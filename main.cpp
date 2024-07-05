@@ -1,26 +1,18 @@
-//
-// Created by Jani on 5. 07. 2024.
-//
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <time.h>
-#include <stdio.h>
-#include <stdint.h>
+#include <iostream>
 
-int main(){
+#include <sdsl/cst_sct3.hpp>
+#include <sdsl/lcp_support_sada.hpp>
 
-    puts("Zacetek\n");
+using namespace sdsl;
+using namespace std;
 
-    float start = (float)clock()/CLOCKS_PER_SEC;
-    uint64_t i;
-    for(i =0; i<1000000000;i++){
-    }
-    float end = (float)clock()/CLOCKS_PER_SEC;
-    float deltaT = end-start;
-
-    puts("Konec\n");
-    printf("Time: %fs\nIterations: %d\n",deltaT,i);
-
-    return 0;
+int main()
+{
+    cst_sct3<csa_wt<wt_huff<rrr_vector<>>>, lcp_support_sada<>> cst1;
+    construct(cst1, "english.200MB", 1);
+    cout << "cst1.lcp in MiB : " << size_in_mega_bytes(cst1.lcp) << endl;
+    util::clear(cst1);
+    cst_sct3<csa_wt<wt_huff<rrr_vector<>>>, lcp_dac<>> cst2;
+    construct(cst2, "english.200MB", 1);
+    cout << "cst2.lcp in MiB : " << size_in_mega_bytes(cst2.lcp) << endl;
 }
