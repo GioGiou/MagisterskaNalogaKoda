@@ -1,0 +1,3 @@
+/home/GioGiou/Mag/MagisterskaNalogaKoda/CMakeFiles/MagisterskaNalogaKoda.dir
+/home/GioGiou/Mag/MagisterskaNalogaKoda/CMakeFiles/edit_cache.dir
+/home/GioGiou/Mag/MagisterskaNalogaKoda/CMakeFiles/rebuild_cache.dir

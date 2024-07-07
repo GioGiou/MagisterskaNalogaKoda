@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/MagisterskaNalogaKoda.dir/main.cpp.o -o MagisterskaNalogaKoda  /lib/libsdsl.a 
