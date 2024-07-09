@@ -6,7 +6,13 @@ struct RunResault{
     double time;
     int sizeInBytes;
     int sizeRun;
-    string type;
+    string typeStruct;
+    double timeFind5;
+    double timeFind10;
+    double timeFind20;
+    double timeFind40;
+    double timeFind80;
+    string pat;
 };
 
 #endif
