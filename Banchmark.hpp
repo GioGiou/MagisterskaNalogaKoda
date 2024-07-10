@@ -12,6 +12,7 @@ struct RunResault{
     double timeFind20;
     double timeFind40;
     double timeFind80;
+    double timeFindLog;
     string pat;
 };
 

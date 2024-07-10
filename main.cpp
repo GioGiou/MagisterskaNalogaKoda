@@ -10,6 +10,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <argp.h>
+#include<unistd.h>   
 
 #include <sdsl/cst_sada.hpp>
 #include <sdsl/lcp_support_sada.hpp>
@@ -75,14 +76,14 @@ int main(int argc, char **argv ){
         while(getline(file, t)){
             tmp.append(t);
         }
-        text_all = tmp.substr(0,800000);
+        text_all = tmp.substr(0,10000000);
     }
     int n = 5;
     int m = 5;
     RunResault test[n];
     int j;
-    for(j=80;j<=800000;j=j*2){
-        
+    for(j=80;j<=5000000;j=j*2){
+        sleep(10);
         text = text_all.substr(0,j);
         cout<<"Size "<<j<<":"<<endl;
         int i;
@@ -91,7 +92,7 @@ int main(int argc, char **argv ){
             SuffixTree st(text);
             auto stop = high_resolution_clock::now();
             
-            auto duration = duration_cast<nanoseconds>(stop - start).count();
+            auto duration = duration_cast<milliseconds>(stop - start).count();
             test[i].time = duration;
             test[i].sizeInBytes=sizeof(st);
             test[i].sizeRun=text.length();
@@ -99,11 +100,11 @@ int main(int argc, char **argv ){
             int k=5;
             for(k=5;k<=80;k=k*2){
                 pattern = text_all.substr(j,k);
-                cout<<"Pattern: "<<pattern<<endl;
+                //cout<<"Pattern: "<<pattern<<endl;
                 auto start1 = high_resolution_clock::now();
                 vector<int> rezultatIskanja = st.check_for_sub_string(pattern.c_str());
                 auto stop1 = high_resolution_clock::now();
-                auto duration1 = duration_cast<nanoseconds>(stop1 - start1).count();
+                auto duration1 = duration_cast<milliseconds>(stop1 - start1).count();
                 switch(k){
                     case 5:
                         test[i].timeFind5= duration1;
@@ -139,12 +140,15 @@ int main(int argc, char **argv ){
         cout<<"\tSize in B:"<<1.0*totalSize/n<<endl;
         cout<<"\tTime in ms:"<<1.0*totalTime/n<<endl;
         
+
+        sleep(10);
+
         for(i=0;i<n;i++){
             auto start = high_resolution_clock::now();
             cst_sada<> cst;
             construct(cst, text);
             auto stop = high_resolution_clock::now();
-            auto duration = duration_cast<nanoseconds>(stop - start).count();
+            auto duration = duration_cast<milliseconds>(stop - start).count();
 
             test[i].time = duration;
             test[i].sizeInBytes=size_in_bytes(cst);
@@ -156,7 +160,7 @@ int main(int argc, char **argv ){
                 auto start1 = high_resolution_clock::now();
                 auto occs = locate(cst.csa, pattern);
                 auto stop1 = high_resolution_clock::now();
-                auto duration1 = duration_cast<nanoseconds>(stop1 - start1).count();
+                auto duration1 = duration_cast<milliseconds>(stop1 - start1).count();
                 switch(k){
                     case 5:
                         test[i].timeFind5= duration1;

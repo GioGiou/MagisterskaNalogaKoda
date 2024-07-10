@@ -1,0 +1,69 @@
+==13200== Callgrind, a call-graph generating cache profiler
+==13200== Copyright (C) 2002-2017, and GNU GPL'd, by Josef Weidendorfer et al.
+==13200== Using Valgrind-3.19.0-8d3c8034b8-20220411 and LibVEX; rerun with -h for copyright info
+==13200== Command: ./main ../test/dna.50MB
+==13200== Parent PID: 10602
+==13200== 
+--13200-- 
+--13200-- Valgrind options:
+--13200--    --log-file=logfile.out
+--13200--    -v
+--13200--    --tool=callgrind
+--13200-- Contents of /proc/version:
+--13200--   Linux version 6.2.15-100.fc36.x86_64 (mockbuild@bkernel01.iad2.fedoraproject.org) (gcc (GCC) 12.2.1 20221121 (Red Hat 12.2.1-4), GNU ld version 2.37-37.fc36) #1 SMP PREEMPT_DYNAMIC Thu May 11 16:51:53 UTC 2023
+--13200-- 
+--13200-- Arch and hwcaps: AMD64, LittleEndian, amd64-cx16-lzcnt-rdtscp-sse3-ssse3-avx-avx2-bmi-f16c-rdrand-rdseed
+--13200-- Page sizes: currently 4096, max supported 4096
+--13200-- Valgrind library directory: /usr/libexec/valgrind
+==13200== For interactive control, run 'callgrind_control -h'.
+--13200-- Reading syms from /home/GioGiou/Mag/MagisterskaNalogaKoda/main
+--13200-- Reading syms from /usr/lib64/ld-linux-x86-64.so.2
+--13200-- Reading syms from /usr/libexec/valgrind/callgrind-amd64-linux
+==13200== Downloading debug info for /usr/libexec/valgrind/callgrind-amd64-linux...
+==13200== Server query failed: No such file or directory
+--13200--    object doesn't have a symbol table
+--13200--    object doesn't have a dynamic symbol table
+--13200-- Scheduler: using generic scheduler lock implementation.
+==13200== embedded gdbserver: reading from /tmp/vgdb-pipe-from-vgdb-to-13200-by-GioGiou-on-giogioupc
+==13200== embedded gdbserver: writing to   /tmp/vgdb-pipe-to-vgdb-from-13200-by-GioGiou-on-giogioupc
+==13200== embedded gdbserver: shared mem   /tmp/vgdb-pipe-shared-mem-vgdb-13200-by-GioGiou-on-giogioupc
+==13200== 
+==13200== TO CONTROL THIS PROCESS USING vgdb (which you probably
+==13200== don't want to do, unless you know exactly what you're doing,
+==13200== or are doing some strange experiment):
+==13200==   /usr/libexec/valgrind/../../bin/vgdb --pid=13200 ...command...
+==13200== 
+==13200== TO DEBUG THIS PROCESS USING GDB: start GDB like this
+==13200==   /path/to/gdb ./main
+==13200== and then give GDB the following command
+==13200==   target remote | /usr/libexec/valgrind/../../bin/vgdb --pid=13200
+==13200== --pid is optional if only one valgrind process is running
+==13200== 
+--13200-- Reading syms from /usr/libexec/valgrind/vgpreload_core-amd64-linux.so
+--13200-- Reading syms from /usr/lib64/libstdc++.so.6.0.30
+==13200== Downloading debug info for /usr/lib64/libstdc++.so.6.0.30...
+==13200== Server query failed: No such file or directory
+--13200--    object doesn't have a symbol table
+--13200-- Reading syms from /usr/lib64/libm.so.6
+==13200== Downloading debug info for /usr/lib64/libm.so.6...
+==13200== Server query failed: No such file or directory
+--13200--    object doesn't have a symbol table
+--13200-- Reading syms from /usr/lib64/libgcc_s-12-20221121.so.1
+==13200== Downloading debug info for /usr/lib64/libgcc_s-12-20221121.so.1...
+==13200== Server query failed: No such file or directory
+--13200--    object doesn't have a symbol table
+--13200-- Reading syms from /usr/lib64/libc.so.6
+==13200== Downloading debug info for /usr/lib64/libc.so.6...
+==13200== Server query failed: No such file or directory
+--13200-- Symbol match: found runtime_resolve: ld-linux-x86-64.so.2 +0x14a30=0x4014a30
+==13200== brk segment overflow in thread #1: can't grow to 0x4856000
+==13200== (see section Limitations in user manual)
+==13200== NOTE: further instances of this message will not be shown
+==13200== 
+--13200-- Start dumping at BB 37275336511 (Prg.Term.)...
+--13200-- Dump to /home/GioGiou/Mag/MagisterskaNalogaKoda/callgrind.out.13200
+--13200-- Dumping done.
+==13200== Events    : Ir
+==13200== Collected : 225705201261
+==13200== 
+==13200== I   refs:      225,705,201,261
