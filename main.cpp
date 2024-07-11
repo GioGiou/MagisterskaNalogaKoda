@@ -89,7 +89,7 @@ int main(int argc, char **argv ){
         int totalSize =0;
         text = text_all.substr(0,j);
         cout<<"Size "<<j<<":"<<endl;
-        
+        /*
         for(i=0;i<n;i++){
             auto start = high_resolution_clock::now();
             SuffixTree st(text);
@@ -141,7 +141,7 @@ int main(int argc, char **argv ){
         cout<<"Summary: "<<endl;
         cout<<"\tSize in B:"<<1.0*totalSize/n<<endl;
         cout<<"\tTime in ms:"<<1.0*totalTime/n<<endl;
-
+        */
         sleep(10);
         for(i=0;i<n;i++){
             auto start = high_resolution_clock::now();
