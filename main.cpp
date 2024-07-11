@@ -58,7 +58,7 @@ int main(int argc, char **argv ){
     string text="";
     string pattern="";
     string text_all="";
-    ofstream out_s("rez.csv",ofstream::trunc);
+    ofstream out_s("rezCST.csv",ofstream::trunc);
     out_s <<"Time,SizeInBytes,SizeRun,TypeOfDS,tFind5,tFind10,tFind20,tFind40,tFind80" <<'\n';
     if(!out_s){
         cout<<"File se ne odpre."<<endl;
@@ -76,7 +76,7 @@ int main(int argc, char **argv ){
         while(getline(file, t)){
             tmp.append(t);
         }
-        text_all = tmp.substr(0,10000000);
+        text_all = tmp.substr(0,11000000);
     }
     int n = 5;
     int m = 5;
@@ -84,9 +84,12 @@ int main(int argc, char **argv ){
     int j;
     for(j=80;j<=5000000;j=j*2){
         sleep(10);
+        int i;
+        double totalTime=0;
+        int totalSize =0;
         text = text_all.substr(0,j);
         cout<<"Size "<<j<<":"<<endl;
-        int i;
+        
         for(i=0;i<n;i++){
             auto start = high_resolution_clock::now();
             SuffixTree st(text);
@@ -104,7 +107,7 @@ int main(int argc, char **argv ){
                 auto start1 = high_resolution_clock::now();
                 vector<int> rezultatIskanja = st.check_for_sub_string(pattern.c_str());
                 auto stop1 = high_resolution_clock::now();
-                auto duration1 = duration_cast<milliseconds>(stop1 - start1).count();
+                auto duration1 = duration_cast<nanoseconds>(stop1 - start1).count();
                 switch(k){
                     case 5:
                         test[i].timeFind5= duration1;
@@ -126,8 +129,7 @@ int main(int argc, char **argv ){
             st.free_suffix_tree_by_post_order(st.get_root());
             out_s << test[i].time <<"," << test[i].sizeInBytes <<"," << test[i].sizeRun <<","<< test[i].typeStruct<<","<< test[i].timeFind5<<","<< test[i].timeFind10<<","<< test[i].timeFind20<<","<< test[i].timeFind40<<","<< test[i].timeFind80<<'\n';
         }
-        double totalTime=0;
-        int totalSize =0;
+        
         cout<<"Suffix tree (Ukkonen): "<<endl;
         for(i=0;i<n;i++){
             cout<<"Run "<<i<<":"<<endl;
@@ -139,10 +141,8 @@ int main(int argc, char **argv ){
         cout<<"Summary: "<<endl;
         cout<<"\tSize in B:"<<1.0*totalSize/n<<endl;
         cout<<"\tTime in ms:"<<1.0*totalTime/n<<endl;
-        
 
         sleep(10);
-
         for(i=0;i<n;i++){
             auto start = high_resolution_clock::now();
             cst_sada<> cst;
@@ -160,7 +160,7 @@ int main(int argc, char **argv ){
                 auto start1 = high_resolution_clock::now();
                 auto occs = locate(cst.csa, pattern);
                 auto stop1 = high_resolution_clock::now();
-                auto duration1 = duration_cast<milliseconds>(stop1 - start1).count();
+                auto duration1 = duration_cast<nanoseconds>(stop1 - start1).count();
                 switch(k){
                     case 5:
                         test[i].timeFind5= duration1;

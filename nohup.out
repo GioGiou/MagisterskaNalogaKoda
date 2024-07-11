@@ -1,0 +1,321 @@
+Size 80:
+Suffix tree (Ukkonen): 
+Run 0:
+	Size in B:120
+	Time in ms:0
+Run 1:
+	Size in B:120
+	Time in ms:0
+Run 2:
+	Size in B:120
+	Time in ms:0
+Run 3:
+	Size in B:120
+	Time in ms:0
+Run 4:
+	Size in B:120
+	Time in ms:0
+Summary: 
+	Size in B:120
+	Time in ms:0
+Size 160:
+Suffix tree (Ukkonen): 
+Run 0:
+	Size in B:120
+	Time in ms:1
+Run 1:
+	Size in B:120
+	Time in ms:1
+Run 2:
+	Size in B:120
+	Time in ms:1
+Run 3:
+	Size in B:120
+	Time in ms:1
+Run 4:
+	Size in B:120
+	Time in ms:0
+Summary: 
+	Size in B:120
+	Time in ms:0.8
+Size 320:
+Suffix tree (Ukkonen): 
+Run 0:
+	Size in B:120
+	Time in ms:2
+Run 1:
+	Size in B:120
+	Time in ms:1
+Run 2:
+	Size in B:120
+	Time in ms:1
+Run 3:
+	Size in B:120
+	Time in ms:2
+Run 4:
+	Size in B:120
+	Time in ms:1
+Summary: 
+	Size in B:120
+	Time in ms:1.4
+Size 640:
+Suffix tree (Ukkonen): 
+Run 0:
+	Size in B:120
+	Time in ms:5
+Run 1:
+	Size in B:120
+	Time in ms:4
+Run 2:
+	Size in B:120
+	Time in ms:4
+Run 3:
+	Size in B:120
+	Time in ms:4
+Run 4:
+	Size in B:120
+	Time in ms:5
+Summary: 
+	Size in B:120
+	Time in ms:4.4
+Size 1280:
+Suffix tree (Ukkonen): 
+Run 0:
+	Size in B:120
+	Time in ms:11
+Run 1:
+	Size in B:120
+	Time in ms:8
+Run 2:
+	Size in B:120
+	Time in ms:10
+Run 3:
+	Size in B:120
+	Time in ms:8
+Run 4:
+	Size in B:120
+	Time in ms:8
+Summary: 
+	Size in B:120
+	Time in ms:9
+Size 2560:
+Suffix tree (Ukkonen): 
+Run 0:
+	Size in B:120
+	Time in ms:22
+Run 1:
+	Size in B:120
+	Time in ms:18
+Run 2:
+	Size in B:120
+	Time in ms:17
+Run 3:
+	Size in B:120
+	Time in ms:7
+Run 4:
+	Size in B:120
+	Time in ms:7
+Summary: 
+	Size in B:120
+	Time in ms:14.2
+Size 5120:
+Suffix tree (Ukkonen): 
+Run 0:
+	Size in B:120
+	Time in ms:32
+Run 1:
+	Size in B:120
+	Time in ms:16
+Run 2:
+	Size in B:120
+	Time in ms:15
+Run 3:
+	Size in B:120
+	Time in ms:15
+Run 4:
+	Size in B:120
+	Time in ms:15
+Summary: 
+	Size in B:120
+	Time in ms:18.6
+Size 10240:
+Suffix tree (Ukkonen): 
+Run 0:
+	Size in B:120
+	Time in ms:84
+Run 1:
+	Size in B:120
+	Time in ms:32
+Run 2:
+	Size in B:120
+	Time in ms:33
+Run 3:
+	Size in B:120
+	Time in ms:32
+Run 4:
+	Size in B:120
+	Time in ms:33
+Summary: 
+	Size in B:120
+	Time in ms:42.8
+Size 20480:
+Suffix tree (Ukkonen): 
+Run 0:
+	Size in B:120
+	Time in ms:120
+Run 1:
+	Size in B:120
+	Time in ms:78
+Run 2:
+	Size in B:120
+	Time in ms:76
+Run 3:
+	Size in B:120
+	Time in ms:76
+Run 4:
+	Size in B:120
+	Time in ms:76
+Summary: 
+	Size in B:120
+	Time in ms:85.2
+Size 40960:
+Suffix tree (Ukkonen): 
+Run 0:
+	Size in B:120
+	Time in ms:214
+Run 1:
+	Size in B:120
+	Time in ms:182
+Run 2:
+	Size in B:120
+	Time in ms:181
+Run 3:
+	Size in B:120
+	Time in ms:180
+Run 4:
+	Size in B:120
+	Time in ms:181
+Summary: 
+	Size in B:120
+	Time in ms:187.6
+Size 81920:
+Suffix tree (Ukkonen): 
+Run 0:
+	Size in B:120
+	Time in ms:444
+Run 1:
+	Size in B:120
+	Time in ms:315
+Run 2:
+	Size in B:120
+	Time in ms:313
+Run 3:
+	Size in B:120
+	Time in ms:308
+Run 4:
+	Size in B:120
+	Time in ms:303
+Summary: 
+	Size in B:120
+	Time in ms:336.6
+Size 163840:
+Suffix tree (Ukkonen): 
+Run 0:
+	Size in B:120
+	Time in ms:742
+Run 1:
+	Size in B:120
+	Time in ms:703
+Run 2:
+	Size in B:120
+	Time in ms:683
+Run 3:
+	Size in B:120
+	Time in ms:674
+Run 4:
+	Size in B:120
+	Time in ms:730
+Summary: 
+	Size in B:120
+	Time in ms:706.4
+Size 327680:
+Suffix tree (Ukkonen): 
+Run 0:
+	Size in B:120
+	Time in ms:1509
+Run 1:
+	Size in B:120
+	Time in ms:1286
+Run 2:
+	Size in B:120
+	Time in ms:1291
+Run 3:
+	Size in B:120
+	Time in ms:1290
+Run 4:
+	Size in B:120
+	Time in ms:1444
+Summary: 
+	Size in B:120
+	Time in ms:1364
+Size 655360:
+Suffix tree (Ukkonen): 
+Run 0:
+	Size in B:120
+	Time in ms:2905
+Run 1:
+	Size in B:120
+	Time in ms:2539
+Run 2:
+	Size in B:120
+	Time in ms:2427
+Run 3:
+	Size in B:120
+	Time in ms:2409
+Run 4:
+	Size in B:120
+	Time in ms:2437
+Summary: 
+	Size in B:120
+	Time in ms:2543.4
+Size 1310720:
+Suffix tree (Ukkonen): 
+Run 0:
+	Size in B:120
+	Time in ms:5753
+Run 1:
+	Size in B:120
+	Time in ms:4902
+Run 2:
+	Size in B:120
+	Time in ms:5349
+Run 3:
+	Size in B:120
+	Time in ms:4918
+Run 4:
+	Size in B:120
+	Time in ms:5378
+Summary: 
+	Size in B:120
+	Time in ms:5260
+Size 2621440:
+Suffix tree (Ukkonen): 
+Run 0:
+	Size in B:120
+	Time in ms:11310
+Run 1:
+	Size in B:120
+	Time in ms:11108
+Run 2:
+	Size in B:120
+	Time in ms:11198
+Run 3:
+	Size in B:120
+	Time in ms:11484
+Run 4:
+	Size in B:120
+	Time in ms:11448
+Summary: 
+	Size in B:120
+	Time in ms:11309.6
+Size 4000000:
