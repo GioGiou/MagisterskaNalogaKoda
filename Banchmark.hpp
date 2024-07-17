@@ -6,6 +6,7 @@ struct RunResault{
     double time;
     int sizeInBytes;
     int sizeRun;
+    int Log;
     string typeStruct;
     double timeFind5;
     double timeFind10;
