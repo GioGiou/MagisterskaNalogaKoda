@@ -66,6 +66,14 @@ dataST %>% ggplot()+
   labs(y="Čas iskanja vzorca dolžine 80 [ns]",x="Dolžina besedila")
 ggsave("./Img/iskanje80ST.png", bg="white")
 
+dataST %>% ggplot()+
+  aes(x=Log,y=tFindLog,color=TypeOfDS)+
+  geom_point()+
+  geom_smooth(se=F)+
+  theme_minimal()+
+  labs(y="Čas iskanja vzorca dolžine log(n) [ns]",x="Dolžina vzorca log(n)")
+ggsave("./Img/iskanjeLogST.png", bg="white")
+
 dataCST<- read.csv("rezCST.csv")
 dataCST %>% ggplot()+
   aes(x=SizeRun,y=Time,color=TypeOfDS)+
@@ -137,12 +145,10 @@ dataCST %>% ggplot()+
   geom_point()+
   geom_smooth(se=F)+
   theme_minimal()+
-  scale_x_continuous(trans = log2_trans(), breaks = trans_breaks("log2", function(x) 2^x),
-                     labels = trans_format("log2", math_format(2^.x)))+
   labs(y="Čas iskanja vzorca dolžine log(n) [ns]",x="Dolžina vzorca log(n)")
-ggsave("./Img/iskanje80CST.png", bg="white")
+ggsave("./Img/iskanjeLogCST.png", bg="white")
 
-data<- rbind(dataST,data)
+data<- rbind(dataST,dataCST)
 data %>% ggplot()+
   aes(x=SizeRun,y=Time,color=TypeOfDS)+
   geom_point()+
@@ -207,3 +213,11 @@ data %>% ggplot()+
                      labels = trans_format("log2", math_format(2^.x)))+
   labs(y="Čas iskanja vzorca dolžine 80 [ns]",x="Dolžina besedila")
 ggsave("./Img/iskanje80.png", bg="white")
+
+data %>% ggplot()+
+  aes(x=Log,y=tFindLog,color=TypeOfDS)+
+  geom_point()+
+  geom_smooth(se=F)+
+  theme_minimal()+
+  labs(y="Čas iskanja vzorca dolžine log(n) [ns]",x="Dolžina vzorca log(n)")
+ggsave("./Img/iskanjeLog.png", bg="white")

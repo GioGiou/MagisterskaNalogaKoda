@@ -146,7 +146,6 @@ int main(int argc, char **argv) {
     cout<<"Summary: "<<endl;
     cout<<"\tSize in B:"<<1.0*totalSize/n<<endl;
     cout<<"\tTime in ms:"<<1.0*totalTime/n<<endl;
-    /*
     sleep(10);
     for (i = 0; i < n; i++) {
       auto start = high_resolution_clock::now();
@@ -212,7 +211,7 @@ int main(int argc, char **argv) {
     cout << "Summary: " << endl;
     cout << "\tSize in B:" << 1.0 * totalSize / n << endl;
     cout << "\tTime in ms:" << totalTime / n << endl;
-    */
+
   }
   return 0;
 }
