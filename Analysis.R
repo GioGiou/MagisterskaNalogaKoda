@@ -221,3 +221,4 @@ data %>% ggplot()+
   theme_minimal()+
   labs(y="Čas iskanja vzorca dolžine log(n) [ns]",x="Dolžina vzorca log(n)")
 ggsave("./Img/iskanjeLog.png", bg="white")
+
