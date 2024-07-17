@@ -51,14 +51,7 @@ int main(int argc, char **argv) {
   string text = "";
   string pattern = "";
   string text_all = "";
-  ofstream out_s("rezST.csv", ofstream::trunc);
-  out_s << "Time,SizeInBytes,SizeRun,TypeOfDS,tFind5,tFind10,tFind20,tFind40,"
-           "tFind80,tFindLog,Log"
-        << '\n';
-  if (!out_s) {
-    cout << "File se ne odpre." << endl;
-    return -1;
-  }
+  
   if (argc == 1) {
     text = "kokos";
   } else {
@@ -72,6 +65,18 @@ int main(int argc, char **argv) {
     }
     text_all = tmp.substr(0, 11000000);
   }
+  string out = "rezST";
+  out.append(argv[1]);
+  out.append(".csv");
+  ofstream out_s(out, ofstream::trunc);
+  if (!out_s) {
+    cout << "File se ne odpre." << endl;
+    return -1;
+  }
+  out_s << "Time,SizeInBytes,SizeRun,TypeOfDS,tFind5,tFind10,tFind20,tFind40,"
+           "tFind80,tFindLog,Log"
+        << '\n';
+  
   int n = 5;
   int m = 5;
   RunResault test[n];
