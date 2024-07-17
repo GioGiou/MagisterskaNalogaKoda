@@ -51,7 +51,7 @@ int main(int argc, char **argv) {
   string text = "";
   string pattern = "";
   string text_all = "";
-  ofstream out_s("rezCST.csv", ofstream::trunc);
+  ofstream out_s("rezST.csv", ofstream::trunc);
   out_s << "Time,SizeInBytes,SizeRun,TypeOfDS,tFind5,tFind10,tFind20,tFind40,"
            "tFind80,tFindLog,Log"
         << '\n';
@@ -76,63 +76,63 @@ int main(int argc, char **argv) {
   int m = 5;
   RunResault test[n];
   int j;
-  for (j = 80; j <= 10000000; j = j * 2) {
+  for (j = 80; j <= 5000000; j = j * 2) {
     sleep(10);
     int i;
     double totalTime = 0;
     int totalSize = 0;
     text = text_all.substr(0, j);
     cout << "Size " << j << ":" << endl;
-    /*
     for(i=0;i<n;i++){
-        auto start = high_resolution_clock::now();
-        SuffixTree st(text);
-        auto stop = high_resolution_clock::now();
+      auto start = high_resolution_clock::now();
+      SuffixTree st(text);
+      auto stop = high_resolution_clock::now();
 
-        auto duration = duration_cast<milliseconds>(stop - start).count();
-        test[i].time = duration;
-        test[i].sizeInBytes=sizeof(st);
-        test[i].sizeRun=text.length();
-        test[i].typeStruct="St";
-        int k=5;
-        for(k=5;k<=80;k=k*2){
-            pattern = text_all.substr(j,k);
-            //cout<<"Pattern: "<<pattern<<endl;
-            auto start1 = high_resolution_clock::now();
-            vector<int> rezultatIskanja =
-    st.check_for_sub_string(pattern.c_str()); auto stop1 =
-    high_resolution_clock::now(); auto duration1 =
-    duration_cast<nanoseconds>(stop1 - start1).count(); switch(k){ case 5:
-                    test[i].timeFind5= duration1;
-                    break;
-                case 10:
-                    test[i].timeFind10= duration1;
-                    break;
-                case 20:
-                    test[i].timeFind20= duration1;
-                    break;
-                case 40:
-                    test[i].timeFind40= duration1;
-                    break;
-                case 80:
-                    test[i].timeFind80= duration1;
-                    break;
-            }
-        }
-        k = (int) log2(j) +1;
+      auto duration = duration_cast<milliseconds>(stop - start).count();
+      test[i].time = duration;
+      test[i].sizeInBytes=sizeof(st);
+      test[i].sizeRun=text.length();
+      test[i].typeStruct="St";
+      int k=5;
+      for(k=5;k<=80;k=k*2){
+        pattern = text_all.substr(j,k);
+        //cout<<"Pattern: "<<pattern<<endl;
         auto start1 = high_resolution_clock::now();
-        auto occs = locate(cst.csa, pattern);
+        vector<int> rezultatIskanja = st.check_for_sub_string(pattern.c_str()); 
         auto stop1 = high_resolution_clock::now();
-        auto duration1 = duration_cast<nanoseconds>(stop1 - start1).count();
-        test[i].timeFindLog=duration1;
-        test[i].Log=k;
-        out_s << test[i].time << "," << test[i].sizeInBytes << ","
-              << test[i].sizeRun << "," << test[i].typeStruct << ","
-              << test[i].timeFind5 << "," << test[i].timeFind10 << ","
-              << test[i].timeFind20 << "," << test[i].timeFind40 << ","
-              << test[i].timeFind80 << "," << test[i].timeFindLog<< ","
-              << test[i].Log<< '\n';
-        st.free_suffix_tree_by_post_order(st.get_root());
+        auto duration1 =  duration_cast<nanoseconds>(stop1 - start1).count();
+        switch(k){ 
+          case 5:
+            test[i].timeFind5= duration1;
+            break;
+        case 10:
+            test[i].timeFind10= duration1;
+            break;
+        case 20:
+            test[i].timeFind20= duration1;
+            break;
+        case 40:
+            test[i].timeFind40= duration1;
+            break;
+        case 80:
+            test[i].timeFind80= duration1;
+            break;
+            }
+      }
+      k = (int) log2(j) +1;
+      auto start1 = high_resolution_clock::now();
+      vector<int> rezultatIskanja = st.check_for_sub_string(pattern.c_str()); 
+      auto stop1 = high_resolution_clock::now();
+      auto duration1 = duration_cast<nanoseconds>(stop1 - start1).count();
+      test[i].timeFindLog=duration1;
+      test[i].Log=k;
+      out_s << test[i].time << "," << test[i].sizeInBytes << ","
+            << test[i].sizeRun << "," << test[i].typeStruct << ","
+            << test[i].timeFind5 << "," << test[i].timeFind10 << ","
+            << test[i].timeFind20 << "," << test[i].timeFind40 << ","
+            << test[i].timeFind80 << "," << test[i].timeFindLog<< ","
+            << test[i].Log<< '\n';
+      st.free_suffix_tree_by_post_order(st.get_root());
     }
 
     cout<<"Suffix tree (Ukkonen): "<<endl;
@@ -146,7 +146,7 @@ int main(int argc, char **argv) {
     cout<<"Summary: "<<endl;
     cout<<"\tSize in B:"<<1.0*totalSize/n<<endl;
     cout<<"\tTime in ms:"<<1.0*totalTime/n<<endl;
-    */
+    /*
     sleep(10);
     for (i = 0; i < n; i++) {
       auto start = high_resolution_clock::now();
@@ -212,6 +212,7 @@ int main(int argc, char **argv) {
     cout << "Summary: " << endl;
     cout << "\tSize in B:" << 1.0 * totalSize / n << endl;
     cout << "\tTime in ms:" << totalTime / n << endl;
+    */
   }
   return 0;
 }
