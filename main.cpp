@@ -65,7 +65,7 @@ int main(int argc, char **argv) {
     }
     text_all = tmp.substr(0, 11000000);
   }
-  string out = "rezCST";
+  string out = "rezST";
   //out.append(argv[1]);
   out.append(".csv");
   ofstream out_s(out, ofstream::trunc);
@@ -81,14 +81,14 @@ int main(int argc, char **argv) {
   int m = 5;
   RunResault test[n];
   int j;
-  for (j = 80; j <= 11000000; j = j * 2) {
+  for (j = 10000; j <= 3000000; j = j +100000) {
     sleep(10);
     int i;
     double totalTime = 0;
     int totalSize = 0;
     text = text_all.substr(0, j);
     cout << "Size " << j << ":" << endl;
-    /*
+
     for(i=0;i<n;i++){
       auto start = high_resolution_clock::now();
       SuffixTree st(text);
@@ -152,7 +152,7 @@ int main(int argc, char **argv) {
     cout<<"Summary: "<<endl;
     cout<<"\tSize in B:"<<1.0*totalSize/n<<endl;
     cout<<"\tTime in ms:"<<1.0*totalTime/n<<endl;
-    */
+    /*
     sleep(10);
     for (i = 0; i < n; i++) {
       auto start = high_resolution_clock::now();
@@ -218,7 +218,7 @@ int main(int argc, char **argv) {
     cout << "Summary: " << endl;
     cout << "\tSize in B:" << 1.0 * totalSize / n << endl;
     cout << "\tTime in ms:" << totalTime / n << endl;
-
+    */
   }
   return 0;
 }
