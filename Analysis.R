@@ -67,6 +67,16 @@ dataST %>% ggplot()+
 ggsave("./Img/iskanje80ST.png", bg="white")
 
 dataST %>% ggplot()+
+  aes(x=SizeRun,y=tFind800,color=TypeOfDS)+
+  geom_point()+
+  geom_smooth(se=F)+
+  theme_minimal()+
+  scale_x_continuous(trans = log2_trans(), breaks = trans_breaks("log2", function(x) 2^x),
+                     labels = trans_format("log2", math_format(2^.x)))+
+  labs(y="Čas iskanja vzorca dolžine 800 [ns]",x="Dolžina besedila")
+ggsave("./Img/iskanje800ST.png", bg="white")
+
+dataST %>% ggplot()+
   aes(x=Log,y=tFindLog,color=TypeOfDS)+
   geom_point()+
   geom_smooth(se=F)+
@@ -141,6 +151,16 @@ dataCST %>% ggplot()+
 ggsave("./Img/iskanje80CST.png", bg="white")
 
 dataCST %>% ggplot()+
+  aes(x=SizeRun,y=tFind800,color=TypeOfDS)+
+  geom_point()+
+  geom_smooth(se=F)+
+  theme_minimal()+
+  scale_x_continuous(trans = log2_trans(), breaks = trans_breaks("log2", function(x) 2^x),
+                     labels = trans_format("log2", math_format(2^.x)))+
+  labs(y="Čas iskanja vzorca dolžine 800 [ns]",x="Dolžina besedila")
+ggsave("./Img/iskanje800CST.png", bg="white")
+
+dataCST %>% ggplot()+
   aes(x=Log,y=tFindLog,color=TypeOfDS)+
   geom_point()+
   geom_smooth(se=F)+
@@ -213,6 +233,16 @@ data %>% ggplot()+
                      labels = trans_format("log2", math_format(2^.x)))+
   labs(y="Čas iskanja vzorca dolžine 80 [ns]",x="Dolžina besedila")
 ggsave("./Img/iskanje80.png", bg="white")
+
+data %>% ggplot()+
+  aes(x=SizeRun,y=tFind800,color=TypeOfDS)+
+  geom_point()+
+  geom_smooth(se=F)+
+  theme_minimal()+
+  scale_x_continuous(trans = log2_trans(), breaks = trans_breaks("log2", function(x) 2^x),
+                     labels = trans_format("log2", math_format(2^.x)))+
+  labs(y="Čas iskanja vzorca dolžine 800 [ns]",x="Dolžina besedila")
+ggsave("./Img/iskanje800.png", bg="white")
 
 data %>% ggplot()+
   aes(x=Log,y=tFindLog,color=TypeOfDS)+

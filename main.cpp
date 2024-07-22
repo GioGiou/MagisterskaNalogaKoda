@@ -63,7 +63,7 @@ int main(int argc, char **argv) {
     while (getline(file, t)) {
       tmp.append(t);
     }
-    text_all = tmp.substr(0, 11000000);
+    text_all = tmp.substr(0, 25000000);
   }
   string out = "rezST";
   //out.append(argv[1]);
@@ -74,7 +74,7 @@ int main(int argc, char **argv) {
     return -1;
   }
   out_s << "Time,SizeInBytes,SizeRun,TypeOfDS,tFind5,tFind10,tFind20,tFind40,"
-           "tFind80,tFindLog,Log"
+           "tFind80,tFindLog,tFind800,Log"
         << '\n';
   
   int n = 5;
@@ -82,6 +82,8 @@ int main(int argc, char **argv) {
   RunResault test[n];
   int j;
   // program je bil Killan pri n=3310000
+  //ST j= 3500000;
+  //CST j = 20000000
   for (j = 800; j <= 3500000; j = j*2) {
     sleep(10);
     int i;
@@ -89,7 +91,7 @@ int main(int argc, char **argv) {
     int totalSize = 0;
     text = text_all.substr(0, j);
     cout << "Size " << j << ":" << endl;
-
+    
     for(i=0;i<n;i++){
       auto start = high_resolution_clock::now();
       SuffixTree st(text);
@@ -146,7 +148,7 @@ int main(int argc, char **argv) {
             << test[i].timeFind5 << "," << test[i].timeFind10 << ","
             << test[i].timeFind20 << "," << test[i].timeFind40 << ","
             << test[i].timeFind80 << "," << test[i].timeFindLog<< ","
-            << test[i].Log<< '\n';
+            << test[i].timeFind800 << "," << test[i].Log<< '\n';
       st.free_suffix_tree_by_post_order(st.get_root());
     }
 
@@ -202,18 +204,17 @@ int main(int argc, char **argv) {
       }
       k=800;
       pattern = text_all.substr(j,k);
-      start1 = high_resolution_clock::now();
-      vector<int> rezultatIskanja = st.check_for_sub_string(pattern.c_str()); 
-      occs = locate(cst.csa, pattern);
-      duration1 = duration_cast<nanoseconds>(stop1 - start1).count();
-      test[i].timeFind800=duration1;
-      k = (int) log2(j) +1;
-      pattern = text_all.substr(j,k);
-      k = (int) log2(j) + 1;
       auto start1 = high_resolution_clock::now();
       auto occs = locate(cst.csa, pattern);
       auto stop1 = high_resolution_clock::now();
       auto duration1 = duration_cast<nanoseconds>(stop1 - start1).count();
+      test[i].timeFind800=duration1;
+      k = (int) log2(j) +1;
+      pattern = text_all.substr(j,k);
+      start1 = high_resolution_clock::now();
+      occs = locate(cst.csa, pattern);
+      stop1 = high_resolution_clock::now();
+      duration1 = duration_cast<nanoseconds>(stop1 - start1).count();
       test[i].timeFindLog=duration1;
       test[i].Log=k;
       out_s << test[i].time << "," << test[i].sizeInBytes << ","
@@ -221,7 +222,7 @@ int main(int argc, char **argv) {
             << test[i].timeFind5 << "," << test[i].timeFind10 << ","
             << test[i].timeFind20 << "," << test[i].timeFind40 << ","
             << test[i].timeFind80 << "," << test[i].timeFindLog<< ","
-            << test[i].Log<< '\n';
+            << test[i].timeFind800 << "," << test[i].Log<< '\n';
     }
     totalTime = 0;
     totalSize = 0;
