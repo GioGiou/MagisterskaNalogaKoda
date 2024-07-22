@@ -81,7 +81,7 @@ int main(int argc, char **argv) {
   int m = 5;
   RunResault test[n];
   int j;
-  for (j = 10000; j <= 3000000; j = j +100000) {
+  for (j = 10000; j <= 3500000; j = j +250000) {
     sleep(10);
     int i;
     double totalTime = 0;
