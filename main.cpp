@@ -82,7 +82,7 @@ int main(int argc, char **argv) {
   RunResault test[n];
   int j;
   // program je bil Killan pri n=3310000
-  for (j = 800; j <= 4000000; j = j*2) {
+  for (j = 800; j <= 3500000; j = j*2) {
     sleep(10);
     int i;
     double totalTime = 0;
