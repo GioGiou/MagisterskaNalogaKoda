@@ -1,0 +1,550 @@
+digraph G {
+rankdir=TB
+"0xe37051" [shape="point"]
+"0xe37051" -> "0xe37e20" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>A</TD></TR></TABLE>>
+]
+"0xe37e20" [shape="point"]
+"0xe37e20" -> "0xe392d0" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>A</TD></TR></TABLE>>
+]
+"0xe392d0" [shape="point"]
+"0xe392d0" -> "0xe37e20" [style=dashed color="#008000"]
+"0xe392d0" -> "0xe39310" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>ATAACACTGGGCTGTAGGAGTGATGGGGTTCACCTCTAATTCT$</TD></TR></TABLE>>
+]
+"0xe39310" [shape="box" label="35"]
+"0xe392d0" -> "0xe39490" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>CACTGGGCTGTAGGAGTGATGGGGTTCACCTCTAATTCT$</TD></TR></TABLE>>
+]
+"0xe39490" [shape="box" label="39"]
+"0xe392d0" -> "0xe39350" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>T</TD></TR></TABLE>>
+]
+"0xe39350" [shape="point"]
+"0xe39350" -> "0xe37ea0" [style=dashed color="#008000"]
+"0xe39350" -> "0xe39390" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>AACACTGGGCTGTAGGAGTGATGGGGTTCACCTCTAATTCT$</TD></TR></TABLE>>
+]
+"0xe39390" [shape="box" label="36"]
+"0xe39350" -> "0xe37e60" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>GAGGTGGACACCAGAGGCGGGGACTTGTAAATAACACTGGGCTGTAGGAGTGATGGGGTTCACCTCTAATTCT$</TD></TR></TABLE>>
+]
+"0xe37e60" [shape="box" label="4"]
+"0xe39350" -> "0xe3a3d0" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>TCT$</TD></TR></TABLE>>
+]
+"0xe3a3d0" [shape="box" label="74"]
+"0xe37e20" -> "0xe38320" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>C</TD></TR></TABLE>>
+]
+"0xe38320" [shape="point"]
+"0xe38320" -> "0xe383a0" [style=dashed color="#008000"]
+"0xe38320" -> "0xe394d0" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>AC</TD></TR></TABLE>>
+]
+"0xe394d0" [shape="point"]
+"0xe394d0" -> "0xe39550" [style=dashed color="#008000"]
+"0xe394d0" -> "0xe38260" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>CAGAGGCGGGGACTTGTAAATAACACTGGGCTGTAGGAGTGATGGGGTTCACCTCTAATTCT$</TD></TR></TABLE>>
+]
+"0xe38260" [shape="box" label="14"]
+"0xe394d0" -> "0xe39510" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>TGGGCTGTAGGAGTGATGGGGTTCACCTCTAATTCT$</TD></TR></TABLE>>
+]
+"0xe39510" [shape="box" label="40"]
+"0xe38320" -> "0xe3a190" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>C</TD></TR></TABLE>>
+]
+"0xe3a190" [shape="point"]
+"0xe3a190" -> "0xe3a210" [style=dashed color="#008000"]
+"0xe3a190" -> "0xe38360" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>AGAGGCGGGGACTTGTAAATAACACTGGGCTGTAGGAGTGATGGGGTTCACCTCTAATTCT$</TD></TR></TABLE>>
+]
+"0xe38360" [shape="box" label="16"]
+"0xe3a190" -> "0xe3a1d0" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>TCTAATTCT$</TD></TR></TABLE>>
+]
+"0xe3a1d0" [shape="box" label="68"]
+"0xe38320" -> "0xe395d0" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>T</TD></TR></TABLE>>
+]
+"0xe395d0" [shape="point"]
+"0xe395d0" -> "0xe39650" [style=dashed color="#008000"]
+"0xe395d0" -> "0xe39610" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>GGGCTGTAGGAGTGATGGGGTTCACCTCTAATTCT$</TD></TR></TABLE>>
+]
+"0xe39610" [shape="box" label="42"]
+"0xe395d0" -> "0xe39110" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>TGTAAATAACACTGGGCTGTAGGAGTGATGGGGTTCACCTCTAATTCT$</TD></TR></TABLE>>
+]
+"0xe39110" [shape="box" label="29"]
+"0xe37e20" -> "0xe38460" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>G</TD></TR></TABLE>>
+]
+"0xe38460" [shape="point"]
+"0xe38460" -> "0xe38060" [style=dashed color="#008000"]
+"0xe38460" -> "0xe384a0" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>AGGCGGGGACTTGTAAATAACACTGGGCTGTAGGAGTGATGGGGTTCACCTCTAATTCT$</TD></TR></TABLE>>
+]
+"0xe384a0" [shape="box" label="19"]
+"0xe38460" -> "0xe38560" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>G</TD></TR></TABLE>>
+]
+"0xe38560" [shape="point"]
+"0xe38560" -> "0xe381a0" [style=dashed color="#008000"]
+"0xe38560" -> "0xe39a90" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>AGTGATGGGGTTCACCTCTAATTCT$</TD></TR></TABLE>>
+]
+"0xe39a90" [shape="box" label="52"]
+"0xe38560" -> "0xe385a0" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>CGGGGACTTGTAAATAACACTGGGCTGTAGGAGTGATGGGGTTCACCTCTAATTCT$</TD></TR></TABLE>>
+]
+"0xe385a0" [shape="box" label="21"]
+"0xe38560" -> "0xe38020" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>TGGACACCAGAGGCGGGGACTTGTAAATAACACTGGGCTGTAGGAGTGATGGGGTTCACCTCTAATTCT$</TD></TR></TABLE>>
+]
+"0xe38020" [shape="box" label="8"]
+"0xe38460" -> "0xe39bd0" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>TGATGGGGTTCACCTCTAATTCT$</TD></TR></TABLE>>
+]
+"0xe39bd0" [shape="box" label="55"]
+"0xe37e20" -> "0xe37ea0" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>T</TD></TR></TABLE>>
+]
+"0xe37ea0" [shape="point"]
+"0xe37ea0" -> "0xe37f20" [style=dashed color="#008000"]
+"0xe37ea0" -> "0xe393d0" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>AACACTGGGCTGTAGGAGTGATGGGGTTCACCTCTAATTCT$</TD></TR></TABLE>>
+]
+"0xe393d0" [shape="box" label="37"]
+"0xe37ea0" -> "0xe37d60" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>CAATGAGGTGGACACCAGAGGCGGGGACTTGTAAATAACACTGGGCTGTAGGAGTGATGGGGTTCACCTCTAATTCT$</TD></TR></TABLE>>
+]
+"0xe37d60" [shape="box" label="1"]
+"0xe37ea0" -> "0xe39d90" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>G</TD></TR></TABLE>>
+]
+"0xe39d90" [shape="point"]
+"0xe39d90" -> "0xe38120" [style=dashed color="#008000"]
+"0xe39d90" -> "0xe37ee0" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>AGGTGGACACCAGAGGCGGGGACTTGTAAATAACACTGGGCTGTAGGAGTGATGGGGTTCACCTCTAATTCT$</TD></TR></TABLE>>
+]
+"0xe37ee0" [shape="box" label="5"]
+"0xe39d90" -> "0xe39dd0" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>GGGTTCACCTCTAATTCT$</TD></TR></TABLE>>
+]
+"0xe39dd0" [shape="box" label="59"]
+"0xe37ea0" -> "0xe3a410" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>TCT$</TD></TR></TABLE>>
+]
+"0xe3a410" [shape="box" label="75"]
+"0xe37051" -> "0xe383a0" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>C</TD></TR></TABLE>>
+]
+"0xe383a0" [shape="point"]
+"0xe383a0" -> "0xe382a0" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>A</TD></TR></TABLE>>
+]
+"0xe382a0" [shape="point"]
+"0xe382a0" -> "0xe37e20" [style=dashed color="#008000"]
+"0xe382a0" -> "0xe37de0" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>ATGAGGTGGACACCAGAGGCGGGGACTTGTAAATAACACTGGGCTGTAGGAGTGATGGGGTTCACCTCTAATTCT$</TD></TR></TABLE>>
+]
+"0xe37de0" [shape="box" label="3"]
+"0xe382a0" -> "0xe39550" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>C</TD></TR></TABLE>>
+]
+"0xe39550" [shape="point"]
+"0xe39550" -> "0xe38320" [style=dashed color="#008000"]
+"0xe39550" -> "0xe3a110" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>C</TD></TR></TABLE>>
+]
+"0xe3a110" [shape="point"]
+"0xe3a110" -> "0xe3a190" [style=dashed color="#008000"]
+"0xe3a110" -> "0xe382e0" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>AGAGGCGGGGACTTGTAAATAACACTGGGCTGTAGGAGTGATGGGGTTCACCTCTAATTCT$</TD></TR></TABLE>>
+]
+"0xe382e0" [shape="box" label="15"]
+"0xe3a110" -> "0xe3a150" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>TCTAATTCT$</TD></TR></TABLE>>
+]
+"0xe3a150" [shape="box" label="67"]
+"0xe39550" -> "0xe39590" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>TGGGCTGTAGGAGTGATGGGGTTCACCTCTAATTCT$</TD></TR></TABLE>>
+]
+"0xe39590" [shape="box" label="41"]
+"0xe382a0" -> "0xe38420" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>GAGGCGGGGACTTGTAAATAACACTGGGCTGTAGGAGTGATGGGGTTCACCTCTAATTCT$</TD></TR></TABLE>>
+]
+"0xe38420" [shape="box" label="18"]
+"0xe383a0" -> "0xe3a210" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>C</TD></TR></TABLE>>
+]
+"0xe3a210" [shape="point"]
+"0xe3a210" -> "0xe383a0" [style=dashed color="#008000"]
+"0xe3a210" -> "0xe383e0" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>AGAGGCGGGGACTTGTAAATAACACTGGGCTGTAGGAGTGATGGGGTTCACCTCTAATTCT$</TD></TR></TABLE>>
+]
+"0xe383e0" [shape="box" label="17"]
+"0xe3a210" -> "0xe3a250" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>TCTAATTCT$</TD></TR></TABLE>>
+]
+"0xe3a250" [shape="box" label="69"]
+"0xe383a0" -> "0xe38660" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>GGGGACTTGTAAATAACACTGGGCTGTAGGAGTGATGGGGTTCACCTCTAATTCT$</TD></TR></TABLE>>
+]
+"0xe38660" [shape="box" label="24"]
+"0xe383a0" -> "0xe39650" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>T</TD></TR></TABLE>>
+]
+"0xe39650" [shape="point"]
+"0xe39650" -> "0xe37f20" [style=dashed color="#008000"]
+"0xe39650" -> "0xe3a350" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>AATTCT$</TD></TR></TABLE>>
+]
+"0xe3a350" [shape="box" label="72"]
+"0xe39650" -> "0xe3a290" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>CTAATTCT$</TD></TR></TABLE>>
+]
+"0xe3a290" [shape="box" label="70"]
+"0xe39650" -> "0xe39890" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>G</TD></TR></TABLE>>
+]
+"0xe39890" [shape="point"]
+"0xe39890" -> "0xe38120" [style=dashed color="#008000"]
+"0xe39890" -> "0xe39690" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>GGCTGTAGGAGTGATGGGGTTCACCTCTAATTCT$</TD></TR></TABLE>>
+]
+"0xe39690" [shape="box" label="43"]
+"0xe39890" -> "0xe398d0" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>TAGGAGTGATGGGGTTCACCTCTAATTCT$</TD></TR></TABLE>>
+]
+"0xe398d0" [shape="box" label="48"]
+"0xe39650" -> "0xe39150" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>TGTAAATAACACTGGGCTGTAGGAGTGATGGGGTTCACCTCTAATTCT$</TD></TR></TABLE>>
+]
+"0xe39150" [shape="box" label="30"]
+"0xe37051" -> "0xe38060" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>G</TD></TR></TABLE>>
+]
+"0xe38060" [shape="point"]
+"0xe38060" -> "0xe37fa0" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>A</TD></TR></TABLE>>
+]
+"0xe37fa0" [shape="point"]
+"0xe37fa0" -> "0xe37e20" [style=dashed color="#008000"]
+"0xe37fa0" -> "0xe387e0" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>C</TD></TR></TABLE>>
+]
+"0xe387e0" [shape="point"]
+"0xe387e0" -> "0xe38320" [style=dashed color="#008000"]
+"0xe387e0" -> "0xe38220" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>ACCAGAGGCGGGGACTTGTAAATAACACTGGGCTGTAGGAGTGATGGGGTTCACCTCTAATTCT$</TD></TR></TABLE>>
+]
+"0xe38220" [shape="box" label="13"]
+"0xe387e0" -> "0xe38820" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>TTGTAAATAACACTGGGCTGTAGGAGTGATGGGGTTCACCTCTAATTCT$</TD></TR></TABLE>>
+]
+"0xe38820" [shape="box" label="28"]
+"0xe37fa0" -> "0xe39b50" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>G</TD></TR></TABLE>>
+]
+"0xe39b50" [shape="point"]
+"0xe39b50" -> "0xe38460" [style=dashed color="#008000"]
+"0xe39b50" -> "0xe384e0" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>G</TD></TR></TABLE>>
+]
+"0xe384e0" [shape="point"]
+"0xe384e0" -> "0xe38560" [style=dashed color="#008000"]
+"0xe384e0" -> "0xe38520" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>CGGGGACTTGTAAATAACACTGGGCTGTAGGAGTGATGGGGTTCACCTCTAATTCT$</TD></TR></TABLE>>
+]
+"0xe38520" [shape="box" label="20"]
+"0xe384e0" -> "0xe37fe0" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>TGGACACCAGAGGCGGGGACTTGTAAATAACACTGGGCTGTAGGAGTGATGGGGTTCACCTCTAATTCT$</TD></TR></TABLE>>
+]
+"0xe37fe0" [shape="box" label="7"]
+"0xe39b50" -> "0xe39b90" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>TGATGGGGTTCACCTCTAATTCT$</TD></TR></TABLE>>
+]
+"0xe39b90" [shape="box" label="54"]
+"0xe37fa0" -> "0xe39d10" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>T</TD></TR></TABLE>>
+]
+"0xe39d10" [shape="point"]
+"0xe39d10" -> "0xe37ea0" [style=dashed color="#008000"]
+"0xe39d10" -> "0xe389b0" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>CAATGAGGTGGACACCAGAGGCGGGGACTTGTAAATAACACTGGGCTGTAGGAGTGATGGGGTTCACCTCTAATTCT$</TD></TR></TABLE>>
+]
+"0xe389b0" [shape="box" label="0"]
+"0xe39d10" -> "0xe39d50" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>GGGGTTCACCTCTAATTCT$</TD></TR></TABLE>>
+]
+"0xe39d50" [shape="box" label="58"]
+"0xe38060" -> "0xe39810" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>C</TD></TR></TABLE>>
+]
+"0xe39810" [shape="point"]
+"0xe39810" -> "0xe383a0" [style=dashed color="#008000"]
+"0xe39810" -> "0xe38620" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>GGGGACTTGTAAATAACACTGGGCTGTAGGAGTGATGGGGTTCACCTCTAATTCT$</TD></TR></TABLE>>
+]
+"0xe38620" [shape="box" label="23"]
+"0xe39810" -> "0xe39850" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>TGTAGGAGTGATGGGGTTCACCTCTAATTCT$</TD></TR></TABLE>>
+]
+"0xe39850" [shape="box" label="47"]
+"0xe38060" -> "0xe381a0" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>G</TD></TR></TABLE>>
+]
+"0xe381a0" [shape="point"]
+"0xe381a0" -> "0xe38060" [style=dashed color="#008000"]
+"0xe381a0" -> "0xe39ad0" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>A</TD></TR></TABLE>>
+]
+"0xe39ad0" [shape="point"]
+"0xe39ad0" -> "0xe37fa0" [style=dashed color="#008000"]
+"0xe39ad0" -> "0xe38760" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>C</TD></TR></TABLE>>
+]
+"0xe38760" [shape="point"]
+"0xe38760" -> "0xe387e0" [style=dashed color="#008000"]
+"0xe38760" -> "0xe381e0" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>ACCAGAGGCGGGGACTTGTAAATAACACTGGGCTGTAGGAGTGATGGGGTTCACCTCTAATTCT$</TD></TR></TABLE>>
+]
+"0xe381e0" [shape="box" label="12"]
+"0xe38760" -> "0xe387a0" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>TTGTAAATAACACTGGGCTGTAGGAGTGATGGGGTTCACCTCTAATTCT$</TD></TR></TABLE>>
+]
+"0xe387a0" [shape="box" label="27"]
+"0xe39ad0" -> "0xe39b10" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>GTGATGGGGTTCACCTCTAATTCT$</TD></TR></TABLE>>
+]
+"0xe39b10" [shape="box" label="53"]
+"0xe381a0" -> "0xe39790" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>C</TD></TR></TABLE>>
+]
+"0xe39790" [shape="point"]
+"0xe39790" -> "0xe39810" [style=dashed color="#008000"]
+"0xe39790" -> "0xe385e0" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>GGGGACTTGTAAATAACACTGGGCTGTAGGAGTGATGGGGTTCACCTCTAATTCT$</TD></TR></TABLE>>
+]
+"0xe385e0" [shape="box" label="22"]
+"0xe39790" -> "0xe397d0" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>TGTAGGAGTGATGGGGTTCACCTCTAATTCT$</TD></TR></TABLE>>
+]
+"0xe397d0" [shape="box" label="46"]
+"0xe381a0" -> "0xe386e0" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>G</TD></TR></TABLE>>
+]
+"0xe386e0" [shape="point"]
+"0xe386e0" -> "0xe381a0" [style=dashed color="#008000"]
+"0xe386e0" -> "0xe38720" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>ACTTGTAAATAACACTGGGCTGTAGGAGTGATGGGGTTCACCTCTAATTCT$</TD></TR></TABLE>>
+]
+"0xe38720" [shape="box" label="26"]
+"0xe386e0" -> "0xe39750" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>CTGTAGGAGTGATGGGGTTCACCTCTAATTCT$</TD></TR></TABLE>>
+]
+"0xe39750" [shape="box" label="45"]
+"0xe386e0" -> "0xe39e90" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>G</TD></TR></TABLE>>
+]
+"0xe39e90" [shape="point"]
+"0xe39e90" -> "0xe386e0" [style=dashed color="#008000"]
+"0xe39e90" -> "0xe386a0" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>ACTTGTAAATAACACTGGGCTGTAGGAGTGATGGGGTTCACCTCTAATTCT$</TD></TR></TABLE>>
+]
+"0xe386a0" [shape="box" label="25"]
+"0xe39e90" -> "0xe39ed0" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>TTCACCTCTAATTCT$</TD></TR></TABLE>>
+]
+"0xe39ed0" [shape="box" label="61"]
+"0xe386e0" -> "0xe39f10" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>TTCACCTCTAATTCT$</TD></TR></TABLE>>
+]
+"0xe39f10" [shape="box" label="62"]
+"0xe381a0" -> "0xe39f50" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>T</TD></TR></TABLE>>
+]
+"0xe39f50" [shape="point"]
+"0xe39f50" -> "0xe39210" [style=dashed color="#008000"]
+"0xe39f50" -> "0xe380a0" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>GGACACCAGAGGCGGGGACTTGTAAATAACACTGGGCTGTAGGAGTGATGGGGTTCACCTCTAATTCT$</TD></TR></TABLE>>
+]
+"0xe380a0" [shape="box" label="9"]
+"0xe39f50" -> "0xe39f90" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>TCACCTCTAATTCT$</TD></TR></TABLE>>
+]
+"0xe39f90" [shape="box" label="63"]
+"0xe38060" -> "0xe39210" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>T</TD></TR></TABLE>>
+]
+"0xe39210" [shape="point"]
+"0xe39210" -> "0xe37f20" [style=dashed color="#008000"]
+"0xe39210" -> "0xe39990" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>A</TD></TR></TABLE>>
+]
+"0xe39990" [shape="point"]
+"0xe39990" -> "0xe39a10" [style=dashed color="#008000"]
+"0xe39990" -> "0xe39250" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>AATAACACTGGGCTGTAGGAGTGATGGGGTTCACCTCTAATTCT$</TD></TR></TABLE>>
+]
+"0xe39250" [shape="box" label="33"]
+"0xe39990" -> "0xe399d0" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>GGAGTGATGGGGTTCACCTCTAATTCT$</TD></TR></TABLE>>
+]
+"0xe399d0" [shape="box" label="50"]
+"0xe39210" -> "0xe39c10" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>G</TD></TR></TABLE>>
+]
+"0xe39c10" [shape="point"]
+"0xe39c10" -> "0xe38120" [style=dashed color="#008000"]
+"0xe39c10" -> "0xe39c50" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>ATGGGGTTCACCTCTAATTCT$</TD></TR></TABLE>>
+]
+"0xe39c50" [shape="box" label="56"]
+"0xe39c10" -> "0xe380e0" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>GACACCAGAGGCGGGGACTTGTAAATAACACTGGGCTGTAGGAGTGATGGGGTTCACCTCTAATTCT$</TD></TR></TABLE>>
+]
+"0xe380e0" [shape="box" label="10"]
+"0xe39210" -> "0xe39fd0" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>TCACCTCTAATTCT$</TD></TR></TABLE>>
+]
+"0xe39fd0" [shape="box" label="64"]
+"0xe37051" -> "0xe37f20" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>T</TD></TR></TABLE>>
+]
+"0xe37f20" [shape="point"]
+"0xe37f20" -> "0xe39a10" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>A</TD></TR></TABLE>>
+]
+"0xe39a10" [shape="point"]
+"0xe39a10" -> "0xe37e20" [style=dashed color="#008000"]
+"0xe39a10" -> "0xe39410" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>A</TD></TR></TABLE>>
+]
+"0xe39410" [shape="point"]
+"0xe39410" -> "0xe392d0" [style=dashed color="#008000"]
+"0xe39410" -> "0xe39290" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>ATAACACTGGGCTGTAGGAGTGATGGGGTTCACCTCTAATTCT$</TD></TR></TABLE>>
+]
+"0xe39290" [shape="box" label="34"]
+"0xe39410" -> "0xe39450" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>CACTGGGCTGTAGGAGTGATGGGGTTCACCTCTAATTCT$</TD></TR></TABLE>>
+]
+"0xe39450" [shape="box" label="38"]
+"0xe39410" -> "0xe3a390" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>TTCT$</TD></TR></TABLE>>
+]
+"0xe3a390" [shape="box" label="73"]
+"0xe39a10" -> "0xe39a50" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>GGAGTGATGGGGTTCACCTCTAATTCT$</TD></TR></TABLE>>
+]
+"0xe39a50" [shape="box" label="51"]
+"0xe37f20" -> "0xe3a2d0" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>C</TD></TR></TABLE>>
+]
+"0xe3a2d0" [shape="point"]
+"0xe3a2d0" -> "0xe383a0" [style=dashed color="#008000"]
+"0xe3a2d0" -> "0xe3a090" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>A</TD></TR></TABLE>>
+]
+"0xe3a090" [shape="point"]
+"0xe3a090" -> "0xe382a0" [style=dashed color="#008000"]
+"0xe3a090" -> "0xe37da0" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>ATGAGGTGGACACCAGAGGCGGGGACTTGTAAATAACACTGGGCTGTAGGAGTGATGGGGTTCACCTCTAATTCT$</TD></TR></TABLE>>
+]
+"0xe37da0" [shape="box" label="2"]
+"0xe3a090" -> "0xe3a0d0" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>CCTCTAATTCT$</TD></TR></TABLE>>
+]
+"0xe3a0d0" [shape="box" label="66"]
+"0xe3a2d0" -> "0xe3a4d0" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>T</TD></TR></TABLE>>
+]
+"0xe3a4d0" [shape="point"]
+"0xe3a4d0" -> "0xe39650" [style=dashed color="#008000"]
+"0xe3a4d0" -> "0xe3a310" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>AATTCT$</TD></TR></TABLE>>
+]
+"0xe3a310" [shape="box" label="71"]
+"0xe37f20" -> "0xe38120" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>G</TD></TR></TABLE>>
+]
+"0xe38120" [shape="point"]
+"0xe38120" -> "0xe38060" [style=dashed color="#008000"]
+"0xe38120" -> "0xe39c90" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>A</TD></TR></TABLE>>
+]
+"0xe39c90" [shape="point"]
+"0xe39c90" -> "0xe37fa0" [style=dashed color="#008000"]
+"0xe39c90" -> "0xe37f60" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>GGTGGACACCAGAGGCGGGGACTTGTAAATAACACTGGGCTGTAGGAGTGATGGGGTTCACCTCTAATTCT$</TD></TR></TABLE>>
+]
+"0xe37f60" [shape="box" label="6"]
+"0xe39c90" -> "0xe39cd0" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>TGGGGTTCACCTCTAATTCT$</TD></TR></TABLE>>
+]
+"0xe39cd0" [shape="box" label="57"]
+"0xe38120" -> "0xe396d0" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>G</TD></TR></TABLE>>
+]
+"0xe396d0" [shape="point"]
+"0xe396d0" -> "0xe381a0" [style=dashed color="#008000"]
+"0xe396d0" -> "0xe38160" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>ACACCAGAGGCGGGGACTTGTAAATAACACTGGGCTGTAGGAGTGATGGGGTTCACCTCTAATTCT$</TD></TR></TABLE>>
+]
+"0xe38160" [shape="box" label="11"]
+"0xe396d0" -> "0xe39e10" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>G</TD></TR></TABLE>>
+]
+"0xe39e10" [shape="point"]
+"0xe39e10" -> "0xe386e0" [style=dashed color="#008000"]
+"0xe39e10" -> "0xe39710" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>CTGTAGGAGTGATGGGGTTCACCTCTAATTCT$</TD></TR></TABLE>>
+]
+"0xe39710" [shape="box" label="44"]
+"0xe39e10" -> "0xe39e50" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>GTTCACCTCTAATTCT$</TD></TR></TABLE>>
+]
+"0xe39e50" [shape="box" label="60"]
+"0xe38120" -> "0xe39910" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>TA</TD></TR></TABLE>>
+]
+"0xe39910" [shape="point"]
+"0xe39910" -> "0xe39990" [style=dashed color="#008000"]
+"0xe39910" -> "0xe391d0" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>AATAACACTGGGCTGTAGGAGTGATGGGGTTCACCTCTAATTCT$</TD></TR></TABLE>>
+]
+"0xe391d0" [shape="box" label="32"]
+"0xe39910" -> "0xe39950" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>GGAGTGATGGGGTTCACCTCTAATTCT$</TD></TR></TABLE>>
+]
+"0xe39950" [shape="box" label="49"]
+"0xe37f20" -> "0xe3a010" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>T</TD></TR></TABLE>>
+]
+"0xe3a010" [shape="point"]
+"0xe3a010" -> "0xe37f20" [style=dashed color="#008000"]
+"0xe3a010" -> "0xe3a450" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>C</TD></TR></TABLE>>
+]
+"0xe3a450" [shape="point"]
+"0xe3a450" -> "0xe3a2d0" [style=dashed color="#008000"]
+"0xe3a450" -> "0xe3a050" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>ACCTCTAATTCT$</TD></TR></TABLE>>
+]
+"0xe3a050" [shape="box" label="65"]
+"0xe3a450" -> "0xe3a490" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>T$</TD></TR></TABLE>>
+]
+"0xe3a490" [shape="box" label="76"]
+"0xe3a010" -> "0xe39190" [label=<<TABLE CELLPADDING="0" BORDER="0" CELLSPACING="0">
+<TR><TD>GTAAATAACACTGGGCTGTAGGAGTGATGGGGTTCACCTCTAATTCT$</TD></TR></TABLE>>
+]
+"0xe39190" [shape="box" label="31"]
+"0xe37051" [style=filled,color=red]
+
+}
