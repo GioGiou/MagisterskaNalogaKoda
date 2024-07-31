@@ -84,6 +84,136 @@ dataST %>% ggplot()+
   labs(y="Čas iskanja vzorca dolžine log(n) [ns]",x="Dolžina vzorca log(n)")
 ggsave("./Img/iskanjeLogST.png", bg="white")
 
+
+#Iskanje 500
+dataST %>% ggplot()+
+  aes(x=SizeRun,y=Time,color=TypeOfDS)+
+  geom_point()+
+  geom_smooth(se=F)+stat_summary(fun=mean,geom = 'line',linetype = 'dotted')+
+  theme_minimal()+   scale_color_manual(values=c("#00BFC4"))+
+  scale_x_continuous(trans = log2_trans(), breaks = trans_breaks("log2", function(x) 2^x),
+                     labels = trans_format("log2", math_format(2^.x)))+
+  labs(y="Čas izgradnje priponskega drevesa [ms]",x="Dolžina besedila")
+ggsave("./Img/izgradnjaDrecvesaST.png")
+
+dataST %>% filter(SizeRun>3000000) %>% ggplot()+
+  aes(x=SizeRun,y=Time,color=TypeOfDS)+
+  geom_point()+
+  geom_smooth(se=F)+stat_summary(fun=mean,geom = 'line',linetype = 'dotted')+
+  theme_minimal()+   scale_color_manual(values=c("#00BFC4"))+
+  labs(y="Čas izgradnje priponskega drevesa [ms]",x="Dolžina besedila")
+ggsave("./Img/izgradnjaDrecvesaST3000000.png")
+dataST %>% filter(SizeRun>4000000) %>% ggplot()+
+  aes(x=SizeRun,y=Time,color=TypeOfDS)+
+  geom_point()+
+  geom_smooth(se=F)+stat_summary(fun=mean,geom = 'line',linetype = 'dotted')+
+  theme_minimal()+   scale_color_manual(values=c("#00BFC4"))+
+  labs(y="Čas izgradnje priponskega drevesa [ms]",x="Dolžina besedila")
+ggsave("./Img/izgradnjaDrecvesaST4000000.png")
+
+
+dataST %>% ggplot()+
+  aes(x=SizeRun,y=tFind5,color=TypeOfDS)+
+  geom_point()+
+  geom_smooth(se=F)+stat_summary(fun=mean,geom = 'line',linetype = 'dotted')+
+  theme_minimal()+   scale_color_manual(values=c("#00BFC4"))+
+  scale_x_continuous(trans = log2_trans(), breaks = trans_breaks("log2", function(x) 2^x),
+                     labels = trans_format("log2", math_format(2^.x)))+
+  labs(y="Čas iskanja vzorca dolžine 5 [ns]",x="Dolžina besedila")
+ggsave("./Img/iskanje5ST.png", bg="white")
+
+dataST %>%filter(SizeRun>4000000) %>%  ggplot()+
+  aes(x=SizeRun,y=tFind5,color=TypeOfDS)+
+  geom_point()+
+  geom_smooth(se=F)+stat_summary(fun=mean,geom = 'line',linetype = 'dotted')+
+  theme_minimal()+   scale_color_manual(values=c("#00BFC4"))+
+  scale_x_continuous(trans = log2_trans(), breaks = trans_breaks("log2", function(x) 2^x),
+                     labels = trans_format("log2", math_format(2^.x)))+
+  labs(y="Čas iskanja vzorca dolžine 5 [ns]",x="Dolžina besedila")
+ggsave("./Img/iskanje5ST4000000.png", bg="white")
+
+dataST %>% ggplot()+
+  aes(x=SizeRun,y=tFind50,color=TypeOfDS)+
+  geom_point()+
+  geom_smooth(se=F)+stat_summary(fun=mean,geom = 'line',linetype = 'dotted')+
+  theme_minimal()+   scale_color_manual(values=c("#00BFC4"))+
+  scale_x_continuous(trans = log2_trans(), breaks = trans_breaks("log2", function(x) 2^x),
+                     labels = trans_format("log2", math_format(2^.x)))+
+  labs(y="Čas iskanja vzorca dolžine 50 [ns]",x="Dolžina besedila")
+ggsave("./Img/iskanje50ST.png", bg="white")
+
+dataST %>% filter(SizeRun>4000000) %>% ggplot()+
+  aes(x=SizeRun,y=tFind50,color=TypeOfDS)+
+  geom_point()+
+  geom_smooth(se=F)+stat_summary(fun=mean,geom = 'line',linetype = 'dotted')+
+  theme_minimal()+   scale_color_manual(values=c("#00BFC4"))+
+  labs(y="Čas iskanja vzorca dolžine 50 [ns]",x="Dolžina besedila")
+ggsave("./Img/iskanje50ST4000000.png", bg="white")
+
+dataST %>% ggplot()+
+  aes(x=SizeRun,y=tFind500,color=TypeOfDS)+
+  geom_point()+
+  geom_smooth(se=F)+stat_summary(fun=mean,geom = 'line',linetype = 'dotted')+
+  theme_minimal()+   scale_color_manual(values=c("#00BFC4"))+
+  scale_x_continuous(trans = log2_trans(), breaks = trans_breaks("log2", function(x) 2^x),
+                     labels = trans_format("log2", math_format(2^.x)))+
+  labs(y="Čas iskanja vzorca dolžine 500 [ns]",x="Dolžina besedila")
+ggsave("./Img/iskanje500ST.png", bg="white")
+
+dataST %>% filter(SizeRun>4000000) %>% ggplot()+
+  aes(x=SizeRun,y=tFind500,color=TypeOfDS)+
+  geom_point()+
+  geom_smooth(se=F)+stat_summary(fun=mean,geom = 'line',linetype = 'dotted')+
+  theme_minimal()+   scale_color_manual(values=c("#00BFC4"))+
+  labs(y="Čas iskanja vzorca dolžine 500 [ns]",x="Dolžina besedila")
+ggsave("./Img/iskanje500ST4000000.png", bg="white")
+
+dataST %>% ggplot()+
+  aes(x=SizeRun,y=tFind5000,color=TypeOfDS)+
+  geom_point()+
+  geom_smooth(se=F)+stat_summary(fun=mean,geom = 'line',linetype = 'dotted')+
+  theme_minimal()+   scale_color_manual(values=c("#00BFC4"))+
+  scale_x_continuous(trans = log2_trans(), breaks = trans_breaks("log2", function(x) 2^x),
+                     labels = trans_format("log2", math_format(2^.x)))+
+  labs(y="Čas iskanja vzorca dolžine 5000 [ns]",x="Dolžina besedila")
+ggsave("./Img/iskanje5000ST.png", bg="white")
+
+dataST %>% filter(SizeRun>4000000) %>% ggplot()+
+  aes(x=SizeRun,y=tFind5000,color=TypeOfDS)+
+  geom_point()+
+  geom_smooth(se=F)+stat_summary(fun=mean,geom = 'line',linetype = 'dotted')+
+  theme_minimal()+   scale_color_manual(values=c("#00BFC4"))+
+  labs(y="Čas iskanja vzorca dolžine 5000 [ns]",x="Dolžina besedila")
+ggsave("./Img/iskanje5000ST4000000.png", bg="white")
+
+dataST %>% ggplot()+
+  aes(x=SizeRun,y=tFind5000.1,color=TypeOfDS)+
+  geom_point()+
+  geom_smooth(se=F)+stat_summary(fun=mean,geom = 'line',linetype = 'dotted')+
+  theme_minimal()+   scale_color_manual(values=c("#00BFC4"))+
+  scale_x_continuous(trans = log2_trans(), breaks = trans_breaks("log2", function(x) 2^x),
+                     labels = trans_format("log2", math_format(2^.x)))+
+  labs(y="Čas iskanja vzorca dolžine 50000 [ns]",x="Dolžina besedila")
+ggsave("./Img/iskanje50000ST.png", bg="white")
+
+dataST %>% filter(SizeRun>4000000) %>% ggplot()+
+  aes(x=SizeRun,y=tFind5000.1,color=TypeOfDS)+
+  geom_point()+
+  geom_smooth(se=F)+stat_summary(fun=mean,geom = 'line',linetype = 'dotted')+
+  theme_minimal()+   scale_color_manual(values=c("#00BFC4"))+
+  labs(y="Čas iskanja vzorca dolžine 5000 [ns]",x="Dolžina besedila")
+ggsave("./Img/iskanje50000ST4000000.png", bg="white")
+
+
+dataST %>% ggplot()+
+  aes(x=Log,y=tFindLog,color=TypeOfDS)+
+  geom_point()+
+  geom_smooth(se=F)+stat_summary(fun=mean,geom = 'line',linetype = 'dotted')+
+  theme_minimal()+   scale_color_manual(values=c("#00BFC4"))+
+  labs(y="Čas iskanja vzorca dolžine log(n) [ns]",x="Dolžina vzorca log(n)")
+ggsave("./Img/iskanjeLogST.png", bg="white")
+
+
 dataCST<- read.csv("rezCST.csv")
 dataCST %>% ggplot()+
   aes(x=SizeRun,y=Time,color=TypeOfDS)+
