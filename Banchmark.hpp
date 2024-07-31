@@ -9,6 +9,10 @@ struct RunResault{
     int Log;
     string typeStruct;
     double timeFind5;
+    double timeFind50;
+    double timeFind500;
+    double timeFind5000;
+    double timeFind50000;
     double timeFind10;
     double timeFind20;
     double timeFind40;
