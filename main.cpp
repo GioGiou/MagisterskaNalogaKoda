@@ -65,7 +65,7 @@ int main(int argc, char **argv) {
     }
     text_all = tmp.substr(0, 25000000);
   }
-  string out = "rezST";
+  string out = "rezNaKlancu";
   //out.append(argv[1]);
   out.append(".csv");
   ofstream out_s(out, ofstream::trunc);
@@ -85,7 +85,7 @@ int main(int argc, char **argv) {
   // program je bil Killan pri n=3310000
   //ST j= 3500000; no chrome: j = 10000000
   //CST j = 20000000
-  for (j = 800; j <= 3500000; j = j*2) {
+  for (j = 800; j <= 300000; j = j*2) {
     sleep(10);
     int i;
     double totalTime = 0;
@@ -164,7 +164,7 @@ int main(int argc, char **argv) {
     cout<<"Summary: "<<endl;
     cout<<"\tSize in B:"<<1.0*totalSize/n<<endl;
     cout<<"\tTime in ms:"<<1.0*totalTime/n<<endl;
-    /*
+
     sleep(10);
     for (i = 0; i < n; i++) {
       auto start = high_resolution_clock::now();
@@ -238,8 +238,8 @@ int main(int argc, char **argv) {
     cout << "Summary: " << endl;
     cout << "\tSize in B:" << 1.0 * totalSize / n << endl;
     cout << "\tTime in ms:" << totalTime / n << endl;
-  */
-  }
+  
+  }/*
   for (j = 5000000; j <= 5500000; j = j+100000) {
     sleep(10);
     int i;
@@ -318,6 +318,6 @@ int main(int argc, char **argv) {
     cout<<"Summary: "<<endl;
     cout<<"\tSize in B:"<<1.0*totalSize/n<<endl;
     cout<<"\tTime in ms:"<<1.0*totalTime/n<<endl;
-  }
+  }*/
   return 0;
 }
