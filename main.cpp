@@ -12,12 +12,13 @@
 #include <string.h>
 #include <unistd.h>
 
+// Compprest suffix tree
 #include <sdsl/bp_support_sada.hpp>
 #include <sdsl/csa_sada.hpp>
 #include <sdsl/cst_sada.hpp>
 #include <sdsl/lcp_support_sada.hpp>
 #include <sdsl/suffix_tree_algorithm.hpp>
-
+// Suffix tree
 #include "Node.h"
 #include "SuffixTree.h"
 #include "utils.h"
