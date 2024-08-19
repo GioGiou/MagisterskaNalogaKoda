@@ -18,6 +18,7 @@
 #include <sdsl/cst_sada.hpp>
 #include <sdsl/lcp_support_sada.hpp>
 #include <sdsl/suffix_tree_algorithm.hpp>
+
 // Suffix tree
 #include "Node.h"
 #include "SuffixTree.h"
