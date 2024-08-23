@@ -67,7 +67,7 @@ int main(int argc, char **argv) {
     }
     text_all = tmp.substr(0, 25000000);
   }
-  string out = "rezNaKlancu";
+  string out = "rezNovPc";
   //out.append(argv[1]);
   out.append(".csv");
   ofstream out_s(out, ofstream::trunc);
@@ -75,7 +75,7 @@ int main(int argc, char **argv) {
     cout << "File se ne odpre." << endl;
     return -1;
   }
-  out_s << "Time,SizeInBytes,SizeRun,TypeOfDS,tFind5,tFind50,tFind500,tFind5000,"
+  out_s << "Time,SizeInBytes,SizeRun,TypeOfDS,tFind5,tFind50,"/*",tFind500,tFind5000,"*/
            "tFind50000,tFindLog,Log"
         << '\n';
   
@@ -87,8 +87,8 @@ int main(int argc, char **argv) {
   // program je bil Killan pri n=3310000
   //ST j= 3500000; no chrome: j = 10000000
   //CST j = 20000000
-  for (j = 800; j <= 300000; j = j*2) {
-    sleep(10);
+  for (j = 500; j <= 500000; j = j*2) {
+    //sleep(10);
     int i;
     double totalTime = 0;
     int totalSize = 0;
@@ -123,12 +123,12 @@ int main(int argc, char **argv) {
         case 500:
             test[i].timeFind500= duration1;
             break;
-        case 5000:
+       /* case 5000:
             test[i].timeFind5000= duration1;
             break;
         case 50000:
             test[i].timeFind50000= duration1;
-            break;
+            break;*/
             }
       }
       k=800;
@@ -149,8 +149,8 @@ int main(int argc, char **argv) {
       out_s << test[i].time << "," << test[i].sizeInBytes << ","
             << test[i].sizeRun << "," << test[i].typeStruct << ","
             << test[i].timeFind5 << "," << test[i].timeFind50 << ","
-            << test[i].timeFind500 << "," << test[i].timeFind5000 << ","
-            << test[i].timeFind50000 << "," << test[i].timeFindLog<< ","
+            << test[i].timeFind500 /*<< "," << test[i].timeFind5000 << ","
+            << test[i].timeFind50000 */ << "," << test[i].timeFindLog<< ","
             << test[i].Log<< '\n';
       st.free_suffix_tree_by_post_order(st.get_root());
     }
@@ -167,7 +167,7 @@ int main(int argc, char **argv) {
     cout<<"\tSize in B:"<<1.0*totalSize/n<<endl;
     cout<<"\tTime in ms:"<<1.0*totalTime/n<<endl;
 
-    sleep(10);
+    sleep(1);
     for (i = 0; i < n; i++) {
       auto start = high_resolution_clock::now();
       cst_sada<> cst;
@@ -196,12 +196,12 @@ int main(int argc, char **argv) {
 	   case 500:
 	       test[i].timeFind500= duration1;
 	       break;
-	   case 5000:
+	  /* case 5000:
 	       test[i].timeFind5000= duration1;
 	       break;
 	   case 50000:
 	       test[i].timeFind50000= duration1;
-	       break;
+	       break;*/
         }
         test[i].pat = pattern;
       }
@@ -223,8 +223,8 @@ int main(int argc, char **argv) {
       out_s << test[i].time << "," << test[i].sizeInBytes << ","
             << test[i].sizeRun << "," << test[i].typeStruct << ","
             << test[i].timeFind5 << "," << test[i].timeFind50 << ","
-            << test[i].timeFind500 << "," << test[i].timeFind5000 << ","
-            << test[i].timeFind50000 << "," << test[i].timeFindLog<< ","
+            << test[i].timeFind500 <</* "," << test[i].timeFind5000 << ","
+            << test[i].timeFind50000 << */ "," << test[i].timeFindLog<< ","
             << test[i].Log<< '\n';
     }
     totalTime = 0;
