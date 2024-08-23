@@ -106,7 +106,7 @@ int main(int argc, char **argv) {
       test[i].sizeRun=text.length();
       test[i].typeStruct="St";
       int k=5;
-      for(k=5;k<=80;k=k*2){
+      for(k=5;k<=50000;k=k*10){
         pattern = text_all.substr(j,k);
         //cout<<"Pattern: "<<pattern<<endl;
         auto start1 = high_resolution_clock::now();
@@ -180,28 +180,28 @@ int main(int argc, char **argv) {
       test[i].sizeRun = text.length();
       test[i].typeStruct = "CST";
       int k = 5;
-      for (k = 5; k <= 80; k = k * 2) {
+      for (k = 5; k <= 50000; k = k * 10) {
         pattern = text_all.substr(j, k);
         auto start1 = high_resolution_clock::now();
         auto occs = locate(cst.csa, pattern);
         auto stop1 = high_resolution_clock::now();
         auto duration1 = duration_cast<nanoseconds>(stop1 - start1).count();
         switch (k) {
-        case 5:
-          test[i].timeFind5 = duration1;
-          break;
-        case 10:
-          test[i].timeFind10 = duration1;
-          break;
-        case 20:
-          test[i].timeFind20 = duration1;
-          break;
-        case 40:
-          test[i].timeFind40 = duration1;
-          break;
-        case 80:
-          test[i].timeFind80 = duration1;
-          break;
+	       case 5:
+	       test[i].timeFind5= duration1;
+	       break;
+	   case 50:
+	       test[i].timeFind50= duration1;
+	       break;
+	   case 500:
+	       test[i].timeFind500= duration1;
+	       break;
+	   case 5000:
+	       test[i].timeFind5000= duration1;
+	       break;
+	   case 50000:
+	       test[i].timeFind50000= duration1;
+	       break;
         }
         test[i].pat = pattern;
       }
@@ -222,10 +222,10 @@ int main(int argc, char **argv) {
       test[i].Log=k;
       out_s << test[i].time << "," << test[i].sizeInBytes << ","
             << test[i].sizeRun << "," << test[i].typeStruct << ","
-            << test[i].timeFind5 << "," << test[i].timeFind10 << ","
-            << test[i].timeFind20 << "," << test[i].timeFind40 << ","
-            << test[i].timeFind80 << "," << test[i].timeFindLog<< ","
-            << test[i].timeFind800 << "," << test[i].Log<< '\n';
+            << test[i].timeFind5 << "," << test[i].timeFind50 << ","
+            << test[i].timeFind500 << "," << test[i].timeFind5000 << ","
+            << test[i].timeFind50000 << "," << test[i].timeFindLog<< ","
+            << test[i].Log<< '\n';
     }
     totalTime = 0;
     totalSize = 0;
