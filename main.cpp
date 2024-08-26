@@ -87,7 +87,11 @@ int main(int argc, char **argv) {
   // program je bil Killan pri n=3310000
   //ST j= 3500000; no chrome: j = 10000000
   //CST j = 20000000
-  for (j = 500; j <= 500000; j = j*2) {
+
+/* 	Intel i3 5005U
+	ST: 2048000 je prekine testiranje, I/O sleep
+*/
+  for (j = 500; j <= 2000000; j = j*2) {
     //sleep(10);
     int i;
     double totalTime = 0;
@@ -96,6 +100,8 @@ int main(int argc, char **argv) {
     cout << "Size " << j << ":" << endl;
     
     for(i=0;i<n;i++){
+      cout << i;	
+	  cout.flush();
       auto start = high_resolution_clock::now();
       SuffixTree st(text);
       auto stop = high_resolution_clock::now();
@@ -153,8 +159,9 @@ int main(int argc, char **argv) {
             << test[i].timeFind50000 */ << "," << test[i].timeFindLog<< ","
             << test[i].Log<< '\n';
       st.free_suffix_tree_by_post_order(st.get_root());
+     cout <<"\r"; 
+     cout.flush(); 
     }
-
     cout<<"Suffix tree (Ukkonen): "<<endl;
     for(i=0;i<n;i++){
         cout<<"Run "<<i<<":"<<endl;
@@ -169,6 +176,8 @@ int main(int argc, char **argv) {
 
     sleep(1);
     for (i = 0; i < n; i++) {
+	  cout << i;
+	  cout.flush();
       auto start = high_resolution_clock::now();
       cst_sada<> cst;
       construct(cst, text);
@@ -226,6 +235,8 @@ int main(int argc, char **argv) {
             << test[i].timeFind500 <</* "," << test[i].timeFind5000 << ","
             << test[i].timeFind50000 << */ "," << test[i].timeFindLog<< ","
             << test[i].Log<< '\n';
+	  cout << "\r";
+	  cout.flush();
     }
     totalTime = 0;
     totalSize = 0;
