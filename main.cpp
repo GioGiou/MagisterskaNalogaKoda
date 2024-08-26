@@ -76,7 +76,7 @@ int main(int argc, char **argv) {
     return -1;
   }
   out_s << "Time,SizeInBytes,SizeRun,TypeOfDS,tFind5,tFind50,"/*",tFind500,tFind5000,"*/
-           "tFind50000,tFindLog,Log"
+           "tFind500,tFindLog,Log"
         << '\n';
   
   int n = 5;
