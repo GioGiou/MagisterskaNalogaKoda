@@ -252,7 +252,8 @@ int main(int argc, char **argv) {
     cout << "\tSize in B:" << 1.0 * totalSize / n << endl;
     cout << "\tTime in ms:" << totalTime / n << endl;
   
-  }/*
+  }
+  /*
   for (j = 5000000; j <= 5500000; j = j+100000) {
     sleep(10);
     int i;
