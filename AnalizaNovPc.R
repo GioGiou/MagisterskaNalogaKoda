@@ -1,7 +1,4 @@
 library(tidyverse)
-library(ggplot2)
-library(dplyr)
-library(magrittr)
 library(scales)
 data<- read.csv("rezNovPc.csv")
 
@@ -15,10 +12,23 @@ data%>% ggplot()+
   #scale_color_manual(values=c("#00BFC4"))+
   scale_x_continuous(trans = log2_trans(), breaks = trans_breaks("log2", function(x) 2^x),
                      labels = trans_format("log2", math_format(2^.x)))+
-  scale_x_continuous(trans = log10_trans(), breaks = trans_breaks("log10", function(x) 10^x),
-                     labels = trans_format("log2", math_format(10^.x)))+
+  #scale_y_continuous(trans = log10_trans(), breaks = trans_breaks("log10", function(x) 10^x),
+  #                  labels = trans_format("log2", math_format(10^.x)))+
   labs(y="Čas izgradnje priponskega drevesa [ms]",x="Dolžina besedila")
 ggsave("./Img/izgradnjaDrecvesaNovPC.png")
+
+data%>% ggplot()+
+  aes(x=SizeRun,y=Time,color=TypeOfDS)+
+  geom_point()+
+  geom_smooth(se=F)+stat_summary(fun=mean,geom = 'line',linetype = 'dotted')+
+  theme_minimal()+
+  #scale_color_manual(values=c("#00BFC4"))+
+  scale_x_continuous(trans = log2_trans(), breaks = trans_breaks("log2", function(x) 2^x),
+                     labels = trans_format("log2", math_format(2^.x)))+
+  scale_y_continuous(trans = log10_trans(), breaks = trans_breaks("log10", function(x) 10^x),
+                     labels = trans_format("log2", math_format(10^.x)))+
+  labs(y="Čas izgradnje priponskega drevesa [ms]",x="Dolžina besedila")
+ggsave("./Img/izgradnjaDrecvesaNovPCzylog.png")
 
 data %>% filter(TypeOfDS=="St")%>% ggplot()+
   aes(x=SizeRun,y=Time,color=TypeOfDS)+
@@ -28,10 +38,23 @@ data %>% filter(TypeOfDS=="St")%>% ggplot()+
   scale_color_manual(values=c("#00BFC4"))+
   scale_x_continuous(trans = log2_trans(), breaks = trans_breaks("log2", function(x) 2^x),
                      labels = trans_format("log2", math_format(2^.x)))+
-  scale_x_continuous(trans = log10_trans(), breaks = trans_breaks("log10", function(x) 10^x),
-                     labels = trans_format("log2", math_format(10^.x)))+
+  #scale_y_continuous(trans = log10_trans(), breaks = trans_breaks("log10", function(x) 10^x),
+  #                  labels = trans_format("log2", math_format(10^.x)))+
   labs(y="Čas izgradnje priponskega drevesa [ms]",x="Dolžina besedila")
 ggsave("./Img/izgradnjaDrecvesaNovPCST.png") 
+
+data %>% filter(TypeOfDS=="St")%>% ggplot()+
+  aes(x=SizeRun,y=Time,color=TypeOfDS)+
+  geom_point()+
+  geom_smooth(se=F)+stat_summary(fun=mean,geom = 'line',linetype = 'dotted')+
+  theme_minimal()+
+  scale_color_manual(values=c("#00BFC4"))+
+  scale_x_continuous(trans = log2_trans(), breaks = trans_breaks("log2", function(x) 2^x),
+                     labels = trans_format("log2", math_format(2^.x)))+
+  scale_y_continuous(trans = log10_trans(), breaks = trans_breaks("log10", function(x) 10^x),
+                     labels = trans_format("log2", math_format(10^.x)))+
+  labs(y="Čas izgradnje priponskega drevesa [ms]",x="Dolžina besedila")
+ggsave("./Img/izgradnjaDrecvesaNovPCSTylog.png") 
 
 data %>% filter(TypeOfDS=="CST")%>% ggplot()+
   aes(x=SizeRun,y=Time,color=TypeOfDS)+
@@ -41,10 +64,23 @@ data %>% filter(TypeOfDS=="CST")%>% ggplot()+
   #scale_color_manual(values=c("#00BFC4"))+
   scale_x_continuous(trans = log2_trans(), breaks = trans_breaks("log2", function(x) 2^x),
                      labels = trans_format("log2", math_format(2^.x)))+
-  scale_x_continuous(trans = log10_trans(), breaks = trans_breaks("log10", function(x) 10^x),
-                     labels = trans_format("log2", math_format(10^.x)))+
+  #scale_y_continuous(trans = log10_trans(), breaks = trans_breaks("log10", function(x) 10^x),
+  #                   labels = trans_format("log2", math_format(10^.x)))+
   labs(y="Čas izgradnje priponskega drevesa [ms]",x="Dolžina besedila")
 ggsave("./Img/izgradnjaDrecvesaNovPCCST.png")
+
+data %>% filter(TypeOfDS=="CST")%>% ggplot()+
+  aes(x=SizeRun,y=Time,color=TypeOfDS)+
+  geom_point()+
+  geom_smooth(se=F)+stat_summary(fun=mean,geom = 'line',linetype = 'dotted')+
+  theme_minimal()+
+  #scale_color_manual(values=c("#00BFC4"))+
+  scale_x_continuous(trans = log2_trans(), breaks = trans_breaks("log2", function(x) 2^x),
+                     labels = trans_format("log2", math_format(2^.x)))+
+  scale_y_continuous(trans = log10_trans(), breaks = trans_breaks("log10", function(x) 10^x),
+                     labels = trans_format("log2", math_format(10^.x)))+
+  labs(y="Čas izgradnje priponskega drevesa [ms]",x="Dolžina besedila")
+ggsave("./Img/izgradnjaDrecvesaNovPCCSTylog.png")
 
 
 # Velikost drevesa
@@ -151,7 +187,7 @@ ggsave("./Img/iskanje50NovPcCST.png", bg="white")
 #Iskanje vzorca dolžine 500
 
 data %>% ggplot()+
-  aes(x=SizeRun,y=tFind50000,color=TypeOfDS)+
+  aes(x=SizeRun,y=tFind500,color=TypeOfDS)+
   geom_point()+
   geom_smooth(se=F)+stat_summary(fun=mean,geom = 'line',linetype = 'dotted')+
   theme_minimal()+   #scale_color_manual(values=c("#00BFC4"))+
@@ -161,7 +197,7 @@ data %>% ggplot()+
 ggsave("./Img/iskanje20ST.png", bg="white")
 
 data %>% filter(TypeOfDS=="St") %>% ggplot()+
-  aes(x=SizeRun,y=tFind50000,color=TypeOfDS)+
+  aes(x=SizeRun,y=tFind500,color=TypeOfDS)+
   geom_point()+
   geom_smooth(se=F)+stat_summary(fun=mean,geom = 'line',linetype = 'dotted')+
   theme_minimal()+
@@ -172,7 +208,7 @@ data %>% filter(TypeOfDS=="St") %>% ggplot()+
 ggsave("./Img/iskanje20ST.png", bg="white")
 
 data %>% filter(TypeOfDS=="CST") %>% ggplot()+
-  aes(x=SizeRun,y=tFind50000,color=TypeOfDS)+
+  aes(x=SizeRun,y=tFind500,color=TypeOfDS)+
   geom_point()+
   geom_smooth(se=F)+stat_summary(fun=mean,geom = 'line',linetype = 'dotted')+
   theme_minimal()+   #scale_color_manual(values=c("#00BFC4"))+
