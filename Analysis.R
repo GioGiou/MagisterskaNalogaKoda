@@ -9,6 +9,7 @@ dataST %>% ggplot()+
   scale_x_continuous(trans = log2_trans(), breaks = trans_breaks("log2", function(x) 2^x),
                      labels = trans_format("log2", math_format(2^.x)))+
   labs(y="Čas izgradnje priponskega drevesa [ms]",x="Dolžina besedila")
+  
 ggsave("./Img/izgradnjaDrecvesaST.png")
 
 dataST %>% ggplot()+
