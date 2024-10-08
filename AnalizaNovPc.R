@@ -102,7 +102,8 @@ data %>% ggplot()+
   aes(x=SizeRun,y=SizeInBytes,color=TypeOfDS)+
   geom_point()+
   geom_smooth(se=F)+stat_summary(fun=mean,geom = 'line',linetype = 'dotted')+
-  theme_minimal()+   
+  theme_minimal()+
+  scale_color_discrete(name = "Vrsta priponskega\ndrevesa", labels= c(CST="Kompaktno\npriponsko drevo", St="Priponsko drevo"))+
   #scale_color_manual(values=c("#00BFC4"))+
   scale_x_continuous(trans = log2_trans(), breaks = trans_breaks("log2", function(x) 2^x),
                      labels = trans_format("log2", math_format(2^.x)))+
