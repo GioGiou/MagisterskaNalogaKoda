@@ -67,7 +67,7 @@ int main(int argc, char **argv) {
     }
     text_all = tmp.substr(0, 25000000);
   }
-  string out = "rezNovPc";
+  string out = "rezNovPcNaKlancu";
   //out.append(argv[1]);
   out.append(".csv");
   ofstream out_s(out, ofstream::trunc);
@@ -83,7 +83,6 @@ int main(int argc, char **argv) {
   int m = 5;
   RunResault test[n];
   int j;
-  
   // program je bil Killan pri n=3310000
   //ST j= 3500000; no chrome: j = 10000000
   //CST j = 20000000
