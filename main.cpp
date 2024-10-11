@@ -88,30 +88,34 @@ int main(int argc, char **argv) {
   //CST j = 20000000
 
 /* 	Intel i3 5005U
-	ST: 2048000 je prekine testiranje, I/O sleep
+	ST: 2048000 je prekine testiranje, I/O sleep 500
 */
-  for (j = 500; j <= 2000000; j = j*2) {
+  for (j = 500; j <= 2000000 && j <= text_all.length(); j = j*2) {
     sleep(10);
     int i;
     double totalTime = 0;
     int totalSize = 0;
     text = text_all.substr(0, j);
-    cout << "Size " << j << ":" << endl;
+    
+   // cout << text << endl;
+	  cout << "Size " << j << ":" << endl;
     
     for(i=0;i<n;i++){
       cout << i;	
-	  cout.flush();
+	    cout.flush();
       auto start = high_resolution_clock::now();
       SuffixTree st(text);
       auto stop = high_resolution_clock::now();
-
+      
       auto duration = duration_cast<milliseconds>(stop - start).count();
       test[i].time = duration;
       test[i].sizeInBytes=sizeof(st);
       test[i].sizeRun=text.length();
       test[i].typeStruct="St";
       int k=5;
-      for(k=5;k<=50000;k=k*10){
+      cout << "TEST";	
+	    cout.flush();
+      for(k=5;k<=500;k=k*10){
         pattern = text_all.substr(j,k);
         //cout<<"Pattern: "<<pattern<<endl;
         auto start1 = high_resolution_clock::now();
