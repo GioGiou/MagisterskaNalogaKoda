@@ -66,6 +66,9 @@ int main(int argc, char **argv) {
       tmp.append(t);
     }
     text_all = tmp.substr(0, 25000000);
+    while (text_all.length()<25000000){
+    	text_all.append(text_all);
+    }
   }
   string out = "rezNovPcNaKlancu";
   //out.append(argv[1]);
@@ -91,7 +94,7 @@ int main(int argc, char **argv) {
 	ST: 2048000 je prekine testiranje, I/O sleep 500
 */
   for (j = 500; j <= 2000000 && j <= text_all.length(); j = j*2) {
-   	// sleep(10);
+    sleep(10);
     int i;
     double totalTime = 0;
     int totalSize = 0;
@@ -177,7 +180,7 @@ int main(int argc, char **argv) {
     cout<<"\tSize in B:"<<1.0*totalSize/n<<endl;
     cout<<"\tTime in ms:"<<1.0*totalTime/n<<endl;
 
-    //sleep(10);
+    sleep(10);
     for (i = 0; i < n; i++) {
 	  cout << i;
 	  cout.flush();
