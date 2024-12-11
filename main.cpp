@@ -66,8 +66,11 @@ int main(int argc, char **argv) {
       tmp.append(t);
     }
     text_all = tmp.substr(0, 25000000);
+    int i = 500;
     while (text_all.length()<25000000){
-    	text_all.append(text_all);
+    	text_all.append(tmp.substr(i,5*i));
+    	text_all = text_all.substr(0, 25000000);
+    	i=i+500;
     }
   }
   string out = "rezNovPcNaKlancu";
@@ -93,7 +96,7 @@ int main(int argc, char **argv) {
 /* 	Intel i3 5005U
 	ST: 2048000 je prekine testiranje, I/O sleep 500
 */
-  for (j = 500; j <= 2000000 && j <= text_all.length(); j = j*2) {
+  for (j = 500; j <= 2000000; j = j*2) {
     sleep(10);
     int i;
     double totalTime = 0;
