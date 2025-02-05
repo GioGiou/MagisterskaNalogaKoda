@@ -5,6 +5,17 @@ dataSLO<- read.csv("rezNovPcNaKlancu.csv")
 dataTidy <- data %>%  pivot_longer(col=starts_with("tFind"),names_to = "PatternLength", values_to = "TimeFind")
 dataTidySLO <- dataSLO %>% pivot_longer(col=starts_with("tFind"),names_to = "PatternLength", values_to = "TimeFind")
 
+dataTidySLO  %>% filter(PatternLength=="tFindLog" & TimeFind<200000) %>% group_by(TypeOfDS) %>% summarise(M=(mean(TimeFind))) %>% print(n=100)
+dataTidySLO %>% filter(TypeOfDS=="St",PatternLength=="tFindLog") %>% group_by(SizeRun,TypeOfDS) %>% summarise(M=mean(TimeFind)) -> a
+
+a$M/lag(a$M,default = 1) #2x
+
+dataTidySLO %>% filter(TypeOfDS=="CST",PatternLength=="tFindLog") %>% group_by(SizeRun,TypeOfDS) %>% summarise(M=mean(TimeFind)) -> a
+
+a$M/lag(a$M,default = 1) #1x
+
+ dataTidy %>% group_by(SizeRun,TypeOfDS) %>% summarise(M=(mean(Time))) %>% print(n=25)
+
 
 dataTidy %>%ggplot() +
   aes(x = SizeRun, y = TimeFind, colour = TypeOfDS) +
