@@ -1,0 +1,21 @@
+Pogosti problem pri obdelavi daljših besedil je iskanje vzorcev v teh. V procesiranju naravnih jezikov se ta problem pretvori na iskanje vseh ponovitev besede v besedilu. Medtem ko v bioinformatiki se ta problem pretvori na preverjanje prisotnost specifičnih genov ali drugih DNK sekvenc v genomu. 
+
+Za učinkovito iskanje vzorcev v besedilu se zgradi indeks, ki je običajno priponsko drevo ali priponsko polje. Ko je vzorec prisoten v besedilu, je predpona vsaj ene pripone besedila. Torej se predpona zagotovo nahaja na začetku sprehoda iz korena proti listom priponskega drevesa zgrajenega nad besedilom.
+Besedilo $T$ dolžine $n$ se shrani v polje črk \texttt{T[1..n]}. Podniz besedila $T$, ki se začne na $i$-tem in konča na $j$-tem znaku ($1\leq i \leq j \leq n$), se zapiše kot $T[i,j]$.  Podobno je definiran tudi vzorec $P$, ki ima dolžino $m$.  Vzorec je del besedila, če obstajata $i$ in $j$, za katera velja $P[1,m]=T[i,j]$.
+
+Ko v besedilu iščemo zgolj en vzorec, se za iskanje lahko uporabi Knuth–Morris–Pratt (KMP) algoritem, s časovno zahtevnostjo $O(n+m)$.  V primeru, da se v besedilu išče več vzorcev, je smiselno nad besedilom zgraditi indeks recimo priponsko drevo, ki je lahko zgrajeno v času $O(n)$, in nato iskati vzorce v priponskem drevesu. Časovna zahtevnost iskanja vzorca v priponskem drevesu je sorazmerna dolžini vzorca, $O(m)$.
+
+Peter Weiner je kot prvi predstavil priponska drevesa leta 1973 \cite{Weiner1973} in jih uporabil v algoritmu za iskanje vzorcev v besedilu. Časovna zahtevnost podanega algoritma je $O(m)$. Velikost priponskega drevesa je sorazmerna z velikostjo besedila, torej pri velikih besedilih preraste velikost delovnega spomina, kar močno vpliva na hitrost iskanja. Rešitev te težave je kompaktna predstavitev priponskega drevesa \cite{Navarro2016}.
+
+
+Namen magistrske naloge je preučevanje vpliva kompaktne predstavitve na izgradnjo priponskih dreves in na operacije nad njimi. V nalogi bodo predstavljene  časovne zahtevnosti osnovnih operacij kot tudi empirična primerjava različnih implementacij priponskih dreves.
+
+\section{STRUKTURA}\label{sec:struktura}
+
+Magistrska naloga je razdeljena na tri poglavja. V prvem poglavju naloge bo podrobno predstavljena podatkovna struktura Priponsko drevo (angl. \textit{Suffix Tree} oziroma ST). Poleg predstavitve strukture bo v poglavju prikazana tudi metoda, ki sprotno zgradi priponsko drevo v času $O(n)$.
+
+%\newpage
+
+V drugem poglavju bo predstavljena podatkovna struktura Kompaktno priponsko drevo (angl. \textit{Compressed Suffix Tree} oziroma CST), ki omogoča iste operacije kot priponsko drevo, pri tem pa potrebuje manj prostora. V tem poglavju bodo tudi prikazane različne kompaktne prestavitve dreves in algoritem za izgradnjo kompaktnega priponskega drevesa, ki skozi celotno izgradnjo ohranja kompaktnost podatkovne strukture.
+
+V tretjem poglavju bodo predstavljene vse operacije nad priponskimi drevesi. Prikazana bo teoretična primerjava različnih implementacij. Pri tem bo izdelana tudi empirična primerjava implementaciji priponskih dreves, ki bo merila prostorsko in časovno zahtevnost.
