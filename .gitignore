@@ -5,3 +5,4 @@
 *.dat
 .vscode
 *.sdsl
+Latex/aux/*
