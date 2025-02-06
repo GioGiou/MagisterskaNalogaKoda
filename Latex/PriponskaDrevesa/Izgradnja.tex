@@ -112,7 +112,7 @@ Na Sliki \ref{fig:PriponskoDrevo} sta priponski povezavi prikazani z črtkano pu
         \label{fig:IzbolšanaNaivna}
 \end{figure}
 
-Kljub temu da je metoda izboljšava naivne metode, je še vedno potrebno beležiti ne eksplicitno definirane liste, ampak to beleženje ne vpliva na čas izgradnje priponskega drevesa. Metoda se v vsakem koraku sprehodi iz začetne točke po priponskih povezavah do korena. Ker je v $i$-tem koraku izgradnje največ $i$ eksplicitno definiranih pripon, potem je tudi število priponskih povezav na poti iz začetne točke do korena po priponskih povezavah enako $i$. Torej je čas enega koraka $O(i)$. Potemtakem ta metoda potrebuje $O(n^2)$ časa za izgradnjo celotnega drevesa. Iz tega sklepa sledi izrek.
+Kljub temu da je metoda izboljšava naivne metode, je še vedno potrebno beležiti ne eksplicitno definirane liste, ampak to beleženje ne vpliva na čas izgradnje priponskega drevesa. Metoda se v vsakem koraku sprehodi iz začetne točke po priponskih povezavah do korena. Postopek izgradnje priponskega drevesa za besedo »KOKOŠ« z Izboljšane naivne metode izgradnje je prikazan na Sliki \ref{fig:IzbolšanaNaivna}. Na sliki je začetna točka označena z zeleno barvo. Ker je v $i$-tem koraku izgradnje največ $i$ eksplicitno definiranih pripon, potem je tudi število priponskih povezav na poti iz začetne točke do korena po priponskih povezavah enako $i$. Torej je čas enega koraka $O(i)$. Potemtakem ta metoda potrebuje $O(n^2)$ časa za izgradnjo celotnega drevesa. Iz tega sklepa sledi izrek.
 
 \begin{izr}\label{izr:naivnaIzbolsana}
     Izboljšana naivna metoda zgradi priponsko drevo nad besedilom $T$ v času $O(n^2)$.
