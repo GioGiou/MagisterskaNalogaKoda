@@ -1,9 +1,13 @@
-Priponska drevesa so posebna implementacija številskega drevesa, pri čemer vsak list ne predstavlja posamične besede, ampak predstavlja posamezno pripono besedila. Na ta način priponsko drevo ne predstavlja zgolj vhodno besedilo $T$ dolžine $n$, ki je sestavljeno iz znakov abecede $\Sigma$, ampak zakodira tudi njegovo strukturo. Zato se pogosto uporabi za indeksiranje besedila. Z uporabo indeksa je iskanje prisotnosti vzorca $P$ dolžine $m$ v besedilu primerljivo s KMP algoritmom, ki potrebuje $O(n+m)$ za preveriti ali se vzorec nahaja v besedilu. Prednost uporabe priponskega drevesa, namesto KMP algoritma, se izraža pri iskanju različnih vzorcev v istem besedilu $T$. Za najti več vzorcev v priponskem drevesu je potrebno: $O(n)$ časa za izgradnjo priponskega drevesa ter $O(m)$ časa za vsak iskani vzorec. Pri iskanju več vzorcev v besedilu $T$ algoritem KMP potrebuje $O(n+m)$ časa za vsak vzorec \cite{Gusfield1997,KMP}.
+Podniz besedila $T$, ki se začne na $i$-tem in konča na $j$-tem znaku ($1\leq i \leq j \leq n$), se zapiše kot $T[i,j]$.  Podobno je definiran tudi vzorec $P$, ki ima dolžino $m$.  Vzorec je del besedila, če obstajata $i$ in $j$, za katera velja $P[1,m]=T[i,j]$.
 
-Priponsko drevo se lahko definira na sledeči način \cite{Gusfield1997}:
+Priponska drevesa so posebna implementacija številskega drevesa, pri čemer vsak list ne predstavlja posamične besede, ampak predstavlja posamezno pripono besede. Na ta način priponsko drevo ne predstavlja zgolj vhodne besede $T$ dolžine $n$, ki je sestavljeno iz znakov abecede $\Sigma$ in je shranjena na pomnilniku kot polje črk \texttt{T[1..n]}, ampak zakodira tudi njegovo strukturo. Zato se pogosto uporabi za indeksiranje besedila. Z uporabo indeksa je iskanje prisotnosti vzorca $P$ dolžine $m$ v besedilu primerljivo s KMP algoritmom, ki potrebuje $O(n+m)$ za preveriti ali se vzorec nahaja v besedilu. Prednost uporabe priponskega drevesa, namesto KMP algoritma, se izraža pri iskanju različnih vzorcev v istem besedilu $T$. Za najti več vzorcev v priponskem drevesu je potrebno: $O(n)$ časa za izgradnjo priponskega drevesa ter $O(m)$ časa za vsak iskani vzorec. Pri iskanju več vzorcev v besedilu $T$ algoritem KMP potrebuje $O(n+m)$ časa za vsak vzorec \cite{Gusfield1997,KMP}.
+
+
+%
+Priponsko drevo nad besedo, ki je niz nad abecedo $\Sigma$, definiramo na sledeči način \cite{Gusfield1997}:
 
 \begin{defi}\label{def:priposkoDrevo}
-    Priponsko drevo nad besedilom $T$ dolžine $n$ je številsko drevo, ki zadošča sledečim zahtevam:
+    Priponsko drevo nad nizom $T$ dolžine $n$ je številsko drevo, ki zadošča sledečim zahtevam:
     \begin{enumerate}
         \item drevo ima natanko $n$ listov, od katerih je vsak list s številom med $1$ in $n$,
         \item vsako notranje vozlišče, razen korena, ima vsaj dva otroka,
@@ -21,9 +25,13 @@ Priponsko drevo se lahko definira na sledeči način \cite{Gusfield1997}:
     Konkatenacija nizov $\alpha\cdot\beta$ je niz $\gamma=\alpha\cdot\beta$, pri čemer je $\alpha=\gamma[1,|\alpha|]$ in $\beta=\gamma[|\alpha|+1,|\alpha|+|\beta|]$.
 \end{defi}
 
+%Podatkovna struktura se bisteveno poenostavi, ko mobena priponsa ni predpona druge pripone, to dosežemo z dodajanjem dolarja na konec besedila
+
+%POsledično so pripone shranjene v listih
+
 Primer priponskega drevesa besede »KOKOŠ« je prikazan na Sliki \ref{fig:PriponskoDrevo}. Znak »\$«, ki predstavlja konec besedila, omogoča razlikovanje med posameznimi priponami, če te niso že eksplicitno predstavljene v drevesu. V tem primeru je »\$« odveč, saj znak »Š« jasno določi vse pripone besede »KOKO«. Znak »\$« omogoča izgraditev drevesa, ki ima vse pripone eksplicitno predstavljene, in zadošča Definiciji \ref{def:priposkoDrevo}.
 
-\begin{figure}[tb]
+\begin{figure}[htb]
     \begin{center}
         \includesvg{Slike/McCreigov/KOKOŠMcCreightS.svg}
         \caption{Primer priponskega drevesa nad besedilom »KOKOŠ$\$$«.} 
@@ -31,19 +39,24 @@ Primer priponskega drevesa besede »KOKOŠ« je prikazan na Sliki \ref{fig:Pripo
     \end{center}
 \end{figure}
 
+
+%%Briši
 Priponska drevesa so posebna implementacija dreves, zato je potrebno nad njimi definirati globino vozlišča, kar poenostavi iskanje in izgradnjo priponskega drevesa. Globina vozlišča je definirana na sledeči način:
 
 \begin{defi}
-   Globina vozlišča $D(v)$ je število vozlišč na poti iz korena drevesa do vozlišča $v$. V globino sta všteta tudi vozlišče $v$ ter koren drevesa.
+   Globina vozlišča $D(v)$ je število vozlišč na poti od korena drevesa do vozlišča $v$. 
 \end{defi}
+
+Iz definicije .. V globino sta všteta tudi vozlišče $v$ ter koren drevesa.
+
 
 Globina vozlišča $D(v)$ je uporabna zgolj, če vsaka povezava predstavlja en sam znak, kar vodi v kršitev druge zahteve Definicije  \ref{def:priposkoDrevo}. V primeru, da povezava predstavlja niz z dvema znakoma, bi se le ta spremenila v dve povezavi, kjer vsaka povezava predstavlja en znak, in vozlišče med njima z enim otrokom, kar krši drugo zahtevo Definicije \ref{def:priposkoDrevo}. Bolj smiselna definicija je besedna globina vozlišča:
 
 \begin{defi}
-    Besedna globina vozlišča $Sd(v)$ je dolžina podniza pridobljenega s konkatenacijo vseh podnizov na povezavah na poti iz korena drevesa do vozlišča $v$. 
+    Črkovna globina vozlišča $Sd(v)$ je dolžina podniza pridobljenega s stikom vseh podnizov na povezavah na poti od korena drevesa do vozlišča $v$. 
 \end{defi}
 
-Primer razlike med globino vozlišča in besedno globino vozlišča se lahko vidi na Sliki \ref{fig:PriponskoDrevo}: vozlišča, do katerih se pride s povezavama »KO« in »O«, imata globino $1$. Besedna globina vozlišča, v katerega kaže povezava »KO«, je $2$ za razliko od vozlišča, v katerega kaže povezava »O«, ki je besedno globina $1$. 
+Primer razlike med globino vozlišča in besedno globino vozlišča se lahko vidi na Sliki \ref{fig:PriponskoDrevo}: vozlišča, do katerih se pride s povezavama »KO« in »O«, imata globino $1$. Besedna globina vozlišča, v katerega kaže povezava »KO«, je $2$ za razliko od vozlišča, v katerega kaže povezava »O«, ki ima besedno globino $1$. 
 
 \section{IZGRADNJA}\label{sec:izgradnja}
 \import{.}{PriponskaDrevesa/Izgradnja}
