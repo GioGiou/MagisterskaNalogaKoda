@@ -1,69 +1,70 @@
-V tem poglavju bodo predstavljene različne metode izgradnje priponskih dreves. Metode bodo predstavljene v zaporedju od najbolj počasne do najhitrejše, ki izgradi drevo v času $O(n)$. 
+V tem poglavju bodo predstavljene različne metode izgradnje priponskih dreves. Metode bodo predstavljene v zaporedju od najbolj počasne, ki izgradi priponsko drevo v času $O(n^3)$, do najhitrejše, ki izgradi drevo v času $O(n)$. 
 
 \paragraph{Naivna metoda:}
-Prva predstavljena metoda za izgradnjo priponskega drevesa je naivna metoda izgradnje. Metoda v vsakem koraku, s sprehodom po drevesu, podaljša vse pripone za en znak ter doda novo pripono. Ker listi vedno predstavljajo konec pripone, se niz na povezavi, ki vodi v list, podaljša za en znak. To je storjeno za vsako pripono.
-
-Pri tem se pojavi nov problem, da nekatere pripone niso eksplicitno predstavljene. Ta problem se reši z beleženjem takih pripon. Če se podaljšana pripona ne razlikuje od niza, ki je že vstavljen v drevo, se ne stori ničesar. Če pa se podaljšana pripona razlikuje od obstoječega niza, se točka na povezavi, kjer se razlikujeta, razdeli in spremeni v vozlišče ter se doda nov list z znakom, ki se je razlikoval. V primeru, da vozlišče že obstaja, se le temu doda novega otroka, na katerega kaže povezava z znakom, ki se razlikuje. Postopek izgradnje priponskega drevesa za besedo »KOKOŠ« z Naivne metode izgradnje je prikazan na Sliki \ref{fig:Naivna}.
+Prva predstavljena metoda za izgradnjo priponskega drevesa je naivna metoda, ki v vsakem koraku s sprehodom po drevesu podaljša vse pripone za en znak ter doda novo pripono. Metoda v $i$-tem koraku izgradnje v dosedaj izgrajeno drevo, ki je bilo izgrajeno za podniz $T[1,i-1]$, doda znak $T[i]$ ter tako izgradi priponsko drevo za podniz $T[1,i]$.
+Ker listi vedno predstavljajo konec pripone, se niz na povezavi, ki vodi v list, podaljša za en znak. To je storjeno za vsako pripono.
 
 \begin{figure}[htb]
-\begin{subfigure}[t]{0.3\linewidth}
-    \subcaption*{}
-        \includesvg{Slike/Naivna/KOKOŠNaivnaK.svg}
-        \centering
-        \label{fig:Naivna1}
-    \end{subfigure}
-    \hspace{0.5cm}
-    \begin{subfigure}[t]{0.3\linewidth}¸
-        \subcaption*{}
-        \includesvg{Slike/Naivna/KOKOŠNaivnaOKOŠ.svg}
-        \centering
-        \label{fig:Naivna2}
-    \end{subfigure}
-    \hspace{0.5cm}
     \begin{subfigure}[t]{0.3\linewidth}
         \subcaption*{}
-        \includesvg{Slike/Naivna/KOKOŠNaivnaKOŠ.svg}
-        \centering
-        \label{fig:Naivna3}
-    \end{subfigure}
+            \includesvg{Slike/Naivna/KOKOŠNaivnaK.svg}
+            \centering
+            \label{fig:Naivna1}
+        \end{subfigure}
+        \hspace{0.5cm}
+        \begin{subfigure}[t]{0.3\linewidth}¸
+            \subcaption*{}
+            \includesvg{Slike/Naivna/KOKOŠNaivnaOKOŠ.svg}
+            \centering
+            \label{fig:Naivna2}
+        \end{subfigure}
+        \hspace{0.5cm}
+        \begin{subfigure}[t]{0.3\linewidth}
+            \subcaption*{}
+            \includesvg{Slike/Naivna/KOKOŠNaivnaKOŠ.svg}
+            \centering
+            \label{fig:Naivna3}
+        \end{subfigure}
+        
+        \begin{subfigure}[t]{0.3\linewidth}
+            \subcaption*{}
+            \includesvg{Slike/Naivna/KOKOŠNaivnaOŠ.svg}
+            \centering
+            \label{fig:Naivna4}
+        \end{subfigure}
+        \hspace{0.5cm}
+        \begin{subfigure}[t]{0.3\linewidth}
+            \subcaption*{}
+            \includesvg[scale=0.67]{Slike/Naivna/KOKOŠNaivnaŠ.svg}
+            \centering
+            \label{fig:Naivna5}
+        \end{subfigure}
+        \hspace{0.5cm}
+        \begin{subfigure}[t]{0.3\textwidth}
+            \subcaption*{}
+            \includesvg[scale=0.67]{Slike/Naivna/KOKOŠNaivnaS.svg}
+            \centering
+            \label{fig:Naivna6}
+        \end{subfigure}
     
-    \begin{subfigure}[t]{0.3\linewidth}
-        \subcaption*{}
-        \includesvg{Slike/Naivna/KOKOŠNaivnaOŠ.svg}
-        \centering
-        \label{fig:Naivna4}
-    \end{subfigure}
-    \hspace{0.5cm}
-    \begin{subfigure}[t]{0.3\linewidth}
-        \subcaption*{}
-        \includesvg[scale=0.67]{Slike/Naivna/KOKOŠNaivnaŠ.svg}
-        \centering
-        \label{fig:Naivna5}
-    \end{subfigure}
-    \hspace{0.5cm}
-    \begin{subfigure}[t]{0.3\textwidth}
-        \subcaption*{}
-        \includesvg[scale=0.67]{Slike/Naivna/KOKOŠNaivnaS.svg}
-        \centering
-        \label{fig:Naivna6}
-    \end{subfigure}
+        %   \includegraphics[width=\textwidth]{Slike/KOKOSUkkonen.png}
+           \caption{Primer izgradnje priponskega drevesa z uporabo Naivne metode za besedo »KOKOŠ$\$$«.} 
+            \label{fig:Naivna}
+    \end{figure}
 
-    %   \includegraphics[width=\textwidth]{Slike/KOKOSUkkonen.png}
-       \caption{Primer izgradnje priponskega drevesa z uporabo Naivne metode za besedo »KOKOŠ$\$$«.} 
-        \label{fig:Naivna}
-\end{figure}
-
-Naivna metoda se v vsakem koraku sprehodi čez celotno drevo. Besedna globina vsakega vozlišča je največ dolžina že dodanega besedila v drevesu, v $i$-tem koraku je besedna globina $\textit{Sd}(v)\le i$. Podobno velja tudi za število listov v drevesu, ki ne presega dolžine že dodanega besedila. Globina lista je manjša ali enaka besedni globini, torej velja da v $i$-tem koraku se pregleda $O(i^2)=\sum_{j=1}^i j=  \dfrac{i(i+1)}{2}$ vozlišč. Iz tega sledi, da za izgradnjo priponskega drevesa je potrebno $O(n^3)$ časa.
+Pri tem se pojavi nov problem, da nekatere pripone niso eksplicitno predstavljene. Ta problem se reši z beleženjem takih pripon in priponska drevesa, ki nimajo vse pripone shranjene v listih, se imenuje implicitna priponska drevesa.  Če se podaljšana pripona ne razlikuje od niza, ki je že vstavljen v drevo, se ne stori ničesar. Če pa se podaljšana pripona razlikuje od obstoječega niza, se točka na povezavi, kjer se razlikujeta, razdeli in spremeni v vozlišče ter se doda nov list z znakom, ki se je razlikoval. V primeru, da vozlišče že obstaja, se le temu doda novega otroka, na katerega kaže povezava z znakom, ki se razlikuje. Postopek izgradnje priponskega drevesa za besedo »KOKOŠ« z naivno metodo izgradnje je prikazan na Sliki \ref{fig:Naivna}. Prva štiri drevesa (vsa v zgornji vrstici ter prvo drevo v spodnji vrstici) so implicitna priponska drevesa.
 
 \begin{izr}\label{izr:naivna}
-    Naivna metoda zgradi priponsko drevo nad besedilo $T$, dolžine $n$, v času $O(n^3)$.
+    Naivna metoda zgradi priponsko drevo nad besedo $T$, dolžine $n$, v času $O(n^3)$.
 \end{izr}
 
 \begin{proof}
-    V $i$-tem koraku izgradnje priponskega drevesa z naivno metodo potrebujemo $O(i^2)$ za vstaviti $i$-ti znak v drevo. Ker je besedilo $T$ dolgo $n$ znakov, potem se lahko to zapiše:
+    Naivna metoda se v vsakem koraku sprehodi čez celotno drevo. Črkovna globina vsakega vozlišča je največ dolžina že dodanega besedila v drevesu, v $i$-tem koraku je črkovna globina vsakega vozlišča $v$ je $\textit{Sd}(v)\le i$. Podobno velja tudi za število listov v drevesu, ki ne presega dolžine že dodanega podniza. Globina lista je manjša ali enaka črkovni globini, torej velja, da v $i$-tem koraku se pregleda $\sum_{j=1}^i j=\dfrac{i(i+1)}{2}=O(i^2)$ vozlišč.
+
+    Ker je niz $T$ dolg $n$ znakov, potem skozi celotno izgradnjo priponskegadrevesa se obišče:
 
     $$
-        \sum_{i=1}^n O(i^2)= O\left(\dfrac{n(n+1)(2n+1)}{6}\right)=O(n^3).
+        \sum_{i=1}^n \sum_{j=1}^i j= \sum_{i=1}^n \dfrac{i(i+1)}{2}=\dfrac{n(n+1)(n+2)}{6}=O(n^3).
     $$
 \end{proof}
 
