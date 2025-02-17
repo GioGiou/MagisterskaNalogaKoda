@@ -52,7 +52,7 @@ Ker listi vedno predstavljajo konec pripone, se niz na povezavi, ki vodi v list,
             \label{fig:Naivna}
     \end{figure}
 
-Pri tem se pojavi nov problem, da nekatere pripone niso eksplicitno predstavljene. Ta problem se reši z beleženjem takih pripon in priponska drevesa, ki nimajo vse pripone shranjene v listih, se imenuje implicitna priponska drevesa.  Če se podaljšana pripona ne razlikuje od niza, ki je že vstavljen v drevo, se ne stori ničesar. Če pa se podaljšana pripona razlikuje od obstoječega niza, se točka na povezavi, kjer se razlikujeta, razdeli in spremeni v vozlišče ter se doda nov list z znakom, ki se je razlikoval. V primeru, da vozlišče že obstaja, se le temu doda novega otroka, na katerega kaže povezava z znakom, ki se razlikuje. Postopek izgradnje priponskega drevesa za besedo »KOKOŠ« z naivno metodo izgradnje je prikazan na Sliki \ref{fig:Naivna}. Prva štiri drevesa (vsa v zgornji vrstici ter prvo drevo v spodnji vrstici) so implicitna priponska drevesa.
+Pri tem se pojavi nov problem, da nekatere pripone niso eksplicitno predstavljene. Ta problem se reši z beleženjem takih pripon in priponska drevesa, ki nimajo vse pripone shranjene v listih, se imenuje implicitna priponska drevesa.  Če se podaljšana pripona ne razlikuje od niza, ki je že vstavljen v drevo, se ne stori ničesar. Če pa se podaljšana pripona razlikuje od obstoječega niza, se točka na povezavi, kjer se razlikujeta, razdeli in spremeni v vozlišče ter se doda nov list z znakom, ki se je razlikoval. V primeru, da vozlišče že obstaja, se le temu doda novega otroka, na katerega kaže povezava z znakom, ki se razlikuje. Postopek izgradnje priponskega drevesa za besedo »KOKOŠ« z naivno metodo izgradnje je prikazan na Sliki \ref{fig:Naivna}. Na sliki \ref{fig:Naivna} zgolj tretje (zadnje drevo v prvi vrstici) in četrto (prvo drevo v drugi vrstici) drevo sta implicitna priponska drevesa.
 
 \begin{izr}\label{izr:naivna}
     Naivna metoda zgradi priponsko drevo nad besedo $T$, dolžine $n$, v času $O(n^3)$.
@@ -64,18 +64,20 @@ Pri tem se pojavi nov problem, da nekatere pripone niso eksplicitno predstavljen
     Ker je niz $T$ dolg $n$ znakov, potem skozi celotno izgradnjo priponskegadrevesa se obišče:
 
     $$
-        \sum_{i=1}^n \sum_{j=1}^i j= \sum_{i=1}^n \dfrac{i(i+1)}{2}=\dfrac{n(n+1)(n+2)}{6}=O(n^3).
+        \sum_{i=1}^n \sum_{j=1}^i j=\sum_{i=1}^n \dfrac{i(i+1)}{2}=\dfrac{n(n+1)(n+2)}{6}=O(n^3).
     $$
 \end{proof}
 
 \paragraph{Izboljšana naivna metoda:}
-Naivna metoda je preprosti način izgradnje priponskega drevesa, vendar se hitro opazijo načini za pospešitev izgradnje drevesa. Prva opazka je, da metoda nepotrebno pregleduje celotno drevo. To se lahko reši s pomočjo priponskih povezav (angl. \textit{Suffix link}).
+Naivna metoda je preprosti način izgradnje priponskega drevesa, vendar se hitro opazijo načini za pospešitev izgradnje drevesa. Najprej opzimo, da metoda nepotrebno pregleduje celotno drevo. To se lahko reši s uporabo priponskih povezav (angl. \textit{Suffix link}).
 
 \begin{defi}\label{def:sl}
-    Priponska povezava $\textit{sl}(v)$ je povezava iz notranjega vozlišča $v$ v notranje vozlišče $w$. Vozlišče $v$ predstavlja niz $y=x\alpha $, medtem ko vozlišče $w$ pa predstavlja niz $\alpha\in\Sigma^*$. Pri tem je $x\in\Sigma$ znak.
+    Naj notranje vozlišče $v$ predstavlja niz $x\alpha$, kjer $x$ je znak in $\alpha\in\Sigma^*$ je podniz niza $T$. Potem priponska povezava $\textit{sl}(v)$ je povezava na notranje vozlišče $w$, ki predstavlja niz $\alpha$.
+
+    %Priponska povezava $\textit{sl}(v)$ je povezava iz notranjega vozlišča $v$ v notranje vozlišče $w$. Vozlišče $v$ predstavlja niz $y=x\alpha $, medtem ko vozlišče $w$ pa predstavlja niz $\alpha\in\Sigma^*$. Pri tem je $x\in\Sigma$ znak.
 \end{defi}
 
-Na Sliki \ref{fig:PriponskoDrevo} sta priponski povezavi prikazani z črtkano puščico. Uvedba priponskih povezav omogoča izogib nepotrebnim sprehodom po drevesu. Tako metoda podaljša vse liste zgolj s sprehodom po priponskih povezavah. Pri tem se pojavi nova opazka, da metoda lahko beleži vozlišče s povezavo na list, ki predstavlja najdaljšo pripono (celotno besedilo). Beleženje tega vozlišča odstrani nepotrebno iskanje začetka sprehoda po priponskih povezavah.
+Na Sliki \ref{fig:PriponskoDrevo} sta priponski povezavi prikazani s črtkano puščico. Uvedba priponskih povezav omogoča izogib nepotrebnim sprehodom po drevesu. Tako metoda podaljša vse liste zgolj s sprehodom po priponskih povezavah. Pri tem se opazi, da metoda lahko beleži notranje vozlišče s povezavo na list, ki predstavlja najdaljšo pripono v predhodnjem koraku izgradnje $T[1,i-1]$. Beleženje tega vozlišča, imenovanega začetna točka, odstrani nepotrebno iskanje začetka sprehoda po priponskih povezavah.
 
 \begin{figure}[htb]
 \begin{subfigure}[t]{0.3\linewidth}
@@ -125,7 +127,7 @@ Na Sliki \ref{fig:PriponskoDrevo} sta priponski povezavi prikazani z črtkano pu
         \label{fig:IzbolšanaNaivna}
 \end{figure}
 
-Kljub temu da je metoda izboljšava naivne metode, je še vedno potrebno beležiti ne eksplicitno definirane liste, ampak to beleženje ne vpliva na čas izgradnje priponskega drevesa. Metoda se v vsakem koraku sprehodi iz začetne točke po priponskih povezavah do korena. Postopek izgradnje priponskega drevesa za besedo »KOKOŠ« z Izboljšane naivne metode izgradnje je prikazan na Sliki \ref{fig:IzbolšanaNaivna}. Na sliki je začetna točka označena z zeleno barvo. Ker je v $i$-tem koraku izgradnje največ $i$ eksplicitno definiranih pripon, potem je tudi število priponskih povezav na poti iz začetne točke do korena po priponskih povezavah enako številu notranjih vozlišč $O(i)$. Torej je čas enega koraka $O(i)$. Potemtakem ta metoda potrebuje $O(n^2)$ časa za izgradnjo celotnega drevesa. Iz tega sklepa sledi izrek.
+Metoda še vedno potrebje beležiti ne eksplicitno definirane pripone (pripone, ki so predpone drugim priponam), ampak to beleženje ne vpliva na čas izgradnje priponskega drevesa. Metoda se v vsakem koraku sprehodi iz začetne točke po priponskih povezavah do korena. Postopek izgradnje priponskega drevesa za besedo »KOKOŠ« z Izboljšane naivne metode izgradnje je prikazan na Sliki \ref{fig:IzbolšanaNaivna}. Na sliki je začetna točka označena z zeleno barvo. Ker je v $i$-tem koraku izgradnje največ $i$ eksplicitno definiranih pripon, potem je tudi število priponskih povezav na poti iz začetne točke do korena po priponskih povezavah enako številu notranjih vozlišč $O(i)$. Torej je čas $i$-tega koraka $O(i)$. Potemtakem ta metoda potrebuje $O(n^2)$ časa za izgradnjo celotnega drevesa. Iz tega sklepa sledi izrek.
 
 \begin{izr}\label{izr:naivnaIzbolsana}
     Izboljšana naivna metoda zgradi priponsko drevo nad besedilom $T$ v času $O(n^2)$.
@@ -139,11 +141,11 @@ Kljub temu da je metoda izboljšava naivne metode, je še vedno potrebno beleži
 %    $$
 %\end{proof}
 
-Čeprav te izboljšave znižajo čas izgradnje priponskega drevesa na $O(n^2)$, le taka izboljšava ne omogoča izgradnje drevesa v času $O(n)$. Za izgradnjo priponskega drevesa v času $O(n)$ obstajata dva algoritma: McCreightov algoritem \cite{McCreight1976} in Ukkonenov algoritem \cite{Ukkonen1995}. 
+Čeprav te izboljšave znižajo čas izgradnje priponskega drevesa na $O(n^2)$, le taka izboljšava ne omogoča izgradnje drevesa v času $O(n)$. Za izgradnjo priponskega drevesa v linearnem času obstajata dva algoritma: McCreightov algoritem \cite{McCreight1976} in Ukkonenov algoritem \cite{Ukkonen1995}. 
 
 \paragraph{McCreightov algoritem:}
-McCreightov algoritem ali Algoritem M je prvi algoritem, ki potrebuje $O(n)$ časa za izgradnjo drevesa pri tem pa je tudi prostorska zahtevnost algoritma $O(n)$.
-Algoritem deluje, tako da v $i$-tem koraku se v drevo doda pripona $T[i:n]$. Torej so pripone dodane v drevo v vrstnem redu od najdaljše do najkrajše pripone. Postopek izgradnje priponskega drevesa za besedo »KOKOŠ« z McCreightvim algoritmom je prikazan na Sliki \ref{fig:McCreight}.
+McCreightov algoritem ali Algoritem M je prvi algoritem s časovno zahtevnostjo $O(n)$ za izgradnjo drevesa, pri tem pa je tudi prostorska zahtevnost algoritma $O(n)$.
+Algoritem deluje, tako da v $i$-tem koraku se v dotakrat izgrajeno drevo doda pripona $T[i,n]$. Torej so pripone dodane v drevo v vrstnem redu od najdaljše do najkrajše pripone. Postopek izgradnje priponskega drevesa za besedo »KOKOŠ« z McCreightvim algoritmom je prikazan na Sliki \ref{fig:McCreight}.
 
 \begin{figure}[htb]
     \begin{subfigure}[t]{0.3\linewidth}
