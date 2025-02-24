@@ -2,13 +2,16 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="210mm"
-   height="297mm"
-   viewBox="0 0 210 297"
+   width="84.987297mm"
+   height="82.555969mm"
+   viewBox="0 0 84.987297 82.555969"
    version="1.1"
    id="svg1"
    inkscape:version="1.4 (86a8ad7, 2024-10-11)"
    sodipodi:docname="KokosSTDFUDS.svg"
+   inkscape:export-filename="..\Latex\Slike\KokosSTDFUDS.svg"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -31,27 +34,18 @@
      inkscape:window-x="-9"
      inkscape:window-y="-9"
      inkscape:window-maximized="1"
-     inkscape:current-layer="layer1" />
+     inkscape:current-layer="layer1">
+    <inkscape:page
+       x="0"
+       y="0"
+       width="84.987297"
+       height="82.555969"
+       id="page2"
+       margin="0"
+       bleed="0" />
+  </sodipodi:namedview>
   <defs
      id="defs1">
-    <rect
-       x="260.51426"
-       y="282.93828"
-       width="298.76699"
-       height="69.250627"
-       id="rect25" />
-    <rect
-       x="189.34134"
-       y="331.11417"
-       width="160.42715"
-       height="16.322529"
-       id="rect5" />
-    <rect
-       x="490.73209"
-       y="241.83051"
-       width="161.92744"
-       height="94.045197"
-       id="rect44" />
     <marker
        style="overflow:visible"
        id="Triangle"
@@ -226,12 +220,8 @@
   <g
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
-     id="layer1">
-    <text
-       xml:space="preserve"
-       transform="matrix(0.26458333,0,0,0.26458333,-2.6458465,-171.71458)"
-       id="text39"
-       style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:13.3333px;font-family:Calibri;-inkscape-font-specification:'Calibri, Light';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:start;writing-mode:lr-tb;direction:ltr;white-space:pre;shape-inside:url(#rect44);display:inline;fill:none;fill-opacity:0;stroke:#000000;stroke-width:1.02425" />
+     id="layer1"
+     transform="translate(-62.506346,-3.4242543)">
     <g
        id="g25">
       <text
@@ -301,7 +291,7 @@
          style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:15.4113px;font-family:Calibri;-inkscape-font-specification:'Calibri, Light';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:start;writing-mode:lr-tb;direction:ltr;white-space:pre;shape-inside:url(#rect37);display:inline;fill:none;fill-opacity:0;fill-rule:nonzero;stroke:#000000;stroke-width:1.37953;stroke-dasharray:none;stroke-opacity:1"><tspan
            x="173.45703"
            y="563.86184"
-           id="tspan2">KO</tspan></text>
+           id="tspan5">KO</tspan></text>
       <text
          xml:space="preserve"
          transform="matrix(0.23266826,0,0,0.22520886,56.465001,-72.791397)"
@@ -309,7 +299,7 @@
          style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:15.4113px;font-family:Calibri;-inkscape-font-specification:'Calibri, Light';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:start;writing-mode:lr-tb;direction:ltr;white-space:pre;shape-inside:url(#rect38);display:inline;fill:none;fill-opacity:0;fill-rule:nonzero;stroke:#000000;stroke-width:1.37953;stroke-dasharray:none;stroke-opacity:1"><tspan
            x="173.45703"
            y="563.86184"
-           id="tspan4">Š$</tspan></text>
+           id="tspan12">Š$</tspan></text>
       <ellipse
          style="display:inline;fill:none;fill-opacity:0;fill-rule:nonzero;stroke:#000000;stroke-width:0.365;stroke-dasharray:none;stroke-opacity:1"
          id="ellipse29"
@@ -328,7 +318,7 @@
          style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:15.4113px;font-family:Calibri;-inkscape-font-specification:'Calibri, Light';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:start;writing-mode:lr-tb;direction:ltr;white-space:pre;shape-inside:url(#rect39);display:inline;fill:none;fill-opacity:0;fill-rule:nonzero;stroke:#000000;stroke-width:1.37953;stroke-dasharray:none;stroke-opacity:1"><tspan
            x="173.45703"
            y="563.86184"
-           id="tspan7">O</tspan></text>
+           id="tspan13">O</tspan></text>
       <text
          xml:space="preserve"
          transform="matrix(0.23266826,0,0,0.22520886,39.102859,-72.066102)"
@@ -336,7 +326,7 @@
          style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:15.4113px;font-family:Calibri;-inkscape-font-specification:'Calibri, Light';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:start;writing-mode:lr-tb;direction:ltr;white-space:pre;shape-inside:url(#rect40);display:inline;fill:none;fill-opacity:0;fill-rule:nonzero;stroke:#000000;stroke-width:1.37953;stroke-dasharray:none;stroke-opacity:1"><tspan
            x="173.45703"
            y="563.86184"
-           id="tspan8">KOŠ$</tspan></text>
+           id="tspan14">KOŠ$</tspan></text>
       <text
          xml:space="preserve"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.67773px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;display:inline;fill:none;fill-opacity:0;fill-rule:nonzero;stroke:#000000;stroke-width:0.365001;stroke-dasharray:none;stroke-opacity:1"
@@ -386,7 +376,7 @@
          style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:15.4113px;font-family:Calibri;-inkscape-font-specification:'Calibri, Light';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:start;writing-mode:lr-tb;direction:ltr;white-space:pre;shape-inside:url(#rect41);display:inline;fill:none;fill-opacity:0;fill-rule:nonzero;stroke:#000000;stroke-width:1.37953;stroke-dasharray:none;stroke-opacity:1"><tspan
            x="173.45703"
            y="563.86184"
-           id="tspan9">Š$</tspan></text>
+           id="tspan15">Š$</tspan></text>
       <text
          xml:space="preserve"
          transform="matrix(0.23266826,0,0,0.22520886,65.885251,-73.483599)"
@@ -394,7 +384,7 @@
          style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:15.4113px;font-family:Calibri;-inkscape-font-specification:'Calibri, Light';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:start;writing-mode:lr-tb;direction:ltr;white-space:pre;shape-inside:url(#rect42);display:inline;fill:none;fill-opacity:0;fill-rule:nonzero;stroke:#000000;stroke-width:1.37953;stroke-dasharray:none;stroke-opacity:1"><tspan
            x="173.45703"
            y="563.86184"
-           id="tspan10">KOŠ$</tspan></text>
+           id="tspan16">KOŠ$</tspan></text>
       <text
          xml:space="preserve"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.67773px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;display:inline;fill:none;fill-opacity:0;fill-rule:nonzero;stroke:#000000;stroke-width:0.365001;stroke-dasharray:none;stroke-opacity:1"
@@ -436,7 +426,7 @@
          style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:15.4113px;font-family:Calibri;-inkscape-font-specification:'Calibri, Light';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:start;writing-mode:lr-tb;direction:ltr;white-space:pre;shape-inside:url(#rect43);display:inline;fill:none;fill-opacity:0;fill-rule:nonzero;stroke:#000000;stroke-width:1.37953;stroke-dasharray:none;stroke-opacity:1"><tspan
            x="173.45703"
            y="563.86184"
-           id="tspan11">Š$</tspan></text>
+           id="tspan17">Š$</tspan></text>
       <path
          style="display:inline;fill:none;fill-opacity:0;fill-rule:nonzero;stroke:#000000;stroke-width:0.271;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker-end:url(#Triangle-58)"
          d="m 112.59843,10.983058 c 15.58272,8.176055 15.58272,8.176055 15.58272,8.176055"
@@ -456,11 +446,6 @@
            x="86.534485"
            y="14.416465">$</tspan></text>
     </g>
-    <text
-       xml:space="preserve"
-       transform="scale(0.26458333)"
-       id="text5"
-       style="font-weight:300;font-size:16px;font-family:Calibri;-inkscape-font-specification:'Calibri, Light';text-align:start;writing-mode:lr-tb;direction:ltr;white-space:pre;shape-inside:url(#rect5);display:inline;fill:#05e972;fill-opacity:0.815913;stroke:#000000;stroke-width:1.02425;stroke-opacity:1" />
     <g
        id="g26"
        transform="translate(-2.1456039)">
@@ -512,10 +497,5 @@
          d="m 145.77983,78.649577 -0.0872,7.329031"
          id="path25-1-44" />
     </g>
-    <text
-       xml:space="preserve"
-       transform="scale(0.26458333)"
-       id="text25"
-       style="fill:#000000;text-orientation:auto;stroke-width:1.02425197;stroke:#646464;-inkscape-font-specification:'Calibri, Light';font-family:Calibri;font-size:32px;font-weight:300;fill-opacity:1;text-align:start;writing-mode:lr-tb;direction:ltr;stroke-opacity:1;white-space:pre;shape-inside:url(#rect25)" />
   </g>
 </svg>
