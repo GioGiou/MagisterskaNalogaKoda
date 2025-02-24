@@ -25,12 +25,12 @@ S pomočjo teh operacij se je mogoče sprehoditi po drevesu in je možno impleme
 
 Prvi način zapisa topologije drevesa je zaporedje eniških zapisov stopenj vozlišč po plasteh (LOUDS). Drevo se predstavi kot bitno polje $B$ dolžine $2n+1$, pri čemer je $n$ število vozlišč v drevesu. Zapis drevesa se začne z nizom $10$, temu pa sledi zapis vsakega vozlišča. Vsako vozlišče $v$ je predstavljeno z nizom $1^o0$, pri je $o$ predstavlja število otrok posameznega vozlišča, torej se ena zapiše $o$-krat in nato eno ničlo, ki predstavlja konec vozlišča. Kot je razvidno iz imena predstavitve, so vozlišča obiskana po nivojih: vozlišča z isto globino so zaporedno predstavljana \cite{Navarro2016}.
 
-Primer takega zapisa je predstavljen na Sliki \ref{fig:LOUDS}. Na sliki je koren drevesa predstavljen z $B[3,7]=11110$. Niz $B[3,7]$ vsebuje 4 bite z vrednostjo $1$, ker ima koren $4$ otroke.
+Primer takega zapisa je predstavljen na Sliki \ref{fig:LOUDS}. Vozlišča so v zaporedju ločena s sivimi črtami. Na sliki je koren drevesa predstavljen z $B[3,7]=11110$. Niz $B[3,7]$ vsebuje 4 bite z vrednostjo $1$, ker ima koren $4$ otroke.
 
 \begin{figure}[htb]
     \begin{center}
-        \includegraphics[width=.8\textwidth]{Slike/KokosSTLOUDR.png}
-        \captionof{figure}[Primer predstavitve drevesa z metodo LOUDS za priponsko drevo besede »KOKOŠ$\$$«.]{Primer predstavitve drevesa z metodo LOUDS za priponsko drevo besede »KOKOŠ$\$$«.} 
+        \includesvg{Slike/KokosSTLOUDR.svg}
+        \caption{Primer predstavitve drevesa z metodo LOUDS za priponsko drevo besede »KOKOŠ$\$$«.} 
         \label{fig:LOUDS}
     \end{center}
 \end{figure}
@@ -87,19 +87,19 @@ kjer je  $v\in \{1,0\}$. Zaporedje $x_1\le x_2 \le \dots \le x_n$ predstavlja vo
 
 \subsection{Uravnoteženi oklepaji}\label{sec:oklepaji}
 
-Naslednji način zapisa topologije drevesa je zapis z zaporedjem uravnoteženih oklepajev (BP). Drevo se predstavi, kot bitno polje $B$ dolžine $2n$, pri čemer je $n$ število vozlišč v drevesu. Zaporedje se zgradi s pomočjo pregleda v globino. Ko je vozlišče prvič obiskano se, na konec do sedaj zapisane sekvence, zapiše '('. Uklepaj je v bitnem polju predstavljen s številom $0$. Ko se zapiše celotno poddrevo vozlišča, pa se na konec sekvence zapiše ')'. Zaklepaj pa je v bitnem polju zapiše s številom $1$. Primer priponskega drevesa predstavljenega z uporabo zaporedja uravnoteženih oklepajev je prikazan na Sliki \ref{fig:BP} \cite{Navarro2016}.
+Naslednji način zapisa topologije drevesa je zapis z zaporedjem uravnoteženih oklepajev (BP). Drevo se predstavi, kot bitno polje $B$ dolžine $2n$, pri čemer je $n$ število vozlišč v drevesu. Zaporedje se zgradi s pomočjo pregleda v globino. Ko je vozlišče prvič obiskano se, na konec do sedaj zapisane sekvence, zapiše '('. Uklepaj je v bitnem polju predstavljen s številom $0$. Ko se zapiše celotno poddrevo vozlišča, pa se na konec sekvence zapiše ')'. Zaklepaj pa je v bitnem polju zapiše s številom $1$. Primer priponskega drevesa predstavljenega z uporabo zaporedja uravnoteženih oklepajev je prikazan na Sliki \ref{fig:BP}. Na sliki so vsa notranja vozlišča obarvana z različnimi baravami za lažje prepoznavanje le teh v zaporedju uravnoteženih oklepajev. Ker so listi oštevilčeni, so ta števila tudi zapisana nad vsakim listom v zaporedju uravnoteženih oklepajev \cite{Navarro2016}.
 
 \begin{figure}[htb]
     \begin{center}
-        \includegraphics[width=0.8\textwidth]{Slike/KokosSTBP.png}
-        \captionof{figure}[Primer predstavitve drevesa z metodo BP za priponsko drevo besede »KOKOŠ$\$$«.]{Primer predstavitve drevesa z metodo BP za priponsko drevo besede »KOKOŠ$\$$«.} 
+        \includesvg{Slike/KokosSTBP.svg}
+        \caption{Primer predstavitve drevesa z metodo BP za priponsko drevo besede »KOKOŠ$\$$«.} 
         \label{fig:BP}
     \end{center}
 \end{figure}
 
 Torej je vsako vozlišče je predstavljeno kot par '(' in ')'. Tako je mogoče definirati sledeče operacije nad oklepaji: $odpri$, $zapri$, $vi$\textit{š}$ek$ ter $oklepa$. Operacija $vi$\textit{š}$ek(B,i)$ vrne število '(', ki niso bili še zaprti in je
 $$
-    vi\textit{š}ek(B,i)=rang_0(B,i)-rang_1(B,i)=2rang_0(B,i)-i.
+    \textit{višek}(B,i)=rang_0(B,i)-rang_1(B,i)=2rang_0(B,i)-i.
 $$
 Operacija $odpri(B,i)$ vrne položaj '(', ki odpre ')' na $i$-tem mestu v $B$. Operacijo $odpri(B,i)$ se lahko definira tudi, tako da vrne prvi $j>i$, pri čemer $vi$\textit{š}$ek(B,j)=vi$\textit{š}$ek(B,i)-1$. Podobno operacija $zapri(B,i)$  vrne položaj ')', ki zapre '(' na $i$-tem mestu v $B$. Z uporabo operacije $vi$\textit{š}$ek$ je operacija $zapri$ definirana, tako da vrne največji $j<i$, pri čemer je $vi$\textit{š}$ek(B,j)=vi$\textit{š}$ek(B,i)+1$. Operacija $oklepa(B,i)$ vrne položaj $j$ od '(' v bitem polju $B$, pri čemer velja, da $j<i<zapri(B,j)$. Z uporabo operacije $vi$\textit{š}$ek$ operacija $oklepa(B,i)$ vrne položaj največjega $j<i$, pri čemer je $vi$\textit{š}$ek(B,j-1)=vi$\textit{š}$ek(B,i)-2$
  \cite{Navarro2016}.
@@ -137,12 +137,12 @@ Zapis topologije drevesa s BP omogoča dodatne operacije. Primer operacije je o�
 
 \subsection{Zaporedje eniških zapisov stopenj vozlišč v globino}\label{sec:DFUDS}
 
-Zadnja predstavitev topologije drevesa je zaporedje eniških zapisov stopenj vozlišč v globino (DFUDS). Predstavitev omogoča preprostejše implementacije operacij ter posledično manjše dodatne podatkovne strukture, za razliko od zapisa z zaporedjem uravnoteženih oklepajev. Pri tem pa omogoča hitrejše implementacije nekaterih operacij v primerjavi, z uporabo zaporedja eniških zapisov stopenj vozlišč po plasteh. Primer zapisa topologije drevesa z DFUDS je prikazan na Sliki \ref{fig:DFUDS}.
+Zadnja predstavitev topologije drevesa je zaporedje eniških zapisov stopenj vozlišč v globino (DFUDS). Predstavitev omogoča preprostejše implementacije operacij ter posledično manjše dodatne podatkovne strukture, za razliko od zapisa z zaporedjem uravnoteženih oklepajev. Pri tem pa omogoča hitrejše implementacije nekaterih operacij v primerjavi, z uporabo zaporedja eniških zapisov stopenj vozlišč po plasteh. Primer zapisa topologije drevesa z DFUDS je prikazan na Sliki \ref{fig:DFUDS}. Vozlišča so v zaporedju ločena s sivimi črtami.
 
 \begin{figure}[htb]
     \begin{center}
-        \includegraphics[width=.8\textwidth]{Slike/KokosSTDFUDS.png}
-        \captionof{figure}[Primer predstavitve drevesa z metodo DFUDS za priponsko drevo besede »KOKOŠ$\$$«.]{Primer predstavitve drevesa z metodo DFUDS za priponsko drevo besede »KOKOŠ$\$$«.} 
+        \includesvg{Slike/KokosSTDFUDS.svg}
+        \caption{Primer predstavitve drevesa z metodo DFUDS za priponsko drevo besede »KOKOŠ$\$$«.} 
         \label{fig:DFUDS}
     \end{center}
 \end{figure}
