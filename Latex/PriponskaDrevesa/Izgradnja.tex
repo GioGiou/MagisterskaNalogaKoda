@@ -1,7 +1,7 @@
-V tem poglavju bodo predstavljene različne metode izgradnje priponskih dreves. Metode bodo predstavljene v zaporedju od najbolj počasne, ki izgradi priponsko drevo v času $O(n^3)$, do najhitrejše, ki izgradi drevo v času $O(n)$. 
+V tem podpoglavju bodo predstavljene različne metode izgradnje priponskih dreves. Metode bodo predstavljene v zaporedju od najbolj počasne, ki izgradi priponsko drevo v času $O(n^3)$, do najhitrejše, ki izgradi drevo v času $O(n)$. 
 
 \paragraph{Naivna metoda:}
-Prva predstavljena metoda za izgradnjo priponskega drevesa je naivna metoda, ki v vsakem koraku s sprehodom po drevesu podaljša vse pripone za en znak ter doda novo pripono. Metoda v $i$-tem koraku izgradnje v dosedaj izgrajeno drevo, ki je bilo izgrajeno za podniz $T[1,i-1]$, doda znak $T[i]$ ter tako izgradi priponsko drevo za podniz $T[1,i]$. To je storjeno s dodajanjem pripone, ki predstavlja znak $T[i]$, in s podaljševanjem pripon, ki že obstajajo v priponskem drevesu. Ker listi vedno predstavljajo konec pripone, se niz na povezavi, ki vodi v list, podaljša za en znak.
+Ta metoda v vsakem koraku s sprehodom po drevesu podaljša vse pripone za en znak ter doda novo pripono. Metoda v $i$-tem koraku izgradnje v dosedaj izgrajeno drevo, ki je bilo izgrajeno za podniz $T[1,i-1]$, doda znak $T[i]$ ter tako izgradi drevo za podniz $T[1,i]$. To je storjeno z dodajanjem pripone, ki predstavlja znak $T[i]$, in s podaljševanjem pripon, ki že obstajajo v drevesu. Ker listi vedno predstavljajo konec pripone, se niz na povezavi, ki vodi v list, podaljša za en znak.
 
 \begin{figure}[htb]
     \begin{subfigure}[t]{0.3\linewidth}
@@ -51,16 +51,16 @@ Prva predstavljena metoda za izgradnjo priponskega drevesa je naivna metoda, ki 
     \label{fig:Naivna}
 \end{figure}
 
-Pri tem se pojavi nov problem, da nekatere pripone niso eksplicitno predstavljene. Ta problem se reši z beleženjem takih pripon in taka priponska drevesa, ki nimajo vse pripone shranjene v listih, se imenuje implicitna priponska drevesa.  Če se podaljšana pripona, ki je implicitno predstavljena, ne razlikuje od niza, ki je že vstavljen v drevo, se ne stori ničesar. Če pa se podaljšana pripona, ki je implicitno predstavljena, razlikuje od obstoječega niza, se točka na povezavi, kjer se razlikujeta, razdeli in spremeni v vozlišče ter se doda drevesu nov list z znakom, ki se je razlikoval. V primeru, da vozlišče že obstaja, se le temu doda novega otroka, na katerega kaže povezava z znakom, ki se razlikuje. Postopek izgradnje priponskega drevesa za besedo »KOKOŠ« z naivno metodo izgradnje je prikazan na Sliki \ref{fig:Naivna}. Na Sliki \ref{fig:Naivna} zgolj tretje (zadnje drevo v prvi vrstici) in četrto (prvo drevo v drugi vrstici) drevo sta implicitna priponska drevesa.
+Opazimo, da drevo, ki  je zgrajeno za podniz T[1,i], $i< n$, ni nujno priponsko, saj niso vse pripone podniza T[1,i] shranjene v listih. Še več, nekatere pripone niso niti eksplicitno predstavljene. Kljub temu pa to drevo vsebuje vso informacijo o pripadajočlh priponah, pri čemer moramo posebej beležiti vse implicitno predstavljene pripone. Takšnemu drevesu rečemo implicitno priponsko drevo. Ta problem se reši z beleženjem takih pripon. Če se niz na povezavi, ki predstavlja zadnji del implicitne pripone, nadaljuje po priponi z znakom $T[i]$ se ne stori ničesar, saj je tudi podalšana pripona implicitno predstavljena. Če pa se niz na povezavi, ki predstavlja zadnji del implicitne pripone, ne nadaljuje z znakom $T[i]$, pa se povezavo razdeli na dva dela in se ustavri vozlišče, na katerega kaze povezava z nizom, ki se ujema z predhodnjo pripono, ter ima dva otroka: vozlišče na katerega kaže prostanek predhodnje povezave ter list z znakom $T[i]$. V primeru, da vozlišče že obstaja, se le temu doda novega otroka, na katerega kaže povezava z znakom, ki se razlikuje. Postopek izgradnje priponskega drevesa za besedo »KOKOŠ« z naivno metodo izgradnje je prikazan na Sliki \ref{fig:Naivna}. Na Sliki \ref{fig:Naivna} zgolj tretje (zadnje drevo v prvi vrstici) in četrto (prvo drevo v drugi vrstici) drevo sta implicitna priponska drevesa.
 
 \begin{izr}\label{izr:naivna}
     Naivna metoda zgradi priponsko drevo nad besedo $T$, dolžine $n$, v času $O(n^3)$.
 \end{izr}
 
 \begin{proof}
-    Naivna metoda se v vsakem koraku sprehodi čez celotno drevo. Črkovna globina vsakega vozlišča je največ dolžina že dodanega besedila v drevesu, v $i$-tem koraku je črkovna globina vsakega vozlišča $v$ je $\textit{Sd}(v)\le i$. Podobno velja tudi za število listov v drevesu, ki ne presega dolžine že dodanega podniza. Globina lista je manjša ali enaka črkovni globini, torej velja, da v $i$-tem koraku se pregleda $\sum_{j=1}^i j=\dfrac{i(i+1)}{2}=O(i^2)$ vozlišč.
+    Naivna metoda se v vsakem koraku sprehodi čez celotno drevo. Črkovna globina vsakega vozlišča je največ dolžina že dodanega besedila v drevesu, v $i$-tem koraku je črkovna globina $\textit{Sd}(v)$ vsakega vozlišča $v$ je največ $i$. Podobno velja tudi za število listov v drevesu, ki ne presega dolžine že dodanega podniza. Globina lista je manjša ali enaka črkovni globini, torej velja, da se v $i$-tem koraku pregleda $\sum_{j=1}^i j=\dfrac{i(i+1)}{2}$ vozlišč.
 
-    Ker je niz $T$ dolg $n$ znakov, potem je skozi celotno izgradnjo priponskega drevesa število obiskanih vozlišč enako
+    Ker je niz $T$ dolg $n$ znakov, je skozi celotno izgradnjo priponskega drevesa število obiskanih vozlišč enako
     $$
         \sum_{i=1}^n \sum_{j=1}^i j=\sum_{i=1}^n \dfrac{i(i+1)}{2}=\dfrac{n(n+1)(n+2)}{6}=O(n^3).
     $$
