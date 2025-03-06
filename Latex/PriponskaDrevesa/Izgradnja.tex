@@ -144,7 +144,7 @@ Metoda še vedno potrebje beležiti implicitne pripone (pripone, ki so predpone 
 
 \paragraph{McCreightov algoritem:}
 McCreightov algoritem ali Algoritem M je prvi algoritem s časovno zahtevnostjo $O(n)$ za izgradnjo drevesa, pri tem pa je tudi prostorska zahtevnost algoritma $O(n)$.
-Algoritem deluje, tako da se v $i$-tem koraku v dotakrat izgrajeno drevo doda pripona $T[i,n]$. Torej so pripone dodane v drevo v vrstnem redu od najdaljše do najkrajše pripone, za razliko od naivne metode, ki v $i$-tem koraku izgradnje priponskega drevesa doda $i$-ti znak v dotakrat izgrajeno priponsko drevo, ki je lahko implicitno. Postopek izgradnje priponskega drevesa za besedo »KOKOŠ« z McCreightvim algoritmom je prikazan na Sliki \ref{fig:McCreight}.
+Algoritem deluje, tako da se v $i$-tem koraku v do takrat izgrajeno drevo doda pripona $T[i,n]$. Torej so pripone dodane v drevo v vrstnem redu od najdaljše do najkrajše pripone, za razliko od naivne metode, ki v $i$-tem koraku izgradnje priponskega drevesa doda $i$-ti znak v do takrat izgrajeno priponsko drevo, ki je lahko implicitno. Postopek izgradnje priponskega drevesa za besedo »KOKOŠ« z McCreightvim algoritmom je prikazan na Sliki \ref{fig:McCreight}.
 
 \begin{figure}[htb]
     \begin{subfigure}[t]{0.3\linewidth}
@@ -192,7 +192,7 @@ Algoritem deluje, tako da se v $i$-tem koraku v dotakrat izgrajeno drevo doda pr
         \label{fig:McCreight}
 \end{figure}
 
-V vsakem koraku je pripona razdeljena na dva dela in sicer na glavo ter rep. Glava, označena kot $\textit{glava}_i$, je najdaljša predpona $i$-te pripone, ki že obstaja v drevesu. Če take pripone ni v drevesu, je glava pripone prazna. Rep besedila, označen kot $\textit{rep}_i$, pa je definiran kot preostanek pripone, ki ni del glave. Za razliko od glave, rep ne more biti prazen. Ker algoritem temelji na dejstvu, da nobena pripona ni predpona drugi priponi, se mora $n$-ti znak besede razlikovati od ostalih znakov v besedi in se ga označi z znakom »\$«.
+V vsakem koraku je pripona razdeljena na dva dela, in sicer na glavo ter rep. Glava, označena kot $\textit{glava}_i$, je najdaljša predpona $i$-te pripone, ki že obstaja v drevesu. Če take pripone ni v drevesu, je glava pripone prazna. Rep besedila, označen kot $\textit{rep}_i$, pa je definiran kot preostanek pripone, ki ni del glave. Za razliko od glave, rep ne more biti prazen. Ker algoritem temelji na dejstvu, da nobena pripona ni predpona drugi priponi, se mora $n$-ti znak besede razlikovati od ostalih znakov v besedi in se ga označi z znakom »\$«.
 Algoritem v vsakem koraku doda krajšo pripono, zato je v repu vedno prisoten vsaj »\$«, saj se bo vedno razlikoval od vsakega znaka, ki je na $(n-i)$-tem mestu poljubne že umeščene pripone \cite{McCreight1976}.
 
 Vsakič, ko se niz $\textit{glava}_i$ ne konča v vozlišču, Algoritem M ustvari novo vozlišče. Ker $\textit{rep}_i$ ni še vsebovan v drevesu, se doda novo list v drevo s povezavo, ki predstavlja niz $\textit{rep}_i$. Repi so dodani v vsakem koraku v konstantnem času, torej algoritem potrebuje zgolj $O(n)$ časa za dodajanje vseh repov.
