@@ -68,10 +68,10 @@ Opazimo, da drevo, ki  je zgrajeno za podniz T[1,i], $i< n$, ni nujno priponsko,
 \end{proof}
 
 \paragraph{Izboljšana naivna metoda:}
-Naivna metoda je preprosti način izgradnje priponskega drevesa, vendar se hitro opazijo načini za pospešitev izgradnje drevesa. Najprej opzimo, da metoda nepotrebno pregleduje celotno drevo. To se lahko reši s uporabo priponskih povezav (angl. \textit{Suffix link}).
+Naivna metoda je preprosti način izgradnje priponskega drevesa, vendar se hitro opazijo načini za pospešitev izgradnje drevesa. Najprej opazimo, da metoda nepotrebno pregleduje celotno drevo. To se lahko reši z uporabo priponskih povezav (angl. \textit{Suffix link}).
 
 \begin{defi}\label{def:sl}
-    Naj notranje vozlišče $v$ predstavlja niz $x\alpha$, kjer $x$ je znak in $\alpha\in\Sigma^*$ je podniz niza $T$. Potem priponska povezava $\textit{sl}(v)$ je povezava na notranje vozlišče $w$, ki predstavlja niz $\alpha$.
+    Naj notranje vozlišče $v$ predstavlja niz $x\alpha$, kjer $x$ je znak in $\alpha\in\Sigma^*$ je podniz niza $T$. Priponska povezava $\textit{sl}(v)$ je povezava na notranje vozlišče $w$, ki predstavlja niz $\alpha$.
 
     %Priponska povezava $\textit{sl}(v)$ je povezava iz notranjega vozlišča $v$ v notranje vozlišče $w$. Vozlišče $v$ predstavlja niz $y=x\alpha $, medtem ko vozlišče $w$ pa predstavlja niz $\alpha\in\Sigma^*$. Pri tem je $x\in\Sigma$ znak.
 \end{defi}
@@ -126,7 +126,7 @@ Na Sliki \ref{fig:PriponskoDrevo} sta priponski povezavi prikazani s črtkano pu
         \label{fig:IzbolšanaNaivna}
 \end{figure}
 
-Metoda še vedno potrebje beležiti ne eksplicitno definirane pripone (pripone, ki so predpone drugim priponam), ampak to beleženje ne vpliva na čas izgradnje priponskega drevesa. Metoda se v vsakem koraku sprehodi iz začetne točke po priponskih povezavah do korena. Postopek izgradnje priponskega drevesa za besedo »KOKOŠ« z izboljšano naivno metodo izgradnje je prikazan na Sliki \ref{fig:IzbolšanaNaivna}. Na sliki je začetna točka označena z zeleno barvo. Ker je v $i$-tem koraku izgradnje največ $i$ eksplicitno definiranih pripon, potem je tudi število priponskih povezav na poti iz začetne točke do korena po priponskih povezavah enako številu notranjih vozlišč $O(i)$. Torej je čas $i$-tega koraka $O(i)$. Potemtakem ta metoda potrebuje $O(n^2)$ časa za izgradnjo celotnega drevesa. Iz tega sklepa sledi izrek.
+Metoda še vedno potrebje beležiti implicitne pripone (pripone, ki so predpone drugim priponam), ampak to beleženje ne vpliva na čas izgradnje priponskega drevesa. Metoda se v vsakem koraku sprehodi iz začetne točke po priponskih povezavah do korena. Postopek izgradnje priponskega drevesa za besedo »KOKOŠ« z izboljšano naivno metodo izgradnje je prikazan na Sliki \ref{fig:IzbolšanaNaivna}. Na sliki je začetna točka označena z zeleno barvo. Ker je v $i$-tem koraku izgradnje največ $i$ eksplicitno definiranih pripon, je tudi število priponskih povezav na poti iz začetne točke do korena po priponskih povezavah enako številu notranjih vozlišč $O(i)$. Torej je čas $i$-tega koraka $O(i)$. Potemtakem ta metoda potrebuje $O(n^2)$ časa za izgradnjo celotnega drevesa. Iz tega sklepa sledi izrek.
 
 \begin{izr}\label{izr:naivnaIzbolsana}
     Izboljšana naivna metoda zgradi priponsko drevo nad besedilom $T$ v času $O(n^2)$.
