@@ -1,13 +1,13 @@
-Za daljša besedila $T$ priponska drevesa lahko presežejo velikost notranjega pomnilnika. Ker velikost drevesa ni odvisna zgolj od števila vozlišč, ampak je odvisna tudi od arhitekture računalnika, ki določa velikost pomnilniškega naslova. Na primer priponsko drevo človeškega genoma, ki ima dolžino 3 milijarde nukleotidov in je predstavljen z abecedo dolžine 5 (pri tem je vštet tudi, znak za konec besedila), potrebuje približno $144$ GB delovnega spomina \cite{GENOMEKNOWLEDGEHUB-2024-10-30}.
+Za daljše besede $T$ priponska drevesa lahko presežejo velikost notranjega pomnilnika. Vsako vozlišče priponskega drevesa hrani niz, ki prestavlja vhodno povezavo, in reference na otroke, starša ter na vozlišče, na katerega kaže priponska povezava. Zato prostor, ki ga zasedejo drevesa na pomnilniku, ni odvisna zgolj od števila vozlišč, ampak je odvisna tudi od arhitekture računalnika, ki določa velikost pomnilniškega naslova, s katerim se referencira druga vozlišča. Na primer priponsko drevo človeškega genoma, ki ima dolžino 3 milijarde nukleotidov iz abecede velikosti pet (pri tem je vštet v abecedo tudi, znak za konec besedila), potrebuje približno $144$ GB notranjega pomnilnika \cite{GENOMEKNOWLEDGEHUB-2024-10-30}.
 
-Ta problem se da rešiti s kompaktnimi podatkovnimi strukturami. V nadaljevanju poglavja bodo na splošno predstavljene in definirane kompaktne podatkovne strukture. Za tem bodo prestavljene različne kompaktne predstavitve dreves. Na koncu pa bo predstavljena kompaktna podatkovna struktura kompaktno priponsko drevo (angl. \textit{Compressed Suffix Tree} oziroma CST).
+Ta problem se da rešiti s kompaktno predstavitvijo podatkovnih struktur, ki se jih bo obravnavalo v tem poglavju. Najprej bo predstavljena podatkovna struktura bitno polje, ki je osnova za ostale kompaktne predstavitve podatkovnih struktur. Za tem bodo prestavljene različne kompaktne predstavitve dreves. Na koncu pa bo predstavljena kompaktna predstavitev priponskega drevesa imenovana kompaktno priponsko drevo (angl. \textit{Compressed Suffix Tree} oziroma CST).
 
+\section{NOTACIJA IN OSNOVNE OPERACIJE}
+%Kompaktne podatkovne strukture omogočajo iste operacije kot osnovna verzija podatkovne strukture ter imajo nižjo prostorsko zahtevnost. Pri tem se predpostavlja obstoj univerzalne množice $N$, ki vsebuje vse možne različice podatkovne strukture z $n$-timi elementi. Torej so lahko kompaktne podatkovne strukture definirane na sledeči način \cite{Navarro2016}:
 
-Kompaktne podatkovne strukture omogočajo iste operacije kot osnovna verzija podatkovne strukture ter imajo nižjo prostorsko zahtevnost. Pri tem se predpostavlja obstoj univerzalne množice $N$, ki vsebuje vse možne različice podatkovne strukture z $n$-timi elementi. Torej so lahko kompaktne podatkovne strukture definirane na sledeči način \cite{Navarro2016}:
-
-\begin{defi}
-    Podatkovna struktura je kompaktna (angl. \textit{succinct}), ko je njena prostorska zahtevnost $\log_2{\left |N\right |} + o(\log_2{\left |N\right |})$\footnote{v nadaljevanju bo $\log_2 n$ zapisan kot $\log n$ } bitov, pri čemer je $N$ univerzalna množica.
-\end{defi}
+%\begin{defi}
+%    Podatkovna struktura je kompaktna (angl. \textit{succinct}), ko je njena prostorska zahtevnost $\log_2{\left |N\right |} + o(\log_2{\left |N\right |})$\footnote{v nadaljevanju bo $\log_2 n$ zapisan kot $\log n$ } bitov, pri čemer je $N$ univerzalna množica.
+%\end{defi}
 
 Bitno polje (angl. \textit{bit vector}) je kompaktna podatkovna struktura, ki je osnova za ostale kompaktne podatkovne strukture. Bitna polja so osnova za kompaktno predstavitev topologijo drevesa. Univerzalna množica vseh bitnih polj dolžine $n$ je velikosti $\left |N\right |=2^n$, torej bitno polje ima prostorsko zahtevnost $n+o(n)$ bitov. Pri tem je potrebnih $n$ bitov za shraniti celotno bitno polje ter dodatnih $o(n)$ bitov za implementacijo operacij nad njim. Bitno polje $B$ podpira tri operacije: $rang_v(B,i)$ (angl. \textit{rank}), $izbira_v(B,i)$  (angl. \textit{select}) ter $dostop(B,i)$ (angl. \textit{access}), ki vrne $i$-ti bit bitnega polja $B$.
 
@@ -19,7 +19,7 @@ V nadaljevanju bo operacija $rang(B,i)$ predstavljala $rang_1(B,i)$. To je možn
 \begin{equation}\label{eq:rang}
     rang_1(B,i)=i-rang_0(B,i).
 \end{equation}
- Operacija rang ima časovno zahtevnost $O(1)$, pri tem pa potrebuje dodatno podatkovno strukturo, ki zasede $o(n)$ bitov. V nasprotnem primeru bitno polje ni več kompaktna podatkovna struktura. Relacija iz Enačbe \ref{eq:rang} omogoča izgradnjo podatkovne strukture zgolj za operacijo $rang_1$.
+ Operacija rang ima časovno zahtevnost $O(1)$, pri tem pa potrebuje dodatno podatkovno strukturo, ki zasede $o(n)$ bitov. V nasprotnem primeru bitno polje ni več kompaktna podatkovna struktura. Relacija iz enakosti \ref{eq:rang} omogoča izgradnjo podatkovne strukture zgolj za operacijo $rang_1$.
 
 Pomožna struktura, ki omogoča konstantni čas operacije $rang(B,i)$, shranjuje range različnih elementov bitnega polja $B$ v polju $R$. Naivni pristop shrani v polju $R$ vrednosti vseh elementov $B$-ja. Problem tega pristopa je prevelika prostorska zahtevnost, saj $R$ ni več velikosti $o(n)$ bitov. Rešitev tega problema je vzorčenje rangov, tako da v polju $R$ so shranjeni zgolj rangi nekaterih elementov $B$-ja. Polje $R$ razdeli $B$ na $s=kw$ delov, pri čemer je $k$ poljubno število ter je $w$ dolžina računalniške besede. Element $R[i]=rang_1(B,is)$, pri čemer $0\le i \le \left\lfloor\frac{n}{s} \right\rfloor$. Na ta način je operacija rang implementiran kot 
 \begin{equation}
