@@ -51,7 +51,7 @@ Ta metoda v vsakem koraku s sprehodom po drevesu podaljša vse pripone za en zna
     \label{fig:Naivna}
 \end{figure}
 
-Opazimo, da drevo, ki  je zgrajeno za podniz T[1,i], $i< n$, ni nujno priponsko, saj niso vse pripone podniza T[1,i] shranjene v listih. Še več, nekatere pripone niso niti eksplicitno predstavljene. Kljub temu pa to drevo vsebuje vso informacijo o pripadajočlh priponah, pri čemer moramo posebej beležiti vse implicitno predstavljene pripone. Takšnemu drevesu rečemo implicitno priponsko drevo. Ta problem se reši z beleženjem takih pripon. Če se niz na povezavi, ki predstavlja zadnji del implicitne pripone, nadaljuje po priponi z znakom $T[i]$ se ne stori ničesar, saj je tudi podalšana pripona implicitno predstavljena. Če pa se niz na povezavi, ki predstavlja zadnji del implicitne pripone, ne nadaljuje z znakom $T[i]$, pa se povezavo razdeli na dva dela in se ustavri vozlišče, na katerega kaze povezava z nizom, ki se ujema z predhodnjo pripono, ter ima dva otroka: vozlišče na katerega kaže prostanek predhodnje povezave ter list z znakom $T[i]$. V primeru, da vozlišče že obstaja, se le temu doda novega otroka, na katerega kaže povezava z znakom, ki se razlikuje. Postopek izgradnje priponskega drevesa za besedo »KOKOŠ« z naivno metodo izgradnje je prikazan na Sliki \ref{fig:Naivna}. Na Sliki \ref{fig:Naivna} zgolj tretje (zadnje drevo v prvi vrstici) in četrto (prvo drevo v drugi vrstici) drevo sta implicitna priponska drevesa.
+Opazimo, da drevo, ki  je zgrajeno za podniz $T[1,i]$, $i< n$, ni nujno priponsko, saj niso vse pripone podniza $T[1,i]$ shranjene v listih. Še več, nekatere pripone niso niti eksplicitno predstavljene. Kljub temu pa to drevo vsebuje vso informacijo o pripadajočlh priponah, pri čemer moramo posebej beležiti vse implicitno predstavljene pripone. Takšnemu drevesu rečemo implicitno priponsko drevo. Problem implicitno predstavljenih pripon v $i$-tem koraku se reši z beleženjem takih pripon. Če se niz na povezavi, ki predstavlja zadnji del implicitne pripone, nadaljuje po priponi z znakom $T[i]$ se ne stori ničesar, saj je tudi podaljšana pripona implicitno predstavljena. Če pa se niz na povezavi, ki predstavlja zadnji del implicitne pripone, ne nadaljuje z znakom $T[i]$, pa se povezavo razdeli na dva dela in se ustvari vozlišče, na katerega kaže povezava z nizom, ki se ujema s predhodnjo pripono, ter ima dva otroka: vozlišče, na katerega kaže preostanek predhodnje povezave, ter list z znakom $T[i]$. V primeru, da vozlišče že obstaja, se le temu doda novega otroka, na katerega kaže povezava z znakom, ki se razlikuje. Postopek izgradnje priponskega drevesa za besedo »KOKOŠ« z naivno metodo izgradnje je prikazan na Sliki \ref{fig:Naivna}. Na Sliki \ref{fig:Naivna} zgolj tretje (zadnje drevo v prvi vrstici) in četrto (prvo drevo v drugi vrstici) drevo sta implicitna priponska drevesa.
 
 \begin{izr}\label{izr:naivna}
     Naivna metoda zgradi priponsko drevo nad besedo $T$, dolžine $n$, v času $O(n^3)$.
@@ -71,7 +71,7 @@ Opazimo, da drevo, ki  je zgrajeno za podniz T[1,i], $i< n$, ni nujno priponsko,
 Naivna metoda je preprosti način izgradnje priponskega drevesa, vendar se hitro opazijo načini za pospešitev izgradnje drevesa. Najprej opazimo, da metoda nepotrebno pregleduje celotno drevo. To se lahko reši z uporabo priponskih povezav (angl. \textit{Suffix link}).
 
 \begin{defi}\label{def:sl}
-    Naj notranje vozlišče $v$ predstavlja niz $x\alpha$, kjer $x$ je znak in $\alpha\in\Sigma^*$ je podniz niza $T$. Priponska povezava $\textit{sl}(v)$ je povezava na notranje vozlišče $w$, ki predstavlja niz $\alpha$.
+    Naj notranje vozlišče $v$ predstavlja niz $x\cdot\alpha$, kjer je $x$ znak in $\alpha\in\Sigma^*$ je podniz niza $T$. Priponska povezava $\textit{sl}(v)$ je povezava na notranje vozlišče $w$, ki predstavlja niz $\alpha$.
 
     %Priponska povezava $\textit{sl}(v)$ je povezava iz notranjega vozlišča $v$ v notranje vozlišče $w$. Vozlišče $v$ predstavlja niz $y=x\alpha $, medtem ko vozlišče $w$ pa predstavlja niz $\alpha\in\Sigma^*$. Pri tem je $x\in\Sigma$ znak.
 \end{defi}
@@ -126,7 +126,7 @@ Na Sliki \ref{fig:PriponskoDrevo} sta priponski povezavi prikazani s črtkano pu
         \label{fig:IzbolšanaNaivna}
 \end{figure}
 
-Metoda še vedno potrebje beležiti implicitne pripone (pripone, ki so predpone drugim priponam), ampak to beleženje ne vpliva na čas izgradnje priponskega drevesa. Metoda se v vsakem koraku sprehodi iz začetne točke po priponskih povezavah do korena. Postopek izgradnje priponskega drevesa za besedo »KOKOŠ« z izboljšano naivno metodo izgradnje je prikazan na Sliki \ref{fig:IzbolšanaNaivna}. Na sliki je začetna točka označena z zeleno barvo. Ker je v $i$-tem koraku izgradnje največ $i$ eksplicitno definiranih pripon, je tudi število priponskih povezav na poti iz začetne točke do korena po priponskih povezavah enako številu notranjih vozlišč $O(i)$. Torej je čas $i$-tega koraka $O(i)$. Potemtakem ta metoda potrebuje $O(n^2)$ časa za izgradnjo celotnega drevesa. Iz tega sklepa sledi izrek.
+Metoda mora še vedno beležiti implicitne pripone (pripone, ki so predpone drugim priponam), ampak to beleženje ne vpliva na čas izgradnje priponskega drevesa. Metoda se v vsakem koraku sprehodi iz začetne točke po priponskih povezavah do korena. Postopek izgradnje priponskega drevesa za besedo »KOKOŠ« z izboljšano naivno metodo izgradnje je prikazan na Sliki \ref{fig:IzbolšanaNaivna}. Na sliki je začetna točka označena z zeleno barvo. Ker je v $i$-tem koraku izgradnje največ $i$ eksplicitno definiranih pripon, je tudi število priponskih povezav na poti iz začetne točke do korena po priponskih povezavah enako številu notranjih vozlišč $O(i)$. Torej je čas $i$-tega koraka $O(i)$. Potemtakem ta metoda potrebuje $O(n^2)$ časa za izgradnjo celotnega drevesa. Iz tega sklepa sledi izrek.
 
 \begin{izr}\label{izr:naivnaIzbolsana}
     Izboljšana naivna metoda zgradi priponsko drevo nad besedilom $T$ v času $O(n^2)$.
@@ -215,7 +215,7 @@ Iz vozlišča $d$ se začne iskanje $\gamma$, če le ta ni prazen niz. Ta operac
 
     Operacija \textit{scanning} potrebuje v vsakem koraku $|glave_i|-|glave_{i-1}|+1=|\gamma_i|$ časa. Torej po vseh korakih operacija \textit{scanning}  potrebuje $T_{\textit{scan}}=\sum_{i=1}^n |glave_i|-|glave_{i-1}|+1= n + |glava_n|-|glava_0|=O(n)$ časa.
 
-    V $i$-tem koraku operacija \textit{rescanning} obišče $n_i$ vozlišč. Pri tem se opazi, da v naslednjem koraku ta vozlišča ne bodo obiskana. Iz tega sledi:  $|\beta_{i+1}\gamma_{i+1}\textit{rep}_{i+1}|\le|\beta_i\gamma_i\textit{rep}_{i}|-n_i$, pričemer je $|\beta_n\gamma_n\textit{rep}_{n}|=|\textit{rep}_{n}|=1$. Torej velja tudi:    
+    V $i$-tem koraku operacija \textit{rescanning} obišče $n_i$ vozlišč. Pri tem se opazi, da v naslednjem koraku ta vozlišča ne bodo obiskana. Iz tega sledi:  $|\beta_{i+1}\gamma_{i+1}\textit{rep}_{i+1}|\le|\beta_i\gamma_i\textit{rep}_{i}|-n_i$, pri čemer je $|\beta_n\gamma_n\textit{rep}_{n}|=|\textit{rep}_{n}|=1$. Torej velja tudi:    
     \begin{equation*} 
         \begin{split}
         |\beta_n\gamma_n\textit{rep}_{n}|=|\textit{rep}_{n}|&\le|\beta_1\gamma_1\textit{rep}_{1}|- \sum_{i=1}^n n_i,\\
@@ -233,13 +233,12 @@ Iz vozlišča $d$ se začne iskanje $\gamma$, če le ta ni prazen niz. Ta operac
 Čeprav McCreightov algoritem zgradi priponsko drevo v času in prostoru $O(n)$, algoritem predpostavi, da je beseda $T$ vnaprej poznana. Pri tem se pojavi vprašanje, ali je mogoče izgraditi priponsko drevo, ne da bi vnaprej poznali začetno besedo. Metoda, ki ne potrebuje celotne besede vnaprej, je Ukkonenov algoritem, ki priponsko drevo zgradi sprotno (angl. \textit{on-line}), kot ga je izgradila tudi naivna metoda, ter potrebuje $O(n)$ časa in prostora.
 
 \paragraph{Ukkonenov algoritem:}
-Ukkonenov algoritem deluje na podoben način kot prej predstavljena naivna metoda, saj dodaja v drevo črko po črko. Torej algoritem v $i$-tem koraku izgradi priponsko drevo, ki je lahko implicitno priponsko drevo, in predstavlja besedilo $T[1,i]$. Primer  izgradnje drevesa z Ukkonenovim algoritmom, je prikazan na Sliki \ref{fig:Ukkonen}. Algoritem v $i$-tem koraku doda v drevo črko $x$. Naj bo $\alpha$ niz, ki z $x$ tvori niz $T[a,i]=\alpha x$, pri čemer je $1\le a <i $ in posledično je $\alpha$ lahko prazen niz. Znak $x$ je lahko dodan v drevo na tri načine:
-
+Ukkonenov algoritem deluje na podoben način kot prej predstavljena naivna metoda, saj dodaja v drevo črko po črko. Torej algoritem v $i$-tem koraku izgradi priponsko drevo, ki je lahko implicitno priponsko drevo, in predstavlja besedilo $T[1,i]$. Primer izgradnje drevesa z Ukkonenovim algoritmom je prikazan na Sliki \ref{fig:Ukkonen}. Algoritem v $i$-tem koraku doda v drevo črko $x$. Naj bo $\alpha$ niz, ki z $x$ tvori niz $T[a,i]=\alpha x$, pri čemer je $1\le a <i $ in posledično je $\alpha$ lahko prazen niz. Na Sliki \ref{fig:absUkkonen} je prikazana skica dodajanja znaka $T[i]$ v do takrat izgrajeno priponsko drevo in na Sliki \ref{fig:Ukkonen} je prikazan primer izgradnje priponskega drevesa za besedo »KOKOŠ$\$$« z Ukkonenovim algoritmom. Znak $x$ je lahko dodan v drevo na tri načine:
 \begin{enumerate}
     \item Če se niz $\alpha$ konča v listu, potem se zadnja povezava, ki je del niza $\alpha$, podaljša  za znak $x$. Torej enkrat, ko je list zgrajen, ne more postati notranje vozlišče. Način je prikazan na Sliki \ref{fig:aUkkonen1}.
     \item Če pa se niz $\alpha$ ne konča v listu, potem se konča bodisi v vozlišču $v$, bodisi na povezavi med vozliščema, recimo $v_1$ in $v_2$. V tem primeru se lahko znak $x$ doda na dva načina:
     \begin{enumerate}
-        \item \label{enum:dodajanje2} Če se nobena pot ne nadaljujeki z znakom $x$, se ustvari nov list $l$, na katerega kaže poveznava z oznako $x$. Če se niz $\alpha$ konča v vozlišču $v$, potem $l$ postane otrok vozlišča $v$. Če pa se $\alpha$ konča sredini niza na povezavi med vozliščema $v_1$ in $v_2$, se ustvari novo vozlišče $v'$. Povezava, ki kaže iz vozlišča $v_1$ na vozlišče $v'$, predstavlja niz, ki se je ujeml z $\alpha$. Iz novega vozlišča kažeta dve povezavi: prva povezava kaže na list $l$, druga povezava pa kaže na vozlišče $v_2$, ki predstavlja preostanek niza, ki ga je predstavljala predhodnja povezava. Način je prikazan na Sliki \ref{fig:aUkkonen2}.
+        \item \label{enum:dodajanje2} Če se nobena pot ne nadaljuje z znakom $x$, se ustvari nov list $l$, na katerega kaže poveznava z oznako $x$. Če se niz $\alpha$ konča v vozlišču $v$, potem $l$ postane otrok vozlišča $v$. Če pa se $\alpha$ konča sredini niza na povezavi med vozliščema $v_1$ in $v_2$, se ustvari novo vozlišče $v'$. Povezava, ki kaže iz vozlišča $v_1$ na vozlišče $v'$, predstavlja niz, ki se je ujeml z $\alpha$. Iz novega vozlišča kažeta dve povezavi: prva povezava kaže na list $l$, druga povezava pa kaže na vozlišče $v_2$, ki predstavlja preostanek niza, ki ga je predstavljala predhodnja povezava. Način je prikazan na Sliki \ref{fig:aUkkonen2}.
         \item Če pa obstaja taka pot, ki se nadaljuje po nizu $\alpha$ z znakom $x$, se ne stori ničesar, saj je drevo že v implicitni obliki. Način je prikazan na Sliki \ref{fig:aUkkonen3}.
     \end{enumerate}    
 \end{enumerate}
@@ -274,7 +273,9 @@ Ukkonenov algoritem deluje na podoben način kot prej predstavljena naivna metod
 
 
 
-Iz načina dodajanja novih znakov v priponsko drevo, ki ga uporablja algoritem, se opazi, da se število vozlišč v drevesu spremeni samo z drugim načinom dodajanja (\ref{enum:dodajanje2}). Da bo algoritem učinkovit, se hraniti začetek, ki ga imenujemo začetna točka, in konec, ki ga imenujemo končna točka (angl. \textit{end point}), rezčlembe ter dodajanja novih vozlišč v drevesu v trenutnem koraku. Na Sliki \ref{fig:Ukkonen} je z rdečo označeno vozlišče, ki se nahaja pred končno točko, ter z zeleno je označeno vozlišče, ki pa se nahaja pred začetno točko. Vse točke, v katerih se bo v tem koraku zgodila razčlemba, imenujemo aktivne točke (angl. \textit{active point}). Začetna točka je prva aktivna točka, končna točka pa je zadnja aktivna točka v trenutnem koraku dodajanja. Premik po aktivnih točkah med začetno točko in končno točko poteka po priponskih povezavah. Pri tem pa algoritem v vsakem koraku poti izračuna, ali je že prišel v končno točko. Za to je potrebno hraniti zgolj trenutno aktivno točko ter zastavico, ki hrani vrednost ali je ta točka tudi končna točka. Pri tem velja tudi, da končna točka v koraku $i-1$ postane aktivna točka v koraku $i$, saj se prva nova razčlemba v koraku $i$ lahko zgodio zgolj v točki, kjer se je končala razčlemba v koraku $i-1$ in to je končna točka koraka $i-1$. 
+Iz načina dodajanja novih znakov v priponsko drevo, ki ga uporablja algoritem, se opazi, da se število vozlišč v drevesu spremeni samo z drugim načinom dodajanja (\ref{enum:dodajanje2}). Vse točke, v katerih se bo v tem koraku zgodila razčlemba, imenujemo aktivne točke (angl. \textit{active point}). Da bo algoritem učinkovit hranimo začetno aktivno točko in končno aktivno točko imenovano tudi končna točka (angl. \textit{end point}), rezčlembe in dodajanja novih vozlišč v drevesu v trenutnem koraku. Na Sliki \ref{fig:Ukkonen} je z rdečo označeno vozlišče, ki se nahaja pred končno točko, ter z zeleno je označeno vozlišče, ki pa se nahaja pred začetno točko. Premik po aktivnih točkah med začetno točko in končno točko poteka po priponskih povezavah. Pri tem pa algoritem v vsakem koraku poti izračuna, ali je že prišel v končno točko. Za to je potrebno hraniti zgolj trenutno aktivno točko ter zastavico, ki hrani vrednost, ali je ta točka tudi končna točka. 
+Aktivna točka postane končna točka takrat, ko se način dodajanja spremeni iz \ref{enum:dodajanje2} v \ref{enum:dodajanje3}, saj od takrat ni več potreno v trenutnem koraku izgradnje deliti povezave in ustavrjati nova vozlišča.
+Pri tem velja tudi, da končna točka v koraku $i-1$ postane začetna aktivna točka v koraku $i$, saj se prva nova razčlemba v koraku $i$ lahko zgodi zgolj v točki, kjer se je končala razčlemba v koraku $i-1$, in to je končna točka koraka $i-1$. 
 
 \begin{figure}[htb]
     \begin{subfigure}[t]{0.3\linewidth}
@@ -324,7 +325,7 @@ Iz načina dodajanja novih znakov v priponsko drevo, ki ga uporablja algoritem, 
         \label{fig:Ukkonen}
 \end{figure}
 
-Vsako aktivno točko lahko predstavimo kot referenčni par $(s,\alpha)$, pri čemer je $s$ vozlišče pred aktivno točko in $\alpha$ je niz iz vozlišča $s$ do aktivne točke. Za lažje shranjevanje niza $\alpha$ je le ta shranjen kot par indeksov $(k,p)$, pri čemer je $\alpha=T[k,p]$. Ker je lahko aktivna točka predstavljena z različnimi referenčnimi pari $(s,(k,p))$, se zato lahko za $s$ izbere najglobje vizlišče pred aktivno točko. Takšen par je enoličen in ga imenujemo kanonična oblika referečnega para. Med vsemi referenčnimi pari za dano aktivno točko velja, da je pri paru, ki je v kanonični obliki, niz $\alpha=T[k,p]$ najkrajši. Na Sliki \ref{fig:Ukkonen} v četrtem koraku izgradnje, ki ga predstavlja prvo drevo v spodnji vrstici, je začetna aktivna točka predstavljena kot $(\textit{koren},(1,3))$, v naslednjem koraku pa je začetna aktivna točka v $(\textit{koren},(1,4))$, ki se bo razcepila in bo postala novo vozlišče. Ta ista točka je lahko po koncu izgradnje še vedno predstavljena z referenčnim parom $(\textit{koren},(1,4))$, ki pa ni v kanonični obliki. Kanonična oblika te točke je $(a,(4,4))$, pri čemer je vozlišče $a$ otrok \textit{koren}-a, na katerega kaže povezava z nizom »KO«.
+Vsako aktivno točko lahko predstavimo kot referenčni par $(s,\alpha)$, pri čemer je $s$ vozlišče pred aktivno točko in $\alpha$ je niz iz vozlišča $s$ do aktivne točke. Za lažje shranjevanje niza $\alpha$ je le ta shranjen kot par indeksov $(k,p)$, pri čemer je $\alpha=T[k,p]$. Aktivna točka je lahko predstavljena z različnimi pari $(s, (k,p))$. Če je $s$  najglobje vozlišče pred aktivno točko, takšen par imenujemo kanonična oblika referenčenga para. kanonična oblika je po definiciji enolična. Med vsemi referenčnimi pari za dano aktivno točko velja, da je pri paru, ki je v kanonični obliki, niz $\alpha=T[k,p]$ najkrajši. Na Sliki \ref{fig:Ukkonen} v četrtem koraku izgradnje, ki ga predstavlja prvo drevo v spodnji vrstici, je začetna aktivna točka predstavljena kot $(\textit{koren},(1,3))$, v naslednjem koraku pa je začetna aktivna točka v $(\textit{koren},(1,4))$, ki se bo razcepila in bo postala novo vozlišče. Ta ista točka je lahko po koncu izgradnje še vedno predstavljena z referenčnim parom $(\textit{koren},(1,4))$, ki pa ni v kanonični obliki. Kanonična oblika te točke je $(a,(4,4))$, pri čemer je vozlišče $a$ otrok \textit{koren}-a, na katerega kaže povezava z nizom »KO«.
 
 \begin{algorithm}[htb]
 
@@ -341,26 +342,26 @@ Vsako aktivno točko lahko predstavimo kot referenčni par $(s,\alpha)$, pri če
     
             {\textit{sVoz}<-\textit{NIL}}
             
-            {$(\textit{KončnaTočka},v)$<-\texttt{razdeliTestiraj}($s,k,i-1,T[i]$)}
+            {$(\textit{KončnaTočka},v)$<-\texttt{razdeliTestiraj}($(s,(k,i-1)),T[i]$)}
             
             \Dokler{ni \textit{KončnaTočka}}{\label{vrstica:zankaKončnatočka}
     
-                {ustvari list $v'$ na katerega kaže točka $v$}
+                {ustvari list $l$ na katerega kaže točka $v$}
     
                 \Ce{$\textit{sVoz} \ne \textit{NIL}$}
                     {Ustvari priponsko povezavo iz \textit{sVoz} v $v$}
     
                 {\textit{sVoz}<-$v$}
                  
-                {$(s,k)$<-\texttt{kanoničnaOblika}($sv(s),k,i-1$)}
+                {$(s,k)$<-\texttt{kanoničnaOblika}($(sl(s),(k,i-1))$)}
                 
-                {$(\textit{KončnaTočka},v)$<-\texttt{razdeliTestiraj}($s,k,i-1,T[i]$)}
+                {$(\textit{KončnaTočka},v)$<-\texttt{razdeliTestiraj}($(s,(k,i-1)),T[i]$)}
             }
             
             \Ce{$\textit{sVoz} \ne \textit{NIL}$}
                     {Ustvari priponsko povezavo iz \textit{sVoz} v $s$}
                     
-            {$(s,k)$<-\texttt{kanoničnaOblika}($s,k,i$)\label{vrstica:povečavaBeta}}
+            {$(s,k)$<-\texttt{kanoničnaOblika}($(s,(k,i))$)\label{vrstica:povečavaBeta}}
             
         }
         
@@ -368,12 +369,12 @@ Vsako aktivno točko lahko predstavimo kot referenčni par $(s,\alpha)$, pri če
 \end{algorithm}
 
 Ukkonenov algoritem za izgradnjo priponskega drevesa, ki je predstavljen v \cite{Ukkonen1995}, izgradi priponsko drevo s psevdokodo, ki je prikazana v Algoritmu \ref{alg:ukkonen}.
-V algoritmu $s$ predstavlja najglobje vozlišče pred aktivno točko ter $k$ predstavlja indeks začetne črke niza iz vozlišča $s$ proti aktivni točki v besedilu $T$. Številka $i$ predstavlja indeks črke v $T$, ki je dodana v drevo. Vozlišče $s$ ter par števil $(k,i-1)$ predstavljajo aktivno točko v trenutnem koraku. Zastavica \textit{KončnaTočka} ima vrednost \textit{true}, če je trenutna aktivna točka tudi končna točka, sicer ima vrednost \textit{false}. Vozlišče $v$ predstavlja vozlišče, v katerega bo pripet nov list $v'$. Povezava do lista $v'$ bo predstavljala črko $T[i]$. Vozlišče \textit{sVoz} pa predstavlja vozlišče, na katerga je bil nazadnje pripet list v $i$-tem koraku. Vozlišče \textit{sVoz} je \textit{NIL} zgolj v prvem dodajanju novega lista v vsakem koraku.
+V algoritmu par $(s, (k,i-1))$ predstavlja kanonično obliko aktivnega vozlišča v trenutnem koraku. Zastavica \textit{KončnaTočka} ima vrednost \textit{true}, če je trenutna aktivna točka tudi končna točka, sicer ima vrednost \textit{false}. Vozlišče $v$ predstavlja vozlišče, v katerega bo pripet nov list $v'$. Povezava do lista $v'$ bo predstavljala črko $T[i]$. Vozlišče \textit{sVoz} pa predstavlja vozlišče, na katerga je bil nazadnje pripet list v $i$-tem koraku. Vozlišče \textit{sVoz} je \textit{NIL} zgolj v prvem dodajanju novega lista v vsakem koraku.
 
 
-Algoritem \ref{alg:ukkonen} uporabi dve pomožni funkciji. Prva uporabljena pomožna funkcija je \texttt{kanoničnaOblika}, ki pretvori trenutno aktivno točko priponskega drevesa v kanonično obliko. Funkcija prejme kot vhod vozlišče $s$ ter niz, predstavljen kot položaj začetka $k$ in konca $p$ podniza do aktivne točke v nizu $T$. Funkcija se sprehodi po drevesu dokler ne doseže najnižjega vozlišča pred aktivno točko. S tem korakom je omogočena učinkovitejša uporaba funkcije \texttt{razdeliTestiraj}.
+Algoritem \ref{alg:ukkonen} uporabi dve pomožni funkciji. Prva uporabljena pomožna funkcija je \texttt{kanoničnaOblika}, ki za trenutno aktivno točko, predstavljeno z referenčnim parom $(s,(k, p))$, vrne njegovo kanonično obliko. Funkcija se sprehodi po drevesu dokler ne doseže najnižjega vozlišča pred aktivno točko. S tem korakom je omogočena učinkovitejša uporaba funkcije \texttt{razdeliTestiraj}.
 
-Funkcija \texttt{razdeliTestiraj} prejme kot vhod znak $t$, ki se želi vstaviti v priponsko drevo, ter trenutno aktivno točko, ki je podana kot referenčni par $(s,(k,p))$ v kanonični obliki. Funkcija preveri ali se niza $T[k,p+1]$ in $T[k,p]\cdot t$ ujemata. Če se niza ujemata, potem je trenutna aktivna točka tudi končna točka, zato funkcija ne stori ničesar in vrne $(\textit{true},s)$. Sicer pa funkcija razdeli povezavo in aktivna točka postane novo vozlišče $v$, če že ne obstaja vozlišče $v$, nato pa vrne $(\textit{false},v)$. 
+Funkcija \texttt{razdeliTestiraj} prejme kot vhod trenutno aktivno točko, ki je podana kot referenčni par $(s,(k,p))$ v kanonični obliki, ter znak $t$, ki se želi vstaviti v priponsko drevo. Funkcija preveri, ali se niza $T[k,p+1]$ in $T[k,p]\cdot t$ ujemata. Če se niza ujemata, potem je trenutna aktivna točka tudi končna točka, zato funkcija ne stori ničesar in vrne $(\textit{true},s)$. Sicer pa funkcija razdeli povezavo in aktivna točka postane novo vozlišče $v$, če že ne obstaja vozlišče $v$, nato pa vrne $(\textit{false},v)$. 
 
 
 \begin{izr} \label{izr:ukkonen}
@@ -385,9 +386,9 @@ Funkcija \texttt{razdeliTestiraj} prejme kot vhod znak $t$, ki se želi vstaviti
 
 Dokaz je razdeljen na dva dela: v prvem delu bomo dokazali, da se zanka, ki se začne v vrstici \ref{vrstica:zankaKončnatočka}, skozi celotno izvajanje algoritma izvede $O(n)$-krat, drugi del pa se bo osredotočil na časovno zahtevnost funkcije \texttt{kanoničnaOblika}. 
 
-Časovna zahtevnost funkcije \texttt{razdeliTestiraj} je $O(1)$, saj funkcija prever ali če je trenutna aktivna točka tudi končna točka in posledično če ni končna točka jo spremeni v notranje vozlišče. Ker je aktivna točka podana v kanonični obliki, ni potrenbnih odvečnih sprehodov po drevesu, ki bipovečali časovno zahtevnost.
+Časovna zahtevnost funkcije \texttt{razdeliTestiraj} je $O(1)$, saj je aktivna točka podana v kanonični obliki, zato ni potrebnih odvečnih sprehodov po drevesu, ki bi povečali časovno zahtevnost. Funkcija prever, ali je trenutna aktivna točka tudi končna točka, za kar potrebuje konstanten čas. Če ni končna točka jo spremeni v notranje vozlišče, za kar je potrebno tudi konstantno časa. Sicer pa ne stori ničesar in vrne, da je aktivna točka tudi končna točka.
 
-Zanka v $i$-tem koraku izgradnje, dodaja nove povezave na poti iz končne točke $kt_{i-1}$ koraka $i-1$, do končne točke $kt_i$ koraka $i$, katera ni še obiskana. Natančno število obiskanih vozlišč na poti je $D(kt_{i-1})-D(kt_i)+2$, iz česar sledi, da se s pomočjo seštevalne amortizacije v $n$-tih korakih zanka izvede
+Zanka v $i$-tem koraku izgradnje dodaja nove povezave na poti iz končne točke $kt_{i-1}$ koraka $i-1$ do končne točke $kt_i$ koraka $i$, katera ni še obiskana. Natančno število obiskanih vozlišč na poti je $D(kt_{i-1})-D(kt_i)+2$, iz česar sledi, da se s pomočjo seštevalne amortizacije v $n$-tih korakih zanka izvede
 
 
 $$

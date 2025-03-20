@@ -1,0 +1,62 @@
+Za daljše besede $T$ priponska drevesa lahko presežejo velikost notranjega pomnilnika. Vsako vozlišče priponskega drevesa hrani niz, ki prestavlja vhodno povezavo, in reference na otroke, starša ter na vozlišče, na katerega kaže priponska povezava. Zato prostor, ki ga zasedejo drevesa na pomnilniku, ni odvisna zgolj od števila vozlišč, ampak je odvisna tudi od arhitekture računalnika, ki določa velikost pomnilniškega naslova, s katerim se referencira druga vozlišča. Na primer priponsko drevo človeškega genoma, ki ima dolžino 3 milijarde nukleotidov iz abecede velikosti pet (pri tem je vštet v abecedo tudi, znak za konec besedila), potrebuje približno $144$ GB notranjega pomnilnika \cite{GENOMEKNOWLEDGEHUB-2024-10-30}.
+
+Ta problem se da rešiti s kompaktno predstavitvijo podatkovnih struktur, ki se jih bo obravnavalo v tem poglavju. Najprej bo predstavljena podatkovna struktura bitno polje, ki je osnova za ostale kompaktne predstavitve podatkovnih struktur. Za tem bodo prestavljene različne kompaktne predstavitve dreves. Na koncu pa bo predstavljena kompaktna predstavitev priponskega drevesa imenovana kompaktno priponsko drevo (angl. \textit{Compressed Suffix Tree} oziroma CST).
+
+\section{NOTACIJA IN OSNOVNE OPERACIJE}
+%Kompaktne podatkovne strukture omogočajo iste operacije kot osnovna verzija podatkovne strukture ter imajo nižjo prostorsko zahtevnost. Pri tem se predpostavlja obstoj univerzalne množice $N$, ki vsebuje vse možne različice podatkovne strukture z $n$-timi elementi. Torej so lahko kompaktne podatkovne strukture definirane na sledeči način \cite{Navarro2016}:
+
+%\begin{defi}
+%    Podatkovna struktura je kompaktna (angl. \textit{succinct}), ko je njena prostorska zahtevnost $\log_2{\left |N\right |} + o(\log_2{\left |N\right |})$\footnote{v nadaljevanju bo $\log_2 n$ zapisan kot $\log n$ } bitov, pri čemer je $N$ univerzalna množica.
+%\end{defi}
+
+Bitno polje (angl. \textit{bit vector}) je kompaktna podatkovna struktura, ki je osnova za ostale kompaktne podatkovne strukture. Bitna polja so osnova za kompaktno predstavitev topologijo drevesa. Univerzalna množica vseh bitnih polj dolžine $n$ je velikosti $\left |N\right |=2^n$, torej bitno polje ima prostorsko zahtevnost $n+o(n)$ bitov. Pri tem je potrebnih $n$ bitov za shraniti celotno bitno polje ter dodatnih $o(n)$ bitov za implementacijo operacij nad njim. Bitno polje $B$ podpira tri operacije: $rang_v(B,i)$ (angl. \textit{rank}), $izbira_v(B,i)$  (angl. \textit{select}) ter $dostop(B,i)$ (angl. \textit{access}), ki vrne $i$-ti bit bitnega polja $B$.
+
+\begin{defi}
+   Operacija $rang_v(B,i)$ vrne število pojav vrednosti $v\in\{1,0\}$ v bitnem vektorju $B$ do položaja $i$.
+\end{defi}
+
+V nadaljevanju bo operacija $rang(B,i)$ predstavljala $rang_1(B,i)$. To je možno, saj velja sledeča relacija med $rang_0(B,i)$ in $rang_1(B,i)$:
+\begin{equation}\label{eq:rang}
+    rang_1(B,i)=i-rang_0(B,i).
+\end{equation}
+ Operacija rang ima časovno zahtevnost $O(1)$, pri tem pa potrebuje dodatno podatkovno strukturo, ki zasede $o(n)$ bitov. V nasprotnem primeru bitno polje ni več kompaktna podatkovna struktura. Relacija iz enakosti \ref{eq:rang} omogoča izgradnjo podatkovne strukture zgolj za operacijo $rang_1$.
+
+Pomožna struktura, ki omogoča konstantni čas operacije $rang(B,i)$, shranjuje range različnih elementov bitnega polja $B$ v polju $R$. Naivni pristop shrani v polju $R$ vrednosti vseh elementov $B$-ja. Problem tega pristopa je prevelika prostorska zahtevnost, saj $R$ ni več velikosti $o(n)$ bitov. Rešitev tega problema je vzorčenje rangov, tako da v polju $R$ so shranjeni zgolj rangi nekaterih elementov $B$-ja. Polje $R$ razdeli $B$ na $s=kw$ delov, pri čemer je $k$ poljubno število ter je $w$ dolžina računalniške besede. Element $R[i]=rang_1(B,is)$, pri čemer $0\le i \le \left\lfloor\frac{n}{s} \right\rfloor$. Na ta način je operacija rang implementiran kot 
+\begin{equation}
+    rang_1(B,i)=R\left[\left\lfloor\frac{i}{s} \right\rfloor\right] + \texttt{popcount}\left(B\left[\left\lfloor\frac{i}{s} \right\rfloor s,i\right]\right),
+\end{equation}
+kjer je \texttt{popcount} funkcija, ki prešteje število bitov z vrednostjo $1$. Zaradi uporabnosti te funkcije je le ta implementirana v različnih modernih arhitekturah procesorjev. Polje $R$ ima velikost $\lfloor\frac{n}{k}\rfloor$ bitov, saj shranjuje $\lfloor\frac{n}{s}\rfloor$ števil dolžine $w$. Pri tem je potrebno funkcijo \texttt{popcount} pognati največ $k$ krat, kar naredi čas operacije rang $O(k)$ \cite{Navarro2016}.
+
+Podobno kot polje $R$ se definira polje $R'$. Polje $R'$ hrani na $i$-tem mestu število bitov z vrednostjo $1$ po vedru $R[\left\lfloor\frac{i}{k} \right\rfloor]$ ali $R'[i]=rang_1(B,iw)-R[\left\lfloor\frac{i}{k} \right\rfloor]$. Na ta način se zniža število klicev funkcije \texttt{popcount} na 1 klic. Ker v $R'$ so sharnjena zgolj števila med 0 in $s-w$ (vsako vedro v $R$ ima $w$ elementov v $R'$), se lahko $R'$ shrani v $\lfloor\frac{n}{w}\rfloor\log{s}$ bitov, kar je $o(n)$ bitov. Operacija rang je zato implementirana s pomočjo $R$ in $R'$ na sledeči način:
+\begin{equation}
+    rang_1(B,i)=R\left[\left\lfloor\frac{i}{kw} \right\rfloor\right]+ R'\left[\left\lfloor\frac{i}{w} \right\rfloor\right]+\texttt{popcount}\left(B\left[\left\lfloor\frac{i}{w} \right\rfloor,\left\lfloor\frac{i}{w} \right\rfloor+(i \mod w)\right]\right).
+\end{equation}
+
+V praksi se izkaže, da se najboljše rezultate pridobi, ko je $k=8$ za računalniško besedo dolžine $w=64$ (uporabljena v vseh modernih procesorjih). To omogoča shranjevanje vedra v $R$ in vseh pripadajočih veder v $R'$ v dveh besedah, ker prva beseda shrani vrednost vedra v $R$ druga pa vse vrednosti pripadajočih veder v $R'$. Ta implementacija potrebuje $1,25*n$ bitov za vse tri podatkovne strukture skupaj \cite{Navarro2016}.
+
+Podobno kot operacija rang, tudi operacija izbira potrebuje pomožno podatkovno strukturo za izvedbo v konstantnem času. 
+\begin{defi}
+    Operacija $izbira_v(B,i)$ vrne položaj $i$-tega pojava vrednosti $v\in\{1,0\}$ v bitnem vektorju $B$.
+\end{defi}
+Operacijo izbira si lahko predstavimo, kot inverzno operacijo od operacije rang, saj velja relacija $j=rang_v(B,izbira_v(B,j))$. Pri tem pa ne obstaja povezava med operacijo $izbira_1(B,i)$ in $izbira_0(B,i)$. To pomeni, da rešitev z pomožno podatkovno strukturo za $izbira_1(B,i)$ ne more biti uporabljena pri iskanju rešitve za $izbira_0(B,i)$. V nadaljevanju bo opisan postopek iskanja $izbire_1(B,i)$, saj se lahko $izbira_0(B,i)$ implementira na podoben način \cite{Navarro2016}.
+
+Ko operacija izbira ni ključna pri reševanju problemov, se lahko uporabi binarno iskanje v poljih $R$ in $R'$, ki potrebuje $O(\log{n})$ časa. Z binarnim iskanjem se najde območje dolžine $k$, pri čemer je potrebno še dodatnih $k$ preiskav, da se najde natančno vrednost.
+Čas operacije se lahko zniža na $O(\log\log n)$ z uporabo pomožnih podatkovnih struktur. Podobno kot pri operacij rang se bitno polje razdeli na $\lceil \frac{m}{s} \rceil$ veder, pri čemer $m$ je število bitov z vrednostjo 1 v bitnem polju in s je število takih bitov v vsakem vedru. Polje $S[0,\lceil \frac{m}{s} \rceil]$ hrani vrednosti $S[i]=izbira_1(B,i*s+1)$, pri čemer $S[\lceil \frac{m}{s} \rceil]=n+1$. Polje $S$ potrebuje $w(\lceil \frac{m}{s} \rceil +1)$ bitov. Ko je $s=w^2$, potem podatkovna struktura potrebuje $\lceil\frac{m}{w^2}\rceil=o(m)=o(n)$ bitov \cite{Navarro2016}.
+
+Vedra niso enako velika, zato se lahko razdelijo na velika vedra in mala vedra, pri čemer je vedro veliko natanko tedaj, ko je večje kot $s=\log^2 n$ bitov, sicer je malo vedro. Pri tem je potrebno shraniti velikost vedra v bitno polje $V$, kjer $V[i]=1$, če $i$-to vedro je veliko, sicer  $V[i]=0$. Bitno polje $V$ potrebuje tudi dodatno podatkovno strukturo za rang. Za velika vedra se izračuna vseh $s$ vrednosti izbire, pri čemer so shranjeni v polju $I$ položaji bitov z vrednostjo ena znotraj vedra. Za mala vedra, pa se sproti naračuna izbira znotraj vedra. Operacija izbira se izračuna na sledeči način:
+\begin{equation}
+    izbira_1(B,j)=\left\{
+    \begin{array}{rl}
+       S\left[\left\lceil \frac{j}{s} -1\right\rceil\right] + I\left[rang_1(V,\left\lceil \frac{j}{s} \right\rceil)s+x\right], & V\left[\left\lceil \frac{j}{s} \right\rceil\right] = 1\\ 
+       S\left[\left\lceil \frac{j}{s} -1 \right\rceil\right] + k, & V\left[\left\lceil \frac{j}{s} \right\rceil\right] = 0\\
+       n+1, & m < j
+    \end{array}\right.,
+\end{equation}
+kjer $x$ predstavlja $((j-1) \mod{s})+1$ in $k$ je položaj $((j-1) \mod{s})+1$-tega bita z vrednostjo 1 na intervalu $B\left[ S\left[\left\lceil \frac{j}{s} -1 \right\rceil\right], S\left[\left\lceil \frac{j}{s} \right\rceil-1\right]\right]$.
+
+Polje $I$ mora shraniti $s\lceil\log n\rceil$ bitov za vsako veliko vedro, katerih je $\frac{n}{s(\log n)^2}$, torej potrebuje $O\left(\left\lceil\frac{n}{\log n}\right\rceil\right)=o(n)$ bitov. Bitno polje $V$ pa potrebuje $\lceil \frac{m}{s} \rceil$ bitov za shraniti velikosti blokov ter dodatne bite za izvajanje operacije rang v konstantnem času, torej tudi $V$ potrebuje $o(n)$ bitov \cite{Navarro2016}.
+
+Operacija se lahko izvedene v konstantnem času. To je doseženo z dodatnim deljenjem majhnih veder, na podoben način, kot je bilo to storjeno nad celotnim bitnim poljem $B$. Vsako majhno vedro se dodatno razdeli na $s'=(\log\log n)^2$ mini veder, pri čemer mini vedro je veliko, ko je večje od $s'(\log\log n)^2$. Vsako majhno mini vedro potrebuje $s'\log{(s(\log{n})^2)}=O((\log\log n)^3)=o(n)$ bitov ter vsako veliko mini vedro potrebuje isto prostora, pri čemer pa jih je največ $O\left(\frac{n}{(\log\log n)^4}\right)$, torej vsa velika mini vedra skupaj potrebujejo $O\left(\frac{n}{\log\log n}\right) =o(n)$ bitov \cite{Navarro2016}.
+
+
+Vse dodatne podatkovne strukture potrebne za izvajanje operacij rang in izbira v konstantnem času, so lahko izgrajene v dveh sprehodih po bitnem polj $B$, pri čemer vsak sprehod traja $O(n)$ časa. Pri tem je ves potrebni spomin že predhodno dodeljen.

@@ -1,3 +1,22 @@
+Skozi magistersko nalogo $T$ predstavljav vhodno besedo, za katero bo izgrajeno priponsko drevo ali kompaktno priponsko drevo, dolžine $n$. Na podoben način $P$ predstavlja iskani vzorec dolžine $m$ v $T$. Vhodna beseda $T$ in vzorec $P$ sta sestavljena iz znakov abecede $\Sigma$.
+
+Manjše zaporedje zankov, ki je del besede, imenujemo podniz in je definiran na sledeč način:
+\begin{defi}
+    Niz $\alpha\in\Sigma^*$ je podniz besedila $T$, ko obstaja tak $1\le i\le n$, za katerega velja, da je  $\alpha=T[i,i+|\alpha|]$. 
+\end{defi}
+Poljubni podnizi so označeni z grškimi črkami $\alpha$, $\beta$ in $\gamma$. Podniz besede $T$, ki se začne na $i$-tem mestu in se konča na $j$-tem mestu, pa je označen kot $T[i,j]$.
+
+Dva poljubna niza se lahko združi v novi daljši niz z stikom, ki je definira na sledeči način:
+\begin{defi}
+    Stik nizov $\alpha$ in $\beta$ je niz $\gamma=\alpha\cdot\beta$, pri čemer je $\alpha=\gamma[1,|\alpha|]$ in $\beta=\gamma[|\alpha|+1,|\alpha|+|\beta|]$.
+\end{defi}
+
+Za razliko od nizov in podnizov, bodo znaki označeni z črkama $x$ ali $t$. Oznaka $T[i]$ pa prededstavlja znak na $i$-tem mestu vhodne besede.
+
+Ker bo nad besedo $T$ izgrajeno priponsko drevo, ki bo uporabljeno za hitrejše iskanje vzorcev v besedi, bo skozi nalogo bodo notranja vozlišča priponskega drevesa imenovana načeloma imenovana kot vozlišča in označena z črkami $s$, $v$, $w$ in $u$. Vozlišča bodo označena tudi z črkami $a$, $b$, $c$ in $d$ v McCreightvem algoritmu. Listi priponskega drvevesa pa bodo označeni z črko $l$.
+
+V nadaljevanju poglavja bodo predstavljna še podatkovne strukture, ki so potrebne za kompaktno predstavitev dreves, ter kompaktna predstavitev dreves, ki bo uporabljena v podatkovni strukturi kompaktno priponsko drevo.
+
 \section{BITNO POLJE}\label{sec:Bitno_Polje}
 \import{.}{Notacija/BitniVektor}
 
@@ -5,4 +24,4 @@
 \import{.}{Notacija/EniskiZapis}
 
 \section{KOMPAKTNA PREDSTAVITEV DREVES}\label{sec:kompaktna_drevesa}
-\import{.}{KompaktnaPredstavitev/KompaktnaDrevesa}
+\import{.}{Notacija/KompaktnaDrevesa}

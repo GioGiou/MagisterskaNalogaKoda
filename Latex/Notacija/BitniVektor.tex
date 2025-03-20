@@ -1,14 +1,86 @@
+Bitno polje (angl. \textit{bit vector}) je kompaktna podatkovna struktura, ki je osnova za ostale kompaktne podatkovne strukture. Bitna polja so osnova za kompaktno predstavitev topologijo drevesa. Univerzalna množica vseh bitnih polj dolžine $n$ je velikosti $\left |N\right |=2^n$, torej bitno polje ima prostorsko zahtevnost $n+o(n)$ bitov. Pri tem je potrebnih $n$ bitov za shraniti celotno bitno polje ter dodatnih $o(n)$ bitov za implementacijo operacij nad njim. Bitno polje $B$ podpira tri operacije: $rang_v(B,i)$ (angl. \textit{rank}), $izbira_v(B,i)$  (angl. \textit{select}) ter $dostop(B,i)$ (angl. \textit{access}), ki vrne $i$-ti bit bitnega polja $B$.
 
 \paragraph{Model:}
 
 RAM
 
-\paragraph{Rang/Izbira:}
+\paragraph{Rang:}
+
+\begin{defi}
+    Operacija $rang_v(B,i)$ vrne število pojav vrednosti $v\in\{1,0\}$ v bitnem vektorju $B$ do položaja $i$.
+ \end{defi}
+ 
+ V nadaljevanju bo operacija $rang(B,i)$ predstavljala $rang_1(B,i)$. To je možno, saj velja sledeča relacija med $rang_0(B,i)$ in $rang_1(B,i)$:
+ \begin{equation}\label{eq:rang}
+     rang_1(B,i)=i-rang_0(B,i).
+ \end{equation}
+  Operacija rang ima časovno zahtevnost $O(1)$, pri tem pa potrebuje dodatno podatkovno strukturo, ki zasede $o(n)$ bitov. V nasprotnem primeru bitno polje ni več kompaktna podatkovna struktura. Relacija iz enakosti \ref{eq:rang} omogoča izgradnjo podatkovne strukture zgolj za operacijo $rang_1$.
+ 
+ Pomožna struktura, ki omogoča konstantni čas operacije $rang(B,i)$, shranjuje range različnih elementov bitnega polja $B$ v polju $R$. Naivni pristop shrani v polju $R$ vrednosti vseh elementov $B$-ja. Problem tega pristopa je prevelika prostorska zahtevnost, saj $R$ ni več velikosti $o(n)$ bitov. Rešitev tega problema je vzorčenje rangov, tako da v polju $R$ so shranjeni zgolj rangi nekaterih elementov $B$-ja. Polje $R$ razdeli $B$ na $s=kw$ delov, pri čemer je $k$ poljubno število ter je $w$ dolžina računalniške besede. Element $R[i]=rang_1(B,is)$, pri čemer $0\le i \le \left\lfloor\frac{n}{s} \right\rfloor$. Na ta način je operacija rang implementiran kot 
+ \begin{equation}
+     rang_1(B,i)=R\left[\left\lfloor\frac{i}{s} \right\rfloor\right] + \texttt{popcount}\left(B\left[\left\lfloor\frac{i}{s} \right\rfloor s,i\right]\right),
+ \end{equation}
+ kjer je \texttt{popcount} funkcija, ki prešteje število bitov z vrednostjo $1$. Zaradi uporabnosti te funkcije je le ta implementirana v različnih modernih arhitekturah procesorjev. Polje $R$ ima velikost $\lfloor\frac{n}{k}\rfloor$ bitov, saj shranjuje $\lfloor\frac{n}{s}\rfloor$ števil dolžine $w$. Pri tem je potrebno funkcijo \texttt{popcount} pognati največ $k$ krat, kar naredi čas operacije rang $O(k)$ \cite{Navarro2016}.
+ 
+ Podobno kot polje $R$ se definira polje $R'$. Polje $R'$ hrani na $i$-tem mestu število bitov z vrednostjo $1$ po vedru $R[\left\lfloor\frac{i}{k} \right\rfloor]$ ali $R'[i]=rang_1(B,iw)-R[\left\lfloor\frac{i}{k} \right\rfloor]$. Na ta način se zniža število klicev funkcije \texttt{popcount} na 1 klic. Ker v $R'$ so sharnjena zgolj števila med 0 in $s-w$ (vsako vedro v $R$ ima $w$ elementov v $R'$), se lahko $R'$ shrani v $\lfloor\frac{n}{w}\rfloor\log{s}$ bitov, kar je $o(n)$ bitov. Operacija rang je zato implementirana s pomočjo $R$ in $R'$ na sledeči način:
+ \begin{equation}
+     rang_1(B,i)=R\left[\left\lfloor\frac{i}{kw} \right\rfloor\right]+ R'\left[\left\lfloor\frac{i}{w} \right\rfloor\right]+\texttt{popcount}\left(B\left[\left\lfloor\frac{i}{w} \right\rfloor,\left\lfloor\frac{i}{w} \right\rfloor+(i \mod w)\right]\right).
+ \end{equation}
+ 
+ V praksi se izkaže, da se najboljše rezultate pridobi, ko je $k=8$ za računalniško besedo dolžine $w=64$ (uporabljena v vseh modernih procesorjih). To omogoča shranjevanje vedra v $R$ in vseh pripadajočih veder v $R'$ v dveh besedah, ker prva beseda shrani vrednost vedra v $R$ druga pa vse vrednosti pripadajočih veder v $R'$. Ta implementacija potrebuje $1,25*n$ bitov za vse tri podatkovne strukture skupaj \cite{Navarro2016}.
+
+\paragraph{Izbira:}
+Podobno kot operacija rang, tudi operacija izbira potrebuje pomožno podatkovno strukturo za izvedbo v konstantnem času. 
+\begin{defi}
+    Operacija $izbira_v(B,i)$ vrne položaj $i$-tega pojava vrednosti $v\in\{1,0\}$ v bitnem vektorju $B$.
+\end{defi}
+Operacijo izbira si lahko predstavimo, kot inverzno operacijo od operacije rang, saj velja relacija $j=rang_v(B,izbira_v(B,j))$. Pri tem pa ne obstaja povezava med operacijo $izbira_1(B,i)$ in $izbira_0(B,i)$. To pomeni, da rešitev z pomožno podatkovno strukturo za $izbira_1(B,i)$ ne more biti uporabljena pri iskanju rešitve za $izbira_0(B,i)$. V nadaljevanju bo opisan postopek iskanja $izbire_1(B,i)$, saj se lahko $izbira_0(B,i)$ implementira na podoben način \cite{Navarro2016}.
+
+Ko operacija izbira ni ključna pri reševanju problemov, se lahko uporabi binarno iskanje v poljih $R$ in $R'$, ki potrebuje $O(\log{n})$ časa. Z binarnim iskanjem se najde območje dolžine $k$, pri čemer je potrebno še dodatnih $k$ preiskav, da se najde natančno vrednost.
+Čas operacije se lahko zniža na $O(\log\log n)$ z uporabo pomožnih podatkovnih struktur. Podobno kot pri operacij rang se bitno polje razdeli na $\lceil \frac{m}{s} \rceil$ veder, pri čemer $m$ je število bitov z vrednostjo 1 v bitnem polju in s je število takih bitov v vsakem vedru. Polje $S[0,\lceil \frac{m}{s} \rceil]$ hrani vrednosti $S[i]=izbira_1(B,i*s+1)$, pri čemer $S[\lceil \frac{m}{s} \rceil]=n+1$. Polje $S$ potrebuje $w(\lceil \frac{m}{s} \rceil +1)$ bitov. Ko je $s=w^2$, potem podatkovna struktura potrebuje $\lceil\frac{m}{w^2}\rceil=o(m)=o(n)$ bitov \cite{Navarro2016}.
+
+Vedra niso enako velika, zato se lahko razdelijo na velika vedra in mala vedra, pri čemer je vedro veliko natanko tedaj, ko je večje kot $s=\log^2 n$ bitov, sicer je malo vedro. Pri tem je potrebno shraniti velikost vedra v bitno polje $V$, kjer $V[i]=1$, če $i$-to vedro je veliko, sicer  $V[i]=0$. Bitno polje $V$ potrebuje tudi dodatno podatkovno strukturo za rang. Za velika vedra se izračuna vseh $s$ vrednosti izbire, pri čemer so shranjeni v polju $I$ položaji bitov z vrednostjo ena znotraj vedra. Za mala vedra, pa se sproti naračuna izbira znotraj vedra. Operacija izbira se izračuna na sledeči način:
+\begin{equation}
+    izbira_1(B,j)=\left\{
+    \begin{array}{rl}
+       S\left[\left\lceil \frac{j}{s} -1\right\rceil\right] + I\left[rang_1(V,\left\lceil \frac{j}{s} \right\rceil)s+x\right], & V\left[\left\lceil \frac{j}{s} \right\rceil\right] = 1\\ 
+       S\left[\left\lceil \frac{j}{s} -1 \right\rceil\right] + k, & V\left[\left\lceil \frac{j}{s} \right\rceil\right] = 0\\
+       n+1, & m < j
+    \end{array}\right.,
+\end{equation}
+kjer $x$ predstavlja $((j-1) \mod{s})+1$ in $k$ je položaj $((j-1) \mod{s})+1$-tega bita z vrednostjo 1 na intervalu $B\left[ S\left[\left\lceil \frac{j}{s} -1 \right\rceil\right], S\left[\left\lceil \frac{j}{s} \right\rceil-1\right]\right]$.
+
+Polje $I$ mora shraniti $s\lceil\log n\rceil$ bitov za vsako veliko vedro, katerih je $\frac{n}{s(\log n)^2}$, torej potrebuje $O\left(\left\lceil\frac{n}{\log n}\right\rceil\right)=o(n)$ bitov. Bitno polje $V$ pa potrebuje $\lceil \frac{m}{s} \rceil$ bitov za shraniti velikosti blokov ter dodatne bite za izvajanje operacije rang v konstantnem času, torej tudi $V$ potrebuje $o(n)$ bitov \cite{Navarro2016}.
+
+Operacija se lahko izvedene v konstantnem času. To je doseženo z dodatnim deljenjem majhnih veder, na podoben način, kot je bilo to storjeno nad celotnim bitnim poljem $B$. Vsako majhno vedro se dodatno razdeli na $s'=(\log\log n)^2$ mini veder, pri čemer mini vedro je veliko, ko je večje od $s'(\log\log n)^2$. Vsako majhno mini vedro potrebuje $s'\log{(s(\log{n})^2)}=O((\log\log n)^3)=o(n)$ bitov ter vsako veliko mini vedro potrebuje isto prostora, pri čemer pa jih je največ $O\left(\frac{n}{(\log\log n)^4}\right)$, torej vsa velika mini vedra skupaj potrebujejo $O\left(\frac{n}{\log\log n}\right) =o(n)$ bitov \cite{Navarro2016}.
+
+
+Vse dodatne podatkovne strukture potrebne za izvajanje operacij rang in izbira v konstantnem času, so lahko izgrajene v dveh sprehodih po bitnem polj $B$, pri čemer vsak sprehod traja $O(n)$ časa. Pri tem je ves potrebni spomin že predhodno dodeljen.
 
 \paragraph{Predhodnik/Naslednjik:}
 
+Operacija predhodnik elementa $y$ najde element $x_i$ del zaporedja, za katerega velja $x_i \le y < x_{i+1}$ in $1\le i\le m$, kjer je $m$ število ponovitev $v$-ja v $B$. Operacija je implementirana kot
+    $$predhodnik_v(B,y)=izbira_v(B,rang_v(B,y)),$$
+pri čemer je $v\in \{1,0\}$. Na podoben način je definirana tudi operacija naslednik. Operacija naslednik elementa $y$  najde položaj elementa $x_i$ v zaporedju $x_1\le x_2 \le \dots \le x_m$, pri čemer velja, da $x_{i-1}< y \le x_i$. Pri tem je implementirana kot
+    $$naslednik_v(B,y)=izbira_v(B,rang_v(B,y-1)+1),$$
+kjer je  $v\in \{1,0\}$. Zaporedje $x_1\le x_2 \le \dots \le x_n$ predstavlja vozlišča v zaporedju eniških zapisov stopenj vozlišč po plasteh.
+
 \paragraph{Range querry:}
 
+Zaporedje oklepajev se lahko definira višek
+
+Operacija $vi$\textit{š}$ek(B,i)$ vrne število '(', ki niso bili še zaprti in je
+$$
+    \textit{višek}(B,i)=rang_0(B,i)-rang_1(B,i)=2rang_0(B,i)-i.
+$$
+
 Višek
+
+operacije nad odseki bitnega polja:
+
+Te operacije so sledeče: $rmq$, $rMq$, $minizbira$ in $min$\textit{š}$tetje$. Operacija $rmq(B,i,j)$ (angl. \textit{range minimum query}) vrne položaj $k$, kjer je $i\le k\le j$, $vi$\textit{š}$ek(B,k)$ je najnižji višek v območju med $i$ in $j$ ter $k$ je prvi pojav najnižjega viška na tem območju. Podobno je definirana tudi operacija $rMq(B,i,j)$ (angl. \textit{range maximum query}), ki pa vrne položaj $k$, pri čemer je $i\le k\le j$ in $vi$\textit{š}$ek(B,k)$ je najvišji višek v območju med $i$ in $j$ ter $k$ je prvi pojav najvišjega viška na območju. Operacija $minizbira(B,i,j,t)$ vrne položaj $t$-tega pojava najmanjšega viška na območju med $i$ in $j$. Operacija $min$\textit{š}$tetje(B,i,j)$ pa vrne število pojav najnižjega viška na območju med $i$ in $j$ \cite{Navarro2016}.
+
+Vse predstavljene operacije (razen operacije $vi$\textit{š}$ek$, ki potrebuje $O(1)$ časa za izvajanje) se lahko implementira s časovno zahtevnostjo $O(\log{n})$. Pri tem pa je potrebno zgraditi dodatno podatkovno strukturo rmM-drevo (angl. \textit{range minumum maximum tree}), ki je lahko shranjeno z $O(n/\log{n})=o(n)$ dodatnimi biti. Podatkovna struktura razdeli bitno polje $B$ na $\frac{n}{b}$ veder velikosti $b$ ter za vsako vedro se ustvari list rmM-drevesa. Drevo je levo poravnano in se lahko zapiše kot polje vozlišč (podobno kot podatkovna struktura kopica). Torej so otroci $i$-tega vozlišča na $2i$-tem in $2i+1$-vem mestu v polju ter starš $i$-tega vozlišča se nahaja na $\left\lfloor\frac{i}{2}\right\rfloor$-mestu. Vsako vozlišče v drevesu hrani štiri podatke: $e$ razlika viška med začetkom in koncem pokritega območja, $m$ najmanjši relativni višek v območju, $M$ največji relativni višek na območju in $n$ število najmanjših viškov na območju, ki ga pokriva vozlišče. Pri tem vozlišče pokriva celotno območje, ki ga pokrivata oba otroka, in listi pokrivajo zgolj eno vedro dolžine $b$. Torej koren drevesa pokriva celotno bitno polje $B$. Vse predstavljene operacije so implementirane s pomočjo sprehoda po rmM-drevesu 
+\cite{Navarro2016}.
 
 rmM drevo
