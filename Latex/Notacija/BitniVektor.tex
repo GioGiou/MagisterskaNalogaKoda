@@ -1,6 +1,25 @@
-Bitno polje (angl. \textit{bit vector}) je kompaktna podatkovna struktura, ki je osnova za ostale kompaktne podatkovne strukture. Bitna polja so osnova za kompaktno predstavitev topologijo drevesa. Univerzalna množica vseh bitnih polj dolžine $n$ je velikosti $\left |N\right |=2^n$, torej bitno polje ima prostorsko zahtevnost $n+o(n)$ bitov. Pri tem je potrebnih $n$ bitov za shraniti celotno bitno polje ter dodatnih $o(n)$ bitov za implementacijo operacij nad njim. Bitno polje $B$ podpira tri operacije: $rang_v(B,i)$ (angl. \textit{rank}), $izbira_v(B,i)$  (angl. \textit{select}) ter $dostop(B,i)$ (angl. \textit{access}), ki vrne $i$-ti bit bitnega polja $B$.
+Najbolj osnovna podatkovna struktura, ki bo tudi osnova za vse ostale kompaktne predstavitve podatkovnih struktur, je bitno polje (angl. \textit{bit vector}). Kot samo ime podatkovne strukture pove, bitno polje $B$ dolžine $n$ je polje, v katerem je shranjeni $n$ bitov, do katerih želimo dostopati v konstantnem času. Poleg dostopa do bitov, bitno polje podpira še dve osnovni operaciji: $rang_v(B,i)$ (angl. \textit{rank}) in $izbira_v(B,i)$ (angl. \textit{select}).
 
-\paragraph{Model:}
+je kompaktna podatkovna struktura, ki je osnova za ostale kompaktne podatkovne strukture. Bitna polja so osnova za kompaktno predstavitev topologijo drevesa. Univerzalna množica vseh bitnih polj dolžine $n$ je velikosti $\left |N\right |=2^n$, torej bitno polje ima prostorsko zahtevnost $n+o(n)$ bitov. Pri tem je potrebnih $n$ bitov za shraniti celotno bitno polje ter dodatnih $o(n)$ bitov za implementacijo operacij nad njim. Bitno polje $B$ podpira tri operacije:  ter $dostop(B,i)$ (angl. \textit{access}), ki vrne $i$-ti bit bitnega polja $B$.
+
+\paragraph{Model računaja:}
+
+Uporaba Računalnika z naključnim dostopom (angl. \textit{random-access machine} oziroma RAM) (točen model word RAM) modela
+    
+    -O(1) časa za izvesti vse osnovne aritmetične operacije
+
+    - omejen prostor na U naslovov, ki hranijo $w=\log_2{U}$ bitov prostora (velikost enega nalova)
+
+name RAM modela je teoretično simulirati fizične računalnike.
+
+
+Bitno polje je shranjeno kot polje celih števil $W\left[1,\left\lceil\frac{n}{w}\right\rceil\right]$ \cite{Navarro2016}.
+
+Torej dostop do $i$-tega bita v bitem polju $B$, ki je označen kot $\textit{dostop}(B,i)=B[i]$, je izračunan kot:
+$$
+    B[i]=\left\lfloor W\left[\left\lceil\frac{i}{w}\right\rceil\right]/2^{w-r}\right\rfloor \mod{2},
+$$
+pri čemer $r$ je točna pozicija $i$-ja znotraj celega števila oziroma $r=((i-1)\mod{w}) +1$. Torej $2^{w-r}$ predstavlaj $w-r$ bitnih premikov (angl. \textit{bit shift})  v desno.
 
 RAM
 
