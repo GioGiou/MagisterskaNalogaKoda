@@ -1,16 +1,27 @@
-Najbolj osnovna podatkovna struktura, ki bo tudi osnova za vse ostale kompaktne predstavitve podatkovnih struktur, je bitno polje (angl. \textit{bit vector}). Kot samo ime podatkovne strukture pove, bitno polje $B$ dolžine $n$ je polje, v katerem je shranjeni $n$ bitov, do katerih želimo dostopati v konstantnem času. Poleg dostopa do bitov, bitno polje podpira še dve osnovni operaciji: $rang_v(B,i)$ (angl. \textit{rank}) in $izbira_v(B,i)$ (angl. \textit{select}).
+Bitno polje (angl. \textit{bit vector}) $B$ dolžine $n=|B|$ kot samo ime podtkovne strukture, je polje, v katerem je shranjinh $n$ bitov, do katerih se želi dostopati v konstantnem času. Zato sega lahko uporabi kot osnovna podatkovna struktura za kompaktne predstavitve. Primer take podatkovne strukture, ki uporabja bitno polje za svojo kompaktno predstavitev, je drevo.
 
-je kompaktna podatkovna struktura, ki je osnova za ostale kompaktne podatkovne strukture. Bitna polja so osnova za kompaktno predstavitev topologijo drevesa. Univerzalna množica vseh bitnih polj dolžine $n$ je velikosti $\left |N\right |=2^n$, torej bitno polje ima prostorsko zahtevnost $n+o(n)$ bitov. Pri tem je potrebnih $n$ bitov za shraniti celotno bitno polje ter dodatnih $o(n)$ bitov za implementacijo operacij nad njim. Bitno polje $B$ podpira tri operacije:  ter $dostop(B,i)$ (angl. \textit{access}), ki vrne $i$-ti bit bitnega polja $B$.
+V nadajevanju tega podpogavja bo predstavljeno, kako učinkovito shraniti bitno polje ter ohraniti dostop do podatkov v konstantem času. Predstavljene bodo še druge operacije nad bitnimi polji, ki so uporabne za reševanje problemov. predstavljene operacije so: osnovni operaciji $rang(B,i)$ (angl. \textit{rank}) in $izbira(B,i)$ (angl. \textit{select}), sestavljen operacij $predhodnik(B,y)$ in $naslednik(B,y)$ ter dodatne operacije nad odseki bitenega polja (angl. \textit{range querry}). Vse predstavljene operacije želimo opraviti čim bolj učinkovito ter pri tem uporabiti čim manj prostora za storiti le to.
 
-\paragraph{Model računaja:}
+%
+    %Najbolj osnovna podatkovna struktura, ki bo tudi osnova za vse ostale kompaktne predstavitve podatkovnih struktur, je bitno polje (angl. \textit{bit vector}). Kot samo ime podatkovne strukture pove, bitno polje $B$ dolžine $n$ je polje, v katerem je shranjeni $n$ bitov, do katerih želimo dostopati v konstantnem času. Poleg dostopa do bitov, bitno polje podpira še dve osnovni operaciji: $rang_v(B,i)$ (angl. \textit{rank}) in $izbira_v(B,i)$ (angl. \textit{select}).
+    %
+    %je kompaktna podatkovna struktura, ki je osnova za ostale kompaktne podatkovne strukture. Bitna polja so osnova za kompaktno predstavitev topologijo drevesa. Univerzalna množica vseh bitnih polj dolžine $n$ je velikosti $\left |N\right |=2^n$, torej bitno polje ima prostorsko zahtevnost $n+o(n)$ bitov. Pri tem je potrebnih $n$ bitov za shraniti celotno bitno polje ter dodatnih $o(n)$ bitov za implementacijo operacij nad njim. Bitno polje $B$ podpira tri operacije:  ter $dostop(B,i)$ (angl. \textit{access}), ki vrne $i$-ti bit bitnega polja $B$.
+
+\paragraph{Model računaja in dostop:}
+Preden se lahko predstavi način shranjevanja bitnega polja, je potrebno predstaviti uporabljen model računanja. Splošen model računanja bo uporabljen, saj se različne arhitekture mikro procesorjev razlikujejo med seboj in bi bilo potreno narediti analizo za vsako arhitekuro posebaj. Zato bo izbran model računanja Računalnik z naključnim dostopom (angl. \textit{random-access machine} oziroma RAM). Bolj natančno bo uporabljen zlogovni RAM  (angl. \textit{word RAM}).
+
+OSnovna različica RAM modela podpira vse aritmetične operacije nad celimi števili in logične operacijami nad biti v konstantnem času. Poleg tega RAM omogoča konstanten čas dostopa do spomina ter linearni čas za dodelitev zaporednega spomina. Vse te operacije so storjene v enakem času tudi v zlogovnem RAM modelu. Edina razlika med modeloma je, da RAM prededpostavlja neskončni spomin zlogovni RAM pa omeji velikost spomina na $U$ nalovov in posledično je velikost enega zloga $w=\log_2 U$\footnote{v nadaljevanju bo $\log_2 n$ zapisan kot $\log n$ } bitov, kar je velikost enega naslova \cite{Fredman1990,Morin2013}.
+
 
 Uporaba Računalnika z naključnim dostopom (angl. \textit{random-access machine} oziroma RAM) (točen model word RAM) modela
     
     -O(1) časa za izvesti vse osnovne aritmetične operacije
 
-    - omejen prostor na U naslovov, ki hranijo $w=\log_2{U}$ bitov prostora (velikost enega nalova)
+    - omejen prostor na U naslovov, ki hranijo $w=\log_2{U}$ bitov prostora (velikost enega nalova)  U je strogo večji od $n$ (velikosti podatkovne strukture), saj sicer jo nemoremo shraniti
 
 name RAM modela je teoretično simulirati fizične računalnike.
+
+\cite{Fredman1990,Morin2013}
 
 
 Bitno polje je shranjeno kot polje celih števil $W\left[1,\left\lceil\frac{n}{w}\right\rceil\right]$ \cite{Navarro2016}.
@@ -27,26 +38,26 @@ RAM
 
 \begin{defi}
     Operacija $rang_v(B,i)$ vrne število pojav vrednosti $v\in\{1,0\}$ v bitnem vektorju $B$ do položaja $i$.
- \end{defi}
+\end{defi}
  
- V nadaljevanju bo operacija $rang(B,i)$ predstavljala $rang_1(B,i)$. To je možno, saj velja sledeča relacija med $rang_0(B,i)$ in $rang_1(B,i)$:
- \begin{equation}\label{eq:rang}
-     rang_1(B,i)=i-rang_0(B,i).
- \end{equation}
-  Operacija rang ima časovno zahtevnost $O(1)$, pri tem pa potrebuje dodatno podatkovno strukturo, ki zasede $o(n)$ bitov. V nasprotnem primeru bitno polje ni več kompaktna podatkovna struktura. Relacija iz enakosti \ref{eq:rang} omogoča izgradnjo podatkovne strukture zgolj za operacijo $rang_1$.
- 
- Pomožna struktura, ki omogoča konstantni čas operacije $rang(B,i)$, shranjuje range različnih elementov bitnega polja $B$ v polju $R$. Naivni pristop shrani v polju $R$ vrednosti vseh elementov $B$-ja. Problem tega pristopa je prevelika prostorska zahtevnost, saj $R$ ni več velikosti $o(n)$ bitov. Rešitev tega problema je vzorčenje rangov, tako da v polju $R$ so shranjeni zgolj rangi nekaterih elementov $B$-ja. Polje $R$ razdeli $B$ na $s=kw$ delov, pri čemer je $k$ poljubno število ter je $w$ dolžina računalniške besede. Element $R[i]=rang_1(B,is)$, pri čemer $0\le i \le \left\lfloor\frac{n}{s} \right\rfloor$. Na ta način je operacija rang implementiran kot 
- \begin{equation}
-     rang_1(B,i)=R\left[\left\lfloor\frac{i}{s} \right\rfloor\right] + \texttt{popcount}\left(B\left[\left\lfloor\frac{i}{s} \right\rfloor s,i\right]\right),
- \end{equation}
- kjer je \texttt{popcount} funkcija, ki prešteje število bitov z vrednostjo $1$. Zaradi uporabnosti te funkcije je le ta implementirana v različnih modernih arhitekturah procesorjev. Polje $R$ ima velikost $\lfloor\frac{n}{k}\rfloor$ bitov, saj shranjuje $\lfloor\frac{n}{s}\rfloor$ števil dolžine $w$. Pri tem je potrebno funkcijo \texttt{popcount} pognati največ $k$ krat, kar naredi čas operacije rang $O(k)$ \cite{Navarro2016}.
- 
- Podobno kot polje $R$ se definira polje $R'$. Polje $R'$ hrani na $i$-tem mestu število bitov z vrednostjo $1$ po vedru $R[\left\lfloor\frac{i}{k} \right\rfloor]$ ali $R'[i]=rang_1(B,iw)-R[\left\lfloor\frac{i}{k} \right\rfloor]$. Na ta način se zniža število klicev funkcije \texttt{popcount} na 1 klic. Ker v $R'$ so sharnjena zgolj števila med 0 in $s-w$ (vsako vedro v $R$ ima $w$ elementov v $R'$), se lahko $R'$ shrani v $\lfloor\frac{n}{w}\rfloor\log{s}$ bitov, kar je $o(n)$ bitov. Operacija rang je zato implementirana s pomočjo $R$ in $R'$ na sledeči način:
- \begin{equation}
-     rang_1(B,i)=R\left[\left\lfloor\frac{i}{kw} \right\rfloor\right]+ R'\left[\left\lfloor\frac{i}{w} \right\rfloor\right]+\texttt{popcount}\left(B\left[\left\lfloor\frac{i}{w} \right\rfloor,\left\lfloor\frac{i}{w} \right\rfloor+(i \mod w)\right]\right).
- \end{equation}
- 
- V praksi se izkaže, da se najboljše rezultate pridobi, ko je $k=8$ za računalniško besedo dolžine $w=64$ (uporabljena v vseh modernih procesorjih). To omogoča shranjevanje vedra v $R$ in vseh pripadajočih veder v $R'$ v dveh besedah, ker prva beseda shrani vrednost vedra v $R$ druga pa vse vrednosti pripadajočih veder v $R'$. Ta implementacija potrebuje $1,25*n$ bitov za vse tri podatkovne strukture skupaj \cite{Navarro2016}.
+V nadaljevanju bo operacija $rang(B,i)$ predstavljala $rang_1(B,i)$. To je možno, saj velja sledeča relacija med $rang_0(B,i)$ in $rang_1(B,i)$:
+\begin{equation}\label{eq:rang}
+    rang_1(B,i)=i-rang_0(B,i).
+\end{equation}
+Operacija rang ima časovno zahtevnost $O(1)$, pri tem pa potrebuje dodatno podatkovno strukturo, ki zasede $o(n)$ bitov. V nasprotnem primeru bitno polje ni več kompaktna podatkovna struktura. Relacija iz enakosti \ref{eq:rang} omogoča izgradnjo podatkovne strukture zgolj za operacijo $rang_1$.
+
+Pomožna struktura, ki omogoča konstantni čas operacije $rang(B,i)$, shranjuje range različnih elementov bitnega polja $B$ v polju $R$. Naivni pristop shrani v polju $R$ vrednosti vseh elementov $B$-ja. Problem tega pristopa je prevelika prostorska zahtevnost, saj $R$ ni več velikosti $o(n)$ bitov. Rešitev tega problema je vzorčenje rangov, tako da v polju $R$ so shranjeni zgolj rangi nekaterih elementov $B$-ja. Polje $R$ razdeli $B$ na $s=kw$ delov, pri čemer je $k$ poljubno število ter je $w$ dolžina računalniške besede. Element $R[i]=rang_1(B,is)$, pri čemer $0\le i \le \left\lfloor\frac{n}{s} \right\rfloor$. Na ta način je operacija rang implementiran kot 
+\begin{equation}
+    rang_1(B,i)=R\left[\left\lfloor\frac{i}{s} \right\rfloor\right] + \texttt{popcount}\left(B\left[\left\lfloor\frac{i}{s} \right\rfloor s,i\right]\right),
+\end{equation}
+kjer je \texttt{popcount} funkcija, ki prešteje število bitov z vrednostjo $1$. Zaradi uporabnosti te funkcije je le ta implementirana v različnih modernih arhitekturah procesorjev. Polje $R$ ima velikost $\lfloor\frac{n}{k}\rfloor$ bitov, saj shranjuje $\lfloor\frac{n}{s}\rfloor$ števil dolžine $w$. Pri tem je potrebno funkcijo \texttt{popcount} pognati največ $k$ krat, kar naredi čas operacije rang $O(k)$ \cite{Navarro2016}.
+
+Podobno kot polje $R$ se definira polje $R'$. Polje $R'$ hrani na $i$-tem mestu število bitov z vrednostjo $1$ po vedru $R[\left\lfloor\frac{i}{k} \right\rfloor]$ ali $R'[i]=rang_1(B,iw)-R[\left\lfloor\frac{i}{k} \right\rfloor]$. Na ta način se zniža število klicev funkcije \texttt{popcount} na 1 klic. Ker v $R'$ so sharnjena zgolj števila med 0 in $s-w$ (vsako vedro v $R$ ima $w$ elementov v $R'$), se lahko $R'$ shrani v $\lfloor\frac{n}{w}\rfloor\log{s}$ bitov, kar je $o(n)$ bitov. Operacija rang je zato implementirana s pomočjo $R$ in $R'$ na sledeči način:
+\begin{equation}
+    rang_1(B,i)=R\left[\left\lfloor\frac{i}{kw} \right\rfloor\right]+ R'\left[\left\lfloor\frac{i}{w} \right\rfloor\right]+\texttt{popcount}\left(B\left[\left\lfloor\frac{i}{w} \right\rfloor,\left\lfloor\frac{i}{w} \right\rfloor+(i \mod w)\right]\right).
+\end{equation}
+
+V praksi se izkaže, da se najboljše rezultate pridobi, ko je $k=8$ za računalniško besedo dolžine $w=64$ (uporabljena v vseh modernih procesorjih). To omogoča shranjevanje vedra v $R$ in vseh pripadajočih veder v $R'$ v dveh besedah, ker prva beseda shrani vrednost vedra v $R$ druga pa vse vrednosti pripadajočih veder v $R'$. Ta implementacija potrebuje $1,25*n$ bitov za vse tri podatkovne strukture skupaj \cite{Navarro2016}.
 
 \paragraph{Izbira:}
 Podobno kot operacija rang, tudi operacija izbira potrebuje pomožno podatkovno strukturo za izvedbo v konstantnem času. 
