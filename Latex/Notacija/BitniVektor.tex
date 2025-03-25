@@ -10,18 +10,11 @@ V nadajevanju tega podpogavja bo predstavljeno, kako učinkovito shraniti bitno 
 \paragraph{Model računaja in dostop:}
 Preden se lahko predstavi način shranjevanja bitnega polja, je potrebno predstaviti uporabljen model računanja. Splošen model računanja bo uporabljen, saj se različne arhitekture mikro procesorjev razlikujejo med seboj in bi bilo potreno narediti analizo za vsako arhitekuro posebaj. Zato bo izbran model računanja Računalnik z naključnim dostopom (angl. \textit{random-access machine} oziroma RAM). Bolj natančno bo uporabljen zlogovni RAM  (angl. \textit{word RAM}).
 
-OSnovna različica RAM modela podpira vse aritmetične operacije nad celimi števili in logične operacijami nad biti v konstantnem času. Poleg tega RAM omogoča konstanten čas dostopa do spomina ter linearni čas za dodelitev zaporednega spomina. Vse te operacije so storjene v enakem času tudi v zlogovnem RAM modelu. Edina razlika med modeloma je, da RAM prededpostavlja neskončni spomin zlogovni RAM pa omeji velikost spomina na $U$ nalovov in posledično je velikost enega zloga $w=\log_2 U$\footnote{v nadaljevanju bo $\log_2 n$ zapisan kot $\log n$ } bitov, kar je velikost enega naslova \cite{Fredman1990,Morin2013}.
+OSnovna različica RAM modela podpira vse aritmetične operacije nad celimi števili in logične operacijami nad biti v konstantnem času. Poleg tega RAM omogoča konstanten čas dostopa do spomina ter linearni čas za dodelitev zaporednega spomina. Vse te operacije so storjene v enakem času tudi v zlogovnem RAM modelu. Edina razlika med modeloma je, da RAM prededpostavlja neskončni spomin zlogovni RAM pa omeji velikost spomina na $U$ nalovov in posledično je velikost enega zloga $w=\log_2 U$\footnote{v nadaljevanju bo $\log_2 n$ zapisan kot $\log n$} bitov, kar je velikost enega naslova \cite{Fredman1990,Morin2013}.
 
+Pri tem se lahko definira tudi \enquote{cela števila} (angl. \textit{Integer}). Cela števila so definirana kot podmnožica celih števil, ki so lahko predstavljena v dvojiškem zapisu z $w$ biti \cite{Navarro2016}.
 
-Uporaba Računalnika z naključnim dostopom (angl. \textit{random-access machine} oziroma RAM) (točen model word RAM) modela
-    
-    -O(1) časa za izvesti vse osnovne aritmetične operacije
-
-    - omejen prostor na U naslovov, ki hranijo $w=\log_2{U}$ bitov prostora (velikost enega nalova)  U je strogo večji od $n$ (velikosti podatkovne strukture), saj sicer jo nemoremo shraniti
-
-name RAM modela je teoretično simulirati fizične računalnike.
-
-\cite{Fredman1990,Morin2013}
+Intuitivni način shranjevanja bitnega polja $B$ dolžine $b$ v spominu bi bilo, da bi se vsaka celica polja shranila na sominu v lastnem naslovu. Na ta način bo operacija $B[i]=dostop(B,i)$ potrebovala konstanten čas za se izvesti. Pritem pa bo bitno polje potrebovalo $O(b)$ bitov oziroma $wb$ bitov. Pri tem imam vsaka celica bitenga polja $w-1$ odvečni bit. 
 
 
 Bitno polje je shranjeno kot polje celih števil $W\left[1,\left\lceil\frac{n}{w}\right\rceil\right]$ \cite{Navarro2016}.
