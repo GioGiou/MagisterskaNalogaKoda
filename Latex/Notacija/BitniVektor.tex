@@ -7,50 +7,43 @@ V nadajevanju tega podpogavja bo predstavljeno, kako učinkovito shraniti bitno 
     %
     %je kompaktna podatkovna struktura, ki je osnova za ostale kompaktne podatkovne strukture. Bitna polja so osnova za kompaktno predstavitev topologijo drevesa. Univerzalna množica vseh bitnih polj dolžine $n$ je velikosti $\left |N\right |=2^n$, torej bitno polje ima prostorsko zahtevnost $n+o(n)$ bitov. Pri tem je potrebnih $n$ bitov za shraniti celotno bitno polje ter dodatnih $o(n)$ bitov za implementacijo operacij nad njim. Bitno polje $B$ podpira tri operacije:  ter $dostop(B,i)$ (angl. \textit{access}), ki vrne $i$-ti bit bitnega polja $B$.
 
-\paragraph{Model računaja in dostop:}
-Preden se lahko predstavi način shranjevanja bitnega polja, je potrebno predstaviti uporabljen model računanja. Splošen model računanja bo uporabljen, saj se različne arhitekture mikro procesorjev razlikujejo med seboj in bi bilo potreno narediti analizo za vsako arhitekuro posebaj. Zato bo izbran model računanja Računalnik z naključnim dostopom (angl. \textit{random-access machine} oziroma RAM). Bolj natančno bo uporabljen zlogovni RAM  (angl. \textit{word RAM}).
+\paragraph{Model računaja, shramba in dostop:}
+Preden se lahko predstavi način shranjevanja bitnega polja, je potrebno predstaviti uporabljen model računanja. Splošen model računanja bo uporabljen, saj se različne arhitekture mikro procesorjev razlikujejo med seboj in bi bilo potreno narediti analizo za vsako arhitekuro posebaj. Zato bo izbran model računanja Računalnik z naključnim dostopom (angl. \textit{random-access machine} oziroma RAM). Bolj natančno bo uporabljen besedni RAM  (angl. \textit{word RAM}).
 
-OSnovna različica RAM modela podpira vse aritmetične operacije nad celimi števili in logične operacijami nad biti v konstantnem času. Poleg tega RAM omogoča konstanten čas dostopa do spomina ter linearni čas za dodelitev zaporednega spomina. Vse te operacije so storjene v enakem času tudi v zlogovnem RAM modelu. Edina razlika med modeloma je, da RAM prededpostavlja neskončni spomin zlogovni RAM pa omeji velikost spomina na $U$ nalovov in posledično je velikost enega zloga $w=\log_2 U$\footnote{v nadaljevanju bo $\log_2 n$ zapisan kot $\log n$} bitov, kar je velikost enega naslova \cite{Fredman1990,Morin2013}.
+Osnovna različica RAM modela podpira vse aritmetične operacije nad celimi števili in logične operacijami nad biti v konstantnem času. Poleg tega RAM omogoča konstanten čas dostopa do spomina ter linearni čas za dodelitev zaporednega spomina. Vse te operacije so storjene v enakem času tudi v besednem RAM modelu. Edina razlika med modeloma je, da RAM prededpostavlja neskončni spomin za razliko od besednega RAM, ki pa omeji velikost spomina na $U$ nalovov in posledično je velikost ene besed $w=\log_2 U$\footnote{v nadaljevanju bo $\log_2 n$ zapisan kot $\log n$} bitov, kar je velikost enega naslova \cite{Fredman1990,Morin2013}.
 
-Pri tem se lahko definira tudi \enquote{cela števila} (angl. \textit{Integer}). Cela števila so definirana kot podmnožica celih števil, ki so lahko predstavljena v dvojiškem zapisu z $w$ biti \cite{Navarro2016}.
+Pri tem se lahko definira tudi \enquote{cela števila} (angl. \textit{Integer}). \enquote{Cela števila} so definirana kot podmnožica celih števil, ki so lahko predstavljena v dvojiškem zapisu z $w$ biti \cite{Navarro2016}.
 
 Intuitivni način shranjevanja bitnega polja $B$ dolžine $b$ v spominu bi bilo, da bi se vsaka celica polja shranila na sominu v lastnem naslovu. Na ta način bo operacija $B[i]=dostop(B,i)$ potrebovala konstanten čas za se izvesti. Pritem pa bo bitno polje potrebovalo $O(b)$ bitov oziroma $wb$ bitov. Pri tem imam vsaka celica bitenga polja $w-1$ odvečni bit. 
 
-
-Bitno polje je shranjeno kot polje celih števil $W\left[1,\left\lceil\frac{n}{w}\right\rceil\right]$ \cite{Navarro2016}.
-
+Pri tem se pojavi vprašanje, ali je mogoče uporabiti $w-1$ odvečnih bitov. Na ta način bit bitno polje $B$ potrebovalo zgolj $b+o(b)$ bitov (dodatnih $o(b)$ bitov je potrebnih, če $b$ ni večkratnik velikosti \enquote{celega števila} $w$). Torej lahko bitno polje $B$ predtstavimo kot polje \enquote{celih števil} $W\left[1,\left\lceil\frac{b}{w}\right\rceil\right]$. Nasledni problem, ki ga je potrebno rešiti, je, kako učinkovito dostopati do $i$-tega bita v bitnem polju. V konstantnem času lahko dostopamo do celice v polju $W$, v kateri je shranjene $i$-ti bit. Le ta je shranjen v $W\left[\left\lceil\frac{i}{w}\right\rceil\right]$ celici. Naivna metoda dostopa bi bila z bitnim premikom (angl. \textit{bit shift}) v desno storjenih $(w-r)$-krat, pri čemer je $r=((i-1)\mod{w}) +1$. Za storiti to je potrebno $O(w)$ časa. Ker en premik v desno je enakovreno deljenju števila z dva, se lahko nadomesti premike v desno z deljenjem števila z številom $2^{w-r}$.
 Torej dostop do $i$-tega bita v bitem polju $B$, ki je označen kot $\textit{dostop}(B,i)=B[i]$, je izračunan kot:
 $$
-    B[i]=\left\lfloor W\left[\left\lceil\frac{i}{w}\right\rceil\right]/2^{w-r}\right\rfloor \mod{2},
+    B[i]=\left\lfloor W\left[\left\lceil\frac{i}{w}\right\rceil\right]/2^{w-r}\right\rfloor \mod{2}.
 $$
-pri čemer $r$ je točna pozicija $i$-ja znotraj celega števila oziroma $r=((i-1)\mod{w}) +1$. Torej $2^{w-r}$ predstavlaj $w-r$ bitnih premikov (angl. \textit{bit shift})  v desno.
+Ker besedni RAM model predpostavi, da so vse aritmetične operacije nad celimi števili opravljene v konstantnem času, potem takem je čas potreben za dostopati do $i$-tega elementa tudi konstanten \cite{Navarro2016}.
 
-RAM
-
-\paragraph{Rang:}
-
-\begin{defi}
-    Operacija $rang_v(B,i)$ vrne število pojav vrednosti $v\in\{1,0\}$ v bitnem vektorju $B$ do položaja $i$.
-\end{defi}
- 
-V nadaljevanju bo operacija $rang(B,i)$ predstavljala $rang_1(B,i)$. To je možno, saj velja sledeča relacija med $rang_0(B,i)$ in $rang_1(B,i)$:
+\paragraph{Rang:} 
+Prva operacija, ki se jo lahko definira nad bitnim poljem $B$ velikosti $b$, je $rang_v(B,i)$. Operacija vrne število pojavov vrednosti $v\in\{1,0\}$ v $B$ do položaja $i$. V nadaljevanju bo operacija $rang(B,i)$ predstavljala $rang_1(B,i)$. To je možno, saj velja sledeča relacija med $rang_0(B,i)$ in $rang_1(B,i)$:
 \begin{equation}\label{eq:rang}
     rang_1(B,i)=i-rang_0(B,i).
 \end{equation}
-Operacija rang ima časovno zahtevnost $O(1)$, pri tem pa potrebuje dodatno podatkovno strukturo, ki zasede $o(n)$ bitov. V nasprotnem primeru bitno polje ni več kompaktna podatkovna struktura. Relacija iz enakosti \ref{eq:rang} omogoča izgradnjo podatkovne strukture zgolj za operacijo $rang_1$.
 
-Pomožna struktura, ki omogoča konstantni čas operacije $rang(B,i)$, shranjuje range različnih elementov bitnega polja $B$ v polju $R$. Naivni pristop shrani v polju $R$ vrednosti vseh elementov $B$-ja. Problem tega pristopa je prevelika prostorska zahtevnost, saj $R$ ni več velikosti $o(n)$ bitov. Rešitev tega problema je vzorčenje rangov, tako da v polju $R$ so shranjeni zgolj rangi nekaterih elementov $B$-ja. Polje $R$ razdeli $B$ na $s=kw$ delov, pri čemer je $k$ poljubno število ter je $w$ dolžina računalniške besede. Element $R[i]=rang_1(B,is)$, pri čemer $0\le i \le \left\lfloor\frac{n}{s} \right\rfloor$. Na ta način je operacija rang implementiran kot 
+Operacijo se lahko naivno implenetirana s štetjem bitov z vrednostjo $1$ v bitenm polju, za kar je potrebno $O(b)$ časa. Operacijo rang se lahko pospeši na konstantni čas pri tem pa se potrebuje dodatno podatkovno strukturo, ki zasede $o(b)$ bitov. Pri tem ni potrebno zgradith dveh dodatnih podatkovnih strukur, saj relacija iz enakosti \ref{eq:rang} omogoča izgradnjo podatkovne strukture zgolj za operacijo $rang_1$.
+
+Pomožna struktura, ki omogoča konstantni čas operacije $rang(B,i)$, shranjuje range različnih elementov bitnega polja $B$ v polju $R$. Naivni pristop bi shraniv v polju $R$ range vseh elementov $B$-ja. Problem tega pristopa je prevelika prostorska zahtevnost, saj je zaželjeno, da $R$ je čim manjšin in pomožnosti ni večji od $o(b)$ bitov. Predlagana rešitev potrebuje $b\log{r_1}=O(bw)$ dodatnih bitov, pričemer $r_1$ predstavlja število bitov z vrednostjo 1.
+
+Rešitev tega problema je vzorčenje rangov, tako da v polju $R$ so shranjeni zgolj rangi nekaterih elementov $B$-ja. Polje $R$ razdeli $B$ na $s=kw$ delov, pri čemer je $k$ poljubno število. Element $R[i]=rang_1(B,is)$, pri čemer $0\le i \le \left\lfloor\frac{n}{s} \right\rfloor$. Na ta način je operacija rang implementiran kot 
 \begin{equation}
     rang_1(B,i)=R\left[\left\lfloor\frac{i}{s} \right\rfloor\right] + \texttt{popcount}\left(B\left[\left\lfloor\frac{i}{s} \right\rfloor s,i\right]\right),
 \end{equation}
-kjer je \texttt{popcount} funkcija, ki prešteje število bitov z vrednostjo $1$. Zaradi uporabnosti te funkcije je le ta implementirana v različnih modernih arhitekturah procesorjev. Polje $R$ ima velikost $\lfloor\frac{n}{k}\rfloor$ bitov, saj shranjuje $\lfloor\frac{n}{s}\rfloor$ števil dolžine $w$. Pri tem je potrebno funkcijo \texttt{popcount} pognati največ $k$ krat, kar naredi čas operacije rang $O(k)$ \cite{Navarro2016}.
+kjer je \texttt{popcount} funkcija, ki prešteje število bitov z vrednostjo $1$, na danem intervalu. Zaradi uporabnosti te funkcije je le ta že implementirana v različnih modernih arhitekturah procesorjev. Polje $R$ ima velikost $\lfloor\frac{b}{k}\rfloor$ bitov, saj shranjuje $\lfloor\frac{b}{s}\rfloor$ števil dolžine $w$. Pri tem je potrebno funkcijo \texttt{popcount} pognati največ $k$ krat, kar naredi čas operacije rang $O(k)$ \cite{Navarro2016}.
 
-Podobno kot polje $R$ se definira polje $R'$. Polje $R'$ hrani na $i$-tem mestu število bitov z vrednostjo $1$ po vedru $R[\left\lfloor\frac{i}{k} \right\rfloor]$ ali $R'[i]=rang_1(B,iw)-R[\left\lfloor\frac{i}{k} \right\rfloor]$. Na ta način se zniža število klicev funkcije \texttt{popcount} na 1 klic. Ker v $R'$ so sharnjena zgolj števila med 0 in $s-w$ (vsako vedro v $R$ ima $w$ elementov v $R'$), se lahko $R'$ shrani v $\lfloor\frac{n}{w}\rfloor\log{s}$ bitov, kar je $o(n)$ bitov. Operacija rang je zato implementirana s pomočjo $R$ in $R'$ na sledeči način:
+Podobno kot polje $R$ se definira polje $R'$. Polje $R'$ hrani na $i$-tem mestu število bitov z vrednostjo $1$ po vedru $R[\left\lfloor\frac{i}{k} \right\rfloor]$ ali $R'[i]=rang_1(B,iw)-R[\left\lfloor\frac{i}{k} \right\rfloor]$. Na ta način se zniža število klicev funkcije \texttt{popcount} na 1 klic. Ker v $R'$ so sharnjena zgolj števila med 0 in $s-w$ (vsako vedro v $R$ ima $w$ elementov v $R'$), se lahko $R'$ shrani v $\lfloor\frac{b}{w}\rfloor\log{s}$ bitov, kar je $o(b)$ bitov. Tako je operacija rang implementirana s pomočjo polji $R$ in $R'$. In sicer je implementirana na sledeči način:
 \begin{equation}
     rang_1(B,i)=R\left[\left\lfloor\frac{i}{kw} \right\rfloor\right]+ R'\left[\left\lfloor\frac{i}{w} \right\rfloor\right]+\texttt{popcount}\left(B\left[\left\lfloor\frac{i}{w} \right\rfloor,\left\lfloor\frac{i}{w} \right\rfloor+(i \mod w)\right]\right).
 \end{equation}
-
-V praksi se izkaže, da se najboljše rezultate pridobi, ko je $k=8$ za računalniško besedo dolžine $w=64$ (uporabljena v vseh modernih procesorjih). To omogoča shranjevanje vedra v $R$ in vseh pripadajočih veder v $R'$ v dveh besedah, ker prva beseda shrani vrednost vedra v $R$ druga pa vse vrednosti pripadajočih veder v $R'$. Ta implementacija potrebuje $1,25*n$ bitov za vse tri podatkovne strukture skupaj \cite{Navarro2016}.
+Ta implementacija potrebuje konstanten čas za izračunati $rang(B,i)$. Dostop do polji $R$ in $R'$ je storjen v konstantnem času, kot tudi izračun funkcije \texttt{popcount}, ki je klicana samo enkrat\cite{Navarro2016}.
 
 \paragraph{Izbira:}
 Podobno kot operacija rang, tudi operacija izbira potrebuje pomožno podatkovno strukturo za izvedbo v konstantnem času. 
