@@ -33,7 +33,7 @@ Operacijo se lahko naivno implenetirana s štetjem bitov z vrednostjo $1$ v bite
 
 Pomožna struktura, ki omogoča konstantni čas operacije $rang(B,i)$, shranjuje range različnih elementov bitnega polja $B$ v polju $R$. Naivni pristop bi shraniv v polju $R$ range vseh elementov $B$-ja. Problem tega pristopa je prevelika prostorska zahtevnost, saj je zaželjeno, da $R$ je čim manjšin in pomožnosti ni večji od $o(b)$ bitov. Predlagana rešitev potrebuje $b\log{r_1}=O(bw)$ dodatnih bitov, pričemer $r_1$ predstavlja število bitov z vrednostjo 1.
 
-Rešitev tega problema je vzorčenje rangov, tako da v polju $R$ so shranjeni zgolj rangi nekaterih elementov $B$-ja. Polje $R$ razdeli $B$ na $s=kw$ delov, pri čemer je $k$ poljubno število. Element $R[i]=rang_1(B,is)$, pri čemer $0\le i \le \left\lfloor\frac{n}{s} \right\rfloor$. Na ta način je operacija rang implementiran kot 
+Rešitev tega problema je vzorčenje rangov, tako da so v polju $R$ shranjeni zgolj rangi nekaterih elementov $B$-ja. Polje $R$ razdeli $B$ na $s=kw$ delov, pri čemer je $k$ poljubno število. Element $R[i]=rang_1(B,is)$, pri čemer $0\le i \le \left\lfloor\frac{n}{s} \right\rfloor$. Na ta način je operacija rang implementiran kot 
 \begin{equation}
     rang_1(B,i)=R\left[\left\lfloor\frac{i}{s} \right\rfloor\right] + \texttt{popcount}\left(B\left[\left\lfloor\frac{i}{s} \right\rfloor s,i\right]\right),
 \end{equation}
