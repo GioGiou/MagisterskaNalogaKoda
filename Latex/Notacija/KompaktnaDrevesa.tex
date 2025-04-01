@@ -1,21 +1,23 @@
-Z uporabo bitnih polj je mogoče predstaviti mnogo podatkovnih struktur. Primer uporabe bitnih polj je kompaktna predstavitev topologije dreves. Običajno je podatkovna struktura drevo sestavljeno iz vozlišč ter kazalcev (angl. \textit{pointers}). Vsako vozlišče shrani lastno vrednost ter kazalce na svoje otroke. Drevo z $n$-timi vozlišči potrebuje $O(n\log{n})$ bitov za shraniti topologijo drevesa. Kompaktna predstavitev topologije dreves zniža prostorsko zahtevnost na $2n+o(n)$ bitov. Za vsako vozlišče je potrebno predstaviti kazalec na vozlišče ter predstaviti, da je vozlišče bilo že obiskano, torej je potrebnih $2n$ bitov.
+Z uporabo bitnih polj je mogoče predstaviti mnogo podatkovnih struktur. Ker pa se bo magistrska naloga osredotočila na priponska drevesa, bodo zato predstavljena uporaba bitnih polj za kompaktno predstavitev topologije dreves. Običajno je podatkovna struktura drevo sestavljeno iz vozlišč ter kazalcev (angl. \textit{pointers}). V vsakem vozlišču je shranjena vrednost, ki jo predstapredstavlja vozlišče, ter kazalci na svoje otroke. Drevo z $n$-timi vozlišči potrebuje $O(n\log{n})$ bitov za shraniti topologijo drevesa (v praksi potrebuje $O(nw)$ bitov). Kompaktna predstavitev topologije dreves zniža prostorsko zahtevnost na $2n+o(n)$ bitov. Za vsako vozlišče je potrebno predstaviti kazalec na vozlišče ter predstaviti, da je vozlišče bilo že obiskano, torej je potrebnih $2n$ bitov.
 
 Pri tem obstajajo tri vrste kompaktne predstavitve dreves: Uravnoteženi oklepaji (angl. \textit{Balanced Parentheses} oziroma BP), Zaporedje eniških zapisov stopenj vozlišč po plasteh (angl. \textit{Level Order Unary Degree Sequence} oziroma LOUDS) in Zaporedje eniških zapisov stopenj vozlišč v globino (angl. \textit{Depth-First Unary Degree Sequence} oziroma DFUDS).
 Naslednja definicija prikaže operacije, ki so potrebne za pravilno delovanje dreves.
 
+\newpage
+
 \begin{defi}\label{def:drevo}
     Podatkovne struktura drevo mora podpirati naslednje operacije:
     \begin{enumerate}
-        \item $koren()$: vrne koren priponskega drevesa,
-        \item $jeList(v)$: vrne »Da«, če je vozlišče list, sicer vrne »Ne«,
-        \item $stOtrok(v)$: vrne število otrok vozlišča $v$,
-        \item $otrok(v,i)$: vrne vozlišče $w$, ki je $i$-ti otrok vozlišča $v$,
-        \item $prviOtrok(v)$: vrne vozlišče $w$, ki je prvi otrok vozlišča $v$,
-        \item $nbrat(v)$: vrne vozlišče $w$, ki je naslednji brat od vozlišča $v$,
-        \item $pbrat(v)$: vrne vozlišče $w$, ki je predhodni brat od vozlišča $v$,
-        \item $star$\textit{š}$(v)$: vrne vozlišče $w$, ki je starš od vozlišča $v$,
-        \item $globina(v)$ vrne število vozlišč na poti iz korena do vozlišča $v$,
-        \item $lca(v,w)$: vrne najnižjega skupnega prednika od $v$ in $w$.
+        \item \textit{koren}$()$ vrne koren priponskega drevesa,
+        \item \textit{jeList}$(v)$ vrne \textit{true}, če je vozlišče list, sicer pa vrne \textit{false},
+        \item \textit{stOtrok}$(v)$ vrne število otrok vozlišča $v$,
+        \item \textit{otrok}$(v,i)$ vrne vozlišče $w$, ki je $i$-ti otrok vozlišča $v$,
+        \item \textit{prviOtrok}$(v)$ vrne vozlišče $w$, ki je prvi otrok vozlišča $v$,
+        \item \textit{nbrat}$(v)$ vrne vozlišče $w$, ki je desni (naslednji) brat od vozlišča $v$,
+        \item \textit{pbrat}$(v)$ vrne vozlišče $w$, ki je levi (predhodni) brat od vozlišča $v$,
+        \item \textit{starš}$(v)$ vrne vozlišče $w$, ki je starš od vozlišča $v$,
+        \item \textit{globina}$(v)$ vrne število vozlišč na poti iz korena do vozlišča $v$,
+        \item \textit{lca}$(v,w)$ vrne najnižjega skupnega prednika od $v$ in $w$.
     \end{enumerate}
 \end{defi}
 
@@ -23,7 +25,7 @@ S pomočjo teh operacij se je mogoče sprehoditi po drevesu in je možno impleme
 
 \subsection{Zaporedje eniških zapisov stopenj vozlišč po plasteh}\label{sec:LOUDS}
 
-Prvi način zapisa topologije drevesa je zaporedje eniških zapisov stopenj vozlišč po plasteh (LOUDS). Drevo se predstavi kot bitno polje $B$ dolžine $2n+1$, pri čemer je $n$ število vozlišč v drevesu. Zapis drevesa se začne z nizom $10$, temu pa sledi zapis vsakega vozlišča. Vsako vozlišče $v$ je predstavljeno z nizom $1^o0$, pri je $o$ predstavlja število otrok posameznega vozlišča, torej se ena zapiše $o$-krat in nato eno ničlo, ki predstavlja konec vozlišča. Kot je razvidno iz imena predstavitve, so vozlišča obiskana po nivojih: vozlišča z isto globino so zaporedno predstavljana \cite{Navarro2016}.
+Prvi način zapisa topologije drevesa je zaporedje eniških zapisov stopenj vozlišč po plasteh (LOUDS). Drevo se predstavi kot bitno polje $B$ dolžine $2n+1$, pri čemer je $n$ število vozlišč v drevesu. Zapis drevesa se začne z nizom $10$, temu pa sledijo stopnje vsakega vozlišča v eniškem zapisu. Kot je razvidno iz imena predstavitve, so vozlišča obiskana po nivojih: vozlišča z isto globino so zaporedno predstavljana \cite{Navarro2016}.
 
 Primer takega zapisa je predstavljen na Sliki \ref{fig:LOUDS}. Vozlišča so v zaporedju ločena s sivimi črtami. Na sliki je koren drevesa predstavljen z $B[3,7]=11110$. Niz $B[3,7]$ vsebuje 4 bite z vrednostjo $1$, ker ima koren $4$ otroke.
 
@@ -35,9 +37,6 @@ Primer takega zapisa je predstavljen na Sliki \ref{fig:LOUDS}. Vozlišča so v z
     \end{center}
 \end{figure}
 
-
-Med izgradnjo kompaktne predstavitve se vsa vozlišča indeksira s številom $i$  med 1 in $n$. Število $i$ predstavlja zaporedno število obiskanega vozlišča, torej koren ima vrednost $1$, prvi otrok korena ima vrednost $2$ in tako dalje. Indeks se uporabi za shranjevanje vrednosti, ki so po navadi shranjene znotraj vozlišča. V Tabeli \ref{tab:LOUDSop} so predstavljene implementacije operacij s pomočjo predstavitve drevesa LOUDS. Vrednost $x$ predstavlja indeks vozlišča in se izračuna kot $x=izbira_0(B,v)+1$ \cite{Navarro2016}.
-
 \begin{table}[htb]
     \centering
     \caption{Implementacija operacij drevesa v LOUDS.}
@@ -45,8 +44,8 @@ Med izgradnjo kompaktne predstavitve se vsa vozlišča indeksira s številom $i$
 \textbf{Operacija}& \textbf{Implementacija v LOUDS} \\\hline
          $koren()$& 3\\
          $jeList(v)$& $B[v]==0$\\
-         $stOtrok(v)$& $naslednik_0(B,x)-x$\\
-         $otrok(v,i)$& $izbira_0(B, rang_1(B, x - 1 + i))+1$\\
+         $stOtrok(v)$& $naslednik_0(B,v)-v$\\
+         $otrok(v,i)$& $izbira_0(B, rang_1(B, v - 1 + i))+1$\\
          $prviOtrok(v)$& $otrok(v,1)$\\
          $nbrat(v)$& $naslednik_0(B,v)+1$ \\
          $pbrat(v)$& $predhodnik_0(B,v-2)+1$ \\
@@ -58,12 +57,10 @@ Med izgradnjo kompaktne predstavitve se vsa vozlišča indeksira s številom $i$
     \label{tab:LOUDSop}
 \end{table}
 
+Med izgradnjo kompaktne predstavitve se vsa vozlišča indeksira s številom $i$ med 1 in $n$. Število $i$ predstavlja zaporedno število obiskanega vozlišča, torej koren ima vrednost $1$, prvi otrok korena ima vrednost $2$ in tako dalje. Indeks se uporabi za shranjevanje vrednosti, ki so po navadi shranjene znotraj vozlišča. V Tabeli \ref{tab:LOUDSop} so predstavljene implementacije operacij s pomočjo predstavitve drevesa LOUDS. Vrednost $x$ predstavlja indeks vozlišča in se izračuna kot $x=izbira_0(B,v)+1$ \cite{Navarro2016}.
 
 
-V Tabeli \ref{tab:LOUDSop} sta uporabljeni dve novi operaciji nad bitnimi polji: $naslednik_v(B,y)$ in $predhodnik_v(B,y)$, kjer je $v\in \{1,0\}$. 
-Torej operaciji predhodnik in naslednik vrneta začetni položaj predhodnega oziroma naslednjega vozlišča v bitnem polju $B$. Primer uporabe je operacija $stOtrok(v)$, ki izračuna število otrok, tako da odšteje položaj vozlišča $v$ v $B$ od položaja naslednjega bita z vrednostjo 0, ki predstavlja vozlišče $v$. Vse operacije razen operacije $globina$ in $lca$ so izvršene v konstantnem času, z uporabo dodatne podatkovne strukture za rang in izbiro. Pri tem je treba izgraditi podatkovno strukturo zgolj za $izbira_0$, saj operacija $izbira_1$ ni potrebna za pravilno delovanje operacij drevesa \cite{Navarro2016}.
-
-Operacija $globina$ ni podprta, saj LOUDS predstavitev ne omogoča učinkovitega iskanja. Pri tem pa velja, da $globina(u)\ge globina(v)$, če je $u>v$. S pomočjo tega dejstva se lahko implementira operacijo $lca$, kot je prikazano v Algoritmu \ref{alg:LOUDSlca} \cite{Navarro2016}.
+Vse operacije razen operacije $globina$ in $lca$ so izvršene v konstantnem času, z uporabo dodatne podatkovne strukture za rang in izbiro. Pri tem je treba izgraditi podatkovno strukturo zgolj za $izbira_0$, saj operacija $izbira_1$ ni potrebna za pravilno delovanje operacij drevesa. Operacija $globina$ ni podprta, saj LOUDS predstavitev ne omogoča učinkovitega iskanja. Operacija globina je lahko implentirana s štetjem uporabe operacije \textit{starš}$(v)$, dokler vozlišče $v$ ni \textit{koren} drevesa. Pri tem pa velja, da $globina(u)\ge globina(v)$, ko je $u>v$. S pomočjo tega dejstva se lahko implementira operacijo $lca$, kot je prikazano v Algoritmu \ref{alg:LOUDSlca} \cite{Navarro2016}.
  
 \begin{algorithm}[hbt]
 
@@ -81,9 +78,11 @@ Operacija $globina$ ni podprta, saj LOUDS predstavitev ne omogoča učinkovitega
 }
 \end{algorithm}
 
+\newpage
+
 \subsection{Zaporedje eniških zapisov stopenj vozlišč v globino}\label{sec:DFUDS}
 
-Zadnja predstavitev topologije drevesa je zaporedje eniških zapisov stopenj vozlišč v globino (DFUDS). Predstavitev omogoča preprostejše implementacije operacij ter posledično manjše dodatne podatkovne strukture, za razliko od zapisa z zaporedjem uravnoteženih oklepajev. Pri tem pa omogoča hitrejše implementacije nekaterih operacij v primerjavi, z uporabo zaporedja eniških zapisov stopenj vozlišč po plasteh. Primer zapisa topologije drevesa z DFUDS je prikazan na Sliki \ref{fig:DFUDS}. Vozlišča so v zaporedju ločena s sivimi črtami.
+Naslednja predstavitev topologije drevesa je zaporedje eniških zapisov stopenj vozlišč v globino (DFUDS). Predstavitev omogoča preprostejše implementacije operacij ter posledično manjše dodatne podatkovne strukture. Vseeno pa omogoča hitrejše implementacije nekaterih operacij v primerjavi, z uporabo predstavitve LOUDS. Primer zapisa topologije drevesa z DFUDS je prikazan na Sliki \ref{fig:DFUDS}. Vozlišča so v zaporedju ločena s sivimi črtami.
 
 \begin{figure}[htb]
     \begin{center}
@@ -93,7 +92,7 @@ Zadnja predstavitev topologije drevesa je zaporedje eniških zapisov stopenj voz
     \end{center}
 \end{figure}
 
-Drevo je predstavljeno z bitnim poljem $B[1,2n+2]$. Zapis temelji na uporabi zaporedja uravnoteženih oklepajev in zapisu stopenj vozlišč, zato je potrebno dodati na začetek bitnega polja $B[1,3]=110$. Zatem pa so zapisane stopnje vozlišč, kot zaporedje $1^o0$ pri čemer $o$ je število otrok vozlišča. Zapis je zgrajen z uporab pregleda v globino. Vsa vozlišča imajo indeks, ki je zaporedno število obiskanega vozlišča.
+Drevo je predstavljeno z bitnim poljem $B[1,2n+2]$. Zapis temelji na uporabi zapisa stopenj vozlišč, zato je potrebno dodati na začetek bitnega polja $B[1,3]=110$. Zatem pa so zapisane stopnje vozlišč z eniškim zapisom. Zapis je zgrajen z uporab pregleda v globino, kot to nazarja ime predstavitve. Vsa vozlišča imajo indeks, ki je zaporedno število obiskanega vozlišča.
 
 \begin{table}[htb]
     \centering
@@ -115,22 +114,15 @@ Drevo je predstavljeno z bitnim poljem $B[1,2n+2]$. Zapis temelji na uporabi zap
     \label{tab:DFUDSop}
 \end{table}
 
-
 V Tabeli \ref{tab:DFUDSop} so predstavljene implementacije operaciji nad drevesom implementirane z DFUDS. Indeks  $x=izbira_0(B,v)+1$ je uporabljen za shranjevanje dodatnih informacij o vozlišču, saj je vozlišče $v$ predstavljeno s položajem vozlišča v bitnem polju $B$. V tabeli je vidno, da operacija $globina(v)$ ni podprta, saj ni mogoče implementirati te operacije brez sprehoda od vozlišča $v$ do korena ter pri tem šteti potrebne korake. Operacija $lca(v,u)$ je lahko implementirana brez sprehoda po drevesu za razliko od implementacije z LOUDS.
 
-Pri implementaciji operacije $nbrat(v)$ pa je prisotna operacija $iskanjeNaprej(B,i,d)$. Operacija omogoča iskanje prvega pojava viška, ki je za $d$ večji od viška na $i$-tem mestu v bitnem polju $B$. Operacija je definirana kot
-$$
-    iskanjeNaprej(B,i,d)=\min\{j>i; vi\textit{š}ek(B,j)=vi\textit{š}ek(B,i)+d\}\cup\{n+1\}.
-$$
-Operacija $iskanjeNaprej$ je lahko implementirana s pomočjo uporabe $rmM$-drevesa in potrebuje $O(\log{n})$ časa, da se izvrši. Implementirana je s pomočjo sprehoda po $rmM$-drevesu in uporabo viška na intervalu pokritega z vozliščem $v$ ($rmM[v].e$, pri čemer je polje $rmM$ predstavitev $rmM$-drevesa) in najmanjšega relativnega viška na intervalu pokritim z vozliščem $v$ ($rmM[v].m$, pri čemer polje $rmM$ je predstavitev $rmM$-drevesa).
+Vse operacije, ki temeljijo na operaciji $rang$ in $izbira$, se izvršijo v $O(1)$ času. Operacije, ki temeljijo na $rmM$-drevesu, pa potrebujejo $O(\log{n})$ časa. Pri tem so potrebne dodatne podatkovne strukture za $izbira_1$, $izbira_0$, $rang$ ter $rmM$-drevo, pri čemer vsaka potrebuje $o(n)$ dodatnih bitov. Prostorsko zahtevnost $rmM$-drevesa je mogoče zmanjšati, tako da se shranita zgolj polji $e$ in $m$. Tako se razpolovi prostorsko zahtevnost $rmM$-drevesa, ki pa še vedno zahteva $o(n)$ dodatnih bitov, brez škode za implementacijo operacij drevesa.
 
-Vse operacije, ki temeljijo na operaciji $rang$ in $izbira$, se izvršijo v $O(1)$ času. Operacije, ki pa temeljijo na $rmM$-drevesu, pa potrebujejo $O(\log{n})$ časa. Pri tem so potrebne dodatne podatkovne strukture za $izbira_1$, $izbira_0$, $rang$ ter $rmM$-drevo, pri čemer vsaka potrebuje $o(n)$ dodatnih bitov. Pri tem je mogoče zmanjšati prostorsko zahtevnost $rmM$-drevesa, tako da se shranita zgolj polji $e$ in $m$. Tako se razpolovi prostorsko zahtevnost drevesa, ki pa še vedno zahteva $o(n)$ dodatnih bitov, brez škode za implementacijo operacij drevesa. Tega ni mogoče storiti v BP, saj $rMq(B,i,j)$ se uporablja pri implementaciji dodatnih operaciji, primer take operacije je $najglobljeVozli$\textit{šč}$e(v)$, ki vrne najgloblje vozlišče v poddrevesu s korenom $v$.
-
-Podobno kot pri predstavitvi drevesa z uporabo zaporedja uravnoteženih oklepajev je mogoče implementirati dodatne operacije nad listi. Za razliko od uravnoteženih oklepajev, kjer ima list obliko $10$, ima list obliko $00$ v zaporedju eniških stopenj v globino. Prva $0$ predstavlja konec predhodnega vozlišča. Tako je možno implementirati $rang_{00}$ in $izbira_{00}$, ki omogočata iskanje listov v drevesu. Pri tem sta potrebi popravljeni podatkovni strukturi za $rang$ in $izbiro$, ki pa potrebujeta vsaka $o(n)$ dodatnih bitov ter  še vedno omogočata konstanten čas izvajanja posplošenih operacij $rang_{00}$ in $izbira_{00}$.  
+Za lažjo implementacijo dodatnih operacij nad listi je mogoče ustavriti dve doatni podatkovni struktur za $rang_{00}$ in $izbira_{00}$ v konstantnem času, ki omogočata iskanje in indeksiranje listov v drevesu. Podatkovni struktur sta implementirani na podoben način kot podatkovani strukturi za $rang_0$ in $izbira_0$, pri tem pa sta $rang_{00}$ in $izbira_{00}$, kot število ponovitev oziroma polozaj $i$-te ponovitve dveh zaporednih bitov z vrednostjo 0.
 
 \subsection{Uravnoteženi oklepaji}\label{sec:oklepaji}
 
-Naslednji način zapisa topologije drevesa je zapis z zaporedjem uravnoteženih oklepajev (BP). Drevo se predstavi, kot bitno polje $B$ dolžine $2n$, pri čemer je $n$ število vozlišč v drevesu. Zaporedje se zgradi s pomočjo pregleda v globino. Ko je vozlišče prvič obiskano se, na konec do sedaj zapisane sekvence, zapiše '('. Uklepaj je v bitnem polju predstavljen s številom $0$. Ko se zapiše celotno poddrevo vozlišča, pa se na konec sekvence zapiše ')'. Zaklepaj pa je v bitnem polju zapiše s številom $1$. Primer priponskega drevesa predstavljenega z uporabo zaporedja uravnoteženih oklepajev je prikazan na Sliki \ref{fig:BP}. Na sliki so vsa notranja vozlišča obarvana z različnimi barvami za lažje prepoznavanje le teh v zaporedju uravnoteženih oklepajev. Ker so listi oštevilčeni, so ta števila tudi zapisana nad vsakim listom v zaporedju uravnoteženih oklepajev \cite{Navarro2016}.
+Zadnji način zapisa topologije drevesa je zapis z zaporedjem uravnoteženih oklepajev (BP). Drevo se predstavi, kot bitno polje $B$ dolžine $2n$, pri čemer je $n$ število vozlišč v drevesu. Zaporedje se zgradi s pomočjo pregleda v globino. Ko je vozlišče prvič obiskano se, na konec do sedaj zapisane sekvence, zapiše '('. Uklepaj je v bitnem polju predstavljen s številom $0$. Ko se zapiše celotno poddrevo vozlišča, pa se na konec sekvence zapiše ')'. Zaklepaj pa je v bitnem polju zapiše s številom $1$. Primer priponskega drevesa predstavljenega z uporabo zaporedja uravnoteženih oklepajev je prikazan na Sliki \ref{fig:BP}. Na sliki so vsa notranja vozlišča obarvana z različnimi barvami za lažje prepoznavanje le teh v zaporedju uravnoteženih oklepajev. Ker so listi oštevilčeni, so ta števila tudi zapisana nad vsakim listom v zaporedju uravnoteženih oklepajev \cite{Navarro2016}.
 
 \begin{figure}[htb]
     \begin{center}
@@ -140,11 +132,7 @@ Naslednji način zapisa topologije drevesa je zapis z zaporedjem uravnoteženih 
     \end{center}
 \end{figure}
 
-Torej je vsako vozlišče je predstavljeno kot par '(' in ')'. Tako je mogoče definirati sledeče operacije nad oklepaji: $odpri$, $zapri$, $vi$\textit{š}$ek$ ter $oklepa$. Operacija $odpri(B,i)$ vrne položaj '(', ki odpre ')' na $i$-tem mestu v $B$. Operacijo $odpri(B,i)$ se lahko definira tudi, tako da vrne prvi $j>i$, pri čemer $vi$\textit{š}$ek(B,j)=vi$\textit{š}$ek(B,i)-1$. Podobno operacija $zapri(B,i)$  vrne položaj ')', ki zapre '(' na $i$-tem mestu v $B$. Z uporabo operacije $vi$\textit{š}$ek$ je operacija $zapri$ definirana, tako da vrne največji $j<i$, pri čemer je $vi$\textit{š}$ek(B,j)=vi$\textit{š}$ek(B,i)+1$. Operacija $oklepa(B,i)$ vrne položaj $j$ od '(' v bitem polju $B$, pri čemer velja, da $j<i<zapri(B,j)$. Z uporabo operacije $vi$\textit{š}$ek$ operacija $oklepa(B,i)$ vrne položaj največjega $j<i$, pri čemer je $vi$\textit{š}$ek(B,j-1)=vi$\textit{š}$ek(B,i)-2$
- \cite{Navarro2016}.
-
-Pravilno delovanje drevesa, ki je predstavljen z uporabo BP, zahteva še operacije o višku nad odseki bitnega polja $B$. Za učinkovit izvajanje teh operacij se izgradi nad bitnim poljem $B$ izgradi še pomožno podatkovno strukturo rmM-drevo.
-
+Torej je vsako vozlišče je predstavljeno kot par '(' in ')'. Tako je mogoče definirati sledeče operacije nad oklepaji: $odpri$, $zapri$ ter $oklepa$. Operacija $odpri(B,i)$ vrne položaj '(', ki odpre ')' na $i$-tem mestu v $B$. Operacijo $odpri(B,i)$ se lahko definira tudi, tako da vrne zadni $j<i$, pri čemer $vi$\textit{š}$ek(B,j)=vi$\textit{š}$ek(B,i)+1$. Podobno operacija $zapri(B,i)$ vrne položaj ')', ki zapre '(' na $i$-tem mestu v $B$. Z uporabo operacije $vi$\textit{š}$ek$ je operacija $zapri$ definirana, tako da vrne prvi $j>i$, pri čemer je $vi$\textit{š}$ek(B,j)=vi$\textit{š}$ek(B,i)-1$. Operacija $oklepa(B,i)$ vrne položaj $j$ od '(' v bitem polju $B$, pri čemer velja, da $j<i<zapri(B,j)$. Z uporabo operacije $vi$\textit{š}$ek$ operacija $oklepa(B,i)$ vrne položaj največjega $j<i$, pri čemer je $vi$\textit{š}$ek(B,j-1)=vi$\textit{š}$ek(B,i)-1$ \cite{Navarro2016}.
 
 Podobno kot pri predstavitvi drevesa LOUDS, tudi predstavitev BP potrebuje dodatno podatkovno strukturo za operaciji $izbira$ in $rang$. Pri tem sta potrebni zgolj podatkovni strukturi za $0$, saj  operaciji $rang_1$ in $izbira_1$ nista potrebni za pravilno delovanje drevesa v tej predstavitvi. Podatkovni strukturi potrebujeta vsaka $o(n)$ dodatnih bitov in operaciji se izvršita v konstantnem času.
 
@@ -169,4 +157,4 @@ Podobno kot pri predstavitvi drevesa LOUDS, tudi predstavitev BP potrebuje dodat
 
 V Tabeli \ref{tab:BPop} so prikazane implementacije operacij, ki so potrebne za pravilno delovanje drevesa. Indeks $x=izbira_0(B,v)$ je uporabljen za pridobiti dodatne informacije o vozlišču, saj vrednost $v$ predstavljata položaja '(' v zaporedju $B$, ne pa indeksa v tabeli z dodatnimi informacijami o vozlišču.
 
-Zapis topologije drevesa s BP omogoča dodatne operacije. Primer operacije je oštevilčenje in iskanja listov drevesa, kar je storjeno s pomočjo posplošitve operacije rang in izbiro na poljubno dolge nize. Ker imajo listi imajo obliko »()« (oziroma $01$, ko so zapisani v bitnem polju $B$), se lahko implementirata operaciji $rang_{01}(B,i)$ in $izbira_{01}(B,i)$. Operaciji potrebujeta konstanten čas, da se izvedeta, saj se lahko izgradi podobno dodatno strukturo, kot za osnovno verzijo ranga in izbire.
+Zapis topologije drevesa s BP omogoča dodatne operacije. Primer operacije je oštevilčenje in iskanja listov drevesa, kar je storjeno s pomočjo posplošitve operacije rang in izbiro na poljubno dolge nize. Ker imajo listi imajo obliko »()« (oziroma $01$, ko so zapisani v bitnem polju $B$), se lahko implementirata operaciji $rang_{01}(B,i)$ in $izbira_{01}(B,i)$. Operaciji potrebujeta konstanten čas, da se izvedeta, saj se lahko izgradi podobno dodatno strukturo, kot za osnovno verzijo ranga in izbire. V BP ni mogoče izbristai polji $M$ in $n$ iz $rmM$-drevesa, saj se uporablja poizvedbo $rMq(B,i,j)$, ki potrebuje polje $M$, pri implementaciji dodatnih operaciji. Primer take operacije je $najglobljeVozli$\textit{šč}$e(v)$, ki vrne najgloblje vozlišče v poddrevesu s korenom $v$ \cite{Navarro2016}.
