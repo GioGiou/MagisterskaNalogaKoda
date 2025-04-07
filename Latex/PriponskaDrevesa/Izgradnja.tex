@@ -275,7 +275,7 @@ Te načine dodajanja se lahko vidi tudi na primeru izgradnje priponskega drevesa
 
 
 Iz načina dodajanja novih znakov v priponsko drevo, ki ga uporablja algoritem, se opazi, da se število vozlišč v drevesu spremeni samo z drugim načinom dodajanja (\ref{enum:dodajanje2}). Vse točke, v katerih se bo v tem koraku zgodila razčlemba, imenujemo aktivne točke (angl. \textit{active point}). Da bo algoritem učinkovit hranimo začetno aktivno točko in končno aktivno točko imenovano tudi končna točka (angl. \textit{end point}), rezčlembe in dodajanja novih vozlišč v drevesu v trenutnem koraku. Na Sliki \ref{fig:Ukkonen} je z rdečo označeno vozlišče, ki se nahaja pred končno točko, ter z zeleno je označeno vozlišče, ki pa se nahaja pred začetno točko. Premik po aktivnih točkah med začetno točko in končno točko poteka po priponskih povezavah. Pri tem pa algoritem v vsakem koraku poti izračuna, ali je že prišel v končno točko. Za to je potrebno hraniti zgolj trenutno aktivno točko ter zastavico, ki hrani vrednost, ali je ta točka tudi končna točka. 
-Aktivna točka postane končna točka takrat, ko se način dodajanja spremeni iz \ref{enum:dodajanje2} v \ref{enum:dodajanje3} ali ko so vse implicitne pripone postale listi drevesa, saj od takrat ni več potreno v trenutnem koraku izgradnje deliti povezave in ustavrjati nova vozlišča.
+Aktivna točka postane končna točka takrat, ko se način dodajanja spremeni iz \ref{enum:dodajanje2} v \ref{enum:dodajanje3} ali ko so vse implicitne pripone postale listi drevesa, saj od takrat ni več potrebno v trenutnem koraku izgradnje deliti povezave in ustavrjati nova vozlišča.
 Pri tem velja tudi, da končna točka v koraku $i-1$ postane začetna aktivna točka v koraku $i$, saj se prva nova razčlemba v koraku $i$ lahko zgodi zgolj v točki, kjer se je končala razčlemba v koraku $i-1$, in to je končna točka koraka $i-1$. 
 
 \begin{figure}[htb]
@@ -387,7 +387,7 @@ Funkcija \texttt{razdeliTestiraj} prejme kot vhod trenutno aktivno točko, ki je
 
 Dokaz je razdeljen na dva dela: v prvem delu bomo dokazali, da se zanka, ki se začne v vrstici \ref{vrstica:zankaKončnatočka}, skozi celotno izvajanje algoritma izvede $O(n)$-krat, drugi del pa se bo osredotočil na časovno zahtevnost funkcije \texttt{kanoničnaOblika}. 
 
-Časovna zahtevnost funkcije \texttt{razdeliTestiraj} je $O(1)$, saj je aktivna točka podana v kanonični obliki, zato ni potrebnih odvečnih sprehodov po drevesu, ki bi povečali časovno zahtevnost. Funkcija prever, ali je trenutna aktivna točka tudi končna točka, za kar potrebuje konstanten čas. Če ni končna točka jo spremeni v notranje vozlišče, za kar je potrebno tudi konstantno časa. Sicer pa ne stori ničesar in vrne, da je aktivna točka tudi končna točka.
+Časovna zahtevnost funkcije \texttt{razdeliTestiraj} je $O(1)$, saj je aktivna točka podana v kanonični obliki, zato ni potrebnih odvečnih sprehodov po drevesu, ki bi povečali časovno zahtevnost. Funkcija preveri, ali je trenutna aktivna točka tudi končna točka, za kar potrebuje konstanten čas. Če ni končna točka, jo spremeni v notranje vozlišče, za kar je potreben konstanten čas. Sicer pa ne stori ničesar in vrne, da je aktivna točka tudi končna točka.
 
 Zanka v $i$-tem koraku izgradnje dodaja nove povezave na poti iz končne točke $kt_{i-1}$ koraka $i-1$ do končne točke $kt_i$ koraka $i$, katera ni še obiskana. Natančno število obiskanih vozlišč na poti je $D(kt_{i-1})-D(kt_i)+2$, iz česar sledi, da se s pomočjo seštevalne amortizacije v $n$-tih korakih zanka izvede
 
