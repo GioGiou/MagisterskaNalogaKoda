@@ -1,18 +1,37 @@
-priponsko polje alternativni index besedila
-
-Veliost n celih šetvil v ram modelu
-
-Enakovredno listom priponskega drevesa
-
-Linearna konstrukcija preko priponskega drevesa oziroma v $O(n^2\log{n})$ časa z naivnim primerjanjem in leksikogfaskim urejanjem,  $O(n\log{n})$ z Radix sort
-
-Z boljšo hevristiko lahkoznižamo čas izgranje na $O(n)$ \cite{Nong2009}
+Priponsko drevo nad besedo $T$ dolžine $n$ potrebuje za vsako potrebuje vsaj en kazalec ter dva \enquote{cela števila}, ki predstavljata začetek in konec predstavljenega podniza, zato se potrebuje vsaj $3n$ \enquote{celih števil} (bolj natančno $3n\log{n}$ bitov). Pri tem se potrebuje še $n$ dodatnih \enquote{celih števil} za shraniti priponske povezave ter dodatnih $2n$ za shraniti povezave na starše vozlišč. Torej priponsko drevo potrebuje med $3-$  in $6n$ \enquote{celih števil} za paravilno delovanje. Ker so pripone besedila indeksi v besedilu, ki predsatvljajo indeks prvega znaka v priponi, se jih lahko shrani z $n$ \enquote{celimi števili.} Če se indekse pripon shranjenih vpolju in urejenih v leksikografskem vrstnem redu, se to podatkovno strukturo imenuje priponsko polje (angl. \textit{Suffix array} oziroma SA).
 
 
+Priponsko polje je alternativni indeks besedila. Priponsko polje se uporablja namesto priponskega drevesa, ko se potrebuje prostorsko bolj učinkovito podatkono strukturo in se lahko žrtvuje čas iskanja vzorcev v besedilu saj priponsko polje zasede približno 5-krat manj prostora na delovnem pomniliniku kot priponso drevo \cite{Manber1990}. Priponsko polje si lahko predstavljamo kot polje listov priponskega drevesa, brez podatkov o notranjih vozliščih drevesa. To podobnost lahko vidimo tudi na Sliki \ref{fig:SuffuxArray}, na kateri je prikazano priponsko drevo in priponsko polje za besedo \enquote{KOKOŠ$\$$}.
 
-5x manj prostora kot priponsko drevo\cite{Manber1990}
+\begin{figure}[htb]
+    \begin{subfigure}[t]{\linewidth}
+        
+        \includesvg{Slike/McCreigov/KOKOŠMcCreightS.svg}
+        \centering
+        \subcaption*{}
+        \label{fig:aSADrevo}
+    \end{subfigure}
+    \begin{subfigure}[t]{1\linewidth}        
+        \includesvg[scale=1.2]{Slike/KokosSA.svg}
+        \centering
+        \subcaption*{}
+        \label{fig:aSAPolje}
+    \end{subfigure}
+    \caption{Primer priponskega polja nad besedo »KOKOŠ$\$$«.} 
+    \label{fig:SuffuxArray}
+\end{figure}
 
-\cite{Manber1990}
+V nadaljeveanju poglavja bodo predstavljena še podatkovna struktura, ki omogoča hitrejše iskanje v priponskem polju ter simuliranje priponskega drevesa. Zatem bodo predstavljeni še načini izgradnje priponskega polja ter implementacije oizvedb poizvedb s pomočjo priponskega polja.
+
+\begin{figure}[htb]
+    \begin{center}
+        \includegraphics[width=.5\textwidth]{Slike/ChatGPTSA.png}
+        \caption{Primer priponskega polja nad besedo \enquote{KOKOŠ$\$$} kot si jo predstavlja ChatGPT.} 
+        \label{fig:ChatGPT}
+    \end{center}
+\end{figure}
+
+
 
 \section{Skupna najdajša predpona}\label{sec:LCP}
 \import{.}{PriponskoPolje/LCP}
