@@ -17,8 +17,40 @@ uporaba za bottom up pregled drevesa. algoritem potrebuje isto časa kot v pripo
 
 drevo lcp intervalov 
 
+$l$-iterval 
+
+\begin{defi}
+    Interval $[i,j]$ je $l$-interval v LCP polju, natanko tedaj ko velja:
+    \begin{enumerate}
+        \item LCP$[i]<l$,
+        \item obstaja vsaj en $k$, za katerega velja, da je $i< k< j$ in LCP$[k]=l$,
+        \item za vsak $k$ velja, da je $i< k< j$ in LCP$[k]\ge l$
+        \item LCP$[j]<l$.      
+    \end{enumerate}
+\end{defi}
+
+\begin{figure}[htb]
+    \begin{subfigure}[T]{0.45\linewidth}
+        
+        \includesvg[scale=1]{Slike/McCreigov/KOKOŠMcCreightS.svg}
+        \centering
+        \subcaption*{}
+        \label{fig:aSADrevo}
+    \end{subfigure}
+    \begin{subfigure}[T]{0.45\linewidth}        
+        \includesvg[scale=0.7]{Slike/IntervalnoDrevo.svg}
+        \centering
+        \subcaption*{}
+        \label{fig:aSAPolje}
+    \end{subfigure}
+    \caption{Primer intervalnega drevesa nad LCP poljem besede \enquote{KOKOŠ$\$$}.} 
+    \label{fig:intervalTree}
+\end{figure}
+
+-popravimo LCP tabelo tako da $LCP[1]=-1$ in $LCP[n+1]=-1$
+
 -vsako vozlišče v drevesu je notranje vozlišče priponnskega drevesa
 
--listi priponskega drevesa so pripone v najglobjem intervalu, ki vsebuje pripono \cite{Abouelhoda2004}
+-listi priponskega drevesa so pripone v najglobjem intervalu $[i,j]$, ki vsebuje pripono,vključno z $i$-to pripono in brez $j$-te pripone \cite{Abouelhoda2004}
 
 
