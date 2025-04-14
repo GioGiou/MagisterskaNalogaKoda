@@ -1,17 +1,17 @@
-Skozi magistrsko nalogo bo $T$ predstavljal vhodno besedo dolžine $n$ znakov, iz katere bomo zgradili priponsko drevo ali kompaktno priponkso drevo. Na podoben način bo $P$ predstavljal iskani vzorec dolžine $m$ znakov v $T$. Vhodna beseda $T$ in vzorec $P$ sta sestavljena iz znakov abecede $\Sigma$.
+Skozi magistrsko nalogo $T$ predstavlja vhodno besedo dolžine $n$ znakov, iz katere bomo zgradili priponsko drevo ali kompaktno priponsko drevo. Na podoben način $P$ predstavlja iskani vzorec dolžine $m$ znakov v $T$. Vhodna beseda $T$ in vzorec $P$ sta sestavljena iz znakov abecede $\Sigma$.
 
-Niz znakov, ki je del besede in se zančne na $i$-tem znaku besede, imenujemo podniz in je definiran na sledeč način:
+Niz znakov, ki je del besede in se začne na $i$-tem znaku besede, imenujemo podniz in je definiran na sledeč način:
 \begin{defi}
     Niz $\alpha\in\Sigma^*$ je podniz besede $T$, ko obstaja tak $1\le i\le n$, za katerega velja, da je  $\alpha=T[i,i+|\alpha|]$. 
 \end{defi}
-Poljubni nizi oziroma podnizi bodo označeni z grškimi črkami $\alpha$, $\beta$ in $\gamma$ ter pri tem bo povedano, ali gre za podniz ali niz. Podniz besede $T$, ki se začne na $i$-tem mestu in se konča na $j$-tem mestu, pa bo označen kot $T[i,j]$. Dva poljubna niza se lahko združita v novi daljši niz s stikom, ki je definira na sledeči način:
+Poljubni nizi oziroma podnizi so označeni z grškimi črkami $\alpha$, $\beta$ in $\gamma$ ter pri tem je povedano, ali gre za podniz ali niz. Podniz besede $T$, ki se začne na $i$-tem mestu in se konča na $j$-tem mestu, pa je označen kot $T[i,j]$. Dva poljubna niza se lahko združita v novi daljši niz s stikom, ki je definiran na sledeči način:
 \begin{defi}
     Stik nizov $\alpha$ in $\beta$ je niz $\gamma=\alpha\cdot\beta$, pri čemer je $\alpha=\gamma[1,|\alpha|]$ in $\beta=\gamma[|\alpha|+1,|\alpha|+|\beta|]$.
 \end{defi}
 
-Za razliko od nizov in podnizov, bodo znaki iz abecede $\Sigma$ označeni s črkama $x$ ali $t$. Oznaka $T[i]$ pa prededstavlja znak na $i$-tem mestu vhodne besede.
+Za razliko od nizov in podnizov so znaki iz abecede $\Sigma$ označeni s črkama $x$ ali $t$. Oznaka $T[i]$ pa prededstavlja znak na $i$-tem mestu vhodne besede.
 
-Ker bo nad besedo $T$ izgrajeno priponsko drevo ali kompaktno priponsko drevo, ki bo uporabljeno za hitrejše iskanje vzorcev v besedi, bodo skozi nalogo notranja vozlišča priponskega drevesa imenovana kot vozlišča in označena s črkami $s$, $v$, $w$ in $u$. Vozlišča bodo označena tudi s črkami $a$, $b$, $c$ in $d$ v McCreightvem algoritmu. Listi priponskega drevesa pa bodo označeni s črko $l$.
+Ker bo nad besedo $T$ izgrajeno priponsko drevo ali kompaktno priponsko drevo, ki je uporabljeno za hitrejše iskanje vzorcev v besedi, so skozi nalogo vozlišča označena s črkami $s$, $v$, $w$ in $u$. Listi priponskega drevesa pa bodo označeni s črko $l$.
 
 V nadaljevanju poglavja bodo predstavljena še predstavitve in podatkovne strukture ter operacije nad njimi, ki so osnova za kompaktno predstavitev drugih podatkovnih struktur (na primer kompaktna prdstavitev dreves), ter kompaktne predstavitve dreves, pri čemer bo ena od predstavitev uporabljena v podatkovni strukturi kompaktno priponsko drevo. Predstavlje bo tudi eniški zapis, ki bo uporabljen v kompaktni predstavitvi priponskih dreves.
 

@@ -268,15 +268,9 @@ Te načine dodajanja se lahko vidi tudi na primeru izgradnje priponskega drevesa
         \label{fig:aUkkonen3}
     \end{subfigure}    
     %   \includegraphics[width=\textwidth]{Slike/KOKOSUkkonen.png}
-    \caption{Načini dodajanja novih znakov v priponsko drevo.} 
+    \caption{Načini dodajanja novih znakov v priponsko drevo. Na sliki kvadratki predstavljajo liste drevesa, krogci pa predstavljajo notranja vozlišča drevesa.} 
     \label{fig:absUkkonen}
 \end{figure}
-
-
-
-Iz načina dodajanja novih znakov v priponsko drevo, ki ga uporablja algoritem, se opazi, da se število vozlišč v drevesu spremeni samo z drugim načinom dodajanja (\ref{enum:dodajanje2}). Vse točke, v katerih se bo v tem koraku zgodila razčlemba, imenujemo aktivne točke (angl. \textit{active point}). Da bo algoritem učinkovit hranimo začetno aktivno točko in končno aktivno točko imenovano tudi končna točka (angl. \textit{end point}), rezčlembe in dodajanja novih vozlišč v drevesu v trenutnem koraku. Na Sliki \ref{fig:Ukkonen} je z rdečo označeno vozlišče, ki se nahaja pred končno točko, ter z zeleno je označeno vozlišče, ki pa se nahaja pred začetno točko. Premik po aktivnih točkah med začetno točko in končno točko poteka po priponskih povezavah. Pri tem pa algoritem v vsakem koraku poti izračuna, ali je že prišel v končno točko. Za to je potrebno hraniti zgolj trenutno aktivno točko ter zastavico, ki hrani vrednost, ali je ta točka tudi končna točka. 
-Aktivna točka postane končna točka takrat, ko se način dodajanja spremeni iz \ref{enum:dodajanje2} v \ref{enum:dodajanje3} ali ko so vse implicitne pripone postale listi drevesa, saj od takrat ni več potrebno v trenutnem koraku izgradnje deliti povezave in ustavrjati nova vozlišča.
-Pri tem velja tudi, da končna točka v koraku $i-1$ postane začetna aktivna točka v koraku $i$, saj se prva nova razčlemba v koraku $i$ lahko zgodi zgolj v točki, kjer se je končala razčlemba v koraku $i-1$, in to je končna točka koraka $i-1$. 
 
 \begin{figure}[htb]
     \begin{subfigure}[t]{0.3\linewidth}
@@ -325,6 +319,11 @@ Pri tem velja tudi, da končna točka v koraku $i-1$ postane začetna aktivna to
        \caption{Primer izgradnje priponskega drevesa z uporabo Ukkonenovaga algoritma za besedo »KOKOŠ$\$$«.} 
         \label{fig:Ukkonen}
 \end{figure}
+
+
+Iz načina dodajanja novih znakov v priponsko drevo, ki ga uporablja algoritem, se opazi, da se število vozlišč v drevesu spremeni samo z drugim načinom dodajanja (\ref{enum:dodajanje2}). Vse točke, v katerih se bo v tem koraku zgodila razčlemba, imenujemo aktivne točke (angl. \textit{active point}). Da bo algoritem učinkovit hranimo začetno aktivno točko in končno aktivno točko imenovano tudi končna točka (angl. \textit{end point}), rezčlembe in dodajanja novih vozlišč v drevesu v trenutnem koraku. Na Sliki \ref{fig:Ukkonen} je z rdečo označeno vozlišče, ki se nahaja pred končno točko, ter z zeleno je označeno vozlišče, ki pa se nahaja pred začetno točko. Premik po aktivnih točkah med začetno točko in končno točko poteka po priponskih povezavah. Pri tem pa algoritem v vsakem koraku poti izračuna, ali je že prišel v končno točko. Za to je potrebno hraniti zgolj trenutno aktivno točko ter zastavico, ki hrani vrednost, ali je ta točka tudi končna točka. 
+Aktivna točka postane končna točka takrat, ko se način dodajanja spremeni iz \ref{enum:dodajanje2} v \ref{enum:dodajanje3} ali ko so vse implicitne pripone postale listi drevesa, saj od takrat ni več potrebno v trenutnem koraku izgradnje deliti povezave in ustavrjati nova vozlišča.
+Pri tem velja tudi, da končna točka v koraku $i-1$ postane začetna aktivna točka v koraku $i$, saj se prva nova razčlemba v koraku $i$ lahko zgodi zgolj v točki, kjer se je končala razčlemba v koraku $i-1$, in to je končna točka koraka $i-1$. 
 
 Vsako aktivno točko lahko predstavimo kot referenčni par $(s,\alpha)$, pri čemer je $s$ vozlišče pred aktivno točko in $\alpha$ je niz iz vozlišča $s$ do aktivne točke. Za lažje shranjevanje niza $\alpha$ je le ta shranjen kot par indeksov $(k,p)$, pri čemer je $\alpha=T[k,p]$. Aktivna točka je lahko predstavljena z različnimi pari $(s, (k,p))$. Če je $s$  najglobje vozlišče pred aktivno točko, takšen par imenujemo kanonična oblika referenčenga para. Kanonična oblika je po definiciji enolična. Med vsemi referenčnimi pari za dano aktivno točko velja, da je pri paru, ki je v kanonični obliki, niz $\alpha=T[k,p]$ najkrajši. Na Sliki \ref{fig:Ukkonen} v četrtem koraku izgradnje, ki ga predstavlja prvo drevo v spodnji vrstici, je začetna aktivna točka predstavljena kot $(\textit{koren},(3,3))$, v naslednjem koraku pa je začetna aktivna točka v $(\textit{koren},(3,4))$, ki se bo razcepila in bo postala novo vozlišče. Ta ista točka je lahko po koncu izgradnje še vedno predstavljena z referenčnim parom $(\textit{koren},(2,4))$, ki pa ni v kanonični obliki. Kanonična oblika te točke je $(a,(4,4))$, pri čemer je vozlišče $a$ otrok \textit{koren}-a, na katerega kaže povezava z nizom »KO«.
 
