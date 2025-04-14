@@ -44,14 +44,14 @@ Podobno kot polje $R$ se definira polje $R'$. Polje $R'$ hrani na $i$-tem mestu 
 Ta implementacija potrebuje konstanten čas za izračunati $rang(B,i)$. Dostop do polji $R$ in $R'$ je storjen v konstantnem času, kot tudi izračun funkcije \texttt{popcount}, ki je klicana samo enkrat\cite{Navarro2016}.
 
 \paragraph{Izbira:}
-Druga odsnovna operacija nad bitnim poljem $B$ pa je $izbira_v(B,i)$, ki vrne položaj $i$-tega pojava vrednosti $v\in\{1,0\}$ v $B$. Podobno kot operacija rang, tudi operacija izbira potrebuje pomožno podatkovno strukturo za izvedbo v konstantnem času. 
+Druga osnovna operacija nad bitnim poljem $B$ je $izbira_v(B,i)$, ki vrne položaj $i$-te ponovitve vrednosti $v\in\{1,0\}$ v $B$. Podobno kot operacija rang tudi operacija izbira potrebuje pomožno podatkovno strukturo za izvedbo v konstantnem času. 
 
-Operacijo izbira si lahko predstavimo, kot inverzno operacijo od operacije rang, saj velja relacija $j=rang_v(B,izbira_v(B,j))$. Pri tem pa ne obstaja direktna povezava med operacijo $izbira_1(B,i)$ in $izbira_0(B,i)$. To pomeni, da rešitev z pomožno podatkovno strukturo za $izbira_1(B,i)$ ne more biti uporabljena pri iskanju rešitve za $izbira_0(B,i)$. V nadaljevanju bo opisan časovno učinkovit postopek iskanja $izbire_1(B,i)$, saj se lahko $izbira_0(B,i)$ implementira na podoben način \cite{Navarro2016}.
+Operacijo izbira si lahko predstavimo kot inverzno operacijo operacije rang, saj velja zveza $j=rang_v(B,izbira_v(B,j))$. Pri tem pa ne obstaja direktna povezava med operacijo $izbira_1(B,i)$ in $izbira_0(B,i)$. To pomeni, da rešitev s pomožno podatkovno strukturo za $izbira_1(B,i)$ ne more biti uporabljena pri iskanju rešitve za $izbira_0(B,i)$. V nadaljevanju bo opisan časovno učinkovit postopek iskanja $izbire_1(B,i)$, saj se lahko $izbira_0(B,i)$ implementira na podoben način \cite{Navarro2016}.
 
 Ko operacija izbira ni ključna pri reševanju problemov, se lahko uporabi binarno iskanje v poljih $R$ in $R'$, za kar se potrebuje $O(\log{b})$ časa. Z binarnim iskanjem se najde območje dolžine $k$, pri čemer je potrebno še dodatnih $k$ preiskav, da se najde natančno vrednost.
 Čas operacije se lahko zniža na $O(\log\log b)$ z uporabo pomožnih podatkovnih struktur. Podobno kot pri operacij rang se bitno polje razdeli na $\lceil \frac{r_1}{s} \rceil$ veder, pri čemer pa je $r_1$ število bitov z vrednostjo 1 v bitnem polju in s je število takih bitov v vsakem vedru. Polje $S[0,\lceil \frac{r_1}{s} \rceil]$ hrani vrednosti $S[i]=izbira_1(B,i*s+1)$, pri čemer $S[\lceil \frac{r_1}{s} \rceil]=n+1$. Polje $S$ potrebuje $w(\lceil \frac{r_1}{s} \rceil +1)$ bitov. Ko je $s=w^2$, potem podatkovna struktura potrebuje $w(\lceil\frac{r_1}{w^2}\rceil+1)=o(r_1)=o(b)$ bitov \cite{Navarro2016}.
 
-Vedra niso enako velika, zato se lahko razdelijo na velika vedra in mala vedra, pri čemer je vedro veliko natanko tedaj, ko je večje kot $s\log^2 n$ bitov, sicer je malo vedro. Pri tem je potrebno shraniti velikost vedra v bitno polje $V$, kjer $V[i]=1$, če $i$-to vedro je veliko, sicer je $V[i]=0$. Bitno polje $V$ potrebuje tudi dodatno podatkovno strukturo za rang. Za velika vedra se izračuna vseh $s$ vrednosti izbire, pri čemer so shranjeni v polju $I$ položaji bitov z vrednostjo ena znotraj vedra. Za mala vedra, pa se sproti naračuna izbira znotraj vedra. Operacija izbira se izračuna na sledeči način:
+Vedra niso enako velika, zato se lahko razdelijo na velika vedra in mala vedra, pri čemer je vedro veliko natanko tedaj, ko je večje kot $s\log^2 n$ bitov, sicer je malo vedro. Pri tem je potrebno shraniti velikost vedra v bitno polje $V$, kjer $V[i]=1$, če $i$-to vedro je veliko, sicer je $V[i]=0$. Bitno polje $V$ potrebuje tudi dodatno podatkovno strukturo za rang. Za velika vedra se izračuna vseh $s$ vrednosti izbire, pri čemer so shranjeni v polju $I$ položaji bitov z vrednostjo ena znotraj vedra. Za mala vedra pa se sproti naračuna izbira znotraj vedra. Operacija izbira se izračuna na sledeči način:
 \begin{equation*}
     izbira_1(B,j)=\left\{
     \begin{array}{rl}
@@ -60,16 +60,16 @@ Vedra niso enako velika, zato se lahko razdelijo na velika vedra in mala vedra, 
        b+1, & m < j
     \end{array}\right.,
 \end{equation*}
-kjer $x$ predstavlja $((j-1) \mod{s})+1$ in $k$ je položaj $((j-1) \mod{s})+1$-tega bita z vrednostjo 1 na intervalu $B\left[ S\left[\left\lceil \frac{j}{s} -1 \right\rceil\right], S\left[\left\lceil \frac{j}{s} \right\rceil-1\right]\right]$.
+kjer je $x = ((j-1) \mod{s})+1$ in $k$ je položaj $x$-tega bita z vrednostjo 1 na intervalu $B\left[ S\left[\left\lceil \frac{j}{s} -1 \right\rceil\right], S\left[\left\lceil \frac{j}{s} \right\rceil-1\right]\right]$.
 
 Polje $I$ mora shraniti $s\lceil\log n\rceil$ bitov za vsako veliko vedro, katerih je $\frac{b}{s(\log b)^2}$, torej potrebuje $O\left(\left\lceil\frac{b}{\log b}\right\rceil\right)=o(b)$ bitov. Bitno polje $V$ pa potrebuje $\lceil \frac{m}{s} \rceil$ bitov za shraniti velikosti blokov ter dodatne bite za izvajanje operacije rang v konstantnem času, torej tudi $V$ potrebuje $o(b)$ bitov \cite{Navarro2016}.
 
-Operacija se lahko izvedene v konstantnem času. To je doseženo z dodatnim deljenjem majhnih veder, na podoben način, kot je bilo to storjeno nad celotnim bitnim poljem $B$. Vsako majhno vedro se dodatno razdeli na $s'=(\log\log b)^2$ mini veder, pri čemer mini vedro je veliko, ko je večje od $s'(\log\log b)^2$. Vsako majhno mini vedro potrebuje $s'\log{(s(\log{b})^2)}=O((\log\log b)^3)=o(b)$ bitov ter vsako veliko mini vedro potrebuje isto prostora, pri čemer pa jih je največ $O\left(\frac{b}{(\log\log b)^4}\right)$, torej vsa velika mini vedra skupaj potrebujejo $O\left(\frac{b}{\log\log b}\right) =o(b)$ bitov \cite{Navarro2016}.
+Operacija se lahko izvede v konstantnem času. To je doseženo z dodatnim deljenjem majhnih veder, na podoben način, kot je bilo to storjeno nad celotnim bitnim poljem $B$. Vsako majhno vedro se dodatno razdeli na $s'=(\log\log b)^2$ mini veder, pri čemer mini vedro je veliko, ko je večje od $s'(\log\log b)^2$. Vsako majhno mini vedro potrebuje $s'\log{(s(\log{b})^2)}=O((\log\log b)^3)=o(b)$ bitov ter vsako veliko mini vedro potrebuje isto prostora, pri čemer pa jih je največ $O\left(\frac{b}{(\log\log b)^4}\right)$, torej vsa velika mini vedra skupaj potrebujejo $O\left(\frac{b}{\log\log b}\right) =o(b)$ bitov \cite{Navarro2016}.
 
 
-Vse dodatne podatkovne strukture potrebne za izvajanje operacij rang in izbira v konstantnem času, so lahko izgrajene v dveh sprehodih po bitnem polj $B$, pri čemer vsak sprehod traja $O(b)$ časa. Pri tem je ves potrebni spomin že predhodno dodeljen.
+Vse dodatne podatkovne, ki so strukture potrebne za izvajanje operacij rang in izbira v konstantnem času, so lahko izgrajene v dveh sprehodih po bitnem polj $B$, pri čemer vsak sprehod traja $O(b)$ časa. Pri tem je ves potrebni spomin že predhodno dodeljen.
 
-\paragraph{Predhodnik/Naslednjik:}
+\paragraph{Predhodnik/Naslednik:}
 S pomočjo operaciji rang in izbira se lahko implementira dodatne operacije, ki omogočajo lažje iskanje po bitnem polju $B$. Dve taki operaciji, ki bosta uporabljeni za implementacijo operacij nad drevesi, sta predhodnik in naslednik.
 
 Operacija predhodnik elementa $y$ najde ideks $x_i$ del zaporedja indeksov bitov z vrednostjo $v$, za katerega velja $x_i \le y < x_{i+1}$ in $1\le i\le r_v$, kjer je $r_v$ število ponovitev $v$-ja v $B$. Operacija je implementirana kot
