@@ -18,30 +18,29 @@ Zato se pojavi vprašanje, ali je mogoče izogniti teh $b(w-1)$ odvečnih bitov.
 $$
     B[i]=\left\lfloor W\left[\left\lceil\frac{i}{w}\right\rceil\right]/2^{w-r}\right\rfloor \mod{2}.
 $$
-Ker besedni RAM model predpostavi, da so vse aritmetične operacije nad celimi števili, med katere sodi tudi celoštevilsko deljenje, opravljene v konstantnem času, je čas potreben za dostop do $i$-tega elementa tudi konstanten. Torej je mogoče izogniti uporabi odvečnih bitov iz naivne implementacije, ne da bi se časovna zahtevnost povečala \cite{Navarro2016}.
+Ker besedni RAM model predpostavi, da so vse aritmetične operacije nad celimi števili, med katere sodi tudi celoštevilsko deljenje, opravljene v konstantnem času, je čas potreben za dostop do $i$-tega elementa tudi konstanten. Torej se mogoče izogniti uporabi odvečnih bitov iz naivne implementacije, ne da bi se časovna zahtevnost povečala \cite{Navarro2016}.
 
 \paragraph{Rang:} 
-Prva operacija, ki se jo lahko definira nad bitnim poljem $B$ velikosti $b$, je $rang_v(B,i)$. Operacija vrne število pojavov vrednosti $v\in\{1,0\}$ v $B$ do uključno položaja $i$. V nadaljevanju bo operacija $rang(B,i)$ predstavljala $rang_1(B,i)$. To je možno, saj velja sledeča relacija med $rang_0(B,i)$ in $rang_1(B,i)$:
+Prva operacija, ki se jo lahko definira nad bitnim poljem $B$ velikosti $b$, je $rang_v(B,i)$. Operacija vrne število bitov z vrednostjo $v\in\{1,0\}$ v $B$ do vključno položaja $i$. V nadaljevanju bo operacija $rang(B,i)$ predstavljala $rang_1(B,i)$. To je možno, saj velja sledeča zveza med $rang_0(B,i)$ in $rang_1(B,i)$:
 \begin{equation}\label{eq:rang}
     rang_1(B,i)=i-rang_0(B,i).
 \end{equation}
 
-Operacijo se lahko naivno implenetirana s štetjem bitov z vrednostjo $1$ v bitenm polju, za kar je potrebno $O(b)$ časa. Operacijo rang se lahko pospeši na konstantni čas pri tem pa se potrebuje dodatne podatkovne strukture, ki zasedejo $o(b)$ bitov. Pri tem ni potrebno zgraditi dodatnih podatkovnih strukur za obe različici ranga, saj relacija iz enakosti \ref{eq:rang} omogoča izgradnjo podatkovne strukture zgolj za operacijo $rang_1$.
+Operacijo se lahko naivno implenetira s štetjem bitov z vrednostjo $1$ v bitenem polju, za kar je potrebno $O(b)$ časa. Operacijo rang se lahko pospeši na konstantni čas, pri tem pa se potrebuje dodatne podatkovne strukture, ki zasedejo $o(b)$ bitov. Pri tem ni potrebno zgraditi dodatnih podatkovnih strukur za obe različici ranga, saj relacija iz enakosti (\ref{eq:rang}) omogoča izgradnjo podatkovne strukture zgolj za operacijo $rang_1$.
 
-Pomožna struktura, ki omogoča konstantni čas operacije $rang(B,i)$, shranjuje range različnih elementov bitnega polja $B$ v polju $R$. Naivni pristop bi shraniv v polju $R$ range vseh elementov $B$-ja. Problem tega pristopa je prevelika prostorska zahtevnost, saj je zaželjeno, da je $R$ čim manjšin in pomožnosti ni večji od $o(b)$ bitov. Predlagana rešitev potrebuje $b\log{r_1}=O(bw)$ dodatnih bitov, pričemer $r_1$ predstavlja število bitov z vrednostjo 1 v bitnem polju $B$.
+Pomožna struktura, ki omogoča konstantni čas operacije $rang(B,i)$, shranjuje range različnih elementov bitnega polja $B$ v polju $R$. Naivni pristop bi shranil v polju $R$ range vseh elementov $B$-ja. Problem tega pristopa je prevelika prostorska zahtevnost, saj je zaželjeno, da je $R$ čim manjši in pomožnosti ni večji od $o(b)$ bitov. Predlagana rešitev potrebuje $b\log{r_1}=O(bw)$ dodatnih bitov, pričemer $r_1$ predstavlja število bitov z vrednostjo 1 v bitnem polju $B$.
 
 Rešitev tega problema je vzorčenje rangov, tako da so v polju $R$ shranjeni zgolj rangi nekaterih elementov $B$-ja. Polje $R$ razdeli $B$ na $s=kw$ delov, pri čemer je $k$ poljubno število. Element $R[i]=rang_1(B,is)$, pri čemer $0\le i \le \left\lfloor\frac{b}{s} \right\rfloor$. Na ta način je operacija rang implementiran kot 
-\begin{equation}
+\begin{equation*}
     rang_1(B,i)=R\left[\left\lfloor\frac{i}{s} \right\rfloor\right] + \texttt{popcount}\left(B\left[\left\lfloor\frac{i}{s} \right\rfloor s,i\right]\right),
-\end{equation}
-
+\end{equation*}
 %dopiši popcount O(1) brez cpu
-kjer je \texttt{popcount} funkcija, ki prešteje število bitov z vrednostjo $1$, na danem intervalu. Zaradi uporabnosti te funkcije, je le ta že implementirana v različnih modernih arhitekturah procesorjev in je zato možno uporabiti strojno operacijo. Sicer pa je mogoče implemenitrati funkcijo \texttt{popcount} brez uporabe strojen operacije \cite{Knuth2011}. Polje $R$ ima velikost $\lfloor\frac{b}{k}\rfloor$ bitov, saj shranjuje $\lfloor\frac{b}{s}\rfloor$ števil velikosti $w$ bitov. Pri tem je potrebno funkcijo \texttt{popcount} pognati največ $k$ krat, kar naredi čas operacije rang $O(k)$ \cite{Navarro2016}.
+kjer je \texttt{popcount} funkcija, ki prešteje število bitov z vrednostjo $1$ na danem intervalu. Zaradi uporabnosti te funkcije je le ta že implementirana v različnih modernih arhitekturah procesorjev in je zato možno uporabiti strojno operacijo. Sicer pa je mogoče implementirati funkcijo \texttt{popcount} brez uporabe strojne operacije \cite{Knuth2011}. Polje $R$ ima velikost $\lfloor\frac{b}{k}\rfloor$ bitov, saj shranjuje $\lfloor\frac{b}{s}\rfloor$ števil velikosti $w$ bitov. Pri tem je potrebno funkcijo \texttt{popcount} pognati največ $k$ krat, kar naredi čas operacije rang $O(k)$ \cite{Navarro2016}.
 
-Podobno kot polje $R$ se definira polje $R'$. Polje $R'$ hrani na $i$-tem mestu število bitov z vrednostjo $1$ po vedru $R[\left\lfloor\frac{i}{k} \right\rfloor]$ ali $R'[i]=rang_1(B,iw)-R[\left\lfloor\frac{i}{k} \right\rfloor]$. Na ta način se zniža število klicev funkcije \texttt{popcount} na 1 klic. Ker v $R'$ so sharnjena zgolj števila med 0 in $s-w$ (vsako vedro v $R$ ima $w$ elementov v $R'$), se lahko $R'$ shrani v $\lfloor\frac{b}{w}\rfloor\log{s}$ bitov, kar je $o(b)$ bitov. Tako je operacija rang implementirana s pomočjo polji $R$ in $R'$. In sicer je implementirana na sledeči način:
-\begin{equation}
+Podobno kot polje $R$ se definira polje $R'$. Polje $R'$ hrani na $i$-tem mestu število bitov z vrednostjo $1$ po vedru $R[\left\lfloor\frac{i}{k} \right\rfloor]$ ali $R'[i]=rang_1(B,iw)-R[\left\lfloor\frac{i}{k} \right\rfloor]$. Na ta način se zniža število klicev funkcije \texttt{popcount} na 1 klic. Ker so v $R'$ sharnjena zgolj števila med 0 in $s-w$ (vsako vedro v $R$ ima $w$ elementov v $R'$), se lahko $R'$ shrani v $\lfloor\frac{b}{w}\rfloor\log{s}$ bitov, kar je $o(b)$ bitov. Tako je operacija rang implementirana z uporabo polji $R$ in $R'$. In sicer je implementirana na sledeči način:
+\begin{equation*}
     rang_1(B,i)=R\left[\left\lfloor\frac{i}{kw} \right\rfloor\right]+ R'\left[\left\lfloor\frac{i}{w} \right\rfloor\right]+\texttt{popcount}\left(B\left[\left\lfloor\frac{i}{w} \right\rfloor,\left\lfloor\frac{i}{w} \right\rfloor+(i \mod w)\right]\right).
-\end{equation}
+\end{equation*}
 Ta implementacija potrebuje konstanten čas za izračunati $rang(B,i)$. Dostop do polji $R$ in $R'$ je storjen v konstantnem času, kot tudi izračun funkcije \texttt{popcount}, ki je klicana samo enkrat\cite{Navarro2016}.
 
 \paragraph{Izbira:}
@@ -53,14 +52,14 @@ Ko operacija izbira ni ključna pri reševanju problemov, se lahko uporabi binar
 Čas operacije se lahko zniža na $O(\log\log b)$ z uporabo pomožnih podatkovnih struktur. Podobno kot pri operacij rang se bitno polje razdeli na $\lceil \frac{r_1}{s} \rceil$ veder, pri čemer pa je $r_1$ število bitov z vrednostjo 1 v bitnem polju in s je število takih bitov v vsakem vedru. Polje $S[0,\lceil \frac{r_1}{s} \rceil]$ hrani vrednosti $S[i]=izbira_1(B,i*s+1)$, pri čemer $S[\lceil \frac{r_1}{s} \rceil]=n+1$. Polje $S$ potrebuje $w(\lceil \frac{r_1}{s} \rceil +1)$ bitov. Ko je $s=w^2$, potem podatkovna struktura potrebuje $w(\lceil\frac{r_1}{w^2}\rceil+1)=o(r_1)=o(b)$ bitov \cite{Navarro2016}.
 
 Vedra niso enako velika, zato se lahko razdelijo na velika vedra in mala vedra, pri čemer je vedro veliko natanko tedaj, ko je večje kot $s\log^2 n$ bitov, sicer je malo vedro. Pri tem je potrebno shraniti velikost vedra v bitno polje $V$, kjer $V[i]=1$, če $i$-to vedro je veliko, sicer je $V[i]=0$. Bitno polje $V$ potrebuje tudi dodatno podatkovno strukturo za rang. Za velika vedra se izračuna vseh $s$ vrednosti izbire, pri čemer so shranjeni v polju $I$ položaji bitov z vrednostjo ena znotraj vedra. Za mala vedra, pa se sproti naračuna izbira znotraj vedra. Operacija izbira se izračuna na sledeči način:
-\begin{equation}
+\begin{equation*}
     izbira_1(B,j)=\left\{
     \begin{array}{rl}
        S\left[\left\lceil \frac{j}{s} -1\right\rceil\right] + I\left[rang_1(V,\left\lceil \frac{j}{s} \right\rceil)s+x\right], & V\left[\left\lceil \frac{j}{s} \right\rceil\right] = 1\\ 
        S\left[\left\lceil \frac{j}{s} -1 \right\rceil\right] + k, & V\left[\left\lceil \frac{j}{s} \right\rceil\right] = 0\\
        b+1, & m < j
     \end{array}\right.,
-\end{equation}
+\end{equation*}
 kjer $x$ predstavlja $((j-1) \mod{s})+1$ in $k$ je položaj $((j-1) \mod{s})+1$-tega bita z vrednostjo 1 na intervalu $B\left[ S\left[\left\lceil \frac{j}{s} -1 \right\rceil\right], S\left[\left\lceil \frac{j}{s} \right\rceil-1\right]\right]$.
 
 Polje $I$ mora shraniti $s\lceil\log n\rceil$ bitov za vsako veliko vedro, katerih je $\frac{b}{s(\log b)^2}$, torej potrebuje $O\left(\left\lceil\frac{b}{\log b}\right\rceil\right)=o(b)$ bitov. Bitno polje $V$ pa potrebuje $\lceil \frac{m}{s} \rceil$ bitov za shraniti velikosti blokov ter dodatne bite za izvajanje operacije rang v konstantnem času, torej tudi $V$ potrebuje $o(b)$ bitov \cite{Navarro2016}.
