@@ -80,7 +80,7 @@ kjer je $v\in \{1,0\}$ \cite{Navarro2016}.
 
 Operaciji se uporablja za sprehod po bitnem polju $B$. Z njima se lahko najde indekse vseh bitov z vrednostjo $v$ v $O(r_v)$ časa ($r_v$ je število bitov z vrednostjo $v$ v bitnem polj $B$).
 
-\paragraph{Operacije na intervalih??:}
+\paragraph{Operacije na intervalih:}
 Dosedaj so vse predstavljene operacije imele kot vhod zgolj en element v bitnem polju, ampak nekateri problemi zahtevajo rešitev za podani interval. Pogosta vprašanja na intervalih sta največje ali najmanjše število v intervalu. Na bitnih poljih pa se ta problem pretvori na razliko med številom bitov z vrednostjo 0 ter številom bitov z vrednostjo 1 do $i$-tega bita. To razmerje imenujemo \textit{višek}$(B,i)$ in je je izračunan kot:
 $$
     \textit{višek}(B,i)=rang_0(B,i)-rang_1(B,i)=2rang_0(B,i)-i.

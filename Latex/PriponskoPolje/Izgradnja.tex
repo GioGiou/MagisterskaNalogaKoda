@@ -1,13 +1,25 @@
-suffix array
+Podobno kot priponsko drevo, je mogoče izgradtiti priponsko polje za besedo $T$ dolžine $n$ z različnimi algoritmi. Časovna zahtevnost teh algoritmov je med $O(n^2\log{n})$ in $O(n)$. Algoritmi bodo predstavljeni od najbolj neučinkovitega do najbolj učinkovitega.
 
+\paragraph{Izgradnja s priponskim drevesom:}
+Priponsko polje je ekvivalentno listom priponskega drevesa, zato se lahko uporabi priponsko drevo za izgraditi priponsko polje. Priponsko polje je zgrajeno v dveh korakih:
+\begin{enumerate}
+    \item izgradnja priponskega drevesa z $O(n)$ algoritmom, recimo z Ukkonenovim algoritmom (korak ni potreben če je priponsko drevo že izgrajeno),
+    \item sprehod v globino po drevesu in zapis idneksov pripon iz listov v polje v vrstem redu obiska.
+\end{enumerate}
+V koraku sprehoda je mogoče izgraditi tudi $LCP$ polje. Vrednosti v $LCP$ polju so črkovne dolžine vozlišč, ki so najglobji predhodnik dveh zaporednih listov. V teh vozliščih se obrne smer sprehoda, saj do takrat je sprehod poteka od lista navzgor in se je v vozlišču obrnil in poteka od vozlišča do lista navzdol.
 
+Opisan algoritem izgradi priponsko polje in $LCP$ polje v $O(n)$ časa. Vsak korak potrebuje $O(n)$ časa, saj smo izbrali algotriem za izgradnjo priponskega drevesa z časovno zahtevnostjo $O(n)$ in sprehod po drevesu z $O(n)$ vozlišči potrebuje $O(n)$ časa. Pri tem pa algoritem potrebuje 5-krat več doatnega prostora, kot ga zasede priponsko polje, in razlog za izgradnjo priponskega polje je zmanjšanje količine spomina, ki ga zasede indeks besedila. Zato bi potrebovali algoritem, ki izgradi priponsko polje v $O(n)$ časa in ne izgradi priponskega drevesa.
 
-Linearna konstrukcija preko priponskega drevesa oziroma v $O(n^2\log{n})$ časa z naivnim primerjanjem in leksikogfaskim urejanjem,  $O(n\log{n})$ z Radix sort
+\paragraph{Izgradnja s urejanjem pripon:}
+Priponsko polje je polje indeksov pripon urejenih v leksigografskem vrstenm redu, zato se lahko uporabi urejanje za izgradnjo priponskega polja. Najbolj učinkoviti algoritmi za urejenaje ( \textit{Quck sort} oziroma  \textit{Merge sort}) potrebujejo $O(n\log{n})$ primerjav za izgraditi priponsko polje. Ker pripone urejamo leksigokrafso, vsaka primerjava potrebuje $O(n)$ časa, torej celotna izgradnja potrebuje $O(n^2\log{n})$ časa. Pritem se potrebuje še dodatnega $O(n)$ časa za izgradnjo $LCP$ polja, saj je potreno izračunati vse $lcp$ vrednosti zaporednih pripon \cite{Kasai2001}.
 
-Z boljšo hevristiko lahko znižamo čas izgranje na $O(n)$ brez priponskega drevesa\cite{Nong2009}
+Namesto tega lahko uporabimo koresko urejanje (angl. \textit{RadixSort}). Torej v $i$-ti iteraciji korenskega urejanja so pripone urejene v vedrih glede na prvih $i$ znakov. To dejstvo se lahko uporabi za izgradnjo $LCP$ polja, saj se v $i$-tem koraku lahko zapiše vrednost $i$ na začetek vsakega nanovo ustvarjenega vedra. Korensko urejanje potrebuje $O(kn)$ časa, pričemer je $k$ dolzina korena in v najslabšem primeru $k=n$, torej metoda potrebuje $O(n^2)$ časa.
+
+Namesto, da se v vsakem koraku podaljša koren za en znak, se lahko koren podvoji. Na ta način potrebuje korensko urejanje $O(\log{n})$ korako in posledično se potrebuje $O(n\log{n})$ časa za izgradnjo priponskega polja. Pri tem pa vrednost v $LCP$ polju na začetku vskaega na novo ustvarjenega vedra ni enaka številu že opravljenih korakov, ampak je v intervalu med $2^{i-1}$ in $2^{i}$, pri čemer je $i$ šetvilo že opravljenih korakov urejanja. Torej je potrebno poiskati natančno vrednost znotraj inervala s primerjavo znakov, pri tem pa ni potrebno primerjati prvih $2^{i-1}$ znakov. Algoritem potrebuje $O(n)$ dodatnega prostora, in sicer 3 polja \enquote{celih števil} in 2 bitna polja dolžine $n$ \cite{Manber1990}.
+
+Z boljšo hevristiko lahko znižamo čas izgranje na $O(n)$ brez priponskega drevesa\cite{Ko2005}
 
 
 
 5x manj prostora kot priponsko drevo\cite{Manber1990}
 
-\cite{Manber1990}
