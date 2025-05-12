@@ -24,8 +24,8 @@
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="mm"
      inkscape:zoom="1"
-     inkscape:cx="200.49999"
-     inkscape:cy="226.49999"
+     inkscape:cx="200.5"
+     inkscape:cy="226.5"
      inkscape:window-width="1920"
      inkscape:window-height="1111"
      inkscape:window-x="-9"
@@ -180,12 +180,12 @@
   <text
      xml:space="preserve"
      style="font-weight:bold;font-size:7.18792px;line-height:1;font-family:Calibri;-inkscape-font-specification:'Calibri, Bold';text-align:end;writing-mode:lr-tb;direction:ltr;text-anchor:end;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.240136;stroke-dasharray:none"
-     x="23.396849"
+     x="23.25713"
      y="75.171532"
      id="text279"><tspan
        id="tspan279"
        style="fill:#000000;fill-opacity:1;stroke-width:0.240136;stroke-dasharray:none"
-       x="23.396849"
+       x="23.25713"
        y="75.171532">1</tspan></text>
   <text
      xml:space="preserve"
@@ -250,12 +250,12 @@
   <text
      xml:space="preserve"
      style="font-weight:bold;font-size:7.18792px;line-height:1;font-family:Calibri;-inkscape-font-specification:'Calibri, Bold';text-align:end;writing-mode:lr-tb;direction:ltr;text-anchor:end;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.240136;stroke-dasharray:none"
-     x="23.453005"
+     x="23.313284"
      y="93.037308"
      id="text286"><tspan
        id="tspan286"
        style="stroke-width:0.240136;stroke-dasharray:none"
-       x="23.453005"
+       x="23.313284"
        y="93.037308">6</tspan></text>
   <text
      xml:space="preserve"
@@ -340,12 +340,12 @@
   <text
      xml:space="preserve"
      style="font-weight:bold;font-size:7.18792px;line-height:1;font-family:Calibri;-inkscape-font-specification:'Calibri, Bold';text-align:end;writing-mode:lr-tb;direction:ltr;text-anchor:end;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.240136;stroke-dasharray:none"
-     x="24.653332"
+     x="24.513611"
      y="84.307449"
      id="text295"><tspan
        id="tspan295"
        style="stroke-width:0.240136;stroke-dasharray:none"
-       x="24.653332"
+       x="24.513611"
        y="84.307449">-1</tspan></text>
   <text
      xml:space="preserve"
@@ -390,7 +390,7 @@
        id="tspan12"
        style="font-size:7.18791px;stroke-width:0.240136"
        x="9.6730871"
-       y="100.70799">G</tspan></text>
+       y="100.70799">U</tspan></text>
   <text
      xml:space="preserve"
      style="font-weight:bold;font-size:7.18791px;line-height:1;font-family:Calibri;-inkscape-font-specification:'Calibri, Bold';text-align:end;writing-mode:lr-tb;direction:ltr;text-anchor:end;fill:#000000;stroke:#000000;stroke-width:0.240136"
@@ -405,32 +405,32 @@
      xml:space="preserve"
      style="font-weight:bold;font-size:7.18791px;line-height:1;font-family:Calibri;-inkscape-font-specification:'Calibri, Bold';text-align:end;writing-mode:lr-tb;direction:ltr;text-anchor:end;fill:#000000;stroke:#000000;stroke-width:0.240136"
      x="11.547273"
-     y="117.83159"
+     y="117.44395"
      id="text14"><tspan
        id="tspan14"
        style="font-size:7.18791px;stroke-width:0.240136"
        x="11.547273"
-       y="117.83159">NB</tspan></text>
+       y="117.44395">NI</tspan></text>
   <text
      xml:space="preserve"
      style="font-weight:bold;font-size:7.18792px;line-height:1;font-family:Calibri;-inkscape-font-specification:'Calibri, Bold';text-align:end;writing-mode:lr-tb;direction:ltr;text-anchor:end;fill:#000000;stroke:#000000;stroke-width:0.240136"
-     x="22.770363"
+     x="22.630642"
      y="100.19908"
      id="text16"><tspan
        id="tspan16"
        style="stroke-width:0.240136"
-       x="22.770363"
+       x="22.630642"
        y="100.19908">-</tspan></text>
   <text
      xml:space="preserve"
      style="font-weight:bold;font-size:7.18792px;line-height:1;font-family:Calibri;-inkscape-font-specification:'Calibri, Bold';text-align:end;writing-mode:lr-tb;direction:ltr;text-anchor:end;fill:#000000;stroke:#000000;stroke-width:0.240136"
-     x="23.481083"
-     y="109.52164"
+     x="23.341362"
+     y="108.97237"
      id="text17"><tspan
        id="tspan17"
        style="stroke-width:0.240136"
-       x="23.481083"
-       y="109.52164">2</tspan></text>
+       x="23.341362"
+       y="108.97237">2</tspan></text>
   <text
      xml:space="preserve"
      style="font-weight:bold;font-size:7.18792px;line-height:1;font-family:Calibri;-inkscape-font-specification:'Calibri, Bold';text-align:end;writing-mode:lr-tb;direction:ltr;text-anchor:end;fill:#000000;stroke:#000000;stroke-width:0.240136"
@@ -455,12 +455,12 @@
      xml:space="preserve"
      style="font-weight:bold;font-size:7.18792px;line-height:1;font-family:Calibri;-inkscape-font-specification:'Calibri, Bold';text-align:end;writing-mode:lr-tb;direction:ltr;text-anchor:end;fill:#000000;stroke:#000000;stroke-width:0.240136"
      x="51.009815"
-     y="117.32619"
+     y="116.93856"
      id="text21"><tspan
        id="tspan21"
        style="stroke-width:0.240136"
        x="51.009815"
-       y="117.32619">-</tspan></text>
+       y="116.93856">-</tspan></text>
   <text
      xml:space="preserve"
      style="font-weight:bold;font-size:7.18792px;line-height:1;font-family:Calibri;-inkscape-font-specification:'Calibri, Bold';text-align:end;writing-mode:lr-tb;direction:ltr;text-anchor:end;fill:#000000;stroke:#000000;stroke-width:0.240136"
@@ -495,12 +495,12 @@
      xml:space="preserve"
      style="font-weight:bold;font-size:7.18792px;line-height:1;font-family:Calibri;-inkscape-font-specification:'Calibri, Bold';text-align:end;writing-mode:lr-tb;direction:ltr;text-anchor:end;fill:#000000;stroke:#000000;stroke-width:0.240136"
      x="79.508064"
-     y="117.32619"
+     y="116.93856"
      id="text25"><tspan
        id="tspan25"
        style="stroke-width:0.240136"
        x="79.508064"
-       y="117.32619">-</tspan></text>
+       y="116.93856">-</tspan></text>
   <text
      xml:space="preserve"
      style="font-weight:bold;font-size:7.18792px;line-height:1;font-family:Calibri;-inkscape-font-specification:'Calibri, Bold';text-align:end;writing-mode:lr-tb;direction:ltr;text-anchor:end;fill:#000000;stroke:#000000;stroke-width:0.240136"
@@ -515,12 +515,12 @@
      xml:space="preserve"
      style="font-weight:bold;font-size:7.18792px;line-height:1;font-family:Calibri;-inkscape-font-specification:'Calibri, Bold';text-align:end;writing-mode:lr-tb;direction:ltr;text-anchor:end;fill:#000000;stroke:#000000;stroke-width:0.240136"
      x="93.411438"
-     y="117.32619"
+     y="116.93856"
      id="text27"><tspan
        id="tspan27"
        style="stroke-width:0.240136"
        x="93.411438"
-       y="117.32619">-</tspan></text>
+       y="116.93856">-</tspan></text>
   <text
      xml:space="preserve"
      style="font-weight:bold;font-size:7.18792px;line-height:1;font-family:Calibri;-inkscape-font-specification:'Calibri, Bold';text-align:end;writing-mode:lr-tb;direction:ltr;text-anchor:end;fill:#000000;stroke:#000000;stroke-width:0.240136"
@@ -555,22 +555,23 @@
      xml:space="preserve"
      style="font-weight:bold;font-size:7.18792px;line-height:1;font-family:Calibri;-inkscape-font-specification:'Calibri, Bold';text-align:end;writing-mode:lr-tb;direction:ltr;text-anchor:end;fill:#000000;stroke:#000000;stroke-width:0.240136"
      x="65.561348"
-     y="117.83334"
+     y="117.44572"
      id="text31"><tspan
        id="tspan31"
        style="stroke-width:0.240136"
        x="65.561348"
-       y="117.83334">6</tspan></text>
+       y="117.44572">6</tspan></text>
   <text
      xml:space="preserve"
-     style="font-weight:bold;font-size:7.18792px;line-height:1;font-family:Calibri;-inkscape-font-specification:'Calibri, Bold';text-align:end;writing-mode:lr-tb;direction:ltr;text-anchor:end;fill:#000000;stroke:#000000;stroke-width:0.240136"
-     x="22.770363"
-     y="117.32619"
-     id="text32"><tspan
+     style="font-weight:bold;font-size:7.37826px;line-height:1;font-family:Calibri;-inkscape-font-specification:'Calibri, Bold';text-align:end;writing-mode:lr-tb;direction:ltr;text-anchor:end;fill:#000000;stroke:#000000;stroke-width:0.246495"
+     x="23.276125"
+     y="114.34364"
+     id="text32"
+     transform="scale(0.97216979,1.0286269)"><tspan
        id="tspan32"
-       style="stroke-width:0.240136"
-       x="22.770363"
-       y="117.32619">-</tspan></text>
+       style="stroke-width:0.246495"
+       x="23.276125"
+       y="114.34364">-</tspan></text>
   <text
      xml:space="preserve"
      style="font-weight:bold;font-size:7.18792px;line-height:1;font-family:Calibri;-inkscape-font-specification:'Calibri, Bold';text-align:end;writing-mode:lr-tb;direction:ltr;text-anchor:end;fill:#000000;stroke:#000000;stroke-width:0.240136"
@@ -585,12 +586,12 @@
      xml:space="preserve"
      style="font-weight:bold;font-size:7.18792px;line-height:1;font-family:Calibri;-inkscape-font-specification:'Calibri, Bold';text-align:end;writing-mode:lr-tb;direction:ltr;text-anchor:end;fill:#000000;stroke:#000000;stroke-width:0.240136"
      x="36.874172"
-     y="117.8351"
+     y="117.44747"
      id="text34"><tspan
        id="tspan34"
        style="stroke-width:0.240136"
        x="36.874172"
-       y="117.8351">4</tspan></text>
+       y="117.44747">4</tspan></text>
   <text
      xml:space="preserve"
      transform="scale(0.26458333)"
