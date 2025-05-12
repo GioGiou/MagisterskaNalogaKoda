@@ -7,7 +7,7 @@ Prostorska zahtevnost kompaktnega priponskega drevesa je nižja (velikost kompak
          &$ST$& $CST$\\\hline
         $koren()$& $O(1)$ & $O(1)$ \\
         $jeList(v)$& $O(1)$ & $O(1)$\\
-        $otrok(v,z)$& $O(\log|\Sigma|)$& $O(\log|\Sigma|t_{SA})$\\
+        $otrok(v,z)$& med $O(1)$ in $O(|\Sigma|)$& $O(\log|\Sigma|t_{SA})$\\
         $prviOtrok(v)$& $O(1)$&$O(1)$\\
         $star$\textit{š}$(v)$& $O(1)$& $O(1)$\\
         $nbrat(v)$& $O(1)$& $O(1)$\\
@@ -18,11 +18,11 @@ Prostorska zahtevnost kompaktnega priponskega drevesa je nižja (velikost kompak
         $lca(v,w)$& $O(1)$& $O(1)$\\
         $sl(v)$& $O(1)$& $O(t_\Psi)$ \\
         \\
-        \textit{š}$teviloPonovitev(vzorec)$& $O(n+m)$& $O(mt_{\Psi})$\\
-        $seznamPojavov(vzorec)$& $O(n+m)$ & $O(mt_\Psi + t_{SA})$\\
+        \textit{š}$teviloPonovitev(vzorec)$& $O(m+occ)$& $O(mt_{\Psi})$\\
+        $seznamPojavov(vzorec)$& $O(n+occ)$ & $O(mt_\Psi +occ\cdot t_{SA})$\\
         $prisotnost(vzorec)$& $O(m)$& $O(mt_{\Psi})$\\
         \\
-        $izgradnja(T)$& $O(n)$ & $O(nt_{SA})$\\
+        $izgradnja(T)$& $O(n)$ & $O(nt_{SA} + n\log{n})$\\
         $velikost$& $O(n)$ kazalcev & $|CSA|+6n+o(n)$ bitov\\
     \end{tabular} 
     \label{tab:PrimerjaST}
