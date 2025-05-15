@@ -1,11 +1,11 @@
-Za daljše besede $T$ lahko priponska drevesa presežejo velikost notranjega pomnilnika. Prva možna reštiev tega problema je uporaba priponskega polja ter $LCP$ polja za simulirat priponsko drevo, ampak ta rešitev za $1,4$-krat dalše besede se ponovno pojavi ta problem. Torej se potrebuje reštitev, ki bo omogočala še bolj prostorsko učinkovito rešitev. 
+Za daljše besede $T$ lahko priponska drevesa presežejo velikost notranjega pomnilnika. Prva možna reštiev tega problema je uporaba priponskega polja ter $LCP$ polja za simulirat priponsko drevo, ampak se pri $1,4$-krat dalši vhodni besedi ponovno pojavi problem preseženja velikosti notranjega pomnilnika. Torej se potrebuje reštitev, ki bo še bolj prostorsko učinkovita. 
 
-Vsako vozlišče priponskega drevesa hrani niz, ki prestavlja vhodno povezavo, in reference na otroke, starša ter na vozlišče, na katerega kaže priponska povezava. Zato prostor, ki ga zasedejo drevesa na pomnilniku, ni odvisna zgolj od števila vozlišč, ampak je odvisna tudi od arhitekture računalnika, ki določa velikost pomnilniškega naslova, s katerim se referencira druga vozlišča. Na primer priponsko drevo človeškega genoma, ki ima dolžino 3 milijarde nukleotidov iz abecede velikosti pet (pri tem je vštet v abecedo tudi, znak za konec besedila), potrebuje približno $144$ GB notranjega pomnilnika. Ekvivalentno priponsko polje pa potrebuje približno $15$ GB notranjega pomnilnika \cite{GENOMEKNOWLEDGEHUB-2024-10-30}.
+Vsako vozlišče priponskega drevesa hrani niz, ki prestavlja vhodno povezavo, in reference na otroke, starša ter na vozlišče, na katerega kaže priponska povezava. Zato prostor, ki ga zasedejo drevesa na pomnilniku, ni odvisna zgolj od števila vozlišč, ampak je odvisna tudi od arhitekture računalnika, ki določa velikost pomnilniškega naslova, s katerim se referencira druga vozlišča. Na primer priponsko drevo človeškega genoma, ki ima dolžino 3 milijarde nukleotidov iz abecede velikosti pet (pri tem je vštet v abecedo tudi, znak za konec besedila), potrebuje med $60$ in $144$ GB notranjega pomnilnika, ki je odvisno od podatkov shranijih v vozliščih \cite{GENOMEKNOWLEDGEHUB-2024-10-30}. Ekvivalentno priponsko polje pa potrebuje med $12$ in $60$ GB notranjega pomnilnika odvisno od dodatnih podatkovnih struktur, ki so bile dodane priponskemu polju. Zato prostorsko učinkovita reštiev ne sme temeljiti na referencah pomnilniških naslovov.
 
-Ta problem se da rešiti s kompaktno predstavitvijo podatkovnih struktur, ki se jih bo obravnavalo v tem poglavju. Ta podatkovna struktura je imenovana kompaktno priponsko drevo (angl. \textit{Compressed Suffix Tree} oziroma CST). Preden se lahko definira kompatno predstavitev je potrebno definirati abstraktno podatkovno strukturo priponsko drevo, ki poda vse operacije, ki so potrebne za pravilno delovanje priponskega drevesa \cite{Sadakane2007}.
+Ta problem se da rešiti s kompaktno predstavitvijo podatkovnih struktur. Podatkovna struktura, ki se jo bo predstavilo v tem poglavuju, je imenovana kompaktno priponsko drevo (angl. \textit{Compressed Suffix Tree} oziroma CST) in predstavlja eno možno kompaktno predstavitev priponskega drevesa. Preden se lahko definira kompatno predstavitev je potrebno definirati abstraktno podatkovno strukturo priponsko drevo, ki poda vse operacije, ki so potrebne za pravilno delovanje priponskega drevesa \cite{Sadakane2007}.
 
 \begin{defi}\label{def:AST}
-    Abstraktna podatkovna struktura Priponsko drevo nad besedilo $T$ podpira sledeče operacije:
+    Abstraktna podatkovna struktura priponsko drevo nad besedilo $T$ podpira sledeče operacije:
     \begin{enumerate}
         \item $koren()$: vrne koren priponskega drevesa,
         \item $jeList(v)$: vrne »Da«, če je vozlišče list, sicer vrne »Ne«,
@@ -21,7 +21,7 @@ Ta problem se da rešiti s kompaktno predstavitvijo podatkovnih struktur, ki se 
     \end{enumerate}
 \end{defi}
 
-V podpoglavju \ref{sec:STsimulacija} je bil predstavili način simulacije priponskega drevesa s pomočjo priponskega polja $SA$ in polja najdaljših skupnih predpon $LCP$. Z uporabo kompaktnih različic teh dveh podatkovnih struktur je možno implementirati kompaktno priponsko drevo. Ker pa veliko operacij iz Definicije \ref{def:AST} operacij nad drevesi, se lahko doda še kompaktno predstavitev topologije drevesa, saj le ta pospeši operacije nad drevesi. Torej sledi definicija za podatkovno strukturo kompaktno priponsko drevo.
+V podpoglavju \ref{sec:STsimulacija} je bil predstavili način simulacije priponskega drevesa s pomočjo priponskega polja $SA$ in polja najdaljših skupnih predpon $LCP$. Z uporabo kompaktnih različic teh dveh podatkovnih struktur je možno implementirati kompaktno priponsko drevo. Ker pa je veliko operacij iz Definicije \ref{def:AST} operacij nad drevesi, se lahko doda še kompaktno predstavitev topologije drevesa, saj le ta pospeši operacije nad drevesi. Torej sledi definicija za podatkovno strukturo kompaktno priponsko drevo.
 
 \begin{defi}
     Kompaktno priponsko drevo nad besedilom $T$ je sestavljeno iz sledečih podatkovnih struktur:
@@ -32,10 +32,21 @@ V podpoglavju \ref{sec:STsimulacija} je bil predstavili način simulacije pripon
     \end{enumerate}
 \end{defi}
 
-V nadaljevanju poglavja bo predstavljena Sadakanejeva \cite{Sadakane2007} implementacija kompaktnega priponskega drevesa. V Poglavju \ref{sec:kompaktna_drevesa} je bilo predstavljenih več različnih predstavitev topologije dreves. Implementacija kompaktnega priponskega drevesa pa uporablja predstavitev z zaporedjem uravnoteženih oklepajev.
+V nadaljevanju poglavja bo predstavljena Sadakanejeva \cite{Sadakane2007} implementacija kompaktnega priponskega drevesa, ki je prva kompaktna predstavitev priponskega drevesa. V Poglavju \ref{sec:kompaktna_drevesa} je bilo predstavljenih več različnih predstavitev topologije dreves. Implementacija kompaktnega priponskega drevesa pa uporablja predstavitev z zaporedjem uravnoteženih oklepajev.
 
 \paragraph{Topologija drevesa:}
-Ker se za kompaktno priponsko drevo uporablja BP kot topologijoa drevsa, je potrebno podpirati operacije $rang_p$, $izbira_p$, $zapri$, $odpri$ in $oklepa$, ki se izvajajo v konstantnem času za $p\in\{0,1\} ^*$. Pri tem so potrebne dve dodatni podatkovni strukturi za operacijo $rang$ ( $rang_0$, $rang_{01}$) in tri za operacijo $izbira$ ($izbira_0$, $izbira_1$ in $izbira_{01}$). Ostale operacije pa uporabljajo podatkovno strukturo za višek predstavljeno v \cite{Munro1997}, ki je implementirana na podoben način kot dodatna podatkovna struktura za $rang$, namesto $rmM$-drevesa. To pomeni, da za operacijo $otrok(v,i)$ je potrebno $O(|\Sigma|)=O(1)$ časa. Zato tudi operacija $lca(v,w)$ potrebuje dodatno podatkovno strukturo, ki ji omogoča konstanten čas izvajanja. Ta podatkovna struktura potrebuje $o(n)$ dodatnih bitov. Dodatna podatkovna struktura $L$ za operacijo $lca(v,w)$ deluje na podoben način kot podatkovna struktura za $rang$, pri čemer $L[i]$ je višek na vzorčnem mestu $i$. Za hitrejše delovanje operacije se zgradi še dvodimenzionalno tabelo $M[i,k]$, ki  shrani položaj najmanjšega viška na intervalu $L[i..i+2^k-1]$. Vrednost $k$ je manjša od velikosti vedra. Torej operacija $lca(v,w)$ se izračuna kot $\min\{M[v',k],M[w'-2^k+1,k]\}$, pri čemer je $k=\lfloor \log{(w'-v')\rfloor}$, $v'$ predstavlja vedro v $L$, ki vsebuje $v$, ter $w'$ je vedro v $L$, ki vsebuje $w$. 
+Ker se za kompaktno priponsko drevo uporablja BP kot topologijoa drevsa, je potrebno podpirati operacije $rang_p$, $izbira_p$, $zapri$, $odpri$ in $oklepa$, ki se izvajajo v konstantnem času za $p\in\{0,1\} ^*$. Pri tem so potrebne dve dodatni podatkovni strukturi za operacijo $rang$ ($rang_0$, $rang_{01}$) in tri za operacijo $izbira$ ($izbira_0$, $izbira_1$ in $izbira_{01}$). Ostale operacije pa uporabljajo podatkovno strukturo za višek predstavljeno, ki sta jo predlagala Munro in Raman \cite{Munro1997} in je implementirana na podoben način kot dodatna podatkovna struktura za $rang$, namesto $rmM$-drevesa. To podatkovno strukturo imenujemo $L$, ki hrani polje najnižjih viškov $L'$ in v celici $L'[i]$ je shranjen najnižji višek v $i$-tem vedru dolžine $O(\log{n})$. To pomeni, da je za operacijo $otrok(v,i)$ potrebno $O(|\Sigma|)=O(1)$ časa. 
+
+Operacija $lca(v,w)$ pa potrebuje dodatno podatkovno strukturo, ki ji omogoča konstanten čas izvajanja $rmq$ poizvedbe nad viškom. Ta podatkovna struktura potrebuje $o(n)$ dodatnih bitov. In sicer se izgradi dvodimenzionalno celico tabele $M[i][k]$, ki shrani položaj najmanjšega viška na intervalu $L'[i..i+2^k-1]$. Torej operacija $lca(v,w)$ se izračuna kot
+\begin{equation*}
+    \min\left\{
+    \begin{array}{l}
+        \min\{L[v,e]\},\\ 
+        \min\{M[v'][k],M[w'-2^k+1][k]\},\\
+        \min\{L[s,w]\}
+    \end{array}\right\},
+\end{equation*}
+pri čemer je $k=\lfloor \log{(w'-v')\rfloor}$, $v'$ predstavlja vedro v $L'$, ki je prvo vedro po vedru z vozliščem $v$, $w'$ je vedro v $L'$, ki je prvo vedro pred vedru z vozliščem $w$, $e$ predstavlja konec vedra v $L$, ki vsebuje $v$, in $s$ predstavlja začetek vedra, ki vsebuje $w$. Pri tem vsaka poizvedba v $L$ in vsaka poizvedba v $M$ potrebuje konstantno časa \cite{Sadakane2007,Valimaki2007}. 
 
 V primeru, da so potrebne dodatne operacije, ki temeljijo na $rMq$ operaciji in $|\Sigma|>\log{n}$, se lahko doda še $rmM$-drevo, ki omogoča izvedbo operaciji v $O(\log{n})$ ter pospeši izvajanje oziroma omogoča implementacijo tudi drugih operacij.
 
@@ -48,7 +59,7 @@ Priponsko drevo nad besedilom $T$ ima $2n-1$ vozlišč: od tega je $n-1$ notranj
 \end{proof}
 
 \paragraph{Kompaktno priponsko polje:}
-Naslednja podatkovna struktura, ki je potrebna za pravilno delovanje kompaktnega priponskega drevesa, je kompaktno priponsko polje (angl. \textit{Compressed Suffix Array} oziroma CSA). Priponsko polje (angl. \textit{Suffix Array} oziroma SA) je podatkovna struktura, v kateri so shranjene vse pripone besedila $T$ v leksikografskem vrstnem redu. Priponska polja so implementirana kot polje indeksov začetkov pripon (cela števila), torej potrebujejo $O(n\log{n})$ bitov (v praksi $O(nw)$ bitov, saj implementacije uporabljajo prevzeto dolžino celega števila). Kompaktna priponska polja znižajo prostorsko zahtevnost na $O(n\log{|\Sigma|})$ bitov \cite{Grossi2000} ali celo na $nH_h +o(n)$ bitov \cite{Grossi2003}, pri čemer je red $h\le\alpha\log_{|\Sigma|}{n};0<\alpha<1$ in $H_h$ je entropija $h$-tega reda, ki se v praksi uporablja kot merilo prostorske zahtevnosti pri kodiranju besedil \cite{Navarro2016}.
+Naslednja podatkovna struktura, ki je potrebna za pravilno delovanje kompaktnega priponskega drevesa, je kompaktno priponsko polje (angl. \textit{Compressed Suffix Array} oziroma CSA). Kompaktna priponska polja znižajo prostorsko zahtevnost priponskega polja iz $O(n\log{n})$ oziroma $O(nw)$ na $O(n\log{|\Sigma|})$ bitov \cite{Grossi2000} ali celo na $nH_h +o(n)$ bitov \cite{Grossi2003}, pri čemer je red $h\le\alpha\log_{|\Sigma|}{n};0<\alpha<1$ in $H_h$ je entropija $h$-tega reda, ki se v praksi uporablja kot merilo prostorske zahtevnosti pri kodiranju besedil \cite{Navarro2016}.
 
 Obstajata dve različici kompaktnih priponskih polj: prva implementacija temelji na funkciji $\Psi$, druga implementacija imenovan $FM$-indeks pa uporablja $LF$ funkciji, ki je inverzna funkcija od $\Psi$ \cite{Navarro2016, Sadakane2007}.
 
@@ -60,17 +71,15 @@ Implementacije kompaktnega priponskega polja, ki so lahko uporabljajo pri implem
         \item $pripona(i)$ vrne $SA[i]$ v času $t_{SA}$,
         \item $inverz(i)$ vrne $j=SA^{-1}[i]$, pri čemer je $SA[j]=i$, v času $t_{SA}$,
         \item $\Psi(i)$ vrne $SA^{-1}[SA[i]+1]$ v času $t_\Psi$,
-        \item $besedilo(i,d)$ vrne $T[SA[i]:SA[i]+d-1]$ v času $O(dt_\Psi)$.
+        \item $besedilo(i,d)$ vrne $T[SA[i],SA[i]+d-1]$ v času $O(dt_\Psi)$.
     \end{enumerate}    
 \end{defi}
 
 Funkcija $\Psi$ je uporabna v kompaktnih priponskih drevesih za izgradnjo priponskih povezav v konstantnem času oziroma v času $t_\Psi$, čeprav ni potrebna za pravilno delovanje kompaktnega priponskega polja. Iz definicije funkcije $\Psi$ je razvidno, da jo lahko simuliramo z uporabo operacij $inverz(i)$ in $pripona(i)$. Iz definicije \ref{def:csa} sledi, da mora kompaktno priponsko polje podpirati funkcijo $\Psi$, zato implementacije z $FM$-indeksom ne pridejo v poštev. 
 
-Vse štiri operacije so lahko implementirane z uporabo $\Psi$ funkcije ter z vzorčenjem priponskega polja $SA$ in inverznega priponskega polja $SA^{-1}$. Na ta način ni potrebno hraniti besedila $T$ in celotnega priponskega polja $SA$.
+V nadaljevanju tega dela poglavja bo predstavljena preprosta različica kopaktenga priponskega polja. Ta različica je bila izbrana zaradi enostavne implementacije operacije ter preproste vizualizacije strukture. V tej implementacije so vse štiri operacije implementirane z uporabo $\Psi$ funkcije ter z vzorčenjem priponskega polja $SA$ in inverznega priponskega polja $SA^{-1}$. Na ta način ni potrebno hraniti besedila $T$ in celotnega priponskega polja $SA$.
 
-Funkcija $\Psi$ je predstavljena z istoimenskim poljem, katerega $i$-ta celica je $\Psi[i]=\Psi(i)=SA^{-1}[SA[i]+1]$. Ideja kompaktnega zapisa polja $\Psi$ temelji na dejstvu, da za $j=SA[i]$ in $j'=SA[i+i]$ ter $T[j]=T[j']$ sledi $T[j+1,n]<T[j'+1,n]$ (leksikografsko), torej tudi $\Psi(i)<\Psi(i+1)$. 
-
-Dejstvo se lahko zapiše: kot bitno polje $D$, pri čemer $D[i]=1$, ko je $i=1$ ali $T[SA[i]]\ne T[SA[i+1]]$, ter polje znakov $S$ urejenih v leksikografskem vrstnem redu, tako da $T[SA[i]]=S[rang(D,i)]$.
+Funkcija $\Psi$ je predstavljena z istoimenskim poljem, katerega $i$-ta celica je $\Psi[i]=\Psi(i)=SA^{-1}[SA[i]+1]$. Ideja kompaktnega zapisa polja $\Psi$ temelji na dejstvu, da za $j=SA[i]$ in $j'=SA[i+1]$ ter $T[j]=T[j']$ sledi $T[j+1,n]<T[j'+1,n]$ (leksikografsko), torej tudi $\Psi(i)<\Psi(i+1)$. To dejstvo se lahko zapiše kot bitno polje $D$, pri čemer $D[i]=1$, ko je $i=1$ ali $T[SA[i]]\ne T[SA[i+1]]$, ter polje znakov $S$ urejenih v leksikografskem vrstnem redu, tako da $T[SA[i]]=S[rang_1(D,i)]$.
 
 Polje $\Psi$ se lahko razdeli na $|\Sigma|$ delov in uvede polje $C$, za katerega velja $C[c]=i$, tako da $T[SA[i+1]]=c$ in $T[SA[i]]\ne c$, za vsak $c\in\Sigma$. Polje $C$ potrebuje $O(|\Sigma|\log{n})$ bitov. Tako se lahko razdeli $\Psi$ na $\Psi_c;\:c\in\Sigma$, kjer je $\Psi[i]=\Psi_c[i']$,  za $i'=i-C[S[rang_1(D,i)]]$. Vsako polje $\Psi_c$ se lahko zapiše kot bitno polje $B_c$ dolžine $n$, pri čemer $B_c[\Psi_c[i]]=1$ za $1 \le i \le n_c$, kjer je $n_c$ število ponovitev znaka $c$ v besedilu $T$. Torej velja $\Psi_c[i']=izbira_1(B_c,i')$ ali $\Psi[i]=izbira_1(B_c,i-C[c])$, kjer $c=rang_1(D,i)$. Bitna polja $B_c$ so zelo redka (število enic je bistveno manjše kot število ničel), torej se jih lahko stisne iz $|\Sigma|n+o(n)$ bitov na $n_c\log\frac{n}{n_c}+O(n_c)$ bitov, kar pomeni, da funkcija $\Psi$ potrebuje $nH_0(T)+O(n+|\Sigma|w)$ bitov, pri čemer $H_0(T)$ je entropija besedila $T$ \cite{Navarro2016}.
 

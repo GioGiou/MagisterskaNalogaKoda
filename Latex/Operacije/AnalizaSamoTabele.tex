@@ -1,0 +1,176 @@
+Prostorska zahtevnost kompaktnega priponskega drevesa je nižja (velikost kompaktnega priponskega drevesa je $|CSA|+6n+o(n)$ bitov za razliko od $O(n)$ kazalcev oziroma $O(n\log{n})$ bitov priponskega drevesa), kar je tudi vidno iz primera človeškega genoma, vendar imajo nekatere operacije na račun kompaktne predstavitve višjo časovno zahtevnost. V Tabeli \ref{tab:PrimerjaST} so prikazane razlike: v prostorski zahtevnosti priponskega drevesa in kompaktnega priponskega drevesa ter  v časovni zahtevnosti operacij priponskega drevesa, v časovni zahtevnosti različnih poizvedb nad priponskim drevesom in v časovni zahtevnosti izgradnje drevesa. Tabela \ref{tab:PrimerjaST} je razdeljena na tri dele: v prvem delu so zbrane operacije priponskega drevesa, v drugem delu so zbrane poizvedbe nad priponskim drevesom, v tretjem delu tabele pa sta zbrani časovna zahtevnost izgradnje ter prostorska zahtevnost.
+
+\begin{table}[htb]
+    \centering
+    \caption{Časovna zahtevnost operacij priponskega drevesa, izgradnje priponskega drevesa in iskanja v priponskem drevesu ter prostorska zahtevnost priponskega drevesa.}
+    \begin{tabular}{rcc}
+         &$ST$& $CST$\\\hline
+        $koren()$& $O(1)$ & $O(1)$ \\
+        $jeList(v)$& $O(1)$ & $O(1)$\\
+        $otrok(v,z)$& med $O(1)$ in $O(|\Sigma|)$& $O(\log|\Sigma|t_{SA})$\\
+        $prviOtrok(v)$& $O(1)$&$O(1)$\\
+        $star$\textit{š}$(v)$& $O(1)$& $O(1)$\\
+        $nbrat(v)$& $O(1)$& $O(1)$\\
+        $pbrat(v)$& $O(1)$& $O(1)$\\
+       
+        $povezava(v,i)$& $O(1)$ & $O(t_{SA})$\\
+        $globinaNiza(v)$& $O(1)$ & $O(t_{SA})$ \\
+        $lca(v,w)$& $O(1)$& $O(1)$\\
+        $sl(v)$& $O(1)$& $O(t_\Psi)$ \\
+        \\
+        \textit{š}$teviloPonovitev(vzorec)$& $O(m+occ)$& $O(mt_{\Psi})$\\
+        $seznamPojavov(vzorec)$& $O(n+occ)$ & $O(mt_\Psi +occ\cdot t_{SA})$\\
+        $prisotnost(vzorec)$& $O(m)$& $O(mt_{\Psi})$\\
+        \\
+        $izgradnja(T)$& $O(n)$ & $O(nt_{SA} + n\log{n})$\\
+        $velikost$& $O(n)$ kazalcev & $|CSA|+6n+o(n)$ bitov\\
+    \end{tabular} 
+    \label{tab:PrimerjaST}
+\end{table}
+
+Kompaktno priponsko drevo je lahko implementirano s pomočjo različnih različic kompaktnega priponskega polja, zato imajo operacije, ki so implementirane s pomočjo priponskega polja, različne časovne zahtevnosti. V Tabeli \ref{tab:PrimerjaST} imajo zato nekatere operacije časovno zahtevnost $O(t_\Psi)$ (časovna zahtevnost funkcije $\Psi$) ali $O(t_{SA})$ (časovna zahtevnost dostopa do priponskega polja) ter prostorska zahtevnost kompaktnega priponskega drevesa vsebuje člen $|CSA|$. Posledica \ref{pos:CSAnh} in Posledica \ref{pos:CSAlog} predstavljata prostorsko zahtevnost kompaktnega priponskega drevesa z uporabo dveh implementacij kompaktnega priponskega polja, zato so v Tabeli \ref{tab:CSATime} predstavljene prostorske in časovne zahtevnosti obeh implementacij priponskega polja.
+
+\begin{table}[htb]
+    \centering
+    \caption{Primerjava prostorske zahtevnosti ter časovne zahtevnosti različnih implementacij kompaktnega priponskega polja.}
+    \begin{tabular}{rccc}
+        Implementacija &$|CSA|$ $[bit]$& $t_\Psi$ & $t_{SA}$\\\hline
+        Grossi idr. \cite{Grossi2003}&  $nH_h+O(n\log\log{n} / \log_{| \Sigma|}{n})$& $O(\log{|\Sigma|})$ &$O(\log^2{n}/\log{\log{n}})$ \\
+        Grossi in Vitter \cite{Grossi2000}& $O\left(\frac{1}{\epsilon}n\log{| \Sigma|}\right)$ & $O(1)$ & $O(\log^\epsilon{n})$ \\
+    \end{tabular}    
+    \label{tab:CSATime}
+\end{table}
+
+%V nadaljevanju poglavja bodo bolj natančno primerjane različne implementacije operacij priponskega drevesa ter poizvedbe nad priponskimi drevesi. Prostorska zahtevnost ter časovna zahtevnost izgradnje ne bo podrobno primerjana, saj so bile podrobno predstavljene v predhodnih poglavjih. Čeprav večina operacij nad priponskim drevesom ohrani enak čas izvajanja tudi v kompaktnem priponskem drevesu, se implementacija teh spremeni. Implementacije bodo predstavljene v vrstnem redu, tako kot se pojavijo v Tabeli \ref{tab:PrimerjaST}.
+%
+%\newpage
+%
+%Prva primerjava implementacije je storjena za operacijo $koren()$, ki vrne koren priponskega drevesa. Operacija v obeh implementacijah potrebuje konstantni čas, da se izvrši. V priponskem drevesu operacija $koren()$ vrne kazalec na vozlišče koren. V kompaktnem priponskem drevesu pa operacija $koren()$ vrne število $1$, ki predstavlja položaj začetka korena oziroma uklepaja, ki predstavlja koren, v topologiji drevesa $\tau$. Iz operacije $koren()$ je razvidno, da čeprav obe implementaciji potrebujeta konstantni čas, da se izvršita, sta implementirani na dva popolnoma različna načina ter vrneta dve popolnoma različni vrednosti.
+%
+%
+%Naslednja primerjava implementacij bo narejena za operacijo $jeList(v)$, ki preveri ali je vozlišče $v$ list priponskega drevesa ali ne. V priponskem drevesu je implementirana operacija $jeList(v)$, tako da se preveri ali za vsak znak iz abecede $\Sigma$ obstaja povezava do drugega vozlišča. Če ne obstaja nobena taka povezava, potem je vozlišče $v$ list, sicer ni. V kompaktnem priponskem drevesu pa se preveri, če topologija drevesa $\tau[v,v+1]==01$, saj ima list v predstavitvi drevesa z uravnoteženimi oklepaji obliko $01$. Obe implementacij sta prikazani v Algoritmu \ref{alg:jeList}, in sicer je v zgornjem delu prikazana implementacija za priponsko drevo, v spodnjem delu pa implementacija za kompaktno priponsko drevo.
+%
+%\begin{algorithm}[htb]
+%
+%\Vhod{Vozlišče $v$}
+%\caption{Implementacija operacije $jeList(v)$ za ST in CST }\label{alg:jeList}
+%{
+%    (\tcc*[h]{Implementacija za ST})
+%
+%    \Za{$i = 1, \ldots, |\Sigma|$}{
+%     \Ce{$i$-ti otrok obstaja}{
+%        \KwRet{$False$}
+%     }
+%    }
+%    \KwRet{$True$}
+%}
+%
+%{
+%    {(\tcc*[h]{Implementacija za CST})}
+%
+%    \Ce{$\tau[v]==0\wedge \tau[v+1]==1$}{
+%        \KwRet{$True$}
+%    }
+%    \KwRet{$False$}
+%}
+%
+%\end{algorithm}
+%
+%Operacija $otrok(v,z)$ vrne vozlišče $u$, katerega povezava, ki kaže nanj iz vozlišča $v$, se začne z znakom $z\in\Sigma$. Operacija je implementirana v priponskih drevesih s pomočjo dvojiškega iskanja, saj so povezave med vozliščem $v$ in njegovimi otroki urejene v leksikografskem vrstnem redu. Torej je potrebnih $O(\log|\Sigma|)$ primerjav. Podobno je operacija implementirana tudi v kompaktnem priponskem drevesu. Pri tem pa je potrebno dostopati do priponskega polja za preveriti znak. Znak se izračuna s sledečo formulo:
+%
+%\begin{equation*}
+%\begin{split}
+%        a&=besedilo(u)[globinaNiza(v)+1]= \\
+%        &=S[rang_1(D,SA^{-1}[SA[rangList(u)]+globinaNiza(v)])],
+%\end{split}   
+%\end{equation*}
+%pri čemer dodatna operacija $besedilo(v)$ vrne besedilo, ki ga predstavljajo nizi na povezavah na poti iz korena do vozlišča $v$. Če $a=z$, potem se vrne vozlišče $u$, sicer se nadaljuje z iskanjem. Ker sta v enačbi dva dostopa do priponskega polja in en klic operacije $globinaNiza(v)$, potrebuje vsaka primerjava $O(t_{SA})$ časa, da se izvrši, zato potrebuje celotna operacija $O(t_{SA}\log|\Sigma|)$ časa, da se izvrši. Pri tem se lahko opazi, da je operacija $otrok(v,z)$ prva operacija, za katero se časovni zahtevnosti razlikujeta.
+%
+%Za razliko od operacije $otrok(v,z)$, se operacija $prviOtrok(v)$, ki vrne skrajno levega otroka od $v$, v obeh implementacija izvede v konstantnem času. V priponskem drevesu operacija $prviOtrok(v)$ vrne kazalec na prvo vozlišče v seznamu otrok vozlišča $v$, ki se lahko s psevdokodo napiše kot \verb|v.otroci[1]|. V kompaktnem priponskem drevesu pa operacija vrne število $v+1$, ki predstavlja položaj začetka prvega otroka oziroma uklepaj, ki predstavlja prvega otroka, v topologiji drevesa $\tau$. 
+%
+%Operacija $star$\textit{š}$(v)$ vrne vozlišče $u$, ki je starš od vozlišča $v$. Operacijo je mogoče implementirati v konstantnem času bodisi za priponsko drevo bodisi za kompaktno priponsko drevo. V priponskem drevesu je operacija implementirana, kot kazalec v vozlišču $v$, ki kaže nazaj na vozlišče $u$. To je lahko zapisano s psevdokodo kot \verb|v.starš|. V kompaktnem priponskem drevesu pa je operacija $star$\textit{š}$(v)$ implementiran s pomočjo dejstva, da uklepaj in zakepaj, ki predstavljata vozlišče $u$, oklepata celotno poddrevo s korenom $u$. Torej $u$, ki je starš od $v$, mora oklepati $v$. Torej je operacija $star$\textit{š}$(v)$ implementirana kot $u=oklepa(\tau,v)$. Operacijo $oklepa$ je možno implementirati v času $O(1)$ s pomočjo predhodno predstavljene dodatne podatkovne strukture ali v času $O(\log{n})$ s pomočjo $rmM$-drevesa.
+%
+%Operacija $star$\textit{š}$(v)$ se uporabi pri implementaciji operacij $nbrat(v)$ in $pbrat(v)$, saj sta vozlišča $v$ in $u$ brata, natanko tedaj ko velja $star$\textit{š}$(v)=star$\textit{š}$(u)$.
+%
+%Operacija $nbrat(v)$, ki vrne vozlišče $u$, ki je desni brat od vozlišča $v$, in potrebuje za obe implementacij priponskega drevesa $O(1)$ časa, da se izvrši. V priponskem drevesu vrne kazalec na vozlišče $u$, za katerega velja, da če je vozlišče $v$ na $i$-tem mestu v seznamu otrok, potem je vozlišče $u$ na $i+1$-tem mestu. To se lahko zapiše s psevdokodo kot \verb|v.starš.otroci[i+1]|. V primeru, da se zaporedno število vozlišča $v$ v seznamu otrok ne beleži, je lahko le to naračunano v času $O(\log|\Sigma|)$, kar še vedno omogoča iskanje v konstantnem času. V kompaktnem priponskem drevesu pa je naslednji brat od $v$ predstavljen kot prvi uklepaj po zaklepaju od vozlišča $v$, kar se lahko zapiše kot $u=zapri(\tau, v)+1$. Operacijo $zapri$ je možno implementirati v času $O(1)$ s pomočjo predhodno predstavljene dodatne podatkovne strukture ali v času $O(\log{n})$ s pomočjo $rmM$-drevesa.
+%
+%Podobno kot operacija $nbrat(v)$, tudi operacija $pbrat(v)$, ki vrne vozlišče $u$, ki je levi brat od vozlišča $v$, potrebuje za oba tipa priponskega drevesa $O(1)$ časa, da se izvrši. V priponskem drevesu vrne kazalec na vozlišče $u$, za katerega velja, da če je vozlišče $v$ na $i$-tem mest v seznamu otrok, potem je vozlišče $u$ na $i-1$-vem mestu. To se lahko zapiše s psevdokodo kot \verb|v.starš.otroci[i-1]|. V primeru, da se zaporedno število vozlišča $v$ v seznamu otrok ne beleži, je lahko le to naračunano v času $O(\log|\Sigma|)$, kar še vedno omogoča iskanje v konstantnem času. V kompaktnem priponskem drevesu pa je naslednji brat od $v$ predstavljen kot prvi uklepaj, ki odpre oklepaj levo od uklepaja od vozlišča $v$, kar se lahko zapiše kot $u=odpri(\tau, v-1)$. Operacijo $odpri$ je možno implementirati v času $O(1)$ s pomočjo predhodno predstavljene dodatne podatkovne strukture ali v času $O(\log{n})$ s pomočjo $rmM$-drevesa.
+%
+%Naslednja operacija, ki se ji teoretični čas izvajanja poslabša z uporabo kompaktnih priponskih dreves, je $povezava(v,i)$, ki vrne $i$-ti znak povezave, ki vodi v vozlišče $v$. V priponskih drevesih je niz na povezavi predstavljen kot par indeksov $(s,e)$, kjer $s$ predstavlja začetek prvega pojava niza v besedilu $T$, $e$ pa predstavlja konec niza v besedilu. Torej je $i$-ti znak v nizu $z=T[s+i-1]$, če velja $0<i\le e-s$. Za to je potrebno $O(1)$ časa. Operacija $povezava(v,i)$ pa je v kompaktnih priponskih drevesih implementirana na podoben način, kot je operacija $otorok(v,z)$. Implementirana je s sledečo formulo:
+%\begin{equation*}
+%\begin{split}
+%        z&=besedilo(v)[globinaNiza(star\textit{š}(v))+i]= \\
+%        &=S[rang_1(D,SA^{-1}[SA[rangList(u)]+globinaNiza(star\textit{š}(v))]+i-1)].
+%\end{split}   
+%\end{equation*}
+%Operacija dvakrat dostopa do priponskega polja, ki za vsak dostop potrebuje $O(t_{SA})$ časa, ter potrebuje rezultat operacije $globinaNiza(u)$, pri čemer $u=star\textit{š}(v)$, ki tudi potrebuje $O(t_{SA})$ časa, da se izvrši, po tem takem potrebuje operacija $povezava(v,i)$ tudi $O(t_{SA})$ časa, da se izvrši.
+%
+%Operacija $globinaNiza(v)$ vrne število znakov na povezavah na poti iz korena proti vozlišču $v$. V priponskem drevesu je možno beležiti za vsako vozlišče njegovo besedno globino. Torej je možno operacijo implementirati s časovno zahtevnostjo $O(1)$. V kompaktnem priponskem drevesu je vrednost $LCP[i]$, kjer $i$ je zaporedno število pripone, ki ga predstavlja skrajno desni list v poddrevesu, ki ima kot koren drugega otroka od $v$. To je možno, saj ima vsako notranje vozlišče vedno vsaj dva otroka. To se izračuna z uporabo sledeče formule
+%\begin{equation*}
+%\begin{split}
+%    sd(v)&=LCP[i]= izbira_1(H,SA[i])-2SA[i]),
+%\end{split}   
+%\end{equation*}
+%pri čemer je $i=rang_{01}(\tau,nbrat(prviOtrok(v)))$. To velja zgolj za notranja vozlišča, saj se za liste izračuna $globinaNiza(v)$, kot $sd(v)=n-SA[rang_{01}(\tau,v)]+1$. Torej operacija potrebuje $O(t_{SA})$ časa, da se izvrši, saj je v obeh primerih potreben dostop do priponskega polja, za katerega je potrebno $O(t_{SA})$ časa.
+%
+%
+%Operacija $lca(v,w)$, ki vrne najgloblje vozlišče $u$, ki je hkrati predhodnik od $v$ in od $w$, ima enako časovno zahtevnost v obeh primerih. Pri tem priponsko drevo potrebuje dodatno podatkovno strukturo, ki je izgrajena v času $O(n)$. V priponskem drevesu je lahko operacija $lca(v,w)$ naivno implementirana s pomočjo primerjanja vozlišč, na podoben način kot je implementirana v kompaktni predstavitvi LOUDS, kar je prikazano v Algoritmu \ref{alg:LOUDSlca}. Pri tem pa se primerjata globina vozlišča in kazalca na vozlišče namesto položaj vozlišča v zaporedju. Operacija je lahko izboljšana na konstantni čas s pomočjo algoritma, ki sta ga zapisala Harel in Tarjan \cite{Harel1984}. Dodatna podatkovna struktura $L$ (ime je enako kot v kompaktnem priponskem drevesu) potrebuje $O(n)$ dodatnega prostora ter mora omogočati $RMQ$ operacije. Implementirana je na podoben način kot  v kompaktnem priponskem drevesu. Torej se operacija $lca(v,w)$ tako v priponskem drevesu kot tudi v kompaktnem priponskem drevesu zapiše kot
+%\begin{equation*}
+%\begin{split}
+%    lca(v,w)&=rmq(L,v,w)=u,
+%\end{split}   
+%\end{equation*}
+%pri čemer so $v$, $w$ in $u$, v priponskem drevesu, zaporedno števila obiskanih istoimenskih vozlišči v sprehodu po priponskem drevesu. Zato mora biti $u$ pretvorjen nazaj v kazalec na vozlišče. V kompaktnem priponskem drevesu pa sprehod in pretvorba v kazalec nista potrebna, saj je $u$ predstavljen kot položaj uklepaja v zaporedju uravnoteženih oklepajev $\tau$. V obeh primerih z uporabo dodatne podatkovne strukture $L$ je možno izračunat $lca(v,w)$ v konstantnem času.
+%
+%Zadnja predstavljena operacija pa je operacija $sl(v)$, ki vrne vozišče $w$, na katerega kaže priponska povezava iz vozlišča $v$. V priponskem drevesu so priponske povezave in posledično operacija $sl(v)$ implementirane, tako da vozlišče $v$ hrani kazalec na vozlišče $w$, kar predstavlja priponsko povezavo. Torej je operacija $sl(v)$ implementirana s sledečo psevdokodo \verb|v.priponskaPovezava|. V kompaktnih priponskih drevesih pa je potrebno naračunati priponsko povezavo vozlišča $v$. Torej se lahko operacijo $sl(v)$ implementira kot:
+%\begin{equation*}
+%\begin{split}
+%    sl(v)&=lca(izbira_{01}(\tau,\Psi(rang_{01}(\tau,v-1)+1)),izbira_{01}(\tau,\Psi(rang_{01}(\tau,zapri(\tau,v))))).
+%\end{split}   
+%\end{equation*}
+%Ker operacije $lca(v,w)$, $izbira_{01}(\tau,x)$, $rang_{01}(\tau,x)$ in $zapri(\tau,x)$ potrebujejo konstantni čas, da se izvršijo, je časovna zahtevnost $O(t_\Psi)$. Za izračunati vrednost $\Psi(\cdot)$ je potrebno $O(t_\Psi)$ časa, kar je odvisno od implementacije kompaktnega priponskega polja. V predhodno predstavljeni implementaciji kompaktnega priponskega polja je $t_\Psi=O(1)$ in se zato v obeh primerih operacija $sl(v)$ izvrši v konstantnem času.
+%
+%Naslednji razdelek v Tabeli \ref{tab:PrimerjaST} predstavlja osnovne poizvedbe, ki se izvajajo nad priponskimi drevesi. Najbolj preprosta poizvedba med njimi je $prisotnost(vzorec)$, ki preveri, če je vzorec $vzorec$ dolžine $m$ prisoten v besedilu $T$. To poizvedbo se lahko izvede direktno nad besedilom z uporabo $KMP$ algoritma, ki potrebuje $O(n+m)$ časa, kar je enako kot čas potreben za izgraditi priponsko drevo, $O(n)$, in preverit prisotnost vzorca v drevesu, $O(m)$. Ko želimo preveriti prisotnost večjega števila vzorcev v besedilu, uporabimo priponsko drevo. Prisotnost vzorca v besedilu s priponskim drevesom se preveri s sprehodom iz korena proti listom drevesa. Pri tem se preveri, ali se nizi na povezavah ujemajo z iskanim vzorcem. V vsakem novem vozlišču je potrebno najti otroka, ki se začne z naslednjim znakom v vzorcu, za kar je potrebno $O(\log|\Sigma|)=O(1)$, saj je velikost abecede konstantna. Potrebno je še preveriti, ali je celoten vzorec $vzorec$ prisoten v priponskem drevesu, kar ima časovno zahtevnost $O(m\log|\Sigma|)=O(m)$. 
+%
+%\begin{algorithm}[htb]
+%
+%\Vhod{Kompaktno priponsko drevo $CST$, vzorec $P$}
+%\Izhod{Del priponskega polja, ki se začne z $P$}
+%\caption{Iskanje intervala v SA (del CST-ja), v katerem je prisoten vzorec $P$,  \cite{Navarro2016}}\label{alg:prisotnostCST}
+%{
+%    {$[s,e]=[C[P[m]]+1,C[P[m]+1]]$}
+%    
+%    \Za{$i=m..1$}{
+%    
+%        \Ce{$s>e$}{\KwRet{$[-1,-1]$}}
+%
+%        {$c=P[i]$}
+%
+%        {$[s',e']=[rang_1(B_c,s-1)+1,rang_1(B_c,e)]$}
+%
+%        {$[s,e]=[C[c]+s',C[c]+e']$}
+%        
+%    }
+%
+%    {\KwRet{$[s,e]$}}
+%}
+%
+%\end{algorithm}
+%
+%V kompaktnem priponskem drevesu se prisotnost vzorca išče s pomočjo vzvratnega iskanja (angl. \textit{Backward Search}) vzorca v priponskem polju $SA$. Vzvratno iskanje za predhodno predstavljeno kompaktno priponsko polje, ki je prikazano s Algoritmom \ref{alg:prisotnostCST}, potrebuje $O(mt_\Psi)$ časa, da se izvrši. Za drugačno implementacijo kompaktnega priponskega polja, se nadomesti vrstico 6 v Algoritmu \ref{alg:prisotnostCST} z binarnim iskanjem nad $\Psi_c$ in zato je potrebno $O(m\log{n}t_\Psi)$ časa. Nato pa je potrebo preveriti, ali je $[s,e]\ne[-1,-1]$, za kar je potrebno konstantno časa. Torej je potrebno $O(mt_\Psi)$ časa za preveriti prisotnost vzorca ali $O(m\log{n}t_\Psi)$ z uporabo binarnega iskanja. V primeru, da se uporabi opisano kompaktno priponsko polje, pa se poizvedba izvrši v času $O(m)$.
+%
+%Naslednja poizvedba je \textit{š}$teviloPonovitev(vzorec)$, ki vrne  število pojavov vzorca v besedilu, kar je ekvivalentno številu pripon v priponskem drevesu, ki se začnejo z vzorcem $vzorec$. V priponskem drevesu je potrebno najti vozlišče $v$, za katerega velja $besedilo(v)[1,m]=vzorec$. Po tem takem je število ponovitev vzorca enako številu listov v poddrevesu s korenom v vozlišču $v$. Štetje vseh listov zahteva $O(n)$ časa, za iskanje vozlišča $v$ pa je potrebno $O(m)$ časa, saj iskanje poteka na isti način, kot v poizvedbi  $prisotnost(vzorec)$. V kompaktnem priponskem drevesu, pa je operacija ponovno implementirana s pomočjo vzvratnega iskanja. Operacija \textit{š}$teviloPonovitev(vzorec)$ je implementiran kot razlika $e-s$, kjer $s$ predstavlja prvo pripono, ki se začne z vzorcem $vzorec$, in $e$ je zadnja tako pripona, torej je razlika $s-e$ število pripon, ki se začnejo z vzorcem $vzorec$. Torej operacija ponovno potrebuje $O(mt_\Psi)$ oziroma $O(mt_\Psi\log{n})$ časa, da se izvrši.
+%
+%Zadnja predstavljena poizvedba pa je $seznamPojavov(vzorec)$, ki vrne vsa začetna mesta pojavov vzorca $vzorec$  v besedilu $T$. To je ekvivalentno seznamu vseh pripon besedila $T$, ki se začnejo z vzorcem $vzorec$. V priponskem drevesu je to implementirano na podoben način, kot poizvedba \textit{š}$teviloPonovitev(vzorec)$, pri čemer namesto štetja listov v poddrevesu s korenom v vozlišču $v$, se v seznam pripon dodaja vse pripone, ki so predstavljene kot listi v poddrevesu s korenom v vozlišču $v$. V kompaktnem priponskem drevesu pa je poizvedba ponovno implementirana s pomočjo vzvratnega iskanja. Z vzvratnim iskanjem se naračuna interval v priponskem polju $SA[s,e]$. Za pridobitev položajev ponovitev vzorca v besedilu, je potrebno ustvariti seznam $[SA[s],SA[s+1],\dots,SA[e]]$, kar zahteva še dodatnih $e-s$ korakov, pri čemer vsak korak potrebuje $O(t_{SA})$ časa za se izvršit. Torej poizvedba $seznamPojavov(vzorec)$ potrebuje $O(mt_\Psi+t_{SA})$ oziroma $O(mt_\Psi \log{n}+t_{SA})$ časa. Z predhodno predstavljeno implementacijo kompaktnega priponskega drevesa pa je potrebno $O(m+\log{n})$ časa.
+%
+%Iz Tabele \ref{tab:CSATime} je razvidno, da sta poizvedbi $seznamPojavov(vzorec)$ in \textit{š}$teviloPonovitev$ $(vzorec)$ hitrejši v kompaktnih priponskih drevesih, natanko tedaj ko je velikost vzorca $m$ bistveno manjša od dolžine besedila $n$. Poizvedba $prisotnost(vzorec)$ ostane enako hitra za obe implementaciji kompaktnega priponskega polja tudi za velikosti vzorca $m=O(n)$. Pri tem pa ostane velikost abecede $\Sigma$ ne spremenjena, torej je tudi $O(\log|\Sigma|)=O(1)$.
+%
+%Iz implementacij poizvedb nad kompaktnim priponskim drevesom se lahko vidi, da so vse tri poizvedbe implementirane zgolj s pomočjo kompaktnega priponskega polja. Iz tega se lahko sklepa, da sta topologija drevesa $\tau$ in $LCP$ polje odvečni podatkovni strukturi. To je res zgolj za osnovne poizvedbe nad besedilom $T$, ki so lahko izvršene zgolj s priponskim polje v enakem času. Poizvedbe, kot so najdaljši ponavljajoči podniz, najdaljši palindrom, ki je implementirana s pomočjo priponskega drevesa konkatenacije obrata $T_z'$ besedila $T_z$, $T=T_{z}\#T_{z}'\$$, in najdaljši skupni niz besedila $T_1$ in $T_2$, ki je implementirana s pomočjo priponskega drevesa konkatenacje obeh besedil $T=T_1 \# T_2\$ $. Na primer poizvedbe najdaljši ponavljajoči podniz je podniz $T[SA[i],SA[i]+globinaNiza(v)]$, pri čemer $i$ je skrajno levi list poddrevesa s korenom v notranjem vozlišču $v$ in velja, da je $LCP[i]$ največji element v $LCP$ polju, torej zahteva $O(nt_{SA})$ časa. Operacije $globinaNiza(v)$ ni potrebno naračunati, saj je enaka $LCP[i]$, torej se še vedno izvede $O(nt_{SA})$ časa, pri tem pa ni uporabljena topologija drevesa. V primeru, da želimo najti drugi najdaljši ponavljajoč se podniz $T[SA[j],SA[j]+globinaNiza(u)]$, pri čemer je $j$ skrajno levi list poddrevesa s korenom v notranjem vozlišču $u=sl(v)$. Za izračunat le tega pa je potrebo $O(nt_{SA}+t_\Psi)$ časa ter se uporabi vse tri podatkovne strukture kompaktnega priponskega drevesa \cite{Valimaki2007, Weiner1973, Navarro2016}.
+%
+%V zadnjem razdelku Tabele \ref{tab:PrimerjaST} pa sta prikazani še dve primerjavi. Prva primerjava je časovna zahtevnost izgradnje priponskega drevesa ali kompaktnega priponskega drevesa iz besedila $T$ dolžine $n$. Izrek \ref{izr:ukkonen} trdi, da je možno priponsko drevo izgraditi s pomočjo Ukkonenovega algoritma v času $O(n)$. Kompaktno priponsko drevo pa se po Izreku \ref{izr:izgradnjaCST} lahko izgradi v času $O(n\log{n})$. Čeprav bi se lahko kompaktno priponsko drevo izgradilo v času $O(n)$ s pomočjo priponskega drevesa. Tako izdelan algoritem ne ohranja kompaktne prostorske zahtevnosti skozi celotno izgradnjo, za razliko od predstavljenega algoritma. Algoritem za izgradnjo kompaktnega priponskega drevesa je za $O(\log{n})$-krat počasnejši od algoritma za izgradnjo priponskega drevesa, vendar lahko izgradi priponsko drevo za večja vhodna besedila za razliko od Ukkonenovega algoritma za isto količino spomina.
+%
+%Iz primerjave algoritmov je razvidno, da se lahko za isto količino spomina izgradi kompaktno priponsko drevo za daljše besedilo kot za priponsko drevo. Priponsko drevo potrebuje $O(n)$ povezav. Čeprav se $O(n)$ povezav sliši manj kot $|CSA|+6n+o(n)$ bitov za kompaktno priponsko drevo, ima v resnici vsaka povezav velikost $O(\log{n})$ bitov, kar pomeni, da je prostorska zahtevnost priponskega drevesa $O(n\log{n})$ bitov. Kompaktno priponsko drevo pa potrebuje $|CSA|+6n+o(n)$ bitov, pri čemer so velikosti kompaktnega priponskega polja $|CSA|$ zapisane v tabeli \ref{tab:CSATime}. V primeru, da vzamemo za primerjavo prostorsko manj učinkovito kompaktno priponsko polje \cite{Grossi2000}, potem je prostorska zahtevnost kompaktnega priponskega drevesa $n\log|\Sigma|+6n+o(n)$ bitov, kar je $O(n)$ bitov, če ostane abeceda konstanta skozi celoten čas obstoja drevesa. Potemtakem je prostorska zahtevnost priponskega drevesa $O(\log{n})$-krat večja od prostorske zahtevnosti kompaktnega priponskega drevesa.
+%
+%Ampak so to le teoretične primerjave časovne zahtevnosti operacij, poizvedb in izgradnje ter prostorske zahtevnosti priponskih dreves, zato je potrebno te primerjave potrditi z empirično primerjavo. Z empirično evalvacijo se želi ugotoviti vpliv delovnega spomina, v katerega je zaradi lažje analize štet tudi \texttt{swap} razdelek zunanjega spomina, na časovne zahtevnost različnih implementacij priponskega drevesa ter prostorsko zahtevnost različnih implementacij priponskega drevesa v vsakdanji uporabi.
+%
+%%\newpage
