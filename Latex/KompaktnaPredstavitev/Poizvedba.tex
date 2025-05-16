@@ -1,3 +1,29 @@
+Naslednji razdelek v Tabeli \ref{tab:PrimerjaST} predstavlja osnovne poizvedbe, ki se izvajajo nad priponskimi drevesi. Najbolj preprosta poizvedba med njimi je $prisotnost(vzorec)$, ki preveri, če je vzorec $vzorec$ dolžine $m$ prisoten v besedilu $T$. To poizvedbo se lahko izvede direktno nad besedilom z uporabo $KMP$ algoritma, ki potrebuje $O(n+m)$ časa, kar je enako kot čas potreben za izgraditi priponsko drevo, $O(n)$, in preverit prisotnost vzorca v drevesu, $O(m)$. Ko želimo preveriti prisotnost večjega števila vzorcev v besedilu, uporabimo priponsko drevo. Prisotnost vzorca v besedilu s priponskim drevesom se preveri s sprehodom iz korena proti listom drevesa. Pri tem se preveri, ali se nizi na povezavah ujemajo z iskanim vzorcem. V vsakem novem vozlišču je potrebno najti otroka, ki se začne z naslednjim znakom v vzorcu, za kar je potrebno $O(\log|\Sigma|)=O(1)$, saj je velikost abecede konstantna. Potrebno je še preveriti, ali je celoten vzorec $vzorec$ prisoten v priponskem drevesu, kar ima časovno zahtevnost $O(m\log|\Sigma|)=O(m)$. 
+
+\begin{algorithm}[htb]
+
+\Vhod{Kompaktno priponsko drevo $CST$, vzorec $P$}
+\Izhod{Del priponskega polja, ki se začne z $P$}
+\caption{Iskanje intervala v SA (del CST-ja), v katerem je prisoten vzorec $P$,  \cite{Navarro2016}}\label{alg:prisotnostCST}
+{
+    {$[s,e]=[C[P[m]]+1,C[P[m]+1]]$}
+    
+    \Za{$i=m..1$}{
+    
+        \Ce{$s>e$}{\KwRet{$[-1,-1]$}}
+
+        {$c=P[i]$}
+
+        {$[s',e']=[rang_1(B_c,s-1)+1,rang_1(B_c,e)]$}
+
+        {$[s,e]=[C[c]+s',C[c]+e']$}
+        
+    }
+
+    {\KwRet{$[s,e]$}}
+}
+
+\end{algorithm}
 V kompaktnem priponskem drevesu se prisotnost vzorca išče s pomočjo vzvratnega iskanja (angl. \textit{Backward Search}) vzorca v priponskem polju $SA$. Vzvratno iskanje za predhodno predstavljeno kompaktno priponsko polje, ki je prikazano s Algoritmom \ref{alg:prisotnostCST}, potrebuje $O(mt_\Psi)$ časa, da se izvrši. Za drugačno implementacijo kompaktnega priponskega polja, se nadomesti vrstico 6 v Algoritmu \ref{alg:prisotnostCST} z binarnim iskanjem nad $\Psi_c$ in zato je potrebno $O(m\log{n}t_\Psi)$ časa. Nato pa je potrebo preveriti, ali je $[s,e]\ne[-1,-1]$, za kar je potrebno konstantno časa. Torej je potrebno $O(mt_\Psi)$ časa za preveriti prisotnost vzorca ali $O(m\log{n}t_\Psi)$ z uporabo binarnega iskanja. V primeru, da se uporabi opisano kompaktno priponsko polje, pa se poizvedba izvrši v času $O(m)$.
 
 Naslednja poizvedba je \textit{š}$teviloPonovitev(vzorec)$, ki vrne  število pojavov vzorca v besedilu, kar je ekvivalentno številu pripon v priponskem drevesu, ki se začnejo z vzorcem $vzorec$. V priponskem drevesu je potrebno najti vozlišče $v$, za katerega velja $besedilo(v)[1,m]=vzorec$. Po tem takem je število ponovitev vzorca enako številu listov v poddrevesu s korenom v vozlišču $v$. Štetje vseh listov zahteva $O(n)$ časa, za iskanje vozlišča $v$ pa je potrebno $O(m)$ časa, saj iskanje poteka na isti način, kot v poizvedbi  $prisotnost(vzorec)$. V kompaktnem priponskem drevesu, pa je operacija ponovno implementirana s pomočjo vzvratnega iskanja. Operacija \textit{š}$teviloPonovitev(vzorec)$ je implementiran kot razlika $e-s$, kjer $s$ predstavlja prvo pripono, ki se začne z vzorcem $vzorec$, in $e$ je zadnja tako pripona, torej je razlika $s-e$ število pripon, ki se začnejo z vzorcem $vzorec$. Torej operacija ponovno potrebuje $O(mt_\Psi)$ oziroma $O(mt_\Psi\log{n})$ časa, da se izvrši.
