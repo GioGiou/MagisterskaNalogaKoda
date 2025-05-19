@@ -128,12 +128,43 @@ Druga predlagana implementacija pa je časovno učinkovita in uporablja kompaktn
 Kompaktno priponsko drevo implementirano s pomočjo kompaktnega priponskega polja, ki potrebuje $O(\frac{1}{\epsilon}n\log{| \Sigma|})$ bitov, potrebuje $|CST|=O(\frac{1}{\epsilon}n\log{| \Sigma|})$ bitov. Pri tem je $\epsilon$ poljubna konstanta, ki ima vrednost $0<\epsilon<1$.
 \end{posl}
 
-\begin{figure}[tb]
-    \begin{center}
-        \includesvg[width=\textwidth]{Slike/KokosCST.svg}
-        \caption{Primer priponskega drevesa (levo) in kompaktnega priponskega drevesa (desno) za besedo »KOKOŠ$\$$«.} 
-        \label{fig:CST}
-    \end{center}
+\begin{figure}[htb]
+    \begin{subfigure}[t]{0.4\linewidth}
+        
+        \begin{subfigure}[t]{1\linewidth}        
+            \includesvg[scale=0.8]{Slike/KOKOŠMcCreightS2.svg}
+            \centering
+            \subcaption*{}
+            \label{fig:neKompaktnoDrevo}
+        \end{subfigure}
+        \begin{subfigure}[t]{1\linewidth}        
+            \includesvg[scale=0.8]{Slike/KokosSA1.svg}
+            \centering
+            \subcaption*{}
+            \label{fig:KompaktnoPolje}
+        \end{subfigure}
+        \centering
+        \subcaption*{}
+        \label{fig:neKompaktno}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.6\linewidth}        
+        \begin{subfigure}[t]{1\linewidth}  
+            \hspace{0.25cm}      
+            \includesvg{Slike/KompaktnoPriponskoPolje.svg}
+            \subcaption*{}
+            \label{fig:neKompaktnoDrevo}
+        \end{subfigure}
+        \begin{subfigure}[t]{1\linewidth}        
+            \includesvg[scale=0.9]{Slike/TopologijaInLCPKompaktna.svg}
+            \centering
+            \subcaption*{}
+            \label{fig:KompaktnoPolje}
+        \end{subfigure}
+        \subcaption*{}
+        \label{fig:Kompaktno}
+    \end{subfigure}
+    \caption{Primer kompaktnega priponskega priponskega drevesa nad besedo \enquote{KOKOŠ$\$$}. Za lažje razumevanje sta na levi strani sliki priazana tudi ekvivalentno priponsko drevo ter ekvivalentno priponsko polje.} 
+    \label{fig:CST}
 \end{figure}
 
 Primer kompaktnega priponskega drevesa je prikazan na Sliki \ref{fig:CST}. Zaradi lažje berljivosti so vse komponente kompaktnega priponskega drevesa (na desni strani slike) prikazane v ne kompaktni obliki. Priponsko polje je prikazano v treh vrsticah (vrstica, ki se začne s $SA$, vrstica, ki se začne s $SA^{-1}$, in vrstica ki se začne s $\Psi$).
