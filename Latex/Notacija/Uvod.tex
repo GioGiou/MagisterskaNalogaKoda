@@ -1,25 +1,41 @@
+%UVODNO BESEDILO
+
+V tem poglavju bodo predstavljene osnovne oznake in definicije, ki bodo uporabljene skozi magistrsko nalogo. Za tem pa bodo predstavljene onovne podatkovne strukture in predstavitve podatkovnih struktur, ki so potreben za implementacijo kompaktnih priponskih dreves.
+
+%V nadaljevanju poglavja bodo predstavljena še predstavitve in podatkovne strukture ter operacije nad njimi, ki so osnova za kompaktno predstavitev drugih podatkovnih struktur (na primer kompaktna prdstavitev dreves), ter kompaktne predstavitve dreves, pri čemer bo ena od predstavitev uporabljena v podatkovni strukturi kompaktno priponsko drevo. Predstavlje bo tudi eniški zapis, ki bo uporabljen v kompaktni predstavitvi priponskih dreves.
+
+\section{OZNAKE IN OSNOVNE DEFINICIJE}\label{sec:def}
 Skozi magistrsko nalogo $T$ predstavlja vhodno besedo dolžine $n$ znakov, iz katere bomo zgradili priponsko drevo ali kompaktno priponsko drevo. Na podoben način $P$ predstavlja iskani vzorec dolžine $m$ znakov v $T$. Vhodna beseda $T$ in vzorec $P$ sta sestavljena iz znakov abecede $\Sigma$.
 
-Niz znakov, ki je del besede in se začne na $i$-tem znaku besede, imenujemo podniz in je definiran na sledeč način:
+Niz znakov iz abecede $\Sigma$, ki je del besede in se začne na $i$-tem in se konča na $j$-tem znaku besede, imenujemo podniz in ga označimo kot $T[i,j]$. Poljubni nizi oziroma podnizi so označeni z grškimi črkami $\alpha$, $\beta$ in $\gamma$ ter pri tem je dopisano, ali gre za podniz ali niz. Formalno je podniz definiran na sledeč način:
 \begin{defi}
     Niz $\alpha\in\Sigma^*$ je podniz besede $T$, ko obstaja tak $1\le i\le n$, za katerega velja, da je  $\alpha=T[i,i+|\alpha|]$. 
 \end{defi}
-Poljubni nizi oziroma podnizi so označeni z grškimi črkami $\alpha$, $\beta$ in $\gamma$ ter pri tem je povedano, ali gre za podniz ali niz. Podniz besede $T$, ki se začne na $i$-tem mestu in se konča na $j$-tem mestu, pa je označen kot $T[i,j]$. Dva poljubna niza se lahko združita v novi daljši niz s stikom, ki je definiran na sledeči način:
+Dva poljubna niza se lahko združita v novi daljši niz s stikom, ki je definiran na sledeči način:
 \begin{defi}
     Stik nizov $\alpha$ in $\beta$ je niz $\gamma=\alpha\cdot\beta$, pri čemer je $\alpha=\gamma[1,|\alpha|]$ in $\beta=\gamma[|\alpha|+1,|\alpha|+|\beta|]$.
 \end{defi}
 
 Za razliko od nizov in podnizov so znaki iz abecede $\Sigma$ označeni s črkama $x$ ali $t$. Oznaka $T[i]$ pa prededstavlja znak na $i$-tem mestu vhodne besede.
 
-Ker bo nad besedo $T$ izgrajeno priponsko drevo ali kompaktno priponsko drevo, ki je uporabljeno za hitrejše iskanje vzorcev v besedi, so skozi nalogo vozlišča označena s črkami $s$, $v$, $w$ in $u$. Listi priponskega drevesa pa bodo označeni s črko $l$.
+Ker bo nad besedo $T$ izgrajeno priponsko drevo ali kompaktno priponsko drevo, ki je uporabljeno za hitrejše iskanje vzorcev v besedi, so skozi nalogo vozlišča označena s črkami $s$, $v$, $w$ in $u$. Listi priponskega drevesa pa bodo označeni s črko $l$, ko se govori na splošno o listih, sicer pa bodo označeni z $l_i$, pri čemer $i$ označuje zaporeno število lista od leve proti desni.
 
-V nadaljevanju poglavja bodo predstavljena še predstavitve in podatkovne strukture ter operacije nad njimi, ki so osnova za kompaktno predstavitev drugih podatkovnih struktur (na primer kompaktna prdstavitev dreves), ter kompaktne predstavitve dreves, pri čemer bo ena od predstavitev uporabljena v podatkovni strukturi kompaktno priponsko drevo. Predstavlje bo tudi eniški zapis, ki bo uporabljen v kompaktni predstavitvi priponskih dreves.
+Skozi nalogo bodo $\log_2{n}$ označeni kot $\log{n}$. Če zapisan logaritem ni dvojiški logaritem bo osnova le tega bila označena.
+
+
+\section{ENIŠKI ZAPIS}\label{sec:Eniski_Zapis}
+\import{.}{Notacija/EniskiZapis}
+
+\section{MODEL RAČUNANJA}\label{sec:Model_racunanja}
+Preden se lahko predstavi način shranjevanja bitnega polja, je potrebno predstaviti uporabljen model računanja. Splošen model računanja bo uporabljen, saj se različne arhitekture mikro procesorjev razlikujejo med seboj in bi bilo potreno narediti analizo za vsako arhitekuro posebaj. Zato bo izbran model računanja Računalnik z naključnim dostopom (angl. \textit{random-access machine} oziroma RAM). Bolj natančno bo uporabljen besedni RAM  (angl. \textit{word RAM}).
+
+Osnovna različica RAM modela podpira, da so vse aritmetične operacije nad celimi števili in logične operacijami nad biti izvedene v konstantnem času. Poleg tega RAM omogoča dostopa do spomina v konstantnem času ter linearni čas za dodelitev zaporednega spomina. Vse te operacije so storjene v enakem času tudi v besednem RAM modelu. Edina razlika med modeloma je, da RAM predpostavlja neskončni spomin za razliko od besednega RAM, ki pa omeji velikost spomina na $U$ naslovov in posledično je velikost ene besede na $w=\log{U}$ bitov, kar je velikost enega naslova \cite{Fredman1990,Morin2013,Navarro2016}. Pri tem se lahko definira tudi \enquote{cela števila} (angl. \textit{Integer}). \enquote{Cela števila} so definirana kot podmnožica celih števil, ki so lahko predstavljena v dvojiškem zapisu z eno računalniško besedo \cite{Navarro2016}.
 
 \section{BITNO POLJE}\label{sec:Bitno_Polje}
 \import{.}{Notacija/BitniVektor}
 
-\section{ENIŠKI ZAPIS}\label{sec:Eniski_Zapis}
-\import{.}{Notacija/EniskiZapis}
+%\section{ENIŠKI ZAPIS}\label{sec:Eniski_Zapis}
+%\import{.}{Notacija/EniskiZapis}
 
 \section{KOMPAKTNA PREDSTAVITEV DREVES}\label{sec:kompaktna_drevesa}
 \import{.}{Notacija/KompaktnaDrevesa}
