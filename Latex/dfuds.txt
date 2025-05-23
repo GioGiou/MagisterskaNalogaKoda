@@ -1,0 +1,1 @@
+    \put(-0.158311,0.01021034){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}{\huge $110|11110|0|110|0|0|110|0|0|0$}\end{tabular}}}}%
