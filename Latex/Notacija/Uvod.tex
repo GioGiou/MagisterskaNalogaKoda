@@ -1,11 +1,11 @@
 %UVODNO BESEDILO
 
-V tem poglavju bodo predstavljene osnovne oznake in definicije, ki bodo uporabljene skozi magistrsko nalogo. Za tem pa bodo predstavljene onovne podatkovne strukture in predstavitve podatkovnih struktur, ki so potreben za implementacijo kompaktnih priponskih dreves.
+V tem poglavju bodo predstavljene osnovne oznake in definicije, ki bodo uporabljene skozi magistrsko nalogo. Za tem pa bodo predstavljene osnovne podatkovne strukture in predstavitve podatkovnih struktur, ki so potreben za implementacijo kompaktne predstavitve priponskih dreves.
 
 %V nadaljevanju poglavja bodo predstavljena še predstavitve in podatkovne strukture ter operacije nad njimi, ki so osnova za kompaktno predstavitev drugih podatkovnih struktur (na primer kompaktna prdstavitev dreves), ter kompaktne predstavitve dreves, pri čemer bo ena od predstavitev uporabljena v podatkovni strukturi kompaktno priponsko drevo. Predstavlje bo tudi eniški zapis, ki bo uporabljen v kompaktni predstavitvi priponskih dreves.
 
 \section{OZNAKE IN OSNOVNE DEFINICIJE}\label{sec:def}
-Skozi magistrsko nalogo $T$ predstavlja vhodno besedo dolžine $n$ znakov, iz katere bomo zgradili priponsko drevo ali kompaktno priponsko drevo. Na podoben način $P$ predstavlja iskani vzorec dolžine $m$ znakov v $T$. Vhodna beseda $T$ in vzorec $P$ sta sestavljena iz znakov abecede $\Sigma$.
+Skozi magistrsko nalogo $T$ predstavlja vhodno besedo dolžine $n$ znakov, iz katere bomo zgradili priponsko drevo ali kompaktno priponsko drevo. Na podoben način $P$ predstavlja iskani vzorec dolžine $m$ znakov v $T$. Vhodna beseda $T$ in vzorec $P$ sta sestavljena iz znakov poljubne abecede $\Sigma$.
 
 Niz znakov iz abecede $\Sigma$, ki je del besede in se začne na $i$-tem in se konča na $j$-tem znaku besede, imenujemo podniz in ga označimo kot $T[i,j]$. Poljubni nizi oziroma podnizi so označeni z grškimi črkami $\alpha$, $\beta$ in $\gamma$ ter pri tem je dopisano, ali gre za podniz ali niz. Formalno je podniz definiran na sledeč način:
 \begin{defi}
@@ -16,11 +16,11 @@ Dva poljubna niza se lahko združita v novi daljši niz s stikom, ki je definira
     Stik nizov $\alpha$ in $\beta$ je niz $\gamma=\alpha\cdot\beta$, pri čemer je $\alpha=\gamma[1,|\alpha|]$ in $\beta=\gamma[|\alpha|+1,|\alpha|+|\beta|]$.
 \end{defi}
 
-Za razliko od nizov in podnizov so znaki iz abecede $\Sigma$ označeni s črkama $x$ ali $t$. Oznaka $T[i]$ pa prededstavlja znak na $i$-tem mestu vhodne besede.
+Za razliko od nizov in podnizov so znaki iz abecede $\Sigma$ označeni s črkama $x$ ali $t$. Oznaka $T[i]$ pa predstavlja znak na $i$-tem mestu vhodne besede.
 
-Ker bo nad besedo $T$ izgrajeno priponsko drevo ali kompaktno priponsko drevo, ki je uporabljeno za hitrejše iskanje vzorcev v besedi, so skozi nalogo vozlišča označena s črkami $s$, $v$, $w$ in $u$. Listi priponskega drevesa pa bodo označeni s črko $l$, ko se govori na splošno o listih, sicer pa bodo označeni z $l_i$, pri čemer $i$ označuje zaporeno število lista od leve proti desni.
+Ker bo nad besedo $T$ izgrajeno priponsko drevo ali kompaktno priponsko drevo, ki je uporabljeno za hitrejše iskanje vzorcev v besedi, so skozi nalogo vozlišča označena s črkami $s$, $v$, $w$ in $u$. Listi priponskega drevesa pa bodo označeni s črko $l$, ko se govori na splošno o listih, sicer pa bodo označeni z $l_i$, pri čemer $i$ označuje zaporedno število lista od leve proti desni.
 
-Skozi nalogo bodo $\log_2{n}$ označeni kot $\log{n}$. Če zapisan logaritem ni dvojiški logaritem bo osnova le tega bila označena.
+Skozi nalogo bodo $\log_2{n}$ označeni kot $\log{n}$. Če zapisan logaritem ni dvojiški logaritem, bo osnova le tega označena.
 
 
 \section{ENIŠKI ZAPIS}\label{sec:Eniski_Zapis}
