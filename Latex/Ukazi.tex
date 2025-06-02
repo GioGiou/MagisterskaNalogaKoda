@@ -1,0 +1,158 @@
+%%%%%%%%%%%%%%%%%%%%%    BP  %%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\Rang}[3]{%
+  \ensuremath{ \mathop{rang}_{#1}(#2,#3) }% rang
+}
+
+\newcommand{\Izbira}[3]{%
+  \ensuremath{ \mathop{Izbira}_{#1}(#2,#3)} % izbira
+}
+
+\newcommand{\Popcount}[1]{%
+  \ensuremath{ \mathop{\texttt{popcount}}\left(#1\right) }% pop count
+}
+
+\newcommand{\Predhodnik}[3]{%
+  \ensuremath{ \mathop{predhodnik}_{#1}(#2,#3) }% Predhodnik
+}
+
+\newcommand{\Naslednik}[3]{%
+  \ensuremath{ \mathop{naslednik}_{#1}(#2,#3) }% Naslednik
+}
+
+\newcommand{\Visek}[2]{%
+  \ensuremath{ \mathop{\textit{višek}}(#1,#2) }% Višek
+}
+\newcommand{\visek}[3]{%
+  \ensuremath{ \mathop{\textit{višek}}(#1,#2,#3) }% Relativni višek intervala
+}
+\newcommand{\rmq}[3]{%
+  \ensuremath{ \mathop{rmq}(#1,#2,#3) }% rmq
+}
+\newcommand{\rMq}[3]{%
+  \ensuremath{ \mathop{rMq}(#1,#2,#3) }% rMq
+}
+
+\newcommand{\MinStetje}[3]{%
+  \ensuremath{ \mathop{\textit{inŠtetje}}(#1,#2,#3) }% Min štetje
+}
+
+\newcommand{\MinIzbira}[4]{%
+  \ensuremath{ \mathop{\textit{minIzbira}}(#1,#2,#3,#4) }% Min izbira
+}
+
+%%%%%%%%%%%%%%%%%%%%%    KOmpaktna drevesa  %%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\Zapri}[2]{%
+  \ensuremath{ \mathop{zapri}(#1,#2) }% Zapri ukleaj
+}
+
+\newcommand{\Odpri}[2]{%
+  \ensuremath{ \mathop{odpri}(#1,#2) }% Odpri zaklepaj
+}
+\newcommand{\IskanjeNAprej}[3]{%
+  \ensuremath{ \mathop{iskanjeNapre}(#1,#2,#3) }% Iskanje naprej
+}
+
+\newcommand{\Oklepa}[2]{%
+  \ensuremath{ \mathop{oklepa}(#1,#2) }% Oklepaja ki oklepata
+}
+
+%%%%%%%%%%%%%%%%%%%%%    DREVESA  %%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\Globina}[1]{%
+  \ensuremath{ \mathop{globina}(#1) }% globina vozlišča v
+} 
+
+%%%%%%%%%%%%%%%%%%%%%    ST   %%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\Koren}{%
+  \ensuremath{ \mathop{koren}() }% koren drevesa
+}   
+
+\newcommand{\List}[1]{%
+  \ensuremath{\mathop{jeList}(#1) }% vrne, ali je v list
+} 
+
+\newcommand{\Otrok}[2]{%
+  \ensuremath{\mathop{otrok}(#1,#2) }% vrne, i-tega otroka od v 
+} 
+
+\newcommand{\PrviOtrok}[1]{%
+  \ensuremath{\mathop{prviOtrok}(#1) }% vrne, prvega otroka od v
+} 
+
+\newcommand{\PBrat}[1]{%
+  \ensuremath{\mathop{pBrat}(#1) }% vrne, vrne predhonjega brata od v
+} 
+
+\newcommand{\NBrat}[1]{%
+  \ensuremath{\mathop{nBrat}(#1) }% vrne, vrne naslednjega brata od v
+} 
+
+\newcommand{\Stars}[1]{%
+  \ensuremath{\mathop{\textit{starš}}(#1) }% vrne, vrne naslednjega brata od v
+} 
+
+\newcommand{\Povezava}[2]{%
+  \ensuremath{\mathop{povezava}(#1,#2) }% vrne, vrne naslednjega brata od v
+} 
+
+\newcommand{\Sd}[1]{%
+  \ensuremath{ \mathop{sd}(#1) }% črkovna globina vozlišča v
+}  
+
+
+\newcommand{\Lca}[2]{%
+  \ensuremath{ \mathop{lca}(#1,#2) } % najnglobji skupni predhodnik
+}  
+
+\newcommand{\Sl}[1]{%
+  \ensuremath{ \mathop{sl}(#1) }% priponska povezava od v
+} 
+
+
+%%%%%%%%%%%%%%%%%%%%%    Poizvedbe  %%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\Prisotnost}[2]{%
+  \ensuremath{ \mathop{prisotnost}(#1,#2) }% prisotnost vzorca P v besedilu T
+} 
+
+\newcommand{\SteviloPonovitev}[2]{%
+  \ensuremath{ \mathop{\textit{številoPonovitev}}(#1,#2) }% število ponovitev vzorca P v besedilu T
+} 
+
+\newcommand{\SeznamPojavov}[2]{%
+  \ensuremath{ \mathop{\textit{seznamPojavov}}(#1,#2) }% število ponovitev vzorca P v besedilu T
+} 
+
+%%%%%%%%%%%%%%%%%%%%%   SA  %%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\lcp}[2]{%
+  \ensuremath{ \mathop{lcp}(#1,#2) }% LCP med dvemi besedami
+} 
+
+\newcommand{\lInterval}[3]{%
+  \ensuremath{ [#1,#2] #3-interval }% l interval
+}
+
+%%%%%%%%%%%%%%%%%%%%%   CSA  %%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\Pripona}[1]{%
+  \ensuremath{ \mathop{pripona}(#1) }% pripona na item mestu 
+} 
+
+\newcommand{\Inverz}[1]{%
+  \ensuremath{ \mathop{inverz}(#1) }% pozicija pripone , ki se začne z i-tim znakom
+} 
+
+\newcommand{\PsiFunkcija}[1]{%
+  \ensuremath{ \mathop{\Psi}(#1) }% psi funkcija od i
+} 
+
+\newcommand{\Beseda}[2]{%
+  \ensuremath{ \mathop{beseda}(#1,#2) }% izpis prvih d znakov pripone na i-tem mestu
+} 
+
+
+%%%%%%%%%%%%%% prazne vrstice %%%%%%%%%%%%%%%%%%%%%%%%%
