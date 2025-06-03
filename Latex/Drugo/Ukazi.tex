@@ -1,11 +1,11 @@
 %%%%%%%%%%%%%%%%%%%%%    BP  %%%%%%%%%%%%%%%%%%%%
 
 \newcommand{\Rang}[3]{%
-  \ensuremath{ \mathop{rang}_{#1}(#2,#3) }% rang
+  \ensuremath{ \mathop{rang}\nolimits_{#1}(#2,#3) }% rang
 }
 
 \newcommand{\Izbira}[3]{%
-  \ensuremath{ \mathop{Izbira}_{#1}(#2,#3)} % izbira
+  \ensuremath{ \mathop{izbira}\nolimits_{#1}(#2,#3)} % izbira
 }
 
 \newcommand{\Popcount}[1]{%
@@ -13,11 +13,11 @@
 }
 
 \newcommand{\Predhodnik}[3]{%
-  \ensuremath{ \mathop{predhodnik}_{#1}(#2,#3) }% Predhodnik
+  \ensuremath{ \mathop{predhodnik}\nolimits_{#1}(#2,#3) }% Predhodnik
 }
 
 \newcommand{\Naslednik}[3]{%
-  \ensuremath{ \mathop{naslednik}_{#1}(#2,#3) }% Naslednik
+  \ensuremath{ \mathop{naslednik}\nolimits_{#1}(#2,#3) }% Naslednik
 }
 
 \newcommand{\Visek}[2]{%
@@ -34,7 +34,7 @@
 }
 
 \newcommand{\MinStetje}[3]{%
-  \ensuremath{ \mathop{\textit{inŠtetje}}(#1,#2,#3) }% Min štetje
+  \ensuremath{ \mathop{\textit{minŠtetje}}(#1,#2,#3) }% Min štetje
 }
 
 \newcommand{\MinIzbira}[4]{%
@@ -50,8 +50,8 @@
 \newcommand{\Odpri}[2]{%
   \ensuremath{ \mathop{odpri}(#1,#2) }% Odpri zaklepaj
 }
-\newcommand{\IskanjeNAprej}[3]{%
-  \ensuremath{ \mathop{iskanjeNapre}(#1,#2,#3) }% Iskanje naprej
+\newcommand{\IskanjeNaprej}[3]{%
+  \ensuremath{ \mathop{iskanjeNaprej}(#1,#2,#3) }% Iskanje naprej
 }
 
 \newcommand{\Oklepa}[2]{%
@@ -72,6 +72,10 @@
 
 \newcommand{\List}[1]{%
   \ensuremath{\mathop{jeList}(#1) }% vrne, ali je v list
+} 
+
+\newcommand{\stOtrok}[1]{%
+  \ensuremath{\mathop{stOtrok}(#1) }% vrne stevilo otroka od v 
 } 
 
 \newcommand{\Otrok}[2]{%
