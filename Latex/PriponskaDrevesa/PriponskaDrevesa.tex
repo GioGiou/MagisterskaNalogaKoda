@@ -1,8 +1,9 @@
-Priponska drevesa so posebna implementacija številskega drevesa, pri čemer vsak list predstavlja posamezno pripono besede. Na ta način priponsko drevo ne predstavlja zgolj vhodne besede $T$ dolžine $n$, ki je sestavljeno iz znakov abecede $\Sigma$ in je shranjena v pomnilniku kot polje črk \texttt{T[1,n]}, ampak zakodira tudi njeno strukturo. Zato se pogosto uporabi za indeksiranje besede in posledično iskanja vzorcev v njej. Vzorec $P[1,m]$ se nahaja v besedi $T$, če obstaja podniz $T[i,j]$, za katerega velja $P[1,m]=T[i,j]$. Z uporabo indeksa je iskanje prisotnosti vzorca $P$ dolžine $m$ v besedi primerljivo s KMP algoritmom. KMP algoritmom potrebuje $O(n+m)$ časa za preveriti, ali se vzorec nahaja v besedi. Za razliko od KMP algoritma je prednost uporabe priponskega drevesa, da lahko iščemo različne vzorcev v isti besedi $T$. Za najti več vzorcev v priponskem drevesu je potrebno: $O(n)$ časa za izgradnjo priponskega drevesa ter $O(m)$ časa za vsak iskani vzorec. Pri iskanju več vzorcev v besedi $T$ algoritem KMP potrebuje $O(n+m)$ časa za vsak iskan vzorec \cite{Gusfield1997,KMP}.
+Priponska drevesa so posebna implementacija številskega drevesa, pri čemer vsak list predstavlja posamezno pripono besede. Na ta način priponsko drevo ne predstavlja zgolj vhodne besede $T$ dolžine $n$, ki je sestavljeno iz znakov abecede $\Sigma$ in je shranjena v pomnilniku kot polje črk \texttt{T[1,n]}, ampak zakodira tudi strukturo besede. Zato se pogosto uporabi za indeksiranje besede in posledično iskanja vzorcev v njej. Vzorec $P[1,m]$ se nahaja v besedi $T$, če obstaja podniz $T[i,j]$, za katerega velja $P[1,m]=T[i,j]$. Z uporabo indeksa je iskanje prisotnosti vzorca $P$ dolžine $m$ v besedi primerljivo s KMP algoritmom. KMP algoritmom potrebuje $O(n+m)$ časa za preveriti, ali se vzorec nahaja v besedi. Za razliko od KMP algoritma je prednost uporabe priponskega drevesa, da lahko iščemo različne vzorcev v isti besedi $T$. Za najti več vzorcev v priponskem drevesu je potrebno: $O(n)$ časa za izgradnjo priponskega drevesa ter $O(m)$ časa za vsak iskani vzorec. Pri iskanju več vzorcev v besedi $T$ algoritem KMP potrebuje $O(n+m)$ časa za vsak iskan vzorec \cite{Gusfield1997,KMP}.
 
 
 %
-Priponsko drevo nad besedo, ki je niz nad abecedo $\Sigma$, definiramo na sledeči način \cite{Gusfield1997}:
+Nad priponskim drevesom lahko definiramo funkcijo $\Niz{v}$. Funkcija vrne niz, ki je pridobljen s stikom podnizov na povezavah na poti od korena do vozlišča $v$.
+Torej priponsko drevo nad besedo $T$, ki je niz nad abecedo $\Sigma$, definiramo na sledeči način \cite{Gusfield1997}:
 
 \begin{defi}\label{def:priposkoDrevo}
     Priponsko drevo nad nizom $T$ dolžine $n$ je številsko drevo, ki zadošča sledečim zahtevam:
@@ -12,7 +13,7 @@ Priponsko drevo nad besedo, ki je niz nad abecedo $\Sigma$, definiramo na slede�
         \item vsaka povezava predstavlja neprazni podniz besede $T$,
         \item ne obstajata %dve
         povezavi, ki se začneta v istem vozlišču in z istim znakom,
-        \item podniz, ki je pridobljen s stikom podnizov na povezavah na poti od korena do lista $l_i$, predstavlja pripono $T[i,n]$ za vsak $i$, kjer je $1 \le i\le n$.        
+        \item za vsak list $l_i$ velja, da je $\Niz{l_i}=T[i,n]$.        
     \end{enumerate}
 \end{defi}
 
@@ -47,7 +48,7 @@ Ker povezave v priponskih drevesih predstavljajo podnize v besedi $T$, se lahko 
 %%Globina vozlišča $D(v)$ je uporabna zgolj, če vsaka povezava predstavlja en sam znak, kar vodi v kršitev druge zahteve Definicije  \ref{def:priposkoDrevo}. V primeru, da povezava predstavlja niz z dvema znakoma, bi se le ta spremenila v dve povezavi, kjer vsaka povezava predstavlja en znak, in vozlišče med njima z enim otrokom, kar krši drugo zahtevo Definicije \ref{def:priposkoDrevo}. Bolj smiselna definicija je besedna globina vozlišča:
 
 \begin{defi}
-    Črkovna globina vozlišča $\Sd{v}$ je dolžina podniza, pridobljenega s stikom vseh podnizov na povezavah na poti od korena drevesa do vozlišča $v$. 
+    Črkovna globina vozlišča $\Sd{v}=|\Niz{v}|$.
 \end{defi}
 
 Primer razlike med globino vozlišča in črkovno globino vozlišča se lahko vidi na Sliki \ref{fig:PriponskoDrevo}: vozlišči, do katerih se pride s povezavama »KO« in »O«, imata globino $1$. Črkovna globina vozlišča, v katerega kaže povezava »KO«, je $2$, medtem ko ima vozlišče, v katerega kaže povezava »O«, črkovno globino $1$. 

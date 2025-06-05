@@ -1,46 +1,7 @@
-V tem podpoglavju bodo predstavljene različne metode izgradnje priponskih dreves. Metode bodo predstavljene v zaporedju od najbolj počasne, ki izgradi priponsko drevo v času $O(n^3)$, do najhitrejše, ki izgradi drevo v času $O(n)$. Obstajata dve metodi izgradnje priponskega drevesa s časovno zahtevnostjo $O(n)$: McCreightov algoritem \cite{McCreight1976} in Ukkonenov algoritem \cite{Ukkonen1995}. V nadaljevanju bo bolj podrobno opisan Ukkonenov sprotni (angl. \textit{on-line}) algoritem, saj v vsakem koraku podaljša vse pripone v drevesu za en znak. McCreightov algoritem pa ni sprotni algoritem, saj v $i$-tem koraku doda $i$-to najdaljšo pripono.
+V tem podpoglavju bodo predstavljene različne metode izgradnje priponskih dreves. Metode bodo predstavljene v zaporedju od najbolj počasne, ki izgradi priponsko drevo v času $O(n^3)$, do najhitrejše, ki izgradi drevo v času $O(n)$. 
 
 \subsection{Naivna metoda}
-
-Naivna metoda je sprotna metoda gradnje priponskega drevesa.
-Ta metoda v vsakem koraku s sprehodom po drevesu podaljša vse pripone za en znak ter doda novo pripono. Metoda v $i$-tem koraku gradnje v dosedaj izgrajeno drevo, ki je bilo izgrajeno za podniz $T[1,i-1]$, doda znak $T[i]$ ter tako izgradi drevo za podniz $T[1,i]$. 
-Naj bo $\alpha$ niz, ki z $x=T[i]$ tvori niz $T[a,i]=\alpha x$, pri čemer je $1\le a \le i $ in posledično je $\alpha$ lahko tudi prazen niz. Znak $x$ je lahko dodan v drevo na tri načine:
-\begin{enumerate}
-    \item \label{enum:dodajanje1} Če se niz $\alpha$ konča v listu, potem se zadnja povezava, ki je del niza $\alpha$, podaljša za znak $x$. Torej enkrat, ko je list zgrajen, ne more postati notranje vozlišče. Način je prikazan na Sliki \ref{fig:aUkkonen1}.
-    \item Če pa se niz $\alpha=\delta\beta$ ne konča v listu, potem se konča bodisi v vozlišču $v$, bodisi na povezavi med vozliščema, recimo $v_1$ in $v_2$ ter $\delta$ predstavlja niz iz korena do vozlišča $v_1$, $\beta$ pa predstavlja zadni del niza $\alpha$ na povezavi med $v_1$ in $v_2$. V tem primeru se lahko znak $x$ doda na dva načina:
-    \begin{enumerate}
-        \item \label{enum:dodajanje2} Če se nobena pot ne nadaljuje z znakom $x$, se ustvari nov list $l$, na katerega kaže poveznava z oznako $x$. Če se niz $\alpha$ konča v vozlišču $v$, potem $l$ postane otrok vozlišča $v$. Če pa se $\alpha$ konča sredini niza na povezavi med vozliščema $v_1$ in $v_2$, se ustvari novo vozlišče $v'$. Povezava, ki kaže iz vozlišča $v_1$ na vozlišče $v'$, predstavlja niz $\beta$. Iz novega vozlišča kažeta dve povezavi: prva povezava kaže na list $l$, druga povezava pa kaže na vozlišče $v_2$, ki predstavlja preostanek niza, ki ga je predstavljala predhodnja povezava. Način je prikazan na Sliki \ref{fig:aUkkonen2}.
-        \item \label{enum:dodajanje3} Če pa obstaja taka pot, ki se nadaljuje po nizu $\alpha$ z znakom $x$, se ne stori ničesar, saj je drevo že v implicitni obliki. Način je prikazan na Sliki \ref{fig:aUkkonen3}.
-    \end{enumerate}    
-\end{enumerate}
-Ti načini podalševanja pripon veljajo za vse sprotne metode gradnje priponskega drevesa.
-\begin{figure}[htb]
-    \begin{subfigure}[t]{0.3\linewidth}
-        
-        \includesvg[scale=0.67]{Slike/Abs/UkkonenIzgradnjaAbstraknoNači1.svg}
-        \centering
-        \subcaption{}
-        \label{fig:aUkkonen1}
-    \end{subfigure}
-    \hspace{0.5cm}
-    \begin{subfigure}[t]{0.3\linewidth}
-        
-        \includesvg[scale=0.67]{Slike/Abs/UkkonenIzgradnjaAbstraknoNači2.svg}
-        \centering
-        \subcaption{}
-        \label{fig:aUkkonen2}
-    \end{subfigure}
-    \hspace{0.5cm}
-    \begin{subfigure}[t]{0.3\linewidth}
-        \includesvg[scale=0.67]{Slike/Abs/UkkonenIzgradnjaAbstraknoNači3.svg}
-        \subcaption{}
-        \centering
-        \label{fig:aUkkonen3}
-    \end{subfigure}    
-    %   \includegraphics[width=\textwidth]{Slike/KOKOSUkkonen.png}
-    \caption{Načini dodajanja novih znakov v priponsko drevo. Na sliki kvadratki predstavljajo liste drevesa, krogci pa predstavljajo notranja vozlišča drevesa.} 
-    \label{fig:absUkkonen}
-\end{figure}
+Ta metoda v vsakem koraku s sprehodom po drevesu podaljša vse pripone za en znak ter doda novo pripono. Metoda v $i$-tem koraku izgradnje v dosedaj izgrajeno drevo, ki je bilo izgrajeno za podniz $T[1,i-1]$, doda znak $T[i]$ ter tako izgradi drevo za podniz $T[1,i]$. To je storjeno z dodajanjem pripone, ki predstavlja znak $T[i]$, in s podaljševanjem pripon, ki že obstajajo v drevesu. Ker listi vedno predstavljajo konec pripone, se niz na povezavi, ki vodi v list, podaljša za en znak.
 
 \begin{figure}[htb]
     \begin{subfigure}[t]{0.3\linewidth}
@@ -90,69 +51,18 @@ Ti načini podalševanja pripon veljajo za vse sprotne metode gradnje priponskeg
     \label{fig:Naivna}
 \end{figure}
 
-\begin{algorithm}[htb]
-
-    \Vhod{Beseda $T$, dolžine $n$}
-    \Izhod{Priponsko drevo}
-    \caption{Naivna metoda gradnje priponskega drevesa}\label{alg:Naivna}
-    {
-        {Ustvari vozlišče \textit{koren}}
-        
-        {$s \textit{koren}$, $k1$}
-        
-        \Za{$i = 1, \ldots, n$}{
-    
-            \Za{$j = 1, \ldots, i-1$}{
-
-                {$v\leftarrow $\texttt{najdiVozlišče}$(T[j,i])$}
-
-                {$u\leftarrow v.$\texttt{otrok}$[T[j+\Sd{v}+1]]$}
-
-                \Ce{$\Niz{u}|=i-j$}{
-                    \SicerCe{$\List(u)$}{
-                        {Uporabi se način podalševanja pripon \ref{enum:dodajanje1}} 
-                    }
-                    \SicerCe{$ u.\mathtt{otrok}[T[i]] = NIL$}{
-
-                        {Ustvari list $l_i$}
-                    
-                        {$ koren.$\texttt{otrok}$[T[i]] \leftarrow l_i$}
-                    }
-
-                }
-                
-                \SicerCe{$|\Niz{u}[i-j+1]\ne T[i] $}{
-
-                    {Uporabi se način podalševanja pripon \ref{enum:dodajanje2}} 
-
-                }
-
-                
-                
-            }
-            \Ce{$ koren.\mathtt{otrok}[T[i]] = NIL$}{
-                    {Ustvari list $l_i$}
-                    
-                    {$ koren.$\texttt{otrok}$[T[i]] \leftarrow l_i$}
-            }         
-            
-        }
-        
-    }
-\end{algorithm}
-
-Opazimo, da drevo, ki je zgrajeno za podniz $T[1,i]$, $i< n$, ni nujno priponsko, saj niso vse pripone podniza $T[1,i]$ shranjene v listih. Še več, nekatere pripone niso niti eksplicitno predstavljene. Kljub temu pa to drevo vsebuje vso informacijo o pripadajočlh priponah, pri čemer moramo posebej beležiti vse implicitno predstavljene pripone. Takšnemu drevesu rečemo implicitno priponsko drevo. Algoritem gradnje priponskega drevesa z naivno metodo je prikazan na Algoritmu \ref{alg:Naivna}. V algoritmu je uporabljena funkcija \texttt{najdiVozlišče}$(\alpha)$, ki vrne najglobje vozlišče pri iskanju niza $\alpha$ v drevesu. Primer gradnja priponskgea drevesa za besedo »KOKOŠ« z naivno metodo pa je prikazan na Sliki \ref{fig:Naivna}. Na Sliki \ref{fig:Naivna} zgolj tretje (zadnje drevo v prvi vrstici) in četrto (prvo drevo v drugi vrstici) drevo sta implicitna priponska drevesa.
+Opazimo, da drevo, ki  je zgrajeno za podniz $T[1,i]$, $i< n$, ni nujno priponsko, saj niso vse pripone podniza $T[1,i]$ shranjene v listih. Še več, nekatere pripone niso niti eksplicitno predstavljene. Kljub temu pa to drevo vsebuje vso informacijo o pripadajočlh priponah, pri čemer moramo posebej beležiti vse implicitno predstavljene pripone. Takšnemu drevesu rečemo implicitno priponsko drevo. Problem implicitno predstavljenih pripon v $i$-tem koraku se reši z beleženjem takih pripon. Če se niz na povezavi, ki predstavlja zadnji del implicitne pripone, nadaljuje po priponi z znakom $T[i]$ se ne stori ničesar, saj je tudi podaljšana pripona implicitno predstavljena. Če pa se niz na povezavi, ki predstavlja zadnji del implicitne pripone, ne nadaljuje z znakom $T[i]$, pa se povezavo razdeli na dva dela in se ustvari vozlišče, na katerega kaže povezava z nizom, ki se ujema s predhodnjo pripono, ter ima dva otroka: vozlišče, na katerega kaže preostanek predhodnje povezave, ter list z znakom $T[i]$. V primeru, da vozlišče že obstaja, se le temu doda novega otroka, na katerega kaže povezava z znakom, ki se razlikuje. Postopek izgradnje priponskega drevesa za besedo »KOKOŠ« z naivno metodo izgradnje je prikazan na Sliki \ref{fig:Naivna}. Na Sliki \ref{fig:Naivna} zgolj tretje (zadnje drevo v prvi vrstici) in četrto (prvo drevo v drugi vrstici) drevo sta implicitna priponska drevesa.
 
 \begin{izr}\label{izr:naivna}
     Naivna metoda zgradi priponsko drevo nad besedo $T$, dolžine $n$, v času $O(n^3)$.
 \end{izr}
 
 \begin{proof}
-    Naivna metoda se v vsakem koraku sprehodi čez celotno drevo. Črkovna globina vsakega vozlišča je največ dolžina že dodanega besedila v drevesu, v $i$-tem koraku je črkovna globina $\Sd{v}$ vsakega vozlišča $v$ je največ $i$. Podobno velja tudi za število listov v drevesu, ki ne presega dolžine že dodanega podniza. Globina lista je manjša ali enaka črkovni globini, torej velja, da se v $i$-tem koraku pregleda $\sum_{j=1}^{i-1} j=\dfrac{i(i-1)}{2}$ vozlišč.
+    Naivna metoda se v vsakem koraku sprehodi čez celotno drevo. Črkovna globina vsakega vozlišča je največ dolžina že dodanega besedila v drevesu, v $i$-tem koraku je črkovna globina $\Sd{v}$ vsakega vozlišča $v$ je največ $i$. Podobno velja tudi za število listov v drevesu, ki ne presega dolžine že dodanega podniza. Globina lista je manjša ali enaka črkovni globini, torej velja, da se v $i$-tem koraku pregleda $\sum_{j=1}^i j=\dfrac{i(i+1)}{2}$ vozlišč.
 
     Ker je niz $T$ dolg $n$ znakov, je skozi celotno izgradnjo priponskega drevesa število obiskanih vozlišč enako
     $$
-        \sum_{i=1}^n \sum_{j=1}^i j=\sum_{i=1}^n \dfrac{i(i-1)}{2}=\dfrac{n(n+1)(n-1)}{6}=O(n^3).
+        \sum_{i=1}^n \sum_{j=1}^i j=\sum_{i=1}^n \dfrac{i(i+1)}{2}=\dfrac{n(n+1)(n+2)}{6}=O(n^3).
     $$
     Torej naivna metoda potrebuje $O(n^3)$ časa.
 \end{proof}
@@ -232,100 +142,135 @@ Metoda mora še vedno beležiti implicitne pripone (pripone, ki so predpone drug
 
 Čeprav te izboljšave znižajo čas izgradnje priponskega drevesa na $O(n^2)$, le taka izboljšava ne omogoča izgradnje drevesa v času $O(n)$. Za izgradnjo priponskega drevesa v linearnem času obstajata dva algoritma: McCreightov algoritem \cite{McCreight1976} in Ukkonenov algoritem \cite{Ukkonen1995}. 
 
-%\subsection{McCreightov algoritem}
-%McCreightov algoritem ali Algoritem M je prvi algoritem s časovno zahtevnostjo $O(n)$ za izgradnjo drevesa, pri tem pa je tudi prostorska zahtevnost algoritma $O(n)$.
-%Algoritem deluje, tako da se v $i$-tem koraku v do takrat izgrajeno drevo doda pripona $T[i,n]$. Torej so pripone dodane v drevo v vrstnem redu od najdaljše do najkrajše pripone, za razliko od naivne metode, ki v $i$-tem koraku izgradnje priponskega drevesa doda $i$-ti znak v do takrat izgrajeno priponsko drevo, ki je lahko implicitno. Postopek izgradnje priponskega drevesa za besedo »KOKOŠ« z McCreightvim algoritmom je prikazan na Sliki \ref{fig:McCreight}.
-%
-%\begin{figure}[htb]
-%    \begin{subfigure}[t]{0.3\linewidth}
-%        \subcaption*{}
-%        \includesvg[scale=0.67]{Slike/McCreigov/KOKOŠMcCreightKOKOŠ.svg}
-%        \centering
-%        \label{fig:McCreigov1}
-%    \end{subfigure}
-%    \hspace{0.5cm}
-%    \begin{subfigure}[t]{0.3\linewidth}
-%        \subcaption*{}
-%        \includesvg[scale=0.67]{Slike/McCreigov/KOKOŠMcCreightOKOŠ.svg}
-%        \centering
-%        \label{fig:McCreigov2}
-%    \end{subfigure}
-%    \hspace{0.5cm}
-%    \begin{subfigure}[t]{0.3\linewidth}
-%        \subcaption*{}
-%        \includesvg[scale=0.67]{Slike/McCreigov/KOKOŠMcCreightKOŠ.svg}
-%        \centering
-%        \label{fig:McCreigov3}
-%    \end{subfigure}
-%    
-%    \begin{subfigure}[t]{0.3\linewidth}
-%        \subcaption*{}
-%        \includesvg[scale=0.67]{Slike/McCreigov/KOKOŠMcCreightOŠ.svg}
-%        \centering
-%        \label{fig:McCreigov4}
-%    \end{subfigure}
-%    \hspace{0.5cm}
-%    \begin{subfigure}[t]{0.3\linewidth}
-%        \subcaption*{}
-%        \includesvg[scale=0.67]{Slike/McCreigov/KOKOŠMcCreightŠ.svg}
-%        \centering
-%        \label{fig:McCreigov5}
-%    \end{subfigure}
-%    \hspace{0.5cm}
-%    \begin{subfigure}[t]{0.3\textwidth}
-%        \subcaption*{}
-%        \includesvg[scale=0.67]{Slike/McCreigov/KOKOŠMcCreightS.svg}
-%        \centering
-%        \label{fig:McCreigov6}
-%    \end{subfigure}
-%        \caption{Primer izgradnje priponskega drevesa z uporabo McCreightvega algoritma za besedo »KOKOŠ$\$$«.} 
-%        \label{fig:McCreight}
-%\end{figure}
-%
-%V vsakem koraku je pripona razdeljena na dva dela, in sicer na glavo ter rep. Glava, označena kot $\textit{glava}_i$, je najdaljša predpona $i$-te pripone, ki že obstaja v drevesu. Če take pripone ni v drevesu, je glava pripone prazna. Rep besedila, označen kot $\textit{rep}_i$, pa je definiran kot preostanek pripone, ki ni del glave. Za razliko od glave, rep ne more biti prazen. Ker algoritem temelji na dejstvu, da nobena pripona ni predpona drugi priponi, se mora $n$-ti znak besede razlikovati od ostalih znakov v besedi in se ga označi z znakom »\$«.
-%Algoritem v vsakem koraku doda krajšo pripono, zato je v repu vedno prisoten vsaj »\$«, saj se bo vedno razlikoval od vsakega znaka, ki je na $(n-i)$-tem mestu poljubne že umeščene pripone \cite{McCreight1976}.
-%
-%Vsakič, ko se niz $\textit{glava}_i$ ne konča v vozlišču, Algoritem M ustvari novo vozlišče. Ker $\textit{rep}_i$ ni še vsebovan v drevesu, se doda novo list v drevo s povezavo, ki predstavlja niz $\textit{rep}_i$. Repi so dodani v vsakem koraku v konstantnem času, torej algoritem potrebuje zgolj $O(n)$ časa za dodajanje vseh repov.
-%
-%Glavo $i$-te pripone je možno razdeliti na $\textit{glava}_i = \alpha\beta\gamma$, pri čemer je $\gamma$ lahko prazni podniz. Podniza $\alpha$ in $ \beta$ sta definirana kot dela $\textit{glava}_{i-1} = x\alpha\beta$, pri čemer je $x$ znak $T[i-1]$. Podniz $\alpha$ je prazen niz natanko tedaj, ko je vozlišče, ki predstavlja najdaljšo predpono od $x\alpha$, koren. Če je $\alpha$ prazen, potem je vozlišče $a$, ki je začetna točka iskanja glave, koren. Sicer je vozlišče $a=\textit{sl}(b)$, kjer je $b$ vozlišče, ki predstavlja najdaljšo predpono niza $x\alpha$.
-%
-%Naslednji korak izgradnje priponskega drevesa je iskanje niza $\beta$ v drevesu. To imenujemo \textit{rescanning}. Po definiciji $\textit{glava}_i$ že obstaja v drevesu, torej obstaja tudi pot iz $a$ v $c$, ki se začne z nizom $\beta$. Iskanje poteka tako, da algoritem primerja dolžino $|\beta|$ z dolžino niza na povezavi iz $a$. Če je $|\beta|$ krajša ali enaka od dolžine niza na povezavi iz $a$, se iskanje prekine. V primeru, da je $|\beta|$ strogo krajša, se ustvari novo vozlišče $d$. Če je $|\beta|$ daljša od dolžine niza na povezavi iz $a$, se izbriše podniz, ki je predstavljen na povezavi, in otrok od $a$ postane novo vozlišče $a$. Postopek se ponovi, dokler $|\beta|$ ni krajša ali enaka od niza, ki ga predstavlja povezava iz $a$. V primeru, da ne obstaja priponska povezava iz vozlišča, ki predstavlja niz $x\alpha\beta$, v vozlišče $d$, se jo ustvari.
-%
-%Iz vozlišča $d$ se začne iskanje $\gamma$, če le ta ni prazen niz. Ta operacija je imenovana \textit{scanning}. Za razliko od niza $\beta$ dolžina niza $\gamma$ ni znana vnaprej. Algoritem mora zato previti vsak znak, dokler ne najde znaka, ki se razlikuje. Ta znak predstavlja prvi znak v repu. V točki, kjer se znaka razlikujeta, je ustvarjeno novo vozlišče, če ta točka ni že vozlišče. Na to vozlišče se pripne $\textit{rep}_i$.
-%
-%
-%\begin{izr}
-%    McCreightov algoritem zgradi priponsko drevo nad besedo $T$ v času $O(n)$.
-%\end{izr}
-%
-%\begin{proof}
-%    McCreightov algoritem v vsakem koraku naredi tri operacije: operacija vstavljanja repa v drevo, operacijo \textit{scanning} in operacijo \textit{rescanning}. Operaciji  \textit{scanning} in \textit{rescanning} sta v $i$-tem koraku opravljeni nad nizom $\beta_i\gamma_i\textit{rep}_{i}$. 
-%    
-%    Za vstaviti rep v drevo algoritem potrebuje $O(1)$ časa. V drevo je potrebno vstaviti $n$ pripon, torej je potreben čas za vstaviti vse repe v drevo $T_{\textit{rep}}=O(n)$.
-%
-%    Operacija \textit{scanning} potrebuje v vsakem koraku $|glave_i|-|glave_{i-1}|+1=|\gamma_i|$ časa. Torej po vseh korakih operacija \textit{scanning}  potrebuje $T_{\textit{scan}}=\sum_{i=1}^n |glave_i|-|glave_{i-1}|+1= n + |glava_n|-|glava_0|=O(n)$ časa.
-%
-%    V $i$-tem koraku operacija \textit{rescanning} obišče $n_i$ vozlišč. Pri tem se opazi, da v naslednjem koraku ta vozlišča ne bodo obiskana. Iz tega sledi:  $|\beta_{i+1}\gamma_{i+1}\textit{rep}_{i+1}|\le|\beta_i\gamma_i\textit{rep}_{i}|-n_i$, pri čemer je $|\beta_n\gamma_n\textit{rep}_{n}|=|\textit{rep}_{n}|=1$. Torej velja tudi:    
-%    \begin{equation*} 
-%        \begin{split}
-%        |\beta_n\gamma_n\textit{rep}_{n}|=|\textit{rep}_{n}|&\le|\beta_1\gamma_1\textit{rep}_{1}|- \sum_{i=1}^n n_i,\\
-%        1&\le n- \sum_{i=1}^n n_i,\\
-%        n&\ge 1+ \sum_{i=1}^n n_i.
-%        \end{split}
-%    \end{equation*}
-%    
-%    Iz tega sledi, da operacija \textit{rescanning} skozi celotno izgradnjo obišče največ $n$ vozlišč, zato potrebuje $T_{\textit{rescan}}=O(n)$ časa skozi celotno izgradnjo.
-%    
-%    Torej je potrebni čas za izgradnjo priponskega drevesa vsota časov potrebnih za posamezno operacijo: 
-%    $$T_{\textit{izgradnja}}=T_{\textit{rep}}+T_{\textit{rescan}}+T_{\textit{scan}}=O(n)+O(n)+O(n)=O(n).$$
-%\end{proof}
-%
-%Čeprav McCreightov algoritem zgradi priponsko drevo v času in prostoru $O(n)$, algoritem predpostavi, da je beseda $T$ vnaprej poznana. Pri tem se pojavi vprašanje, ali je mogoče izgraditi priponsko drevo, ne da bi vnaprej poznali začetno besedo. Metoda, ki ne potrebuje celotne besede vnaprej, je Ukkonenov algoritem, ki priponsko drevo zgradi sprotno (angl. \textit{on-line}), kot ga je izgradila tudi naivna metoda, ter potrebuje $O(n)$ časa in prostora.
+\subsection{McCreightov algoritem}
+McCreightov algoritem ali Algoritem M je prvi algoritem s časovno zahtevnostjo $O(n)$ za izgradnjo drevesa, pri tem pa je tudi prostorska zahtevnost algoritma $O(n)$.
+Algoritem deluje, tako da se v $i$-tem koraku v do takrat izgrajeno drevo doda pripona $T[i,n]$. Torej so pripone dodane v drevo v vrstnem redu od najdaljše do najkrajše pripone, za razliko od naivne metode, ki v $i$-tem koraku izgradnje priponskega drevesa doda $i$-ti znak v do takrat izgrajeno priponsko drevo, ki je lahko implicitno. Postopek izgradnje priponskega drevesa za besedo »KOKOŠ« z McCreightvim algoritmom je prikazan na Sliki \ref{fig:McCreight}.
+
+\begin{figure}[htb]
+    \begin{subfigure}[t]{0.3\linewidth}
+        \subcaption*{}
+        \includesvg[scale=0.67]{Slike/McCreigov/KOKOŠMcCreightKOKOŠ.svg}
+        \centering
+        \label{fig:McCreigov1}
+    \end{subfigure}
+    \hspace{0.5cm}
+    \begin{subfigure}[t]{0.3\linewidth}
+        \subcaption*{}
+        \includesvg[scale=0.67]{Slike/McCreigov/KOKOŠMcCreightOKOŠ.svg}
+        \centering
+        \label{fig:McCreigov2}
+    \end{subfigure}
+    \hspace{0.5cm}
+    \begin{subfigure}[t]{0.3\linewidth}
+        \subcaption*{}
+        \includesvg[scale=0.67]{Slike/McCreigov/KOKOŠMcCreightKOŠ.svg}
+        \centering
+        \label{fig:McCreigov3}
+    \end{subfigure}
+    
+    \begin{subfigure}[t]{0.3\linewidth}
+        \subcaption*{}
+        \includesvg[scale=0.67]{Slike/McCreigov/KOKOŠMcCreightOŠ.svg}
+        \centering
+        \label{fig:McCreigov4}
+    \end{subfigure}
+    \hspace{0.5cm}
+    \begin{subfigure}[t]{0.3\linewidth}
+        \subcaption*{}
+        \includesvg[scale=0.67]{Slike/McCreigov/KOKOŠMcCreightŠ.svg}
+        \centering
+        \label{fig:McCreigov5}
+    \end{subfigure}
+    \hspace{0.5cm}
+    \begin{subfigure}[t]{0.3\textwidth}
+        \subcaption*{}
+        \includesvg[scale=0.67]{Slike/McCreigov/KOKOŠMcCreightS.svg}
+        \centering
+        \label{fig:McCreigov6}
+    \end{subfigure}
+        \caption{Primer izgradnje priponskega drevesa z uporabo McCreightvega algoritma za besedo »KOKOŠ$\$$«.} 
+        \label{fig:McCreight}
+\end{figure}
+
+V vsakem koraku je pripona razdeljena na dva dela, in sicer na glavo ter rep. Glava, označena kot $\textit{glava}_i$, je najdaljša predpona $i$-te pripone, ki že obstaja v drevesu. Če take pripone ni v drevesu, je glava pripone prazna. Rep besedila, označen kot $\textit{rep}_i$, pa je definiran kot preostanek pripone, ki ni del glave. Za razliko od glave, rep ne more biti prazen. Ker algoritem temelji na dejstvu, da nobena pripona ni predpona drugi priponi, se mora $n$-ti znak besede razlikovati od ostalih znakov v besedi in se ga označi z znakom »\$«.
+Algoritem v vsakem koraku doda krajšo pripono, zato je v repu vedno prisoten vsaj »\$«, saj se bo vedno razlikoval od vsakega znaka, ki je na $(n-i)$-tem mestu poljubne že umeščene pripone \cite{McCreight1976}.
+
+Vsakič, ko se niz $\textit{glava}_i$ ne konča v vozlišču, Algoritem M ustvari novo vozlišče. Ker $\textit{rep}_i$ ni še vsebovan v drevesu, se doda novo list v drevo s povezavo, ki predstavlja niz $\textit{rep}_i$. Repi so dodani v vsakem koraku v konstantnem času, torej algoritem potrebuje zgolj $O(n)$ časa za dodajanje vseh repov.
+
+Glavo $i$-te pripone je možno razdeliti na $\textit{glava}_i = \alpha\beta\gamma$, pri čemer je $\gamma$ lahko prazni podniz. Podniza $\alpha$ in $ \beta$ sta definirana kot dela $\textit{glava}_{i-1} = x\alpha\beta$, pri čemer je $x$ znak $T[i-1]$. Podniz $\alpha$ je prazen niz natanko tedaj, ko je vozlišče, ki predstavlja najdaljšo predpono od $x\alpha$, koren. Če je $\alpha$ prazen, potem je vozlišče $a$, ki je začetna točka iskanja glave, koren. Sicer je vozlišče $a=\textit{sl}(b)$, kjer je $b$ vozlišče, ki predstavlja najdaljšo predpono niza $x\alpha$.
+
+Naslednji korak izgradnje priponskega drevesa je iskanje niza $\beta$ v drevesu. To imenujemo \textit{rescanning}. Po definiciji $\textit{glava}_i$ že obstaja v drevesu, torej obstaja tudi pot iz $a$ v $c$, ki se začne z nizom $\beta$. Iskanje poteka tako, da algoritem primerja dolžino $|\beta|$ z dolžino niza na povezavi iz $a$. Če je $|\beta|$ krajša ali enaka od dolžine niza na povezavi iz $a$, se iskanje prekine. V primeru, da je $|\beta|$ strogo krajša, se ustvari novo vozlišče $d$. Če je $|\beta|$ daljša od dolžine niza na povezavi iz $a$, se izbriše podniz, ki je predstavljen na povezavi, in otrok od $a$ postane novo vozlišče $a$. Postopek se ponovi, dokler $|\beta|$ ni krajša ali enaka od niza, ki ga predstavlja povezava iz $a$. V primeru, da ne obstaja priponska povezava iz vozlišča, ki predstavlja niz $x\alpha\beta$, v vozlišče $d$, se jo ustvari.
+
+Iz vozlišča $d$ se začne iskanje $\gamma$, če le ta ni prazen niz. Ta operacija je imenovana \textit{scanning}. Za razliko od niza $\beta$ dolžina niza $\gamma$ ni znana vnaprej. Algoritem mora zato previti vsak znak, dokler ne najde znaka, ki se razlikuje. Ta znak predstavlja prvi znak v repu. V točki, kjer se znaka razlikujeta, je ustvarjeno novo vozlišče, če ta točka ni že vozlišče. Na to vozlišče se pripne $\textit{rep}_i$.
+
+
+\begin{izr}
+    McCreightov algoritem zgradi priponsko drevo nad besedo $T$ v času $O(n)$.
+\end{izr}
+
+\begin{proof}
+    McCreightov algoritem v vsakem koraku naredi tri operacije: operacija vstavljanja repa v drevo, operacijo \textit{scanning} in operacijo \textit{rescanning}. Operaciji  \textit{scanning} in \textit{rescanning} sta v $i$-tem koraku opravljeni nad nizom $\beta_i\gamma_i\textit{rep}_{i}$. 
+    
+    Za vstaviti rep v drevo algoritem potrebuje $O(1)$ časa. V drevo je potrebno vstaviti $n$ pripon, torej je potreben čas za vstaviti vse repe v drevo $T_{\textit{rep}}=O(n)$.
+
+    Operacija \textit{scanning} potrebuje v vsakem koraku $|glave_i|-|glave_{i-1}|+1=|\gamma_i|$ časa. Torej po vseh korakih operacija \textit{scanning}  potrebuje $T_{\textit{scan}}=\sum_{i=1}^n |glave_i|-|glave_{i-1}|+1= n + |glava_n|-|glava_0|=O(n)$ časa.
+
+    V $i$-tem koraku operacija \textit{rescanning} obišče $n_i$ vozlišč. Pri tem se opazi, da v naslednjem koraku ta vozlišča ne bodo obiskana. Iz tega sledi:  $|\beta_{i+1}\gamma_{i+1}\textit{rep}_{i+1}|\le|\beta_i\gamma_i\textit{rep}_{i}|-n_i$, pri čemer je $|\beta_n\gamma_n\textit{rep}_{n}|=|\textit{rep}_{n}|=1$. Torej velja tudi:    
+    \begin{equation*} 
+        \begin{split}
+        |\beta_n\gamma_n\textit{rep}_{n}|=|\textit{rep}_{n}|&\le|\beta_1\gamma_1\textit{rep}_{1}|- \sum_{i=1}^n n_i,\\
+        1&\le n- \sum_{i=1}^n n_i,\\
+        n&\ge 1+ \sum_{i=1}^n n_i.
+        \end{split}
+    \end{equation*}
+    
+    Iz tega sledi, da operacija \textit{rescanning} skozi celotno izgradnjo obišče največ $n$ vozlišč, zato potrebuje $T_{\textit{rescan}}=O(n)$ časa skozi celotno izgradnjo.
+    
+    Torej je potrebni čas za izgradnjo priponskega drevesa vsota časov potrebnih za posamezno operacijo: 
+    $$T_{\textit{izgradnja}}=T_{\textit{rep}}+T_{\textit{rescan}}+T_{\textit{scan}}=O(n)+O(n)+O(n)=O(n).$$
+\end{proof}
+
+Čeprav McCreightov algoritem zgradi priponsko drevo v času in prostoru $O(n)$, algoritem predpostavi, da je beseda $T$ vnaprej poznana. Pri tem se pojavi vprašanje, ali je mogoče izgraditi priponsko drevo, ne da bi vnaprej poznali začetno besedo. Metoda, ki ne potrebuje celotne besede vnaprej, je Ukkonenov algoritem, ki priponsko drevo zgradi sprotno (angl. \textit{on-line}), kot ga je izgradila tudi naivna metoda, ter potrebuje $O(n)$ časa in prostora.
 
 \subsection{Ukkonenov algoritem}
-Ukkonenov algoritem deluje na podoben način kot prej predstavljena naivna metoda, saj dodaja v drevo črko po črko. Torej algoritem v $i$-tem koraku izgradi priponsko drevo, ki je lahko implicitno priponsko drevo, in predstavlja besedo $T[1,i]$. Algoritem v $i$-tem koraku doda v drevo črko $T[i]$. 
-
+Ukkonenov algoritem deluje na podoben način kot prej predstavljena naivna metoda, saj dodaja v drevo črko po črko. Torej algoritem v $i$-tem koraku izgradi priponsko drevo, ki je lahko implicitno priponsko drevo, in predstavlja besedo $T[1,i]$. Algoritem v $i$-tem koraku doda v drevo črko $x=T[i]$. Naj bo $\alpha$ niz, ki z $x$ tvori niz $T[a,i]=\alpha x$, pri čemer je $1\le a \le i $ in posledično je $\alpha$ lahko tudi prazen niz. Znak $x$ je lahko dodan v drevo na tri načine:
+\begin{enumerate}
+    \item Če se niz $\alpha$ konča v listu, potem se zadnja povezava, ki je del niza $\alpha$, podaljša za znak $x$. Torej enkrat, ko je list zgrajen, ne more postati notranje vozlišče. Način je prikazan na Sliki \ref{fig:aUkkonen1}.
+    \item Če pa se niz $\alpha=\delta\beta$ ne konča v listu, potem se konča bodisi v vozlišču $v$, bodisi na povezavi med vozliščema, recimo $v_1$ in $v_2$ ter $\delta$ predstavlja niz iz korena do vozlišča $v_1$, $\beta$ pa predstavlja zadni del niza $\alpha$ na povezavi med $v_1$ in $v_2$. V tem primeru se lahko znak $x$ doda na dva načina:
+    \begin{enumerate}
+        \item \label{enum:dodajanje2} Če se nobena pot ne nadaljuje z znakom $x$, se ustvari nov list $l$, na katerega kaže poveznava z oznako $x$. Če se niz $\alpha$ konča v vozlišču $v$, potem $l$ postane otrok vozlišča $v$. Če pa se $\alpha$ konča sredini niza na povezavi med vozliščema $v_1$ in $v_2$, se ustvari novo vozlišče $v'$. Povezava, ki kaže iz vozlišča $v_1$ na vozlišče $v'$, predstavlja niz $\beta$. Iz novega vozlišča kažeta dve povezavi: prva povezava kaže na list $l$, druga povezava pa kaže na vozlišče $v_2$, ki predstavlja preostanek niza, ki ga je predstavljala predhodnja povezava. Način je prikazan na Sliki \ref{fig:aUkkonen2}.
+        \item \label{enum:dodajanje3} Če pa obstaja taka pot, ki se nadaljuje po nizu $\alpha$ z znakom $x$, se ne stori ničesar, saj je drevo že v implicitni obliki. Način je prikazan na Sliki \ref{fig:aUkkonen3}.
+    \end{enumerate}    
+\end{enumerate}
 Te načine dodajanja se lahko vidi tudi na primeru izgradnje priponskega drevesa za besedo »KOKOŠ$\$$«. Postopek izgranje z Ukkonenovim algoritmom in vmesna drevesa so prikazana na Sliki \ref{fig:Ukkonen}.
+
+\begin{figure}[htb]
+    \begin{subfigure}[t]{0.3\linewidth}
+        
+        \includesvg[scale=0.67]{Slike/Abs/UkkonenIzgradnjaAbstraknoNači1.svg}
+        \centering
+        \subcaption{}
+        \label{fig:aUkkonen1}
+    \end{subfigure}
+    \hspace{0.5cm}
+    \begin{subfigure}[t]{0.3\linewidth}
+        
+        \includesvg[scale=0.67]{Slike/Abs/UkkonenIzgradnjaAbstraknoNači2.svg}
+        \centering
+        \subcaption{}
+        \label{fig:aUkkonen2}
+    \end{subfigure}
+    \hspace{0.5cm}
+    \begin{subfigure}[t]{0.3\linewidth}
+        \includesvg[scale=0.67]{Slike/Abs/UkkonenIzgradnjaAbstraknoNači3.svg}
+        \subcaption{}
+        \centering
+        \label{fig:aUkkonen3}
+    \end{subfigure}    
+    %   \includegraphics[width=\textwidth]{Slike/KOKOSUkkonen.png}
+    \caption{Načini dodajanja novih znakov v priponsko drevo. Na sliki kvadratki predstavljajo liste drevesa, krogci pa predstavljajo notranja vozlišča drevesa.} 
+    \label{fig:absUkkonen}
+\end{figure}
 
 \begin{figure}[htb]
     \begin{subfigure}[t]{0.3\linewidth}
