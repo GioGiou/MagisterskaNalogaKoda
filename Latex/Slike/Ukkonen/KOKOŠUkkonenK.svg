@@ -36,10 +36,10 @@
      id="defs1"><linearGradient
        id="linearGradient22"><stop
          style="stop-color:#ff6467;stop-opacity:1;"
-         offset="0.5"
+         offset="0"
          id="stop22" /><stop
-         style="stop-color:#05e972;stop-opacity:0.98053098;"
-         offset="0.5"
+         style="stop-color:#05e972;stop-opacity:0.98039216;"
+         offset="0"
          id="stop23" /></linearGradient><rect
        x="173.45633"
        y="550.37762"
@@ -78,7 +78,7 @@
          style="stroke-width:0.365"
          x="41.327579"
          y="53.021385">1</tspan></text><ellipse
-       style="fill:url(#linearGradient23);fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.365;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:#05e972;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.365;stroke-dasharray:none;stroke-opacity:1"
        id="path1"
        cx="42.299477"
        cy="20.482824"
@@ -99,4 +99,4 @@
        style="font-style:normal;font-variant:normal;font-weight:300;font-stretch:normal;font-size:15.4113px;font-family:Calibri;-inkscape-font-specification:'Calibri, Light';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:start;writing-mode:lr-tb;direction:ltr;white-space:pre;shape-inside:url(#rect4);display:inline;fill:none;fill-opacity:0;fill-rule:nonzero;stroke:#000000;stroke-width:1.37953;stroke-dasharray:none;stroke-opacity:1"><tspan
          x="173.45703"
          y="563.86184"
-         id="tspan2">K</tspan></text></g></svg>
+         id="tspan1">K</tspan></text></g></svg>
