@@ -27,7 +27,7 @@ Pri tem pa se pojavi vprašanje, ali je mogoče indeksirati celotno besedo $T$ z
 
 %Priponsko polje je alternativni indeks besedila. Priponsko polje se uporablja namesto priponskega drevesa, ko se potrebuje prostorsko bolj učinkovito podatkovno strukturo in se lahko žrtvuje čas iskanja vzorcev v besedilu saj priponsko polje zasede približno 8-krat manj prostora na delovnem pomnilniku kot priponsko drevo \cite{Manber1990}. Priponsko polje si lahko predstavljamo kot polje listov priponskega drevesa, brez podatkov o notranjih vozliščih drevesa. To podobnost lahko vidimo tudi na Sliki \ref{fig:SuffuxArray}, na kateri je prikazano priponsko drevo in priponsko polje za besedo \enquote{KOKOŠ$\$$}.
 
-V nadaljevanju poglavja bodo predstavljena implementacija poized nad vhodno besedo s pomočjo priponskega polja ter pospešitev iskanja z dodatno podatkovno strukturo imenovano LCP polje. Za tem bo predstavljena posplošitev LCP polja, ki omogoča simuliranje priponskega drevesa. Nato pa bo predstavlje še način gradnje priponskega polja.
+V nadaljevanju poglavja bodo predstavljena implementacija poized nad vhodno besedo s pomočjo priponskega polja ter pospešitev iskanja z dodatno podatkovno strukturo imenovano LCP polje. Nato pa bo predstavlje še način gradnje priponskega polja. %Za tem bo predstavljena posplošitev LCP polja, ki omogoča simuliranje priponskega drevesa. 
 
 %\begin{figure}[htb]
 %    \begin{center}
@@ -46,11 +46,8 @@ V nadaljevanju poglavja bodo predstavljena implementacija poized nad vhodno bese
 \import{.}{PriponskoPolje/Poizvedba}
 
 
-\section{IZGRADNJA}\label{sec:SAIzgradnja}
+\section{GRADNJA}\label{sec:SAIzgradnja}
 \import{.}{PriponskoPolje/Izgradnja}
 
-
-
-
-\section{SIMULACIJA PRIPONSKEGA DREVESA}\label{sec:STsimulacija}
-\import{.}{PriponskoPolje/SimulacijaDrevesa}
+%\section{SIMULACIJA PRIPONSKEGA DREVESA}\label{sec:STsimulacija}
+%\import{.}{PriponskoPolje/SimulacijaDrevesa}

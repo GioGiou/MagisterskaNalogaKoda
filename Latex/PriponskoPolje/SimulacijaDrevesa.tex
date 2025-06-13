@@ -1,12 +1,12 @@
-V priponskem drevesu je dolžina najdaljše skupne predpone dveh pripon dolžina podniza najglobljega skupnega predhodnika (angl. \textit{Lowest common ancestor} oziroma LCA) obeh listov, ki predstavljata priponi. Ampak trenutna implementacija \textit{LCP}-polja je namenjena pospešitvi iskanja po priponskem polju in uporablja \textit{L-LCP} in \textit{R-LCP} polji. Zato se potrebuje bolj splošno \textit{LCP}-polje, ki bi nadomestilo \textit{L-LCP} in \textit{R-LCP} polji in bi omogočalo simuliranje priponskega drevesa.
+V priponskem drevesu je dolžina najdaljše skupne predpone dveh pripon dolžina podniza najglobljega skupnega predhodnika (angl. \textit{Lowest common ancestor} oziroma LCA) obeh listov, ki predstavljata priponi. Ampak predhono predstavljena implementacija \textit{LCP} polja je namenjena pospešitvi iskanja po priponskem polju in uporablja \textit{Q-LCP} polje. Zato se potrebuje bolj splošno \textit{LCP}polje, ki bi nadomestilo \textit{Q-LCP} polje in bi omogočalo simuliranje priponskega drevesa.
 
-Vrednost v \textit{L-LCP}$[M]$ predstavlja dolžno najdaljše skupne predpone $lcp(T[SA[M], n],$ $T[SA[L], n])$, pri čemer je $L$ začetni indeks intervala bisekcije s sredinsko točko v $M$, in vrednost funkcije $lcp$ označimo kot $k$. Vemo tudi, da je $SA[L]<SA[M]$, torej imajo vse pripone na intervalu med $L$ in $M$ paroma najdaljšo skupno predpono dolžine vsaj $k$, saj vse pripone na tem intervalu so leksikografsko večje od $SA[L]$ in manjše od $SA[M]$. To pomeni, da za vsak $i$, ki je $L<i\le M$, velja $k\le lcp(T[SA[i-1], n], T[SA[i], n])$. Posledično obstaja tak $i$, za katerega velja $lcp(T[SA[i-1], n], T[SA[i], n])=k$. Podoben sklep se lahko naredi tudi za \textit{R-LCP}$[M]$, pri čemer uporabimo interval v priponskem polju med $M$ in $R$. Zato se lahko naredi bolj spološno $LCP$ polje $LCP[2,n]$, za katerega velja
+Če namesto \textit{Q-LCP} polja, vzamemo vrednost v \textit{L-LCP}, in sicer vrednost \textit{L-LCP}$[M]$ predstavlja dolžno najdaljše skupne predpone $\lcp{T[SA[M], n]}{T[SA[L], n]}$, pri čemer je $L$ začetni indeks intervala bisekcije s sredinsko točko v $M$, in vrednost funkcije $lcp$ označimo kot $k$. Vemo tudi, da je $SA[L]<SA[M]$, torej imajo vse pripone na intervalu med $L$ in $M$ paroma najdaljšo skupno predpono dolžine vsaj $k$, saj vse pripone na tem intervalu so leksikografsko večje od $SA[L]$ in manjše od $SA[M]$. To pomeni, da za vsak $i$, ki je $L<i\le M$, velja $k\le lcp(T[SA[i-1], n], T[SA[i], n])$. Posledično obstaja tak $i$, za katerega velja $lcp(T[SA[i-1], n], T[SA[i], n])=k$. Podoben sklep se lahko naredi tudi za \textit{R-LCP}$[M]$, pri čemer uporabimo interval v priponskem polju med $M$ in $R$. Zato se lahko naredi bolj spološno $LCP$ polje $LCP[2,n]$, ki ima vrdnosti 
 $$
-    LCP[i]=lcp(T[SA[i-1], n], T[SA[i], n]).
+    LCP[i]=\lcp{T[SA[i-1], n]}{T[SA[i], n]}.
 $$
-Primer takega $LCP$ polja je prikazan na Sliki \ref{fig:SuffuxArray}. Na sliki je označena z zeleno barvo vrednost $LCP[3]$, ki je najdaljša skupna predpona med priponama $SA[2]$ in $SA[3]$. Ta vrednost je tudi označena na priponskem drevesu na sliki \cite{Abouelhoda2004, Kasai2001}.
+Primer takega $LCP$ polja je prikazan na Sliki \ref{fig:SuffuxArray}. Na sliki je označena z zeleno barvo vrednost $LCP[3]$, ki je najdaljša skupna predpona med priponama $SA[2]$ in $SA[3]$. Predpona pripon  $SA[2]$ in $SA[3]$ je označena z zeleno tudi na priponskem drevesu na sliki \cite{Abouelhoda2004, Kasai2001}.
 
-Novo $LCP$ polje potrebuje zgolj $O(n)$ \enquote{celih števil}. Pri tem pa potrebuje dodatno podatkovno strukturo za učinkovito iskanje najmanjše vrednosti na intervalu oziroma $rmq$, ki je potrebna za nadomestiti \textit{L-LCP} in \textit{R-LCP} polji. Prva možnost je izgradnja $rmM$-drevesa, ki v vsakem vozlišču vsebuje zgolj vrednost $m$. Iskanje v drevesu pa potrebuje $O(\log{n})$ časa oziroma $O(m\log{n}+\log{n})$ časa za poizvedbo, kar pa je prepočasno, saj potrebuje iskanje z \textit{L-LCP} in \textit{R-LCP} polji $O(m+\log{n})$ časa za poizvedbo. Zato lahko uporabimo $rmq$ strukturo, ki sta jo predlagala Fischer in Heun \cite{Fischer2007}. Predlagana podatkovna struktura potrebuje $O(n)$ dodatnega prostora in za dani interval vrne najmanjšo vrednost v $O(1)$ času, torej se lahko poizvedba izvrši v $O(m+\log{n})$.
+Novo $LCP$ polje potrebuje zgolj $n-1$ celih števil. Pri tem pa potrebuje dodatno podatkovno strukturo za učinkovito iskanje najmanjše vrednosti na intervalu oziroma $rmq$, ki je potrebna za nadomestiti \textit{Q-LCP} polje. Prva možnost je izgradnja $rmM$-drevesa, ki v vsakem vozlišču vsebuje zgolj vrednost $m$. Iskanje v drevesu pa potrebuje $O(\log{n})$ časa oziroma $O(m\log{n}+\log{n})$ časa za poizvedbo, kar pa je prepočasno, saj potrebuje iskanje z \textit{L-LCP} in \textit{R-LCP} polji $O(m+\log{n})$ časa za poizvedbo. Zato lahko uporabimo $rmq$ strukturo, ki sta jo predlagala Fischer in Heun \cite{Fischer2007}. Predlagana podatkovna struktura potrebuje $O(n)$ dodatnega prostora in za dani interval vrne najmanjšo vrednost v $O(1)$ času, torej se lahko poizvedba izvrši v $O(m+\log{n})$.
 
 Posplošeno $LCP$ polje se tudi lahko uporabi simuliranje priponskega drevesa. Vrednost $LCP[i]$ predstavlja črkovno dolžino vozlišča $v$, za katerega velja $v=LCA(l_{i-1},l_i)$, pričemer $l_i$ predstavlja pripono $SA[i]$ in $l_{i-1}$ predstavlja pripono $SA[i-1]$. Kasai idr. \cite{Kasai2001} so uporabili to dejstvo za simulacijo pregleda od spodaj navzgor (angl. \textit{Bottom-Up Traversal}) in od desne proti levi (angl. \textit{Post-Order Traversal}). S takim obhodom drevesa lahko rešimo problem sprehoda po podnizih (angl. \textit{substring traversal problem}), ki oštevilči vse ponavljajoče se podnize. Podani algoritem potrebuje $O(n)$ časa in potrebuje enako časa kot obhod priponskega drevesa z $n$-timi listi.
 
@@ -24,14 +24,16 @@ V splošnem vsako notranje vozlišče $v$ v priponskem drevesu predstavlja podni
 Koren drevesa predstavlja prazen niz in njegovo poddrevo je celotno drevo, zato koren predstavlja $0$-interval $[1,n]$. Ker pa je $LCP$ polje definirano zgolj za indekse od $2$ do $n$, se lahko definira indeks $1$ kot $LCP[1]=-1$. Ta popravek ne vpliva na pravilnost delovanja priponskega polja, saj ne obstaja pripona $SA[0]$. Znotrja vsakega $l$-intervala $[L,R]$ lahko obstajajo drugi $l'$-intervali, za katere velja $l<l'$. Takih $l'$-intervalov je največ $n_l+1=O(|\Sigma|)$, pri čemer je $n_l$ število ponovitev vrednosti $l$ v $LCP$ polju na intervalu $[L,R]$. Torej lahko predstavimo relacijo med $l$-intervali kot $LCP$ intervalno drevo (angl. \textit{LCP interval tree}). Primer $LCP$ intervalnega drevesa je prikazan na Sliki \ref{fig:intervalTree}. Prikazana je tudi relacija med priponskim drevesom in $LCP$ intervalnim drevesom. \cite{Abouelhoda2004}.
 
 \begin{figure}[tb]
-    \begin{subfigure}[T]{0.45\linewidth}        
-        \includesvg[scale=1]{Slike/McCreigov/KOKOŠMcCreightS.svg}
+    \begin{subfigure}[C]{0.45\linewidth}
+        \vfill       
+        \includesvg[scale=0.7]{Slike/McCreigov/KOKOŠMcCreightS.svg}
         \centering
+        \vfill
         \subcaption*{}
         \label{fig:aSADrevo}
     \end{subfigure}
     \hfill
-    \begin{subfigure}[T]{0.45\linewidth}        
+    \begin{subfigure}[C]{0.45\linewidth}        
         \includesvg[scale=0.7]{Slike/IntervalnoDrevo.svg}
         \centering
         \subcaption*{}
