@@ -73,7 +73,7 @@ int main(int argc, char **argv) {
     	i=i+500;
     }
   }
-  string out = "rezNovPcNaKlancu";
+  string out = "rezNovPcNaKlancu-march2000000";
   //out.append(argv[1]);
   out.append(".csv");
   ofstream out_s(out, ofstream::trunc);
@@ -96,7 +96,7 @@ int main(int argc, char **argv) {
 /* 	Intel i3 5005U
 	ST: 2048000 je prekine testiranje, I/O sleep 500
 */
-  for (j = 500; j <= 2000000; j = j*2) {
+  for (j = 500; j <= 50000000 /*3000000*/; j = j*2) {
     sleep(10);
     int i;
     double totalTime = 0;
