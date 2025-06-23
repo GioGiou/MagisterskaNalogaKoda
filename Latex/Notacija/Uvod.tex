@@ -5,15 +5,15 @@ V tem poglavju bodo predstavljene osnovne oznake in definicije, ki bodo uporablj
 %V nadaljevanju poglavja bodo predstavljena še predstavitve in podatkovne strukture ter operacije nad njimi, ki so osnova za kompaktno predstavitev drugih podatkovnih struktur (na primer kompaktna prdstavitev dreves), ter kompaktne predstavitve dreves, pri čemer bo ena od predstavitev uporabljena v podatkovni strukturi kompaktno priponsko drevo. Predstavlje bo tudi eniški zapis, ki bo uporabljen v kompaktni predstavitvi priponskih dreves.
 
 \section{OZNAKE IN OSNOVNE DEFINICIJE}\label{sec:def}
-Skozi magistrsko nalogo $T$ predstavlja vhodno besedo dolžine $n$ znakov, iz katere bomo zgradili priponsko drevo ali kompaktno priponsko drevo. Na podoben način $P$ predstavlja iskani vzorec dolžine $m$ znakov v $T$. Vhodna beseda $T$ in vzorec $P$ sta sestavljena iz znakov poljubne abecede $\Sigma$.
+Skozi magistrsko nalogo bo $\Sigma$ predstavljala abecedo. Abeceda je množica znakov $\Sigma=\{\sigma_1,\dots,\sigma_a\}$. Vhodna beseda $T$ dolžine $n$ znakov, iz katere bomo zgradili priponsko drevo, priponsko polje ali kompaktno priponsko drevo, je sestavljena iz znakov abecede $\Sigma$, torej je $T=\Sigma^n$. Na podoben način $P$ predstavlja iskani vzorec dolžine $m$ znakov, katerega se želi preveriti prisotnost v $T$. Tako kot beseda $T$ je tudi vzorec $P$ sestavljen iz znakov abecede $\Sigma$, torej je $P=\Sigma^m$.
 
-Niz znakov iz abecede $\Sigma$, ki je del besede in se začne na $i$-tem in se konča na $j$-tem znaku besede, imenujemo podniz in ga označimo kot $T[i,j]$. Poljubni nizi oziroma podnizi so označeni z grškimi črkami $\alpha$, $\beta$ in $\gamma$ ter pri tem je dopisano, ali gre za podniz ali niz. Formalno je podniz definiran na sledeč način:
+Niz znakov iz abecede $\Sigma$, ki je del besede in se začne na $i$-tem in se konča na $j$-tem znaku besede, imenujemo podniz in ga označimo kot $T[i:j]$. Posebna vrsta podniza, ki se začne na $i$-tem znaku in konča na koncu besedila, imenujemo pripona ter se jo označi kot $T[i:n]$ oziroma $T[i:]$. Poljubni nizi oziroma podnizi so označeni z grškimi črkami $\alpha$, $\beta$ in $\gamma$ ter pri tem je dopisano, ali gre za podniz ali niz. Formalno je podniz definiran na sledeč način:
 \begin{defi}
-    Niz $\alpha\in\Sigma^*$ je podniz besede $T$, ko obstaja tak $1\le i\le n$, za katerega velja, da je  $\alpha=T[i,i+|\alpha|]$. 
+    Niz $\alpha\in\Sigma^*$ je podniz besede $T$, ko obstaja tak $1\le i\le n$, za katerega velja, da je  $\alpha=T[i:i+|\alpha|]$. 
 \end{defi}
 Dva poljubna niza se lahko združita v novi daljši niz s stikom, ki je definiran na sledeči način:
 \begin{defi}
-    Stik nizov $\alpha$ in $\beta$ je niz $\gamma=\alpha\cdot\beta=\alpha\beta$, pri čemer je $\alpha=\gamma[1,|\alpha|]$ in $\beta=\gamma[|\alpha|+1,|\alpha|+|\beta|]$.
+    Stik nizov $\alpha$ in $\beta$ je niz $\gamma=\alpha\cdot\beta=\alpha\beta$, pri čemer je $\alpha=\gamma[1:|\alpha|]$ in $\beta=\gamma[|\alpha|+1:|\alpha|+|\beta|]$.
 \end{defi}
 
 Za razliko od nizov in podnizov so znaki iz abecede $\Sigma$ označeni s črkama $x$ ali $t$. Oznaka $T[i]$ pa predstavlja znak na $i$-tem mestu vhodne besede.

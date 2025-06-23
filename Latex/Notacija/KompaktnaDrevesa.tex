@@ -1,6 +1,6 @@
 Z uporabo bitnih polj je mogoče predstaviti mnogo podatkovnih struktur. Ker pa se magistrska naloga osredotočila na priponska drevesa, bo zato predstavljena uporaba bitnih polj za kompaktno predstavitev topologije dreves. Običajno je podatkovna struktura drevo sestavljeno iz vozlišč ter referenc  na njih. V vsakem vozlišču je shranjena vrednost, ki jo predstavlja vozlišče, ter referenca na svoje otroke. Drevo z $n$-timi vozlišči potrebuje $O(n\log{n})$ bitov za shraniti topologijo drevesa (v praksi potrebuje $O(nw)$ bitov). Kompaktna predstavitev topologije dreves zniža prostorsko zahtevnost na $2n+o(n)$ bitov. Za vsako vozlišče je potrebno predstaviti referenco na vozlišče ter predstaviti, da je vozlišče bilo že obiskano, zato vskao vozlišče potrebuje 2 bita oziroma za predstavitev celotnega drevesa je potrebnih $2n$ bitov.
 
-Pri tem obstajajo tri vrste kompaktne predstavitve dreves: Uravnoteženi oklepaji (angl. \textit{Balanced Parentheses} oziroma BP), Zaporedje eniških zapisov stopenj vozlišč po plasteh (angl. \textit{Level Order Unary Degree Sequence} oziroma LOUDS) in Zaporedje eniških zapisov stopenj vozlišč v globino (angl. \textit{Depth-First Unary Degree Sequence} oziroma DFUDS). Naslednja definicija prikaže operacije, ki so potrebne za pravilno delovanje dreves.
+Pri tem obstajajo tri vrste kompaktne predstavitve dreves: Uravnoteženi oklepaji (angl. \textit{Balanced Parentheses} oziroma BP), Zaporedje eniških zapisov stopenj vozlišč po plasteh (angl. \textit{Level Order Unary Degree Sequence} oziroma LOUDS) in Zaporedje eniških zapisov stopenj vozlišč v globino (angl. \textit{Depth-First Unary Degree Sequence} oziroma DFUDS). Naslednja definicija prikaže operacije nad drevesi.
 
 
 \begin{defi}\label{def:drevo}
@@ -28,7 +28,7 @@ Prvi način zapisa topologije drevesa je zaporedje eniških zapisov stopenj vozl
 
 Topologijo drevesa se predstavi kot bitno polje $B$ dolžine $2n+1$, pri čemer je $n$ število vozlišč v drevesu. Zapis drevesa se začne z nizom $10$, temu pa sledijo stopnje vsakega vozlišča v eniškem zapisu. Kot je razvidno iz imena predstavitve, so vozlišča obiskana po nivojih: vozlišča z isto globino so zaporedno predstavljena \cite{Navarro2016}.
 
-Primer takega zapisa je predstavljen na Sliki \ref{fig:LOUDS}. Na sliki so vozlišča v zaporedju ločena s sivimi črtami. Koren drevesa je predstavljen z $B[3,7]=11110$. Niz $B[3,7]$ vsebuje 4 bite z vrednostjo $1$, ker ima koren $4$ otroke.
+Primer takega zapisa je predstavljen na Sliki \ref{fig:LOUDS}. Na sliki so vozlišča v zaporedju ločena s sivimi črtami. Koren drevesa je predstavljen z $B[3:7]=11110$. Niz $B[3:7]$ vsebuje 4 bite z vrednostjo $1$, ker ima koren $4$ otroke.
 
 \begin{figure}[htb]
     \begin{center}
@@ -92,7 +92,7 @@ Naslednja predstavitev topologije drevesa je zaporedje eniških zapisov stopenj 
     \end{center}
 \end{figure}
 
-Drevo je predstavljeno z bitnim poljem $B[1,2n+2]$. Zapis temelji na uporabi zapisa stopenj vozlišč, zato je potrebno dodati na začetek bitnega polja $B[1,3]=110$. Zatem pa so zapisane stopnje vozlišč z eniškim zapisom. Zapis je zgrajen z uporab pregleda v globino, kot to ponazarja ime predstavitve. Vsa vozlišča imajo indeks, ki je zaporedno število obiskanega vozlišča. Predstavitev omogoča preprostejše implementacije operacij ter posledično manjše dodatne podatkovne strukture. Vseeno pa omogoča hitrejše implementacije nekaterih operacij v primerjavi z uporabo predstavitve LOUDS. Primer zapisa topologije drevesa z DFUDS je prikazan na Sliki \ref{fig:DFUDS}. Vozlišča so v zaporedju ločena s sivimi črtami.
+Drevo je predstavljeno z bitnim poljem $B[1:2n+2]$. Zapis temelji na uporabi zapisa stopenj vozlišč, zato je potrebno dodati na začetek bitnega polja $B[1:3]=110$. Zatem pa so zapisane stopnje vozlišč z eniškim zapisom. Zapis je zgrajen z uporab pregleda v globino, kot to ponazarja ime predstavitve. Vsa vozlišča imajo indeks, ki je zaporedno število obiskanega vozlišča. Predstavitev omogoča preprostejše implementacije operacij ter posledično manjše dodatne podatkovne strukture. Vseeno pa omogoča hitrejše implementacije nekaterih operacij v primerjavi z uporabo predstavitve LOUDS. Primer zapisa topologije drevesa z DFUDS je prikazan na Sliki \ref{fig:DFUDS}. Vozlišča so v zaporedju ločena s sivimi črtami.
 
 \begin{table}[htb]
     \centering
