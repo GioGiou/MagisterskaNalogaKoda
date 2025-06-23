@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="70.482346mm"
+   height="81.128845mm"
+   viewBox="0 0 70.482346 81.128845"
+   version="1.1"
+   id="svg1"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1" />
+  <g
+     id="layer1"
+     style="display:inline"
+     transform="translate(-16.156896,-16.86627)">
+    <g
+       id="g4">
+      <text
+         xml:space="preserve"
+         style="font-weight:300;font-size:3.52777px;line-height:1;font-family:Calibri;-inkscape-font-specification:'Calibri, Light';text-align:end;writing-mode:lr-tb;direction:ltr;text-anchor:end;fill:none;stroke:#ff6467;stroke-width:0.346001;stroke-linejoin:bevel;stroke-opacity:1"
+         x="-79.690628"
+         y="80.317642"
+         id="text1-6"
+         transform="rotate(-90)"><tspan
+           id="tspan1-14"
+           style="text-align:end;text-anchor:end;stroke:#ff6467;stroke-width:0.346;stroke-opacity:1"
+           x="-79.690628"
+           y="80.317642">$T[SA[M]:]$</tspan></text>
+      <rect
+         style="fill:#ff6467;fill-opacity:1;stroke:none;stroke-width:0.306181;stroke-linejoin:bevel"
+         id="rect1-57-5"
+         width="15.689304"
+         height="48.097263"
+         x="70.79538"
+         y="30.523928" />
+      <rect
+         style="fill:none;stroke:#000000;stroke-width:0.346001;stroke-linejoin:bevel"
+         id="rect1-5"
+         width="15.649485"
+         height="61.577316"
+         x="70.816757"
+         y="17.03927" />
+    </g>
+    <g
+       id="g5">
+      <text
+         xml:space="preserve"
+         style="font-weight:300;font-size:3.52777px;line-height:1;font-family:Calibri;-inkscape-font-specification:'Calibri, Light';text-align:end;writing-mode:lr-tb;direction:ltr;text-anchor:end;fill:none;stroke:#05e972;stroke-width:0.346001;stroke-linejoin:bevel;stroke-opacity:1"
+         x="-79.690628"
+         y="24.366325"
+         id="text1"
+         transform="rotate(-90)"><tspan
+           id="tspan1"
+           style="text-align:end;text-anchor:end;stroke:#05e972;stroke-width:0.346;stroke-opacity:1"
+           x="-79.690628"
+           y="24.366325">$P$</tspan></text>
+      <rect
+         style="fill:#05e972;fill-opacity:1;stroke:none;stroke-width:0.246061;stroke-linejoin:bevel"
+         id="rect1-57"
+         width="15.70523"
+         height="31.031813"
+         x="16.284706"
+         y="47.679703" />
+      <rect
+         style="fill:none;stroke:#000000;stroke-width:0.346001;stroke-linejoin:bevel"
+         id="rect1"
+         width="15.649485"
+         height="61.577316"
+         x="16.329897"
+         y="17.03927" />
+    </g>
+    <g
+       id="g3"
+       transform="translate(-6.6145926)">
+      <text
+         xml:space="preserve"
+         style="font-weight:300;font-size:3.52777px;line-height:1;font-family:Calibri;-inkscape-font-specification:'Calibri, Light';text-align:end;writing-mode:lr-tb;direction:ltr;text-anchor:end;fill:none;stroke:#51a2ff;stroke-width:0.346001;stroke-linejoin:bevel;stroke-opacity:1"
+         x="-79.69062"
+         y="58.621807"
+         id="text1-1"
+         transform="rotate(-90)"><tspan
+           id="tspan1-1"
+           style="text-align:end;text-anchor:end;stroke:#51a2ff;stroke-width:0.346;stroke-opacity:1"
+           x="-79.69062"
+           y="58.621807">$T[SA[L-1]:]$</tspan></text>
+      <rect
+         style="fill:#51a2ff;fill-opacity:1;stroke:none;stroke-width:0.275607;stroke-linejoin:bevel"
+         id="rect1-57-9"
+         width="15.739799"
+         height="38.846485"
+         x="50.134109"
+         y="39.685719" />
+      <rect
+         style="fill:none;stroke:#000000;stroke-width:0.346001;stroke-linejoin:bevel"
+         id="rect1-8"
+         width="15.649485"
+         height="61.577316"
+         x="50.18792"
+         y="17.03927" />
+    </g>
+    <path
+       style="fill:none;fill-opacity:1;stroke:#969696;stroke-width:0.346001;stroke-linejoin:bevel;stroke-opacity:1"
+       d="m 32.139165,57.505062 11.286945,0.01032 z"
+       id="path5" />
+    <path
+       style="fill:none;fill-opacity:1;stroke:#969696;stroke-width:0.346001;stroke-linejoin:bevel;stroke-opacity:1"
+       d="m 32.01474,78.489683 11.286945,0.01032 z"
+       id="path5-2" />
+    <path
+       style="fill:none;fill-opacity:1;stroke:#969696;stroke-width:0.466952;stroke-linejoin:bevel;stroke-opacity:1"
+       d="m 37.653108,78.330071 0.01021,-20.774997 z"
+       id="path5-1" />
+    <text
+       xml:space="preserve"
+       style="font-weight:300;font-size:3.52777px;line-height:1;font-family:Calibri;-inkscape-font-specification:'Calibri, Light';text-align:end;writing-mode:lr-tb;direction:ltr;text-anchor:end;fill:none;fill-opacity:1;stroke:#969696;stroke-width:0.346001;stroke-linejoin:bevel;stroke-opacity:1"
+       x="36.902084"
+       y="69.042419"
+       id="text5"><tspan
+         id="tspan5"
+         style="stroke-width:0.346"
+         x="36.902084"
+         y="69.042419">$k$</tspan></text>
+    <path
+       style="fill:none;fill-opacity:1;stroke:#969696;stroke-width:0.346001;stroke-linejoin:bevel;stroke-opacity:1"
+       d="m 59.522749,57.535638 11.286945,0.01032 z"
+       id="path5-7" />
+    <path
+       style="fill:none;fill-opacity:1;stroke:#969696;stroke-width:0.346001;stroke-linejoin:bevel;stroke-opacity:1"
+       d="m 59.398324,78.520259 11.286945,0.01032 z"
+       id="path5-2-4" />
+    <path
+       style="fill:none;fill-opacity:1;stroke:#969696;stroke-width:0.466952;stroke-linejoin:bevel;stroke-opacity:1"
+       d="M 65.036692,78.360647 65.046902,57.58565 Z"
+       id="path5-1-2" />
+    <text
+       xml:space="preserve"
+       style="font-weight:300;font-size:3.52777px;line-height:1;font-family:Calibri;-inkscape-font-specification:'Calibri, Light';text-align:end;writing-mode:lr-tb;direction:ltr;text-anchor:end;fill:none;fill-opacity:1;stroke:#969696;stroke-width:0.346001;stroke-linejoin:bevel;stroke-opacity:1"
+       x="64.285667"
+       y="69.07299"
+       id="text5-7"><tspan
+         id="tspan5-7"
+         style="stroke-width:0.346"
+         x="64.285667"
+         y="69.07299">$l$</tspan></text>
+  </g>
+</svg>
