@@ -3,8 +3,8 @@
 
 <svg
    width="70.482346mm"
-   height="81.12886mm"
-   viewBox="0 0 70.482346 81.12886"
+   height="79.762886mm"
+   viewBox="0 0 70.482346 79.762886"
    version="1.1"
    id="svg1"
    xmlns="http://www.w3.org/2000/svg"
@@ -13,66 +13,58 @@
      id="defs1" />
   <g
      id="layer3"
-     transform="translate(-129.64584,-15.610411)"
+     transform="translate(-129.64583,-15.610411)"
      style="display:inline">
-    <g
-       id="g4-9"
-       transform="translate(113.48894,-1.2558501)">
-      <text
-         xml:space="preserve"
-         style="font-weight:300;font-size:3.52777px;line-height:1;font-family:Calibri;-inkscape-font-specification:'Calibri, Light';text-align:end;writing-mode:lr-tb;direction:ltr;text-anchor:end;fill:none;stroke:#ff6467;stroke-width:0.346001;stroke-linejoin:bevel;stroke-opacity:1"
-         x="-79.690628"
-         y="80.317642"
-         id="text1-6-8"
-         transform="rotate(-90)"><tspan
-           id="tspan1-14-6"
-           style="text-align:end;text-anchor:end;stroke:#ff6467;stroke-width:0.346;stroke-opacity:1"
-           x="-79.690628"
-           y="80.317642">$T[SA[M]:]$</tspan></text>
-      <rect
-         style="fill:#ff6467;fill-opacity:1;stroke:none;stroke-width:0.306181;stroke-linejoin:bevel"
-         id="rect1-57-5-5"
-         width="15.689304"
-         height="48.097263"
-         x="70.79538"
-         y="30.523928" />
-      <rect
-         style="fill:none;stroke:#000000;stroke-width:0.346001;stroke-linejoin:bevel"
-         id="rect1-5-0"
-         width="15.649485"
-         height="61.577316"
-         x="70.816757"
-         y="17.03927" />
-    </g>
-    <g
-       id="g5-2"
-       transform="translate(113.48894,-1.2558501)">
-      <text
-         xml:space="preserve"
-         style="font-weight:300;font-size:3.52777px;line-height:1;font-family:Calibri;-inkscape-font-specification:'Calibri, Light';text-align:end;writing-mode:lr-tb;direction:ltr;text-anchor:end;fill:none;stroke:#05e972;stroke-width:0.346001;stroke-linejoin:bevel;stroke-opacity:1"
-         x="-79.690628"
-         y="24.366325"
-         id="text1-8"
-         transform="rotate(-90)"><tspan
-           id="tspan1-6"
-           style="text-align:end;text-anchor:end;stroke:#05e972;stroke-width:0.346;stroke-opacity:1"
-           x="-79.690628"
-           y="24.366325">$P$</tspan></text>
-      <rect
-         style="fill:#05e972;fill-opacity:1;stroke:none;stroke-width:0.246061;stroke-linejoin:bevel"
-         id="rect1-57-0"
-         width="15.70523"
-         height="31.031813"
-         x="16.284706"
-         y="47.679703" />
-      <rect
-         style="fill:none;stroke:#000000;stroke-width:0.346001;stroke-linejoin:bevel"
-         id="rect1-2"
-         width="15.649485"
-         height="61.577316"
-         x="16.329897"
-         y="17.03927" />
-    </g>
+    <text
+       xml:space="preserve"
+       style="font-weight:300;font-size:3.52777px;line-height:1;font-family:Calibri;-inkscape-font-specification:'Calibri, Light';text-align:end;writing-mode:lr-tb;direction:ltr;text-anchor:end;fill:none;stroke:#000000;stroke-width:0.346001;stroke-linejoin:bevel;stroke-opacity:1"
+       x="-78.434776"
+       y="193.80658"
+       id="text1-6-8"
+       transform="rotate(-90)"><tspan
+         id="tspan1-14-6"
+         style="text-align:end;text-anchor:end;stroke:#000000;stroke-width:0.346;stroke-opacity:1"
+         x="-78.434776"
+         y="193.80658">$T[SA[M]:]$</tspan></text>
+    <rect
+       style="fill:#ff6467;fill-opacity:1;stroke:none;stroke-width:0.306181;stroke-linejoin:bevel"
+       id="rect1-57-5-5"
+       width="15.689304"
+       height="48.097263"
+       x="184.28432"
+       y="29.268078" />
+    <rect
+       style="fill:none;stroke:#000000;stroke-width:0.346001;stroke-linejoin:bevel"
+       id="rect1-5-0"
+       width="15.649485"
+       height="61.577316"
+       x="184.30569"
+       y="15.783421" />
+    <text
+       xml:space="preserve"
+       style="font-weight:300;font-size:3.52777px;line-height:1;font-family:Calibri;-inkscape-font-specification:'Calibri, Light';text-align:end;writing-mode:lr-tb;direction:ltr;text-anchor:end;fill:none;stroke:#000000;stroke-width:0.346001;stroke-linejoin:bevel;stroke-opacity:1"
+       x="-78.434776"
+       y="137.85527"
+       id="text1-8"
+       transform="rotate(-90)"><tspan
+         id="tspan1-6"
+         style="text-align:end;text-anchor:end;stroke:#000000;stroke-width:0.346;stroke-opacity:1"
+         x="-78.434776"
+         y="137.85527">$P$</tspan></text>
+    <rect
+       style="fill:#05e972;fill-opacity:1;stroke:none;stroke-width:0.246061;stroke-linejoin:bevel"
+       id="rect1-57-0"
+       width="15.70523"
+       height="31.031813"
+       x="129.77365"
+       y="46.423851" />
+    <rect
+       style="fill:none;stroke:#000000;stroke-width:0.346001;stroke-linejoin:bevel"
+       id="rect1-2"
+       width="15.649485"
+       height="61.577316"
+       x="129.81883"
+       y="15.783421" />
     <path
        style="fill:none;fill-opacity:1;stroke:#969696;stroke-width:0.346001;stroke-linejoin:bevel;stroke-opacity:1"
        d="m 145.6281,56.778384 11.28695,0.01032 z"
@@ -123,15 +115,15 @@
          y="64.434242">$l$</tspan></text>
     <text
        xml:space="preserve"
-       style="font-weight:300;font-size:3.52777px;line-height:1;font-family:Calibri;-inkscape-font-specification:'Calibri, Light';text-align:end;writing-mode:lr-tb;direction:ltr;text-anchor:end;fill:none;stroke:#51a2ff;stroke-width:0.346001;stroke-linejoin:bevel;stroke-opacity:1"
+       style="font-weight:300;font-size:3.52777px;line-height:1;font-family:Calibri;-inkscape-font-specification:'Calibri, Light';text-align:end;writing-mode:lr-tb;direction:ltr;text-anchor:end;fill:none;stroke:#000000;stroke-width:0.346001;stroke-linejoin:bevel;stroke-opacity:1"
        x="-78.963943"
        y="165.49614"
        id="text1-1-3"
        transform="rotate(-90,-0.26458333,-0.26458333)"><tspan
          id="tspan1-1-8"
-         style="text-align:end;text-anchor:end;stroke:#51a2ff;stroke-width:0.346;stroke-opacity:1"
+         style="text-align:end;text-anchor:end;stroke:#000000;stroke-width:0.346;stroke-opacity:1"
          x="-78.963943"
-         y="165.49614">$T[SA[L-1]:]$</tspan></text>
+         y="165.49614">$T[SA[L]:]$</tspan></text>
     <rect
        style="fill:#51a2ff;fill-opacity:1;stroke:none;stroke-width:0.275607;stroke-linejoin:bevel"
        id="rect1-57-9-9"

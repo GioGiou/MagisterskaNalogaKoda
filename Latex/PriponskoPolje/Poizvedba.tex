@@ -42,7 +42,7 @@ Tako definirano $LCP$ polje je potrebno $O(n^2)$ prostora. Problem, katerega si 
 Na začetku vsakega koraka vemo, da se $P$ ujema z vsaj $k$ znaki in če smo v levem oziroma desnem podintervalom predhodnega intervala. Recimo, da smo v desnem, torej $L$ je bila predhodna sredinska točka. Vemo, da se $P$ in $SA[L]$-ta pripona ujemata v $k$ znakih ter $SA[L]$-ta pripona in $SA[M]$-ta pripona se ujemata v $LCP[L,M]$-tih znakih ter pripona $SA[L]$ je leksikografsko manjša od $SA[M]$. Torej obstajajo tri možne relacije med $k$ in $LCP[L,M]$:
 \begin{enumerate}
     \item $k<LCP[L,M]$, potem se $SA[L]$-ta pripona in $SA[M]$-ta pripona bolj ujemata kot $SA[L]$-ta pripona in $P$. Ker smo v predhodnem koraku izvedeli, da je $P$ večji od sredne predhodnega intervala, po tem pomeni, da je $P[k+1]>T[SA[L+k+1]]=T[SA[M+k+1]]$. Torej naslednji pregledani interval je $SA[M:R]$.
-    \item $k>LCP[L,M]$, potem se $SA[L]$-ta pripona in $SA[M]$-ta pripona manj ujemata kot $SA[L]$-ta pripona in $P$ in označimo \textit{L-LCP}$[M]=l$. Torej $P[l+1]=T[SA[L+l+1]]<T[SA[M+l+1]]$, saj je $L<M$, ker je $SA[L]$-ta pripona leksikografsko manjša $SA[M]$-ta pripona. Torej se bisekcija nadaljuje na intervalu $SA[L:M]$.
+    \item $k>LCP[L,M]$, potem se $SA[L]$-ta pripona in $SA[M]$-ta pripona manj ujemata kot $SA[L]$-ta pripona in $P$ in označimo \textit{LCP}$[L,M]=l$. Torej $P[l+1]=T[SA[L+l+1]]<T[SA[M+l+1]]$, saj je $L<M$, ker je $SA[L]$-ta pripona leksikografsko manjša $SA[M]$-ta pripona. Torej se bisekcija nadaljuje na intervalu $SA[L:M]$.
     \item $k=LCP[L,M]$, potem je potrebno preveriti, ali je $P$ večji od $SA[M]$-te pripone. Pri tem ni potrebno preveriti prvih $k$ znakov, saj vemo, da se ujemajo, ker je se $SA[L]$-ta pripona ujema s $SA[M]$-ta pripona v $k$ znakih in se $SA[L]$-ta pripona tudi ujema z $P$ v $k$ znakih. Med preverjanjem štejemo, koliko znakov se ujema in to zabeležimo kot $k'$. Če je $P[k+k'+1]<T[SA[M]+k+k'+1]$ potem nadaljujemo v interval $SA[L:M]$, sicer je $P[k+k'+1]>T[SA[M]+k+k'+1]$ in nadaljujemo v interval $SA[M:R]$. Preden nadaljujemo v naslednji interval popravimo $k\leftarrow k+k'$, pri čemer novi $k\le m$.
 \end{enumerate}
 Simetrično velja tudi, če smo v levem podintervalu, pri tem pa uporabimo celico $LCP[R,M]$, saj je $R$ predhodna srednja točka intervala. Iz tega sledi sledeča lema.
@@ -62,7 +62,7 @@ Poizvedbo spremenimo tako, da se zamenja $LCP$ polje z \textit{L-LCP} poljem, ko
     Poizvedba $\Prisotnost{T}{P}$ implementiran s priponskim poljem in \textit{L-LCP} in \textit{R-LCP} polji poljem potrebuje $O(m+\log{n})$ časa in prostora za $3n$ celih števil.
 \end{lema}
 
-\begin{figure}[htb] 
+\begin{figure}[tb] 
     \includesvg[scale=.8]{Slike/LLCP_RLCP.svg}
     \centering
     \caption{Primer \textit{L-LCP} in \textit{R-LCP} polji za priponskega polja nad besedo \enquote{KOKOŠ$\$$}.} 
