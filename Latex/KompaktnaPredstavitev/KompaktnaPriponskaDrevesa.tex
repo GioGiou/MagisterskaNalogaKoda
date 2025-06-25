@@ -69,7 +69,7 @@ Implementacije kompaktnega priponskega polja, ki so lahko uporabljajo pri implem
      Kompaktno priponsko polje nad besedilom $T$, ki je uporabljeno za predstavitev kompaktnega priponskega drevesa, podpira sledeče operacije:
     \begin{enumerate}
         \item $\Pripona{i}$: vrne začetni indeks pripone shranjen v $SA[i]$ v času $t_{SA}$,
-        \item $\Inver{i}$: vrne indeks $j=SA^{-1}[i]$, pri čemer je $SA[j]=i$, v času $t_{SA}$,
+        \item $\Inverz{i}$: vrne indeks $j=SA^{-1}[i]$, pri čemer je $SA[j]=i$, v času $t_{SA}$,
         \item $\PsiFunkcija{i}$: vrne $SA^{-1}[SA[i]+1]$ v času $t_\Psi$,
         \item $\Beseda{i}{d}$: vrne $T[SA[i],SA[i]+d-1]$ v času $O(dt_\Psi)$.
     \end{enumerate}    
