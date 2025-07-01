@@ -1,9 +1,10 @@
 library(tidyverse)
 library(scales)
+library(svglite)
 data<- read.csv("rezNovPc.csv")
 dataSLO<- read.csv("rezNovPcNaKlancu.csv")
 dataTidy <- data %>%  pivot_longer(col=starts_with("tFind"),names_to = "PatternLength", values_to = "TimeFind")
-dataTidySLO <- dataSLO %>% pivot_longer(col=starts_with("tFind"),names_to = "PatternLength", values_to = "TimeFind")
+dataTidySLO <- dataSLO %>% pivot_longer(col=starts_with("tFind"),names_to = "PatternLength", values_to = "TimeFind") %>% mutate(Time=Time/1000000)
 
 dataTidySLO  %>% filter(PatternLength=="tFindLog" & TimeFind<200000) %>% group_by(TypeOfDS) %>% summarise(M=(mean(TimeFind))) %>% print(n=100)
 dataTidySLO %>% filter(TypeOfDS=="St",PatternLength=="tFindLog") %>% group_by(SizeRun,TypeOfDS) %>% summarise(M=mean(TimeFind)) -> a
@@ -35,9 +36,9 @@ dataTidySLO %>%ggplot() +
   scale_x_continuous(trans = "log2") +
   theme_minimal() +
   labs(y="Čas iskanja v priponskem drevesu [ns]",x="Dolžina besedila")+
-  scale_color_discrete(name = "Vrsta priponskega\ndrevesa", labels= c(CST="Kompaktno\npriponsko drevo", St="Priponsko drevo"))+
+  scale_color_discrete(name = "Vrsta priponskega\ndrevesa", labels= c(CST="Kompaktno\npriponsko drevo", St="Priponsko drevo",SA="Priponsko polje"))+
   facet_grid(scales = "free_y",vars(PatternLength),labeller = as_labeller(c(tFind5="Vzorec velikosti 5", tFind50="Vzorec velikosti 50", tFind500="Vzorec velikosti 500",tFindLog="Vzorec velikosti log(n)")))
-ggsave("./Img/IskanjeNovPCSLO.png", bg="white")
+ggsave("./Img/IskanjeNovPCSLO.svg",bg = "white", height = 10, width = 20, units = "cm")
 
 #Izgradnja drevesa
 data%>% ggplot()+
@@ -54,19 +55,20 @@ data%>% ggplot()+
   labs(y="Čas izgradnje priponskega drevesa [ms]",x="Dolžina besedila")
 ggsave("./Img/izgradnjaDrecvesaNovPC.png",bg = "white")
 
-dataSLO %>% ggplot()+
+dataTidySLO %>% ggplot()+
   aes(x=SizeRun,y=Time,color=TypeOfDS)+
   geom_point()+
-  geom_smooth(se=F)+stat_summary(fun=mean,geom = 'line',linetype = 'dotted')+
+  #geom_smooth(se=F)+
+  stat_summary(fun=mean,geom = 'line')+
   theme_minimal()+
-  scale_color_discrete(name = "Vrsta priponskega\ndrevesa", labels= c(CST="Kompaktno\npriponsko drevo", St="Priponsko drevo"))+
+  scale_color_discrete(name = "Vrsta priponskega\ndrevesa", labels= c(CST="Kompaktno\npriponsko drevo", St="Priponsko drevo",SA="Priponsko polje"))+
   #scale_color_manual(values=c("#00BFC4"))+
   scale_x_continuous(trans = log2_trans(), breaks = trans_breaks("log2", function(x) 2^x),
                      labels = trans_format("log2", math_format(2^.x)))+
   #scale_y_continuous(trans = log10_trans(), breaks = trans_breaks("log10", function(x) 10^x),
   #                  labels = trans_format("log2", math_format(10^.x)))+
   labs(y="Čas izgradnje priponskega drevesa [ms]",x="Dolžina besedila")
-ggsave("./Img/izgradnjaDrecvesaNovPCSLO.png",bg = "white")
+ggsave("./Img/izgradnjaDrecvesaNovPCSLO.svg",bg = "white", height = 10, width = 20, units = "cm")
 
 data%>% ggplot()+
   aes(x=SizeRun,y=Time,color=TypeOfDS)+
