@@ -35,6 +35,8 @@ using namespace std;
 using namespace std::chrono;
 
 int lcp_min(int *lcp,int L, int R);
+bool find_sa(int* SA, string text, string pattern, int n);
+int string_compare(string text, string pattern, int index);
 
 int main(int argc, char **argv) {
   // Iskanje
@@ -79,7 +81,7 @@ int main(int argc, char **argv) {
     	i=i+500;
     }
   }
-  string out = "rezNovPcNaKlancu-march2000000";
+  string out = "rezNovPcNaKlancu";
   //out.append(argv[1]);
   out.append(".csv");
   ofstream out_s(out, ofstream::trunc);
@@ -108,11 +110,11 @@ int main(int argc, char **argv) {
     double totalTime = 0;
     int totalSize = 0;
     text = text_all.substr(0, j-1);
-    text.append("$");
+    text.append("\0");
     
     // cout << text << endl;
 	  cout << "Size " << j << ":" << endl;
-    /*
+    //ST
     for(i=0;i<n;i++){
       cout << i;	
 	    cout.flush();
@@ -150,7 +152,7 @@ int main(int argc, char **argv) {
             break;
         case 50000:
             test[i].timeFind50000= duration1;
-            break;  //Komentar
+            break;*/  //Komentar
             }
       }
       k=800;
@@ -168,11 +170,11 @@ int main(int argc, char **argv) {
       duration1 = duration_cast<nanoseconds>(stop1 - start1).count();
       test[i].timeFindLog=duration1;
       test[i].Log=k;
-      out_s << test[i].time << "," << test[i].sizeInBytes << ","
+      out_s << fixed <<  test[i].time << "," << test[i].sizeInBytes << ","
             << test[i].sizeRun << "," << test[i].typeStruct << ","
             << test[i].timeFind5 << "," << test[i].timeFind50 << ","
             << test[i].timeFind500 /*<< "," << test[i].timeFind5000 << ","
-            << test[i].timeFind50000  << "," << test[i].timeFindLog<< "," // komenrat
+            << test[i].timeFind50000 */ << "," << test[i].timeFindLog<< "," // komenrat
             << test[i].Log<< '\n';
       st.free_suffix_tree_by_post_order(st.get_root());
      cout <<"\r"; 
@@ -182,14 +184,15 @@ int main(int argc, char **argv) {
     for(i=0;i<n;i++){
         cout<<"Run "<<i<<":"<<endl;
         cout<<"\tSize in B:"<<test[i].sizeInBytes<<endl;
-        cout<<"\tTime in ms:"<<test[i].time<<endl;
+        cout<<"\tTime in ms:"<< fixed << test[i].time<<endl;
         totalSize = totalSize + test[i].sizeInBytes;
         totalTime = totalTime + test[i].time;
     }
     cout<<"Summary: "<<endl;
     cout<<"\tSize in B:"<<1.0*totalSize/n<<endl;
-    cout<<"\tTime in ms:"<<1.0*totalTime/n<<endl;
+    cout<<"\tTime in ms:"<< fixed << 1.0*totalTime/n<<endl;
 
+    //SA
     sleep(10);
     for (i = 0; i < n; i++) {
 	  cout << i;
@@ -226,7 +229,7 @@ int main(int argc, char **argv) {
 	       break;
 	   case 50000:
 	       test[i].timeFind50000= duration1;
-	       break; // komentar
+	       break; // komentar*/
         }
         test[i].pat = pattern;
       }
@@ -245,11 +248,11 @@ int main(int argc, char **argv) {
       duration1 = duration_cast<nanoseconds>(stop1 - start1).count();
       test[i].timeFindLog=duration1;
       test[i].Log=k;
-      out_s << test[i].time << "," << test[i].sizeInBytes << ","
+      out_s << fixed <<  test[i].time << "," << test[i].sizeInBytes << ","
             << test[i].sizeRun << "," << test[i].typeStruct << ","
             << test[i].timeFind5 << "," << test[i].timeFind50 << ","
             << test[i].timeFind500 <</* "," << test[i].timeFind5000 << ","
-            << test[i].timeFind50000 << // komenrat "," << test[i].timeFindLog<< ","
+            << test[i].timeFind50000 << // komenrat */"," << test[i].timeFindLog<< ","
             << test[i].Log<< '\n';
 	  cout << "\r";
 	  cout.flush();
@@ -260,13 +263,13 @@ int main(int argc, char **argv) {
     for (i = 0; i < n; i++) {
       cout << "Run " << i << ":" << endl;
       cout << "\tSize in B:" << test[i].sizeInBytes << endl;
-      cout << "\tTime in ms:" << test[i].time << endl;
+      cout << "\tTime in ms:" << fixed <<  test[i].time << endl;
       totalSize = totalSize + test[i].sizeInBytes;
       totalTime = totalTime + test[i].time;
     }
     cout << "Summary: " << endl;
     cout << "\tSize in B:" << 1.0 * totalSize / n << endl;
-    cout << "\tTime in ms:" << totalTime / n << endl;*/
+    cout << "\tTime in ms:" << fixed <<  totalTime / n << endl;
 
 
     //SA
@@ -290,7 +293,7 @@ int main(int argc, char **argv) {
       for (k = 5; k <= 50000; k = k * 10) {
         pattern = text_all.substr(j, k);
         auto start1 = high_resolution_clock::now();
-        auto occs = locate(cst.csa, pattern);
+        auto occs = find_sa(SA,text,pattern,j);
         auto stop1 = high_resolution_clock::now();
         auto duration1 = duration_cast<nanoseconds>(stop1 - start1).count();
         switch (k) {
@@ -308,30 +311,30 @@ int main(int argc, char **argv) {
 	       break;
 	   case 50000:
 	       test[i].timeFind50000= duration1;
-	       break;// komenrat/*/
+	       break;// komenrat*/
         }
         test[i].pat = pattern;
       }
       k=800;
       pattern = text_all.substr(j,k);
       auto start1 = high_resolution_clock::now();
-      auto occs = locate(cst.csa, pattern);
+      auto occs = find_sa(SA,text,pattern,j);
       auto stop1 = high_resolution_clock::now();
       auto duration1 = duration_cast<nanoseconds>(stop1 - start1).count();
       test[i].timeFind800=duration1;
       k = (int) log2(j) +1;
       pattern = text_all.substr(j,k);
       start1 = high_resolution_clock::now();
-      occs = locate(cst.csa, pattern);
+      occs = find_sa(SA,text,pattern,j);
       stop1 = high_resolution_clock::now();
       duration1 = duration_cast<nanoseconds>(stop1 - start1).count();
       test[i].timeFindLog=duration1;
       test[i].Log=k;
-      out_s << test[i].time << "," << test[i].sizeInBytes << ","
+      out_s << fixed <<  test[i].time << "," << test[i].sizeInBytes << ","
             << test[i].sizeRun << "," << test[i].typeStruct << ","
             << test[i].timeFind5 << "," << test[i].timeFind50 << ","
-            << test[i].timeFind500 <</* "," << test[i].timeFind5000 << ","
-            << test[i].timeFind50000 << // komentar */ "," << test[i].timeFindLog<< ","
+            << test[i].timeFind500 << /* "," << test[i].timeFind5000 << ","
+            << test[i].timeFind50000 << // komentar*/ "," << test[i].timeFindLog<< ","
             << test[i].Log<< '\n';
 	  cout << "\r";
 	  cout.flush();
@@ -342,13 +345,13 @@ int main(int argc, char **argv) {
     for (i = 0; i < n; i++) {
       cout << "Run " << i << ":" << endl;
       cout << "\tSize in B:" << test[i].sizeInBytes << endl;
-      cout << "\tTime in ms:" << test[i].time << endl;
+      cout << "\tTime in ms:" << fixed <<  test[i].time << endl;
       totalSize = totalSize + test[i].sizeInBytes;
       totalTime = totalTime + test[i].time;
     }
     cout << "Summary: " << endl;
     cout << "\tSize in B:" << 1.0 * totalSize / n << endl;
-    cout << "\tTime in ms:" << totalTime / n << endl;
+    cout << "\tTime in ms:" << fixed <<  totalTime / n << endl;
 
     //SA + LCP
     sleep(10);
@@ -364,16 +367,19 @@ int main(int argc, char **argv) {
       libsais((const unsigned char*) text.c_str(),SA,j,0, NULL);
       int rezPLCP = libsais_plcp((const unsigned char*) text.c_str(),SA,PLCP,j);
       int rezLCP = libsais_lcp(PLCP,SA,LCP,j);
-      int rezRLLCP = lcp_min(LCP,0,5);
+      int rezRLLCP = lcp_min(LCP,4,5);
       //auto   construct(cst, text); 
       auto stop = high_resolution_clock::now();
       auto duration = duration_cast<nanoseconds>(stop - start).count();
       cout << rezPLCP << endl;
       cout << rezLCP << endl;
       cout << rezRLLCP << endl;
+      cout << "SA[0]: "<< SA[0] << endl;
       cout << "SA[4]: "<< SA[4] << endl;
       cout << "SA[5]: "<< SA[5] << endl;
       cout << "LCP[5]: "<< LCP[5] << endl;
+      cout << "LCP[4]: "<< LCP[4] << endl;
+      
       test[i].time = duration;
       //test[i].sizeInBytes = size_in_bytes(cst);
       test[i].sizeRun = text.length();
@@ -419,7 +425,7 @@ int main(int argc, char **argv) {
       duration1 = duration_cast<nanoseconds>(stop1 - start1).count();
       test[i].timeFindLog=duration1;
       test[i].Log=k;
-      out_s << test[i].time << "," << test[i].sizeInBytes << ","
+      out_s << fixed <<  test[i].time << "," << test[i].sizeInBytes << ","
             << test[i].sizeRun << "," << test[i].typeStruct << ","
             << test[i].timeFind5 << "," << test[i].timeFind50 << ","
             << test[i].timeFind500 <</* "," << test[i].timeFind5000 << ","
@@ -433,14 +439,14 @@ int main(int argc, char **argv) {
     cout << "SA+LCP: " << endl;
     for (i = 0; i < n; i++) {
       cout << "Run " << i << ":" << endl;
-      cout << "\tSize in B:" << test[i].sizeInBytes << endl;
-      cout << "\tTime in ms:" << test[i].time << endl;
+      cout << "\tSize in B:" << fixed << test[i].sizeInBytes << endl;
+      cout << "\tTime in ms:" <<  fixed << test[i].time << endl;
       totalSize = totalSize + test[i].sizeInBytes;
       totalTime = totalTime + test[i].time;
     }
     cout << "Summary: " << endl;
     cout << "\tSize in B:" << 1.0 * totalSize / n << endl;
-    cout << "\tTime in ms:" << totalTime / n << endl;
+    cout << "\tTime in ms:" << fixed << totalTime / n << endl;
   }
   /*
   for (j = 5000000; j <= 5500000; j = j+100000) {
@@ -530,4 +536,40 @@ int main(int argc, char **argv) {
 int lcp_min(int *lcp,int L, int R){
   auto rez = min_element(lcp+L,lcp+R+1);
   return *rez;
+}
+
+bool find_sa(int* SA, string text, string pattern, int n){
+  int L = 0;
+  int R =n;
+  int M = (L+R)/2;
+  while (L<R){
+    string suffix = text.substr(SA[M], n);
+    int comp = string_compare(text,pattern,SA[M]);
+    if(comp==0){ return true;}
+    else if(comp==-1){
+      R=M;
+      M = (L+R)/2;
+    }
+    else if(comp==+1){
+      L=M;
+      M = (L+R)/2;
+    }
+    else{
+      cout << "Napaka" << endl;
+      return false;
+    }
+  }
+  int comp = string_compare(text,pattern,SA[M]);
+  if(comp==0){ return true;}
+  return false;
+}
+int string_compare(string text, string pattern, int index){
+  int i=0;
+  while(text[index+i]==pattern[i] && i<pattern.length()){
+    i++;
+  }
+  if(i=pattern.length()){return 0;}
+  else if(text[index+i]<pattern[i]){return 1;}
+  else if(text[index+i]>pattern[i]){return -1;}
+  return -2;
 }
