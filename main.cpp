@@ -467,6 +467,8 @@ void build_QLCP_rec(int* SA, int* QLCP,  string text, int L, int R, int n, bool 
   else{
     QLCP[M]=lcp(text, SA[M],SA[L]);
   }
+  build_QLCP_rec(SA, QLCP,  text, L, M, n, true);
+  build_QLCP_rec(SA, QLCP,  text, M, R, n,  false);
 }
 
 int lcp(string text, int L, int R){
