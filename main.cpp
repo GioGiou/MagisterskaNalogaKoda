@@ -406,10 +406,10 @@ int main(int argc, char **argv) {
       
       k = (int) log2(j) +1;
       pattern = text_all.substr(j,k);
-      auto start1 = high_resolution_clock::now();
-      auto occs = find_sa_LCP(SA,LCP,text,pattern,j);
-      auto stop1 = high_resolution_clock::now();
-      auto duration1 = duration_cast<nanoseconds>(stop1 - start1).count();
+      start1 = high_resolution_clock::now();
+      occs = find_sa_LCP(SA,LCP,text,pattern,j);
+      stop1 = high_resolution_clock::now();
+      duration1 = duration_cast<nanoseconds>(stop1 - start1).count();
       test[i].timeFindLog=duration1;
       test[i].Log=k;
       out_s << fixed <<  test[i].time << "," << test[i].sizeInBytes << ","
@@ -506,8 +506,8 @@ bool find_sa_LCP(int* SA, int* LCP, string text, string pattern, int n){
   int R =n-1;
   bool levo = true;
   int M = (L+R)/2;
-  int k = find_k(text,pattern,SA[m],0);
-  int comp  = string_compare_from_k(text,pattern,SA[M],k);
+  int k = find_k(text,pattern,SA[M],0);
+  int comp = string_compare_from_k(text,pattern,SA[M],k);
   if(comp == 0){return true;}
   else if(comp==-1){
     levo = true;
@@ -598,7 +598,7 @@ bool find_sa_LCP(int* SA, int* LCP, string text, string pattern, int n){
       }
     }
   }
-  int comp = string_compare_from_k(text,pattern,SA[M],k);
+  comp = string_compare_from_k(text,pattern,SA[M],k);
   if(comp==0){ return true;}
   return false;
 }
