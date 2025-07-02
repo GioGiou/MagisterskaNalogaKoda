@@ -40,6 +40,12 @@ int string_compare(string text, string pattern, int index);
 bool find_sa_LCP(int* SA, int* LCP, string text, string pattern, int n);
 int find_k(string text, string pattern, int index, int k);
 int string_compare_from_k(string text, string pattern, int index, int k);
+void build_QLCP(int* SA, int* QLCP, string text, int n);
+int lcp(string text, int L, int R);
+void build_QLCP_rec(int* SA, int* QLCP,  string text, int L, int R, int n, bool levo);
+
+
+
 int main(int argc, char **argv) {
   // Iskanje
   // string text1 = "kokos$";
@@ -440,7 +446,35 @@ int main(int argc, char **argv) {
   return 0;
 }
 
+void build_QLCP(int* SA, int* QLCP, string text, int n){
+  int L =0;
+  int R = n-1;
+  int M = (L+R)/2;
+  QLCP[M]=-1;
+  build_QLCP_rec(SA, QLCP,  text, L, M, n, true);
+  build_QLCP_rec(SA, QLCP,  text, M, R, n,  false);
+}
+void build_QLCP_rec(int* SA, int* QLCP,  string text, int L, int R, int n, bool levo){
+  int M = (L+R)/2;
+  if (L==R){
+    cout << M << endl;
+    QLCP[M]=n-SA[M];
+  }
+  if(levo){
+    QLCP[M]=lcp(text, SA[M],SA[R]);
+  }
+  else{
+    QLCP[M]=lcp(text, SA[M],SA[L]);
+  }
+}
 
+int lcp(string text, int L, int R){
+  int i=0;
+  while(text[L+i]==text[R+i]){
+    i++;
+  }
+  return i;
+}
 
 int lcp_min(int *lcp,int L, int R){
   auto rez = min_element(lcp+L,lcp+R+1);
