@@ -38,9 +38,8 @@ int lcp_min(int *lcp,int L, int R);
 bool find_sa(int* SA, string text, string pattern, int n);
 int string_compare(string text, string pattern, int index);
 bool find_sa_LCP(int* SA, int* LCP, string text, string pattern, int n);
-int string_compare_from_k(string text, string pattern, int index, int k);
 int find_k(string text, string pattern, int index, int k);
-
+int string_compare_from_k(string text, string pattern, int index, int k);
 int main(int argc, char **argv) {
   // Iskanje
   // string text1 = "kokos$";
@@ -318,19 +317,12 @@ int main(int argc, char **argv) {
         }
         test[i].pat = pattern;
       }
-      k=800;
-      pattern = text_all.substr(j,k);
-      auto start1 = high_resolution_clock::now();
-      auto occs = find_sa(SA,text,pattern,j);
-      auto stop1 = high_resolution_clock::now();
-      auto duration1 = duration_cast<nanoseconds>(stop1 - start1).count();
-      test[i].timeFind800=duration1;
       k = (int) log2(j) +1;
       pattern = text_all.substr(j,k);
-      start1 = high_resolution_clock::now();
-      occs = find_sa(SA,text,pattern,j);
-      stop1 = high_resolution_clock::now();
-      duration1 = duration_cast<nanoseconds>(stop1 - start1).count();
+      auto start1 = high_resolution_clock::now();
+      bool = find_sa(SA,text,pattern,j);
+      auto stop1 = high_resolution_clock::now();
+      auto duration1 = duration_cast<nanoseconds>(stop1 - start1).count();
       test[i].timeFindLog=duration1;
       test[i].Log=k;
       out_s << fixed <<  test[i].time << "," << test[i].sizeInBytes << ","
@@ -371,6 +363,7 @@ int main(int argc, char **argv) {
       int rezPLCP = libsais_plcp((const unsigned char*) text.c_str(),SA,PLCP,j);
       int rezLCP = libsais_lcp(PLCP,SA,LCP,j);
       int rezRLLCP = lcp_min(LCP,4,5);
+      //auto   construct(cst, text); 
       auto stop = high_resolution_clock::now();
       auto duration = duration_cast<nanoseconds>(stop - start).count();
       cout << rezPLCP << endl;
@@ -387,10 +380,9 @@ int main(int argc, char **argv) {
       test[i].sizeRun = text.length();
       test[i].typeStruct = "SA+LCP";
       int k = 5;
-      /*for (k = 5; k <= 50000; k = k * 10) {
-        pattern = text_all.substr(j, k);
+      pattern = text_all.substr(j, k);
         auto start1 = high_resolution_clock::now();
-        auto occs = locate(cst.csa, pattern);
+        auto occs = find_sa_LCP(SA,LCP,text,pattern,j);
         auto stop1 = high_resolution_clock::now();
         auto duration1 = duration_cast<nanoseconds>(stop1 - start1).count();
         switch (k) {
@@ -408,31 +400,24 @@ int main(int argc, char **argv) {
 	       break;
 	   case 50000:
 	       test[i].timeFind50000= duration1;
-	       break;// komenrat/
+	       break;// komenrat*/
         }
         test[i].pat = pattern;
-      }*/
-      /*k=800;
-      pattern = text_all.substr(j,k);
-      auto start1 = high_resolution_clock::now();
-      auto occs = locate(cst.csa, pattern);
-      auto stop1 = high_resolution_clock::now();
-      auto duration1 = duration_cast<nanoseconds>(stop1 - start1).count();
-      test[i].timeFind800=duration1;
+      }
       k = (int) log2(j) +1;
       pattern = text_all.substr(j,k);
-      start1 = high_resolution_clock::now();
-      occs = locate(cst.csa, pattern);
-      stop1 = high_resolution_clock::now();
-      duration1 = duration_cast<nanoseconds>(stop1 - start1).count();
+      auto start1 = high_resolution_clock::now();
+      auto occs = find_sa_LCP(SA,LCP,text,pattern,j);
+      auto stop1 = high_resolution_clock::now();
+      auto duration1 = duration_cast<nanoseconds>(stop1 - start1).count();
       test[i].timeFindLog=duration1;
       test[i].Log=k;
       out_s << fixed <<  test[i].time << "," << test[i].sizeInBytes << ","
             << test[i].sizeRun << "," << test[i].typeStruct << ","
             << test[i].timeFind5 << "," << test[i].timeFind50 << ","
             << test[i].timeFind500 <</* "," << test[i].timeFind5000 << ","
-            << test[i].timeFind50000 << // komentar "," << test[i].timeFindLog<< ","
-            << test[i].Log<< '\n'; */
+            << test[i].timeFind50000 << // komentar*/ "," << test[i].timeFindLog<< ","
+            << test[i].Log<< '\n'; 
 	  cout << "\r";
 	  cout.flush();
     }
@@ -450,13 +435,14 @@ int main(int argc, char **argv) {
     cout << "\tSize in B:" << 1.0 * totalSize / n << endl;
     cout << "\tTime in ms:" << fixed << totalTime / n << endl;
   }
+ 
   return 0;
 }
 
 
 
 int lcp_min(int *lcp,int L, int R){
-  auto rez = min_element(lcp+L+1,lcp+R+1);
+  auto rez = min_element(lcp+L,lcp+R+1);
   return *rez;
 }
 
@@ -465,6 +451,7 @@ bool find_sa(int* SA, string text, string pattern, int n){
   int R =n;
   int M = (L+R)/2;
   while (L<R){
+    string suffix = text.substr(SA[M], n);
     int comp = string_compare(text,pattern,SA[M]);
     if(comp==0){ return true;}
     else if(comp==-1){
@@ -484,7 +471,6 @@ bool find_sa(int* SA, string text, string pattern, int n){
   if(comp==0){ return true;}
   return false;
 }
-
 int string_compare(string text, string pattern, int index){
   int i=0;
   while(text[index+i]==pattern[i] && i<pattern.length()){
