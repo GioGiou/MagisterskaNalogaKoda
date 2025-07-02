@@ -320,7 +320,7 @@ int main(int argc, char **argv) {
       k = (int) log2(j) +1;
       pattern = text_all.substr(j,k);
       auto start1 = high_resolution_clock::now();
-      bool = find_sa(SA,text,pattern,j);
+      bool occ = find_sa(SA,text,pattern,j);
       auto stop1 = high_resolution_clock::now();
       auto duration1 = duration_cast<nanoseconds>(stop1 - start1).count();
       test[i].timeFindLog=duration1;
@@ -404,7 +404,7 @@ int main(int argc, char **argv) {
         }
         test[i].pat = pattern;
       }
-      k = (int) log2(j) +1;
+      int k = (int) log2(j) +1;
       pattern = text_all.substr(j,k);
       auto start1 = high_resolution_clock::now();
       auto occs = find_sa_LCP(SA,LCP,text,pattern,j);
