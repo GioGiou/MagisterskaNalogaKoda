@@ -403,8 +403,8 @@ int main(int argc, char **argv) {
 	       break;// komenrat*/
         }
         test[i].pat = pattern;
-      }
-      int k = (int) log2(j) +1;
+      
+      k = (int) log2(j) +1;
       pattern = text_all.substr(j,k);
       auto start1 = high_resolution_clock::now();
       auto occs = find_sa_LCP(SA,LCP,text,pattern,j);
