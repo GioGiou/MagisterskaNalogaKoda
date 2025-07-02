@@ -37,6 +37,9 @@ using namespace std::chrono;
 int lcp_min(int *lcp,int L, int R);
 bool find_sa(int* SA, string text, string pattern, int n);
 int string_compare(string text, string pattern, int index);
+bool find_sa_LCP(int* SA, int* LCP, string text, string pattern, int n);
+int string_compare_from_k(string text, string pattern, int index, int k);
+int find_k(string text, string pattern, int index, int k);
 
 int main(int argc, char **argv) {
   // Iskanje
@@ -368,7 +371,6 @@ int main(int argc, char **argv) {
       int rezPLCP = libsais_plcp((const unsigned char*) text.c_str(),SA,PLCP,j);
       int rezLCP = libsais_lcp(PLCP,SA,LCP,j);
       int rezRLLCP = lcp_min(LCP,4,5);
-      //auto   construct(cst, text); 
       auto stop = high_resolution_clock::now();
       auto duration = duration_cast<nanoseconds>(stop - start).count();
       cout << rezPLCP << endl;
@@ -448,93 +450,13 @@ int main(int argc, char **argv) {
     cout << "\tSize in B:" << 1.0 * totalSize / n << endl;
     cout << "\tTime in ms:" << fixed << totalTime / n << endl;
   }
-  /*
-  for (j = 5000000; j <= 5500000; j = j+100000) {
-    sleep(10);
-    int i;
-    double totalTime = 0;
-    int totalSize = 0;
-    text = text_all.substr(0, j);
-    cout << "Size " << j << ":" << endl;
-    for(i=0;i<n;i++){
-      auto start = high_resolution_clock::now();
-      SuffixTree st(text);
-      auto stop = high_resolution_clock::now();
-
-      auto duration = duration_cast<nanoseconds>(stop - start).count();
-      test[i].time = duration;
-      test[i].sizeInBytes=sizeof(st);
-      test[i].sizeRun=text.length();
-      test[i].typeStruct="St";
-      int k=5;
-      for(k=5;k<=50000;k=k*10){
-        pattern = text_all.substr(j,k);
-        //cout<<"Pattern: "<<pattern<<endl;
-        auto start1 = high_resolution_clock::now();
-        vector<int> rezultatIskanja = st.check_for_sub_string(pattern.c_str()); 
-        auto stop1 = high_resolution_clock::now();
-        auto duration1 =  duration_cast<nanoseconds>(stop1 - start1).count();
-        switch(k){ 
-          case 5:
-            test[i].timeFind5= duration1;
-            break;
-        case 50:
-            test[i].timeFind50= duration1;
-            break;
-        case 500:
-            test[i].timeFind500= duration1;
-            break;
-        case 5000:
-            test[i].timeFind5000= duration1;
-            break;
-        case 50000:
-            test[i].timeFind50000= duration1;
-            break;
-            }
-      }
-      k=800;
-      pattern = text_all.substr(j,k);
-      auto start1 = high_resolution_clock::now();
-      vector<int> rezultatIskanja = st.check_for_sub_string(pattern.c_str()); 
-      auto stop1 = high_resolution_clock::now();
-      auto duration1 = duration_cast<nanoseconds>(stop1 - start1).count();
-      test[i].timeFind800=duration1;
-      k = (int) log2(j) +1;
-      pattern = text_all.substr(j,k);
-      start1 = high_resolution_clock::now();
-      rezultatIskanja = st.check_for_sub_string(pattern.c_str()); 
-      stop1 = high_resolution_clock::now();
-      duration1 = duration_cast<nanoseconds>(stop1 - start1).count();
-      test[i].timeFindLog=duration1;
-      test[i].Log=k;
-      out_s << test[i].time << "," << test[i].sizeInBytes << ","
-            << test[i].sizeRun << "," << test[i].typeStruct << ","
-            << test[i].timeFind5 << "," << test[i].timeFind50 << ","
-            << test[i].timeFind500 << "," << test[i].timeFind5000 << ","
-            << test[i].timeFind50000 << "," << test[i].timeFindLog<< ","
-            << test[i].Log<< '\n';
-      st.free_suffix_tree_by_post_order(st.get_root());
-    }
-
-    cout<<"Suffix tree (Ukkonen): "<<endl;
-    for(i=0;i<n;i++){
-        cout<<"Run "<<i<<":"<<endl;
-        cout<<"\tSize in B:"<<test[i].sizeInBytes<<endl;
-        cout<<"\tTime in ms:"<<test[i].time<<endl;
-        totalSize = totalSize + test[i].sizeInBytes;
-        totalTime = totalTime + test[i].time;
-    }
-    cout<<"Summary: "<<endl;
-    cout<<"\tSize in B:"<<1.0*totalSize/n<<endl;
-    cout<<"\tTime in ms:"<<1.0*totalTime/n<<endl;
-  }*/
   return 0;
 }
 
 
 
 int lcp_min(int *lcp,int L, int R){
-  auto rez = min_element(lcp+L,lcp+R+1);
+  auto rez = min_element(lcp+L+1,lcp+R+1);
   return *rez;
 }
 
@@ -543,7 +465,6 @@ bool find_sa(int* SA, string text, string pattern, int n){
   int R =n;
   int M = (L+R)/2;
   while (L<R){
-    string suffix = text.substr(SA[M], n);
     int comp = string_compare(text,pattern,SA[M]);
     if(comp==0){ return true;}
     else if(comp==-1){
@@ -563,6 +484,7 @@ bool find_sa(int* SA, string text, string pattern, int n){
   if(comp==0){ return true;}
   return false;
 }
+
 int string_compare(string text, string pattern, int index){
   int i=0;
   while(text[index+i]==pattern[i] && i<pattern.length()){
@@ -572,4 +494,125 @@ int string_compare(string text, string pattern, int index){
   else if(text[index+i]<pattern[i]){return 1;}
   else if(text[index+i]>pattern[i]){return -1;}
   return -2;
+}
+
+int string_compare_from_k(string text, string pattern, int index, int k){
+  int i=k;
+  while(text[index+i]==pattern[i] && i<pattern.length()){
+    i++;
+  }
+  if(i=pattern.length()){return 0;}
+  else if(text[index+i]<pattern[i]){return 1;}
+  else if(text[index+i]>pattern[i]){return -1;}
+  return -2;
+}
+
+int find_k(string text, string pattern, int index, int k){
+  int i=k;
+  while(text[index+i]==pattern[i] && i<pattern.length()){
+    i++;
+  }
+  return i;
+}
+
+bool find_sa_LCP(int* SA, int* LCP, string text, string pattern, int n){
+  int L = 0;
+  int R =n-1;
+  bool levo = true;
+  int M = (L+R)/2;
+  int k = find_k(text,pattern,SA[m],0);
+  int comp  = string_compare_from_k(text,pattern,SA[M],k);
+  if(comp == 0){return true;}
+  else if(comp==-1){
+    levo = true;
+    R=M;
+    M = (L+R)/2;
+  }
+  else if(comp==+1){
+    levo = false;
+    L=M;
+    M = (L+R)/2;
+  }
+  else{
+    cout << "Napaka" << endl;
+    return false;
+  }  
+  while (L<R){
+    if(levo){
+      int minLCP = lcp_min(LCP, M, R);
+      if(minLCP<k){
+        levo=true;
+        R=M;
+        M = (L+R)/2;
+      }
+      else if(minLCP>k){
+        levo = false;
+        R=M;
+        M = (L+R)/2;
+      }
+      else if (minLCP==k){
+        k = find_k(text,pattern,SA[m],k);
+        comp  = string_compare_from_k(text,pattern,SA[M],k);
+        if(comp == 0){return true;}
+        else if(comp==-1){
+          levo = true;
+          R=M;
+          M = (L+R)/2;
+        }
+        else if(comp==+1){
+          levo = false;
+          L=M;
+          M = (L+R)/2;
+        }
+        else{
+          cout << "Napaka" << endl;
+          return false;
+        }
+      }
+      else{
+        cout << "Napaka" << endl;
+        return false;
+      }
+      
+    }
+    else{
+      int minLCP = lcp_min(LCP, L, M);
+      if(minLCP<k){
+        levo=false;
+        L=M;
+        M = (L+R)/2;
+      }
+      else if(minLCP>k){
+        levo = true;
+        R=M;
+        M = (L+R)/2;
+      }
+      else if (minLCP==k){
+        k = find_k(text,pattern,SA[m],k);
+        comp  = string_compare_from_k(text,pattern,SA[M],k);
+        if(comp == 0){return true;}
+        else if(comp==-1){
+          levo = true;
+          R=M;
+          M = (L+R)/2;
+        }
+        else if(comp==+1){
+          levo = false;
+          L=M;
+          M = (L+R)/2;
+        }
+        else{
+          cout << "Napaka" << endl;
+          return false;
+        }
+      }
+      else{
+        cout << "Napaka" << endl;
+        return false;
+      }
+    }
+  }
+  int comp = string_compare_from_k(text,pattern,SA[M],k);
+  if(comp==0){ return true;}
+  return false;
 }

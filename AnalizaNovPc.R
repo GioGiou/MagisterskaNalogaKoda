@@ -38,7 +38,7 @@ dataTidySLO %>%ggplot() +
   labs(y="Čas iskanja v priponskem drevesu [ns]",x="Dolžina besedila")+
   scale_color_discrete(name = "Vrsta priponskega\ndrevesa", labels= c(CST="Kompaktno\npriponsko drevo", St="Priponsko drevo",SA="Priponsko polje"))+
   facet_grid(scales = "free_y",vars(PatternLength),labeller = as_labeller(c(tFind5="Vzorec velikosti 5", tFind50="Vzorec velikosti 50", tFind500="Vzorec velikosti 500",tFindLog="Vzorec velikosti log(n)")))
-ggsave("./Img/IskanjeNovPCSLO.svg",bg = "white", height = 10, width = 20, units = "cm")
+ggsave("./Img/IskanjeNovPCSLO.svg",bg = "white", height = 15, width = 25, units = "cm")
 
 #Izgradnja drevesa
 data%>% ggplot()+
