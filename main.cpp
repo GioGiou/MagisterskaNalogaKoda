@@ -537,7 +537,7 @@ bool find_sa_LCP(int* SA, int* LCP, string text, string pattern, int n){
         M = (L+R)/2;
       }
       else if (minLCP==k){
-        k = find_k(text,pattern,SA[m],k);
+        k = find_k(text,pattern,SA[M],k);
         comp  = string_compare_from_k(text,pattern,SA[M],k);
         if(comp == 0){return true;}
         else if(comp==-1){
@@ -574,7 +574,7 @@ bool find_sa_LCP(int* SA, int* LCP, string text, string pattern, int n){
         M = (L+R)/2;
       }
       else if (minLCP==k){
-        k = find_k(text,pattern,SA[m],k);
+        k = find_k(text,pattern,SA[M],k);
         comp  = string_compare_from_k(text,pattern,SA[M],k);
         if(comp == 0){return true;}
         else if(comp==-1){
