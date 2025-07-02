@@ -40,6 +40,8 @@ dataTidySLO %>%ggplot() +
   facet_grid(scales = "free_y",vars(PatternLength),labeller = as_labeller(c(tFind5="Vzorec velikosti 5", tFind50="Vzorec velikosti 50", tFind500="Vzorec velikosti 500",tFindLog="Vzorec velikosti log(n)")))
 ggsave("./Img/IskanjeNovPCSLO.svg",bg = "white", height = 15, width = 25, units = "cm")
 
+
+
 #Izgradnja drevesa
 data%>% ggplot()+
   aes(x=SizeRun,y=Time,color=TypeOfDS)+
