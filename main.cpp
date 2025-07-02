@@ -279,14 +279,15 @@ int main(int argc, char **argv) {
     for (i = 0; i < n; i++) {
 	  //cout << i;
 	  cout.flush();
-      auto start = high_resolution_clock::now();
       int SA[j]; 
+      auto start = high_resolution_clock::now();
+      
       int rez = libsais((const unsigned char*) text.c_str(),SA,j,0, NULL);  
       //auto   construct(cst, text); 
       auto stop = high_resolution_clock::now();
       auto duration = duration_cast<nanoseconds>(stop - start).count();
-      cout << rez << endl;
-      cout << "SA[5]: "<< SA[5] << endl;
+      // cout << rez << endl;
+      // cout << "SA[5]: "<< SA[5] << endl;
       test[i].time = duration;
       //test[i].sizeInBytes = size_in_bytes(cst);
       test[i].sizeRun = text.length();
@@ -366,14 +367,14 @@ int main(int argc, char **argv) {
       //auto   construct(cst, text); 
       auto stop = high_resolution_clock::now();
       auto duration = duration_cast<nanoseconds>(stop - start).count();
-      cout << rezPLCP << endl;
-      cout << rezLCP << endl;
-      cout << rezRLLCP << endl;
-      cout << "SA[0]: "<< SA[0] << endl;
-      cout << "SA[4]: "<< SA[4] << endl;
-      cout << "SA[5]: "<< SA[5] << endl;
-      cout << "LCP[5]: "<< LCP[5] << endl;
-      cout << "LCP[4]: "<< LCP[4] << endl;
+      // cout << rezPLCP << endl;
+      // cout << rezLCP << endl;
+      // cout << rezRLLCP << endl;
+      // cout << "SA[0]: "<< SA[0] << endl;
+      // cout << "SA[4]: "<< SA[4] << endl;
+      // cout << "SA[5]: "<< SA[5] << endl;
+      // cout << "LCP[5]: "<< LCP[5] << endl;
+      // cout << "LCP[4]: "<< LCP[4] << endl;
       
       test[i].time = duration;
       //test[i].sizeInBytes = size_in_bytes(cst);
