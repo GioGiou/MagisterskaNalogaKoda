@@ -25,7 +25,7 @@
 #include "SuffixTree.h"
 #include "utils.h"
 
-// Suffix array
+// Suffix array**
 #include "libsais.h"
 
 #include "Banchmark.hpp"
@@ -37,12 +37,12 @@ using namespace std::chrono;
 int lcp_min(int *lcp,int L, int R);
 bool find_sa(int* SA, string text, string pattern, int n);
 int string_compare(string text, string pattern, int index);
-bool find_sa_LCP(int* SA, int* LCP, string text, string pattern, int n);
+bool find_sa_LCP(int* SA, int* QLCP, string text, string pattern, int n);
 int find_k(string text, string pattern, int index, int k);
 int string_compare_from_k(string text, string pattern, int index, int k);
-void build_QLCP(int* SA, int* QLCP, string text, int n);
+void build_QLCP(int* SA, int* LCP, int* QLCP, string text, int n);
 int lcp(string text, int L, int R);
-void build_QLCP_rec(int* SA, int* QLCP,  string text, int L, int R, int n, bool levo);
+void build_QLCP_rec(int* SA, int* LCP, int* QLCP,  string text, int L, int R, int n, bool levo, bool* flag);
 
 
 
@@ -112,13 +112,13 @@ int main(int argc, char **argv) {
 /* 	Intel i3 5005U
 	ST: 2048000 je prekine testiranje, I/O sleep 500
 */
-  for (j = 500; j <= 2000000 /*3000000*/; j = j*2) {
+  for (j = 1024000; j <= 2000000 /*3000000*/; j = j*2) {
     sleep(10);
     int i;
     double totalTime = 0;
     int totalSize = 0;
     text = text_all.substr(0, j-1);
-    text.append("\0");
+    text.append("\3");
     
     // cout << text << endl;
 	  cout << "Size " << j << ":" << endl;
@@ -358,19 +358,19 @@ int main(int argc, char **argv) {
     //SA + LCP
     sleep(10);
     for (i = 0; i < n; i++) {
-      //cout << i;
+      cout << i << endl;
       cout.flush();
       int SA[j]; 
       int PLCP[j];
       int LCP[j];
-      vector<vector<int>> RLLCP(j,vector<int>(2)); 
-      auto start = high_resolution_clock::now();
       int QLCP[j];
+      auto start = high_resolution_clock::now();
       int rez = libsais((const unsigned char*) text.c_str(),SA,j,0, NULL); 
       int rezPLCP = libsais_plcp((const unsigned char*) text.c_str(),SA,PLCP,j);
-      int rezLCP = libsais_lcp(PLCP,SA,LCP,j);
-      int rezRLLCP = lcp_min(LCP,4,5);
-      build_QLCP(SA,QLCP,text,j);
+      int rezLCP = libsais_lcp(PLCP,SA,LCP,j);    
+		cout << "lcp " << endl;
+    
+      build_QLCP(SA,LCP,QLCP,text,j);
             //auto   construct(cst, text); 
       auto stop = high_resolution_clock::now();
       auto duration = duration_cast<nanoseconds>(stop - start).count();
@@ -388,9 +388,10 @@ int main(int argc, char **argv) {
       test[i].sizeRun = text.length();
       test[i].typeStruct = "SA+LCP";
       int k = 5;
+      cout << "TEST"<<endl;
       pattern = text_all.substr(j, k);
         auto start1 = high_resolution_clock::now();
-        auto occs = find_sa_LCP(SA,LCP,text,pattern,j);
+        auto occs = find_sa_LCP(SA,QLCP,text,pattern,j);
         auto stop1 = high_resolution_clock::now();
         auto duration1 = duration_cast<nanoseconds>(stop1 - start1).count();
         switch (k) {
@@ -415,7 +416,7 @@ int main(int argc, char **argv) {
       k = (int) log2(j) +1;
       pattern = text_all.substr(j,k);
       start1 = high_resolution_clock::now();
-      occs = find_sa_LCP(SA,LCP,text,pattern,j);
+      occs = find_sa_LCP(SA,QLCP,text,pattern,j);
       stop1 = high_resolution_clock::now();
       duration1 = duration_cast<nanoseconds>(stop1 - start1).count();
       test[i].timeFindLog=duration1;
@@ -447,33 +448,46 @@ int main(int argc, char **argv) {
   return 0;
 }
 
-void build_QLCP(int* SA, int* QLCP, string text, int n){
+void build_QLCP(int* SA,int *LCP, int* QLCP, string text, int n){
   int L =0;
   int R = n-1;
   int M = (L+R)/2;
   QLCP[M]=-1;
-  build_QLCP_rec(SA, QLCP,  text, L, M, n, true);
-  build_QLCP_rec(SA, QLCP,  text, M, R, n,  false);
+  bool flag[n];
+  for(int i=0;i<n;i++){
+  	flag[i]=false;
+  }
+  flag[M]=true;
+  build_QLCP_rec(SA, LCP, QLCP, text, L, M, n, true, flag);
+  build_QLCP_rec(SA, LCP, QLCP, text, M, R, n,  false, flag);
 }
-void build_QLCP_rec(int* SA, int* QLCP,  string text, int L, int R, int n, bool levo){
+void build_QLCP_rec(int* SA, int* LCP, int* QLCP,  string text, int L, int R, int n, bool levo, bool* flag){
   int M = (L+R)/2;
+  if(flag[M]){
+  	return;
+  }
   if (L==R){
-    cout << M << endl;
+  	flag[M]=true;
     QLCP[M]=n-SA[M];
+    return;
   }
   if(levo){
-    QLCP[M]=lcp(text, SA[M],SA[R]);
+    QLCP[M]=lcp_min(LCP, M, R);
   }
   else{
-    QLCP[M]=lcp(text, SA[M],SA[L]);
+    QLCP[M]=lcp_min(LCP, L, M);
   }
-  build_QLCP_rec(SA, QLCP,  text, L, M, n, true);
-  build_QLCP_rec(SA, QLCP,  text, M, R, n,  false);
+  flag[M]=true;
+  build_QLCP_rec(SA, LCP, QLCP,  text, M, R, n, false, flag);
+  build_QLCP_rec(SA, LCP, QLCP,  text, L, M, n, true, flag);
+  
+  
+  
 }
 
 int lcp(string text, int L, int R){
   int i=0;
-  while(text[L+i]==text[R+i]){
+  while(text[L+i]==text[R+i] ){
     i++;
   }
   return i;
@@ -539,7 +553,7 @@ int find_k(string text, string pattern, int index, int k){
   return i;
 }
 
-bool find_sa_LCP(int* SA, int* LCP, string text, string pattern, int n){
+bool find_sa_LCP(int* SA, int* QLCP, string text, string pattern, int n){
   int L = 0;
   int R =n-1;
   bool levo = true;
@@ -563,7 +577,7 @@ bool find_sa_LCP(int* SA, int* LCP, string text, string pattern, int n){
   }  
   while (L<R){
     if(levo){
-      int minLCP = lcp_min(LCP, M, R);
+      int minLCP = QLCP[M];
       if(minLCP<k){
         levo=true;
         R=M;
@@ -600,7 +614,7 @@ bool find_sa_LCP(int* SA, int* LCP, string text, string pattern, int n){
       
     }
     else{
-      int minLCP = lcp_min(LCP, L, M);
+      int minLCP = QLCP[M];
       if(minLCP<k){
         levo=false;
         L=M;
