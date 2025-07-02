@@ -365,8 +365,8 @@ int main(int argc, char **argv) {
       int LCP[j];
       vector<vector<int>> RLLCP(j,vector<int>(2)); 
       auto start = high_resolution_clock::now();
-      int QLCP[j]
-      libsais((const unsigned char*) text.c_str(),SA,j,0, NULL);
+      int QLCP[j];
+      int rez = libsais((const unsigned char*) text.c_str(),SA,j,0, NULL); 
       int rezPLCP = libsais_plcp((const unsigned char*) text.c_str(),SA,PLCP,j);
       int rezLCP = libsais_lcp(PLCP,SA,LCP,j);
       int rezRLLCP = lcp_min(LCP,4,5);
