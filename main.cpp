@@ -89,7 +89,7 @@ int main(int argc, char **argv) {
     	i=i+500;
     }
   }
-  string out = "rezNovPcNaKlancu";
+  string out = "rezNovPc";
   //out.append(argv[1]);
   out.append(".csv");
   ofstream out_s(out, ofstream::trunc);
@@ -112,7 +112,7 @@ int main(int argc, char **argv) {
 /* 	Intel i3 5005U
 	ST: 2048000 je prekine testiranje, I/O sleep 500
 */
-  for (j = 1024000; j <= 2000000 /*3000000*/; j = j*2) {
+  for (j = 500; j <= 2000000 /*3000000*/; j = j*2) {
     sleep(10);
     int i;
     double totalTime = 0;
@@ -356,9 +356,11 @@ int main(int argc, char **argv) {
     cout << "\tTime in ms:" << fixed <<  totalTime / n << endl;
 
     //SA + LCP
+    if(j<1024000){
+    	
     sleep(10);
     for (i = 0; i < n; i++) {
-      cout << i << endl;
+      cout << i;
       cout.flush();
       int SA[j]; 
       int PLCP[j];
@@ -368,7 +370,6 @@ int main(int argc, char **argv) {
       int rez = libsais((const unsigned char*) text.c_str(),SA,j,0, NULL); 
       int rezPLCP = libsais_plcp((const unsigned char*) text.c_str(),SA,PLCP,j);
       int rezLCP = libsais_lcp(PLCP,SA,LCP,j);    
-		cout << "lcp " << endl;
     
       build_QLCP(SA,LCP,QLCP,text,j);
             //auto   construct(cst, text); 
@@ -388,7 +389,7 @@ int main(int argc, char **argv) {
       test[i].sizeRun = text.length();
       test[i].typeStruct = "SA+LCP";
       int k = 5;
-      cout << "TEST"<<endl;
+      cout << "TEST";
       pattern = text_all.substr(j, k);
         auto start1 = high_resolution_clock::now();
         auto occs = find_sa_LCP(SA,QLCP,text,pattern,j);
@@ -443,6 +444,7 @@ int main(int argc, char **argv) {
     cout << "Summary: " << endl;
     cout << "\tSize in B:" << 1.0 * totalSize / n << endl;
     cout << "\tTime in ms:" << fixed << totalTime / n << endl;
+  }
   }
  
   return 0;
