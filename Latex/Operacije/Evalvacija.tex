@@ -48,7 +48,7 @@ Kot je bilo predstavljeno v Tabeli \ref{tab:besedila} je besedilo sestavljeno iz
 
 \begin{figure}[htb]
     \centering
-    \includegraphics[width=\textwidth]{Slike/velikostDrecvesaNovPC.png}
+    \includesvg[inkscapelatex=false,width=\textwidth]{Slike/velikostDrecvesaNovPC.svg}
     \captionof{figure}[Graf velikosti priponskega drevesa izgrajenih iz besedil različne velikosti. Vhodno besedilo je DNK sekvenca.]{Graf velikosti priponskega drevesa izgrajenih iz besedil različne velikosti. Vhodno besedilo je DNK sekvenca.} 
     \label{fig:VelikostGraf}
 \end{figure}
@@ -59,7 +59,7 @@ Na Sliki \ref{fig:VelikostGraf} se lahko tudi opazi, da velikost priponskega dre
 
 \begin{figure}[htb]
     \centering
-    \includegraphics[width=\textwidth]{Slike/izgradnjaDrecvesaNovPC.png}
+    \includesvg[inkscapelatex=false,width=\textwidth]{Slike/izgradnjaDrecvesaNovPC.svg}
     \captionof{figure}[Graf prikazuje čas izgradnje priponskega drevesa za različne dolžine vhodnih besedil. Vhodno besedilo je DNK sekvenca.]{Graf prikazuje čas izgradnje priponskega drevesa za različne dolžine vhodnih besedil. Vhodno besedilo je DNK sekvenca.} 
     \label{fig:IzgradnjaGraf}
 \end{figure}
@@ -72,7 +72,7 @@ Pri izgradnji največjega priponskega drevesa se lahko opazi na Sliki \ref{fig:I
 Iz Slike \ref{fig:IzgradnjaGraf} je tudi razvidno, da čas potreben za izgradnjo kompaktnega priponskega drevesa raste počasneje kot čas izgradnje priponskega drevesa. Čas potreben za izgradnjo kompaktnega priponskega drevesa za besedilo dolžine 500 znakov je $70,8$ milisekund, čas za izgradnjo kompaktnega priponskega drevesa za besedilo dolžine 1024000 znakov pa je $121$ milisekund. Kompaktno priponsko drevo se zgradi hitreje od priponskega drevesa pri besedilih, ki so daljši od 8000 znakov. Priponsko drevo potrebuje $83,2$ milisekunde za izgradnjo, za razliko od kompaktnega priponskega drevesa, ki pa potrebuje $75,2$ milisekunde za biti izgrajeno nad besedilom dolžine 8000 znakov.
 
 \begin{figure}[htb]
-    \includegraphics[width=\textwidth]{Slike/IskanjeNovPC.png}
+    \includesvg[inkscapelatex=false,width=\textwidth]{Slike/IskanjeNovPC.svg}
     \captionof{figure}[Graf prikazuje čas iskanja vzorcev različnih dolžin v različnih implementacijah priponskega drevesa. Vhodno besedilo je DNK sekvenca.]{Graf prikazuje čas iskanja vzorcev različnih dolžin v različnih implementacijah priponskega drevesa. Vhodno besedilo je DNK sekvenca.} 
     \label{fig:IskanjeGraf}
 \end{figure}
@@ -94,7 +94,7 @@ Druga primerjava je bila narejena s Cankarjevim romanom Na klancu \cite{podatkiN
 Uporabljeno besedilo uporablja abecedo velikosti $52+1$ znak, pri čemer je originalna abeceda sestavljena iz slovenske abecede brez črk 'č', 'š', in 'ž' (bodisi v velikih črkah bodisi v malih črkah), ločil, presledkov in narekovajev. Pri tem vhodno besedilo zasede $25,851$ MB delovnega spomina, kar je všteto v vse meritve velikosti različnih implementacij priponskih dreves.
 
 \begin{figure}[htb]
-    \includegraphics[width=\textwidth]{Slike/velikostDrecvesaNovPCSLO.png}
+    \includesvg[inkscapelatex=false,width=\textwidth]{Slike/velikostDrecvesaNovPCSLO.svg}
     \captionof{figure}[Graf velikosti priponskega drevesa izgrajenih iz besedil različnih velikosti. Vhodno besedilo je roman Na klancu.]{Graf velikosti priponskega drevesa izgrajenih iz besedil različnih velikosti. Vhodno besedilo je roman Na klancu.} 
     \label{fig:VelikostGrafSLO}
 \end{figure}
@@ -105,7 +105,7 @@ Iz Slike \ref{fig:VelikostGrafSLO} je razvidno, da je priponsko drevo prostorsko
 
 
 \begin{figure}[htb]
-    \includegraphics[width=\textwidth]{Slike/izgradnjaDrecvesaNovPCSLO.png}
+    \includesvg[inkscapelatex=false,width=\textwidth]{Slike/izgradnjaDrecvesaNovPCSLO.svg}
     \captionof{figure}[Graf prikazuje čas izgradnje priponskega drevesa za različne dolžine vhodnih besedil. Vhodno besedilo je roman Na klancu.]{Graf prikazuje čas izgradnje priponskega drevesa za različne dolžine vhodnih besedil. Vhodno besedilo je roman Na klancu.} 
     \label{fig:IzgradnjaGrafSLO}
 \end{figure}
@@ -116,7 +116,7 @@ Torej iz Slike \ref{fig:IzgradnjaGrafSLO} se lahko opazi, da je za besedila kraj
 
 
 \begin{figure}[htb]
-    \includegraphics[width=\textwidth]{Slike/IskanjeNovPCSLO.png}
+    \includesvg[inkscapelatex=false,width=\textwidth]{Slike/IskanjeNovPCSLO.svg}
     \captionof{figure}[Graf prikazuje čas iskanja vzorcev različnih dolžin v različnih implementacijah priponskega drevesa. Vhodno besedilo je roman Na klancu.]{Graf prikazuje čas iskanja vzorcev različnih dolžin v različnih implementacijah priponskega drevesa. Vhodno besedilo je roman Na klancu.} 
     \label{fig:IskanjeGrafSLO}
 \end{figure}
