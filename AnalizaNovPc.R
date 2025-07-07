@@ -9,6 +9,8 @@ dataTidySLO <- dataSLO %>% pivot_longer(col=starts_with("tFind"),names_to = "Pat
 dataTidySLO  %>% filter(PatternLength=="tFindLog" & TimeFind<200000) %>% group_by(TypeOfDS) %>% summarise(M=(mean(TimeFind))) %>% print(n=100)
 dataTidySLO %>% filter(TypeOfDS=="St",PatternLength=="tFindLog") %>% group_by(SizeRun,TypeOfDS) %>% summarise(M=mean(TimeFind)) -> a
 
+lm(SizeInBytes~SizeRun, data = dataTidySLO)
+
 a$M/lag(a$M,default = 1) #2x
 
 dataTidySLO %>% filter(TypeOfDS=="CST",PatternLength=="tFindLog") %>% group_by(SizeRun,TypeOfDS) %>% summarise(M=mean(TimeFind)) -> a
@@ -54,7 +56,7 @@ dataTidy%>% ggplot()+
   scale_color_discrete(name = "Vrsta priponskega\ndrevesa", labels= c(CST="Kompaktno\npriponsko drevo", St="Priponsko drevo",SA="Priponsko polje","SA+LCP"="Priponsko polje z QLCP"))+
   #scale_color_manual(values=c("#00BFC4"))+
   scale_x_continuous(trans = log2_trans(), breaks = trans_breaks("log2", function(x) 2^x),
-                     labels = trans_format("log2", math_format(2^.x)))+
+                    labels = trans_format("log2", math_format(2^.x)))+
   scale_y_continuous(trans = log10_trans(), breaks = trans_breaks("log10", function(x) 10^x))+
   labs(y="Čas izgradnje indeksa besedila [ms]",x="Dolžina besedila")
 ggsave("./Img/izgradnjaDrecvesaNovPC.svg",bg = "white", height = 10, width = 20, units = "cm")

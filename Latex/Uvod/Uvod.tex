@@ -4,7 +4,7 @@ Ko v besedi $T$ dolžine $n$ iščemo zgolj en vzorec $P$ dolžine $m$, se za is
 Torej se vzorec zagotovo nahaja na začetku sprehoda iz korena proti listom priponskega drevesa, zgrajenega nad besedo. 
 Peter Weiner je kot prvi predstavil priponska drevesa leta 1973 \cite{Weiner1973} in jih uporabil v algoritmu za iskanje vzorcev v besedi. Časovna zahtevnost podanega algoritma za iskanje vzorcev v besedi je $O(m)$. Velikost priponskega drevesa je sorazmerna z dolžino vhodne besede, torej pri velikih besedah preraste velikost delovnega pomnilnika, kar močno vpliva na hitrost iskanja. Rešitev te težave je kompaktna predstavitev priponskega drevesa \cite{Navarro2016}.
 
-Namen magistrske naloge je preučevanje vpliva kompaktne predstavitve na izgradnjo priponskih dreves in na operacije nad njimi. V nalogi bodo predstavljene časovne zahtevnosti osnovnih operacij in poizvedb ter izgradnje priponskih dreves, priponskih polj in kompaktne predstavitve priponskih dreves. Izdelana bo tudi empirična primerjava različnih implementacij priponskih dreves.
+Namen magistrske naloge je preučevanje vpliva kompaktne predstavitve na izgradnjo priponskih dreves in na operacije nad njimi. V nalogi bodo predstavljene časovne zahtevnosti osnovnih operacij in poizvedb ter izgradnje priponskih dreves, priponskih polj in kompaktne predstavitve priponskih dreves. Izdelana bo tudi empirična primerjava različnih implementacij priponskih dreves in drugih indeksov besed.
 
 \section{STRUKTURA}\label{sec:struktura}
 
@@ -16,4 +16,4 @@ V tretjem poglavju naloge bo podrobno predstavljena podatkovna struktura pripons
 
 V petem poglavju bo predstavljena podatkovna struktura kompaktno priponsko drevo (angl. \textit{Compressed Suffix Tree} oziroma CST), ki omogoča iste operacije kot priponsko drevo, pri tem pa potrebuje manj prostora. V tem poglavju bodo tudi predstavljen algoritem za izgradnjo kompaktnega priponskega drevesa, ki skozi celotno izgradnjo ohranja kompaktnost podatkovne strukture. Zatem pa bodo predstavljene implementacije poizvedb nad vhodno besedo s pomočjo kompaktne predstavitve priponskega drevesa.
 
-V šestem poglavju bodo izdelana primerjava med različnimi indeksi. Predstavljen bo kratki povzetek teoretičnih časovnih zahtevnosti različnih operacij, ki so bile predhodno predstavljen, ter prostorska zahtevnost predstavljenih podatkovnih struktur. Pri tem bo izdelana tudi empirična primerjava implementaciji priponskih dreves, ki bo merila prostorsko podatkovnih struktur in časovno zahtevnost izgradnje ter poizvedb nad njimi.
+V šestem poglavju bodo izdelana primerjava med različnimi indeksi, ki so bili predhodno predstavljeni. Izdelana bo empirična primerjava različnih indeksov, ki bo merila prostorsko zahtevnost podatkovnih struktur in časovno zahtevnost izgradnje ter poizvedb nad njimi.
