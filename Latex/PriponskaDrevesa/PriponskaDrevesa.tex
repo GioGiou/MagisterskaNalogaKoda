@@ -8,12 +8,12 @@ Torej priponsko drevo nad besedo $T$, ki je niz nad abecedo $\Sigma$, definiramo
 \begin{defi}\label{def:priposkoDrevo}
     Priponsko drevo nad nizom $T$ dolžine $n$ je številsko drevo, ki zadošča sledečim zahtevam:
     \begin{enumerate}
-        \item drevo ima natanko $n$ listov oštevilčenih s števili med $1$ in $n$, ki je shranjena v polju $indeks$,
+        \item drevo ima natanko $n$ listov oštevilčenih s števili med $1$ in $n$, ki se shranjenijo v polju $indeks$,
         \item vsako notranje vozlišče, razen korena, ima vsaj dva otroka,
         \item vsaka povezava predstavlja neprazni podniz besede $T$,
         \item ne obstajata %dve
         povezavi, ki se začneta v istem vozlišču in z istim znakom,
-        \item za vsak list $l$ velja, da je $\Niz{l}=T[l.ideks:]$.        
+        \item za vsak list $l$ velja, da je $\Niz{l}=T[l.indeks:]$.        
     \end{enumerate}
 \end{defi}
 
