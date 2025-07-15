@@ -1,0 +1,106 @@
+%% Creator: Inkscape 1.4 (86a8ad7, 2024-10-11), www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'IntervalnoDrevo.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \newcommand*\fsize{\dimexpr\f@size pt\relax}%
+  \newcommand*\lineheight[1]{\fontsize{\fsize}{#1\fsize}\selectfont}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{282.6303413bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,1.20457491)%
+    \lineheight{1}%
+    \setlength\tabcolsep{0pt}%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{IntervalnoDrevo.pdf}}%
+    \put(0.19124903,0.68049526){\color[rgb]{0,0,0}\makebox(0,0)[t]{\smash{\begin{tabular}[t]{c}\textbf{$[2:3]$}\\\textbf{2-interval}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{IntervalnoDrevo.pdf}}%
+    \put(0.80861883,0.68049533){\color[rgb]{0,0,0}\makebox(0,0)[t]{\smash{\begin{tabular}[t]{c}\textbf{$[4:5]$}\\\textbf{1-interval}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{IntervalnoDrevo.pdf}}%
+    \put(0.49465223,1.11613117){\color[rgb]{0,0,0}\makebox(0,0)[t]{\smash{\begin{tabular}[t]{c}\textbf{$[1:6]$}\\\textbf{0-interval}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=4]{IntervalnoDrevo.pdf}}%
+    \put(0.10571093,0.47357412){\color[rgb]{0,0,0}\makebox(0,0)[rt]{\smash{\begin{tabular}[t]{r}\textbf{ }\end{tabular}}}}%
+    \put(0.23325777,0.45064079){\color[rgb]{0,0,0}\makebox(0,0)[rt]{\smash{\begin{tabular}[t]{r}\textbf{1}\end{tabular}}}}%
+    \put(0.36961896,0.45039433){\color[rgb]{0,0,0}\makebox(0,0)[rt]{\smash{\begin{tabular}[t]{r}\textbf{2}\end{tabular}}}}%
+    \put(0.51889039,0.45079919){\color[rgb]{0,0,0}\makebox(0,0)[rt]{\smash{\begin{tabular}[t]{r}\textbf{3}\end{tabular}}}}%
+    \put(0.6580414,0.45079919){\color[rgb]{0,0,0}\makebox(0,0)[rt]{\smash{\begin{tabular}[t]{r}\textbf{4}\end{tabular}}}}%
+    \put(0.80462606,0.45120398){\color[rgb]{0,0,0}\makebox(0,0)[rt]{\smash{\begin{tabular}[t]{r}\textbf{5}\end{tabular}}}}%
+    \put(0.11087425,0.2714381){\color[rgb]{0,0,0}\makebox(0,0)[rt]{\smash{\begin{tabular}[t]{r}\textbf{SA}\end{tabular}}}}%
+    \put(0.65791828,0.35917035){\color[rgb]{0,0,0}\makebox(0,0)[rt]{\smash{\begin{tabular}[t]{r}\textbf{0}\end{tabular}}}}%
+    \put(0.23382097,0.2714557){\color[rgb]{0,0,0}\makebox(0,0)[rt]{\smash{\begin{tabular}[t]{r}\textbf{6}\end{tabular}}}}%
+    \put(0.36877415,0.2712797){\color[rgb]{0,0,0}\makebox(0,0)[rt]{\smash{\begin{tabular}[t]{r}\textbf{1}\end{tabular}}}}%
+    \put(0.51889039,0.2714381){\color[rgb]{0,0,0}\makebox(0,0)[rt]{\smash{\begin{tabular}[t]{r}\textbf{3}\end{tabular}}}}%
+    \put(0.65783029,0.27103331){\color[rgb]{0,0,0}\makebox(0,0)[rt]{\smash{\begin{tabular}[t]{r}\textbf{2}\end{tabular}}}}%
+    \put(0.80476685,0.2714381){\color[rgb]{0,0,0}\makebox(0,0)[rt]{\smash{\begin{tabular}[t]{r}\textbf{4}\end{tabular}}}}%
+    \put(0.9440701,0.27184289){\color[rgb]{0,0,0}\makebox(0,0)[rt]{\smash{\begin{tabular}[t]{r}\textbf{5}\end{tabular}}}}%
+    \put(0.9440877,0.35917035){\color[rgb]{0,0,0}\makebox(0,0)[rt]{\smash{\begin{tabular}[t]{r}\textbf{0}\end{tabular}}}}%
+    \put(0.80371081,0.35901196){\color[rgb]{0,0,0}\makebox(0,0)[rt]{\smash{\begin{tabular}[t]{r}\textbf{1}\end{tabular}}}}%
+    \put(0.14603663,0.35917035){\color[rgb]{0,0,0}\makebox(0,0)[rt]{\smash{\begin{tabular}[t]{r}\textbf{LCP}\end{tabular}}}}%
+    \put(0.24585966,0.35901196){\color[rgb]{0,0,0}\makebox(0,0)[rt]{\smash{\begin{tabular}[t]{r}\textbf{-1}\end{tabular}}}}%
+    \put(0.36970696,0.35917035){\color[rgb]{0,0,0}\makebox(0,0)[rt]{\smash{\begin{tabular}[t]{r}\textbf{0}\end{tabular}}}}%
+    \put(0.51873192,0.35876557){\color[rgb]{0,0,0}\makebox(0,0)[rt]{\smash{\begin{tabular}[t]{r}\textbf{2}\end{tabular}}}}%
+    \put(0.94371818,0.45081679){\color[rgb]{0,0,0}\makebox(0,0)[rt]{\smash{\begin{tabular}[t]{r}\textbf{6}\end{tabular}}}}%
+    \put(0.09701638,0.19452244){\color[rgb]{0,0,0}\makebox(0,0)[rt]{\smash{\begin{tabular}[t]{r}\textbf{U}\end{tabular}}}}%
+    \put(0.09467552,0.10653063){\color[rgb]{0,0,0}\makebox(0,0)[rt]{\smash{\begin{tabular}[t]{r}\textbf{D}\end{tabular}}}}%
+    \put(0.11581356,0.02666891){\color[rgb]{0,0,0}\makebox(0,0)[rt]{\smash{\begin{tabular}[t]{r}\textbf{NI}\end{tabular}}}}%
+    \put(0.2269744,0.19962657){\color[rgb]{0,0,0}\makebox(0,0)[rt]{\smash{\begin{tabular}[t]{r}\textbf{-}\end{tabular}}}}%
+    \put(0.23410258,0.11163477){\color[rgb]{0,0,0}\makebox(0,0)[rt]{\smash{\begin{tabular}[t]{r}\textbf{2}\end{tabular}}}}%
+    \put(0.36249082,0.19962657){\color[rgb]{0,0,0}\makebox(0,0)[rt]{\smash{\begin{tabular}[t]{r}\textbf{-}\end{tabular}}}}%
+    \put(0.51160378,0.19962657){\color[rgb]{0,0,0}\makebox(0,0)[rt]{\smash{\begin{tabular}[t]{r}\textbf{-}\end{tabular}}}}%
+    \put(0.51160378,0.03173769){\color[rgb]{0,0,0}\makebox(0,0)[rt]{\smash{\begin{tabular}[t]{r}\textbf{-}\end{tabular}}}}%
+    \put(0.51160378,0.11163477){\color[rgb]{0,0,0}\makebox(0,0)[rt]{\smash{\begin{tabular}[t]{r}\textbf{-}\end{tabular}}}}%
+    \put(0.79742744,0.19962657){\color[rgb]{0,0,0}\makebox(0,0)[rt]{\smash{\begin{tabular}[t]{r}\textbf{-}\end{tabular}}}}%
+    \put(0.79742744,0.11163477){\color[rgb]{0,0,0}\makebox(0,0)[rt]{\smash{\begin{tabular}[t]{r}\textbf{-}\end{tabular}}}}%
+    \put(0.79742744,0.03173769){\color[rgb]{0,0,0}\makebox(0,0)[rt]{\smash{\begin{tabular}[t]{r}\textbf{-}\end{tabular}}}}%
+    \put(0.93687156,0.11163477){\color[rgb]{0,0,0}\makebox(0,0)[rt]{\smash{\begin{tabular}[t]{r}\textbf{-}\end{tabular}}}}%
+    \put(0.93687156,0.03173769){\color[rgb]{0,0,0}\makebox(0,0)[rt]{\smash{\begin{tabular}[t]{r}\textbf{-}\end{tabular}}}}%
+    \put(0.65798861,0.19452244){\color[rgb]{0,0,0}\makebox(0,0)[rt]{\smash{\begin{tabular}[t]{r}\textbf{3}\end{tabular}}}}%
+    \put(0.9440701,0.19492722){\color[rgb]{0,0,0}\makebox(0,0)[rt]{\smash{\begin{tabular}[t]{r}\textbf{5}\end{tabular}}}}%
+    \put(0.65790053,0.10693542){\color[rgb]{0,0,0}\makebox(0,0)[rt]{\smash{\begin{tabular}[t]{r}\textbf{5}\end{tabular}}}}%
+    \put(0.65754862,0.02665116){\color[rgb]{0,0,0}\makebox(0,0)[rt]{\smash{\begin{tabular}[t]{r}\textbf{6}\end{tabular}}}}%
+    \put(0.22695136,0.0249338){\color[rgb]{0,0,0}\makebox(0,0)[rt]{\smash{\begin{tabular}[t]{r}\textbf{-}\end{tabular}}}}%
+    \put(0.36977732,0.10653063){\color[rgb]{0,0,0}\makebox(0,0)[rt]{\smash{\begin{tabular}[t]{r}\textbf{3}\end{tabular}}}}%
+    \put(0.36983012,0.02663356){\color[rgb]{0,0,0}\makebox(0,0)[rt]{\smash{\begin{tabular}[t]{r}\textbf{4}\end{tabular}}}}%
+  \end{picture}%
+\endgroup%

@@ -2,14 +2,14 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="210mm"
-   height="297mm"
-   viewBox="0 0 210 297"
+   width="98.89698mm"
+   height="51.309086mm"
+   viewBox="0 0 98.89698 51.309086"
    version="1.1"
    id="svg1"
    inkscape:version="1.4 (86a8ad7, 2024-10-11)"
    sodipodi:docname="IntervalnoDrevo.svg"
-   inkscape:export-filename="..\Latex\Slike\IntervalnoDrevo.svg"
+   inkscape:export-filename="..\Latex\Latex\Latex\Latex\Latex\Latex\Latex\Latex\Latex\Latex\Latex\Latex\Latex\Latex\Latex\Latex\Slike\IntervalnoDrevo.svg"
    inkscape:export-xdpi="96"
    inkscape:export-ydpi="96"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
@@ -26,83 +26,31 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="mm"
-     inkscape:zoom="0.75811588"
-     inkscape:cx="396.3774"
-     inkscape:cy="561.25984"
+     inkscape:zoom="1.0721378"
+     inkscape:cx="505.99841"
+     inkscape:cy="227.11634"
      inkscape:window-width="1920"
      inkscape:window-height="1111"
      inkscape:window-x="-9"
      inkscape:window-y="-9"
      inkscape:window-maximized="1"
-     inkscape:current-layer="layer1" />
+     inkscape:current-layer="layer1-5">
+    <inkscape:page
+       x="0"
+       y="0"
+       width="98.89698"
+       height="51.309086"
+       id="page2"
+       margin="0"
+       bleed="0" />
+  </sodipodi:namedview>
   <defs
      id="defs1" />
   <g
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
-     id="layer1">
-    <g
-       id="g1">
-      <rect
-         style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.765;stroke-dasharray:none;stroke-opacity:1"
-         id="rect2-8"
-         width="37.343124"
-         height="19.195065"
-         x="84.36264"
-         y="20.755417" />
-      <rect
-         style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.765;stroke-dasharray:none;stroke-opacity:1"
-         id="rect2"
-         width="37.343124"
-         height="19.195065"
-         x="54.092915"
-         y="64.190804" />
-      <text
-         xml:space="preserve"
-         style="font-weight:bold;font-size:5.64444px;line-height:1;font-family:Calibri;-inkscape-font-specification:'Calibri, Bold';text-align:end;writing-mode:lr-tb;direction:ltr;text-anchor:end;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.365;stroke-dasharray:none;stroke-opacity:1"
-         x="90.028526"
-         y="75.272484"
-         id="text3-1"><tspan
-           id="tspan3-1"
-           style="font-size:5.64444px;fill:#000000;fill-opacity:1;stroke-width:0.365;stroke-dasharray:none"
-           x="90.028526"
-           y="75.272484">[2,3] 2-interval</tspan></text>
-      <rect
-         style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.765;stroke-dasharray:none;stroke-opacity:1"
-         id="rect2-5"
-         width="37.343124"
-         height="19.195065"
-         x="115.69049"
-         y="64.190796" />
-      <text
-         xml:space="preserve"
-         style="font-weight:bold;font-size:5.64444px;line-height:1;font-family:Calibri;-inkscape-font-specification:'Calibri, Bold';text-align:end;writing-mode:lr-tb;direction:ltr;text-anchor:end;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.365;stroke-dasharray:none;stroke-opacity:1"
-         x="151.6261"
-         y="75.272476"
-         id="text3-6"><tspan
-           id="tspan3-14"
-           style="font-size:5.64444px;fill:#000000;fill-opacity:1;stroke-width:0.365;stroke-dasharray:none"
-           x="151.6261"
-           y="75.272476">[4,5] 1-interval</tspan></text>
-      <path
-         style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.765;stroke-dasharray:none;stroke-opacity:1"
-         d="M 97.357942,40.254841 70.659355,64.335922 Z"
-         id="path2" />
-      <path
-         style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.765;stroke-dasharray:none;stroke-opacity:1"
-         d="m 107.47898,40.429342 27.22209,23.732079 z"
-         id="path3" />
-      <text
-         xml:space="preserve"
-         style="font-weight:bold;font-size:5.64444px;line-height:1;font-family:Calibri;-inkscape-font-specification:'Calibri, Bold';text-align:end;writing-mode:lr-tb;direction:ltr;text-anchor:end;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.365;stroke-dasharray:none;stroke-opacity:1"
-         x="120.29825"
-         y="31.837093"
-         id="text3"><tspan
-           id="tspan3"
-           style="font-size:5.64444px;fill:#000000;fill-opacity:1;stroke-width:0.365;stroke-dasharray:none"
-           x="120.29825"
-           y="31.837093">[1,6] 0-interval</tspan></text>
-    </g>
+     id="layer1"
+     transform="translate(-54.248034,-89.166824)">
     <g
        id="layer1-5"
        transform="matrix(1.4553691,0,0,1.4553691,-47.139387,-117.19367)">
@@ -180,12 +128,12 @@
       <text
          xml:space="preserve"
          style="font-weight:bold;font-size:4.9389px;line-height:1;font-family:Calibri;-inkscape-font-specification:'Calibri, Bold';text-align:end;writing-mode:lr-tb;direction:ltr;text-anchor:end;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.165;stroke-dasharray:none"
-         x="85.28968"
+         x="85.256622"
          y="146.10609"
          id="text279"><tspan
            id="tspan279"
            style="fill:#000000;fill-opacity:1;stroke-width:0.165;stroke-dasharray:none"
-           x="85.28968"
+           x="85.256622"
            y="146.10609">1</tspan></text>
       <text
          xml:space="preserve"
@@ -250,12 +198,12 @@
       <text
          xml:space="preserve"
          style="font-weight:bold;font-size:4.9389px;line-height:1;font-family:Calibri;-inkscape-font-specification:'Calibri, Bold';text-align:end;writing-mode:lr-tb;direction:ltr;text-anchor:end;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.165;stroke-dasharray:none"
-         x="85.32827"
+         x="85.295204"
          y="158.36015"
          id="text286"><tspan
            id="tspan286"
            style="stroke-width:0.165;stroke-dasharray:none"
-           x="85.32827"
+           x="85.295204"
            y="158.36015">6</tspan></text>
       <text
          xml:space="preserve"
@@ -340,13 +288,13 @@
       <text
          xml:space="preserve"
          style="font-weight:bold;font-size:4.9389px;line-height:1;font-family:Calibri;-inkscape-font-specification:'Calibri, Bold';text-align:end;writing-mode:lr-tb;direction:ltr;text-anchor:end;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.165;stroke-dasharray:none"
-         x="85.353592"
+         x="86.119965"
          y="152.44122"
          id="text295"><tspan
            id="tspan295"
            style="stroke-width:0.165;stroke-dasharray:none"
-           x="85.353592"
-           y="152.44122">0</tspan></text>
+           x="86.119965"
+           y="152.44122">-1</tspan></text>
       <text
          xml:space="preserve"
          style="font-weight:bold;font-size:4.9389px;line-height:1;font-family:Calibri;-inkscape-font-specification:'Calibri, Bold';text-align:end;writing-mode:lr-tb;direction:ltr;text-anchor:end;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0.165;stroke-dasharray:none"
@@ -412,23 +360,23 @@
       <text
          xml:space="preserve"
          style="font-weight:bold;font-size:4.9389px;line-height:1;font-family:Calibri;-inkscape-font-specification:'Calibri, Bold';text-align:end;writing-mode:lr-tb;direction:ltr;text-anchor:end;fill:#000000;stroke:#000000;stroke-width:0.165"
-         x="84.859215"
+         x="84.826157"
          y="163.3714"
          id="text16"><tspan
            id="tspan16"
            style="stroke-width:0.165"
-           x="84.859215"
+           x="84.826157"
            y="163.3714">-</tspan></text>
       <text
          xml:space="preserve"
          style="font-weight:bold;font-size:4.9389px;line-height:1;font-family:Calibri;-inkscape-font-specification:'Calibri, Bold';text-align:end;writing-mode:lr-tb;direction:ltr;text-anchor:end;fill:#000000;stroke:#000000;stroke-width:0.165"
-         x="84.859215"
+         x="85.314499"
          y="169.49742"
          id="text17"><tspan
            id="tspan17"
            style="stroke-width:0.165"
-           x="84.859215"
-           y="169.49742">-</tspan></text>
+           x="85.314499"
+           y="169.49742">2</tspan></text>
       <text
          xml:space="preserve"
          style="font-weight:bold;font-size:4.9389px;line-height:1;font-family:Calibri;-inkscape-font-specification:'Calibri, Bold';text-align:end;writing-mode:lr-tb;direction:ltr;text-anchor:end;fill:#000000;stroke:#000000;stroke-width:0.165"
@@ -562,13 +510,13 @@
       <text
          xml:space="preserve"
          style="font-weight:bold;font-size:4.9389px;line-height:1;font-family:Calibri;-inkscape-font-specification:'Calibri, Bold';text-align:end;writing-mode:lr-tb;direction:ltr;text-anchor:end;fill:#000000;stroke:#000000;stroke-width:0.165"
-         x="85.347557"
+         x="84.826157"
          y="175.51703"
          id="text32"><tspan
            id="tspan32"
            style="stroke-width:0.165"
-           x="85.347557"
-           y="175.51703">2</tspan></text>
+           x="84.826157"
+           y="175.51703">-</tspan></text>
       <text
          xml:space="preserve"
          style="font-weight:bold;font-size:4.9389px;line-height:1;font-family:Calibri;-inkscape-font-specification:'Calibri, Bold';text-align:end;writing-mode:lr-tb;direction:ltr;text-anchor:end;fill:#000000;stroke:#000000;stroke-width:0.165"
