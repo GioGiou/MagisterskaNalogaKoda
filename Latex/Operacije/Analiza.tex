@@ -125,7 +125,7 @@ pri čemer so $v$, $w$ in $u$, v priponskem drevesu, zaporedno števila obiskani
 Zadnja predstavljena operacija pa je operacija $sl(v)$, ki vrne vozišče $w$, na katerega kaže priponska povezava iz vozlišča $v$. V priponskem drevesu so priponske povezave in posledično operacija $sl(v)$ implementirane, tako da vozlišče $v$ hrani kazalec na vozlišče $w$, kar predstavlja priponsko povezavo. Torej je operacija $sl(v)$ implementirana s sledečo psevdokodo \verb|v.priponskaPovezava|. V kompaktnih priponskih drevesih pa je potrebno naračunati priponsko povezavo vozlišča $v$. Torej se lahko operacijo $sl(v)$ implementira kot:
 \begin{equation*}
 \begin{split}
-    sl(v)&=lca(izbira_{01}(\tau,\Psi(rang_{01}(\tau,v-1)+1)),izbira_{01}(\tau,\Psi(rang_{01}(\tau,zapri(\tau,v))))).
+    sl(v)=lca(izbira_{01}(\tau,\Psi(rang_{01}(\tau,v-1)+1)),izbira_{01}(\tau,\Psi(rang_{01}(\tau,zapri(\tau,v))))).
 \end{split}   
 \end{equation*}
 Ker operacije $lca(v,w)$, $izbira_{01}(\tau,x)$, $rang_{01}(\tau,x)$ in $zapri(\tau,x)$ potrebujejo konstantni čas, da se izvršijo, je časovna zahtevnost $O(t_\Psi)$. Za izračunati vrednost $\Psi(\cdot)$ je potrebno $O(t_\Psi)$ časa, kar je odvisno od implementacije kompaktnega priponskega polja. V predhodno predstavljeni implementaciji kompaktnega priponskega polja je $t_\Psi=O(1)$ in se zato v obeh primerih operacija $sl(v)$ izvrši v konstantnem času.
