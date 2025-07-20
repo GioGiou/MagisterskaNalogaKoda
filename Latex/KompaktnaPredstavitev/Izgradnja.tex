@@ -18,7 +18,7 @@ Priponsko polje $SA$ se ne razdeli na $b$ delov, ampak je lažje najti najmanjš
 
 Ko je polje $L$ izračunano, se kompaktno predstavitev polja $\Psi$ zapiše kot bitna polja $B_c$ za vsak znak $c\in \Sigma$. Vsako bitno polje $B_c$ se inicializira z ničlami. Če je $L[i]=c$ potem se nastavi $B_c[i]=1$. To je lahko storjeno brez dodatnega prostora za polje $L$, saj ni potrebno zapisati črke $c=T[A[j]-1]$ v polju $L$, ampak se lahko neposredno zapiše enico v celico $B_c[kb+j]=1$ \cite{Navarro2016}.
 
-Vzporedno z izdelavo kompaktne predstavitve polja $\Psi$ se lahko naračuna tudi polji vzorcev $SA_S$ in $SA_S^{-1}$, saj se za izgradnjo sprotno naračunava priponsko polje $SA$. Torej za izgradnjo polji vzorcev ni potrebnega dodatnega časa. Čas, potreben za izgradnjo kompaktnega priponskega polja $SA$, je $O(n\log{n})$. Večina operacij potrebuje $O(n)$ časa. Iskanje pripon, ki spadajo v določeno vedro, potrebuje $O(n)$ časa za vsako vedro, torej potrebuje $n/b\cdot O(n)=(n\log{n})/n\cdot O(n)=O(n\log{n})$ časa za naračunat vse pripone. 
+Vzporedno z izdelavo kompaktne predstavitve polja $\Psi$ se lahko naračuna tudi polji vzorcev $SA_S$ in $SA_S^{-1}$, saj se za izgradnjo sprotno naračunava priponsko polje $SA$. Torej za izgradnjo polj vzorcev ni potrebnega dodatnega časa. Čas, potreben za izgradnjo kompaktnega priponskega polja $SA$, je $O(n\log{n})$. Večina operacij potrebuje $O(n)$ časa. Iskanje pripon, ki spadajo v določeno vedro, potrebuje $O(n)$ časa za vsako vedro, torej potrebuje $n/b\cdot O(n)=(n\log{n})/n\cdot O(n)=O(n\log{n})$ časa za naračunat vse pripone. 
 
 \paragraph{Izgradnja LCP strukture.}
 Bitno polje $H$, ki predstavlja $LCP$ polje, je naslednja zgrajena podatkovna struktura. Ker je $H[j]=1$ za $j=PLCP[i]+2i$, se $H$ izračuna direktno iz polja $PLCP$.
@@ -36,7 +36,7 @@ To je storjeno s sprehodom po priponskem polju $SA$ iz leve proti desni ter za v
 Izgradnja topologije drevesa poteka v času $O(nt_{SA})$ oziroma $O(n\log{n})$ za predhodno predstavljeno implementacijo $CSA$. V vsakem koraku je v topologijo drevesa dodan nov list. Za vsak list je lahko dodano novo vozlišče na sklad, če za črkovno dolžino vozliča $v$, ki je trenutno na vrhu sklada, velja $\Sd{v}<LCP[i]$, pri čemer je $i$ zaporedno število pripone, ki jo predstavlja list v priponskem polju. Za vsak list so iz sklada odvzeta vozlišča, za katera velja $\Sd{v}\ge LCP[i]$. V času izgradnje drevesa je na sklad potisnjenih in snetih največ $n-1$ vozlišč. Ker postopek ustvari $n$ listov in največ $n-1$ notranjih vozlišč, je $O(nt_{SA})$ oziroma $O(n\log{n})$ potrebni čas izgradnje topologije drevesa $\tau$.
 
 \begin{izr} \label{izr:izgradnjaCST}
-    Časovna zahtevnost izgradnje kompaktnega priponskega drevesa za vhodno besedo $T$ dolžine $n$ je $O(n\log{n})$ ter v času izgradnje je prostorska zahtevnost vedno kompaktna.
+    Časovna zahtevnost izgradnje kompaktnega priponskega drevesa za vhodno besedo $T$ dolžine $n$ je $O(n\log{n})$ ter je v času izgradnje prostorska zahtevnost vedno kompaktna.
 \end{izr}
 
 \begin{proof}

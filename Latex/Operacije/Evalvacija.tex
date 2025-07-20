@@ -28,19 +28,19 @@ Podobno se lahko vidi tudi za roman Na klancu, Slika \ref{fig:VelikostGrafSLO}. 
 
 \paragraph{Časovna zahtevnost gradnje.} 
 
-Zdaj, ko poznamo velikost indeksov, pa si lahko pogledamo čas, ki ga potrebujemo za gradnjo le-teh. Rezultati so prikazani na Sliki \ref{fig:IzgradnjaGraf} za DNK sekvenco ter na Sliki \ref{fig:IzgradnjaGrafSLO} za roman Na klancu. V obeh primerih vidimo, da čas gradnje indeksov raste linearno z dolžino besede. V obeh testnih primerih se priponsko polje (označeno z zelen barvo) se zgradi najhitreje. Iz slik se zdi, da kompaktno priponsko drevo (označeno z rdečo barvo) potrebuje konstanten čas za gradnjo, vendar se iz rezultatov testiranja vidi majhno rast, ki ni vidna na slikah.
+Zdaj, ko poznamo velikost indeksov, pa si lahko pogledamo čas, ki ga potrebujemo za gradnjo le-teh. Rezultati so prikazani na Sliki \ref{fig:IzgradnjaGraf} za DNK sekvenco ter na Sliki \ref{fig:IzgradnjaGrafSLO} za roman Na klancu. V obeh primerih vidimo, da čas gradnje indeksov raste linearno z dolžino besede. V obeh testnih primerih se priponsko polje (označeno z zeleno barvo) zgradi najhitreje. Iz slik se zdi, da kompaktno priponsko drevo (označeno z rdečo barvo) potrebuje konstanten čas za gradnjo, vendar se iz rezultatov testiranja vidi majhno rast, ki ni vidna na slikah.
 
 \begin{figure}[htb]
     \centering
     \includesvg[inkscapelatex=false,width=\textwidth]{Slike/izgradnjaDrecvesaNovPC.svg}
-    \caption{Graf prikazuje čas izgradnje indeksov besde za različne dolžine vhodnih besed. Vhodna beseda je DNK sekvenca.} 
+    \caption{Graf prikazuje čas izgradnje indeksov besede za različne dolžine vhodnih besed. Vhodna beseda je DNK sekvenca.} 
     \label{fig:IzgradnjaGraf}
 \end{figure}
 
 \begin{figure}[htb]
     \centering
     \includesvg[inkscapelatex=false,width=\textwidth]{Slike/izgradnjaDrecvesaNovPCSLO.svg}
-    \caption{Graf prikazuje čas izgradnje indeksov besde za različne dolžine vhodnih besed. Vhodna beseda je roman Na klancu.} 
+    \caption{Graf prikazuje čas izgradnje indeksov besede za različne dolžine vhodnih besed. Vhodna beseda je roman Na klancu.} 
     \label{fig:IzgradnjaGrafSLO}
 \end{figure}
 
