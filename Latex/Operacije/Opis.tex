@@ -2,7 +2,7 @@ Preden se lahko izdela primerjavo podatkovnih struktur je potrebno predstaviti o
 
 \subsection{Testni primeri}
 
-Predstavljeno testno metodo bomo pognali nad dvema vhodnima besedama, ki sta prikazani v Tabeli \ref{tab:besedila}. Prva testirana beseda je Cankarjev kratki roman Na klancu \cite{podatkiNaKlancu}. Roman je bil izbran, saj predstavlja tipično vhodno besedo v naravnem jeziku, ki je v tem primeru slovenščina. Abeceda takih besed sestoji iz črk naravnega jezika (velikih in malih), presledkov in ločil. Pri tem se je pojavil problem, saj slovenščina ne uporablja ASCII znake. Zato je potrebno pred samim začetkom testiranja vhodno besedo pred pripraviti. To je bilo storjeno tako, da so bili vsi ne ASCII znaki odstranjeni oziroma zamenjani z ASCII alternativami. Na primer znak, ki predstavlja '...', je bil zamenjan s tremi pikami, vse črke z naglasi (kot so strešice, ostrivci ter drugi) so bile zamenjani z osnovnim znakom, torej na primer š postane s in é postane e. Pri tem so bile tudi odstranjene vse prazne vrstice ter ločila poglavij, ki so bila označena z '***'. Odstranjeni so bili tudi vsi nevidni simboli, ki niso vidni bralcu, prisotni v besedilu. Na ta način se je začetno besedilo znižalo iz dolžine 319843 znakov na 317803.
+Empirična primerjava je bila izdelana nad dvema vhodnima besedama, ki sta prikazani v Tabeli \ref{tab:besedila}. Prva testirana beseda je daljša DNK sekvenca \cite{podatki}, ki je zlepek različnih DNK sekvenc in je označena kot \DNK. Izbrana je bila kot primer vhodne besede, uporabljene v bioinformatiki. Ta vhodna beseda je bila predhodno uporabljena za testiranje implementacije kompaktnega priponskega drevesa od Välimäki idr. \cite{Valimaki2007}. Abeceda $\Sigma$ besede \DNK sestoji iz nukleotidov, ki jih označimo z črkami A, C, T in G. Zato smo se odloči, da nukleotide predstavimo kot 7 bitne ASCII znake.
 
 \begin{table}[htb]
     \caption{Primerjava besedil, ki smo jih uporabili za primerjavo različnih indeksov besed}
@@ -12,23 +12,23 @@ Predstavljeno testno metodo bomo pognali nad dvema vhodnima besedama, ki sta pri
         Ime testne besede& Število znakov & Velikost abecede & Velikost na disku \\
         &  &   & [MB]\\
          \hline
-        Ivan Cankar, Na klancu \cite{podatkiNaKlancu}& 317803 & 52 & $25,851$ \\
-        DNK sekvenca \cite{podatki}&  52428800& 4 & $26,767$ \\
+        Ivan Cankar, Na klancu \cite{podatkiNaKlancu}& 317803 & 53 & $25,851$ \\
+        DNK sekvenca \cite{podatki}&  52428800& 5 & $26,767$ \\
     \end{tabular}    
 \end{table}
 
-Druga testirana beseda pa je daljša DNK sekvenca \cite{podatki}, ki je zlepek različnih DNK sekvenc. Izbrana je bila kot primer vhodne besede, uporabljene v bioinformatiki. Ta vhodna beseda je bila predhodno uporabljena za testiranje implementacije kompaktnega priponskega drevesa od Välimäki idr. \cite{Valimaki2007}.
+Druga testirana beseda je Cankarjev kratki roman Na klancu \cite{podatkiNaKlancu}, ki je označen kot \NK. Roman je bil izbran, saj predstavlja tipično vhodno besedo v naravnem jeziku, ki je v tem primeru slovenščina. Abeceda $\Sigma$ besed \NK sestoji iz črk slovenske abecede (velikih in malih), presledkov in ločil. Ker smo se odločili, da predstavimo \DNK z ASCII znaki, je bilo potrebno \NK v ASCII. Zato so bili vsi ne ASCII znaki odstranjeni oziroma zamenjani z ASCII alternativami. Na primer znak, ki predstavlja '...', je bil zamenjan s tremi pikami, vse črke z naglasi (kot so strešice, ostrivci ter drugi) so bile zamenjani z osnovnim znakom, zato š postane s in é postane e. Odstranjene so bile tudi vse prazne vrstice ter ločila poglavij, ki so bila označena z '***', saj le-te ne vplivajo na vsebino besedila. Odstranjeni so bili tudi vsi simboli, ki niso vidni bralcu, prisotni v besedilu. Na ta način se je začetno besedilo znižalo iz dolžine 319843 znakov na 317803.
 
 \paragraph{Podaljševanje besedila.}
 
-V drugem stolpcu Tabele \ref{tab:besedila} so prikazane dolžine besed, ki bodo uporabljen za testiranje. Pri tem se opazi, da so nekatera besedila krajša kot 1024500 znakov, ki so potrebni za izgradnjo indeksov in za izdelavo vzorcev testiranja. Zato je treba te besede podaljšati. Ker je malo verjetno, da se vhodno besedilo ponovi $k$-krat, dokler ne doseže primerne velikosti, predvsem v naravnem jeziku, bo uporabljena bolj napredna metoda podaljševanja besedila. Metoda vzame manjše podnize besedila ter naredi stik med začetno besedo in podnizom. Tako dobljeno besedilo je bolj verjetno, saj je večja verjetnost, da se manjši deli besedila ponovijo za razliko od celotnega besedila. Predlagana metoda podaljševanja besedila je prikazana v Algoritmu \ref{alg:Konkatenacija}. Pri tem metoda predpostavi, da je besedilo dolgo vsaj $3000$ znakov. Ta metoda je primerna za podaljševanje daljših besedil, sicer pa je možno metodi spremeniti parameter $i$ in tako prilagoditi metodo drugim besedilom.
+V drugem stolpcu Tabele \ref{tab:besedila} so prikazane dolžine besed, ki so bila uporabljena za testiranje. Pri tem se opazi, da so beseda \NK je krajša od 1024500 znakov, ki so potrebni za izgradnjo indeksov in za izdelavo vzorcev testiranja. Zato jo je bilo potrebno podaljšati. Ker je malo verjetno, da se vhodna beseda ponovi $k$-krat, dokler ne doseže primerne velikosti, predvsem v naravnem jeziku, je bila uporabljena bolj napredna metoda podaljševanja besedila. Metoda vzame manjše podnize besedila ter naredi stik med začetno besedo in podnizom. Tako dobljena beseda je bolj verjetna, saj je večja verjetnost, da se manjši deli besede ponovijo za razliko od celotne besede. Predlagana metoda podaljševanja besede je prikazana v Algoritmu \ref{alg:Konkatenacija}. Pri tem metoda predpostavi, da je beseda dolga vsaj $3000$ znakov. Ta metoda je primerna za podaljševanje daljših besed, sicer pa je možno metodi spremeniti parameter $i$ in tako prilagoditi metodo drugim besedam.
 
 
 \begin{algorithm}[htb]
 
 \Vhod{Vhodna beseda $T$, velikost $s_{max}$}
 \Izhod{Besedilo $T_0$}
-\caption{Metoda podaljševanja vhodnega besedila}\label{alg:Konkatenacija}
+\caption{Metoda podaljševanja vhodne besede}\label{alg:Konkatenacija}
 {
     {$T_0\leftarrow T$}
 
@@ -52,12 +52,12 @@ V drugem stolpcu Tabele \ref{tab:besedila} so prikazane dolžine besed, ki bodo 
 Predlagana metoda podaljša besedo na velikost $s_{max}$. Ta velikost je lahko dolžina najdaljše besede ali pa je poljubna vrednost, bodisi manjša od dolžine največje besede bodisi večja. Če je beseda daljša od velikosti $s_{max}<|T|$, bo predlagana metoda skrajšala besedo na $|T_0|=s_{max}$. Za potrebe testiranja smo se odločili, da je $s_{max}=25000000$, kar je več kot zadostna dolžina.
 
 \subsection{Metoda testiranja}
-Strukturna primerjava je prikazana s psevdokodo na Algoritmu \ref{alg:metodaTest}. Vsak test v primerjavi se izvede petkrat, da se zmanjša vpliv drugih procesov na rezultate testiranja. Iz psevdokode opazimo, da je primerjava poizvedb  bila storjena za poizvedbo $\Prisotnost{T}{P}$, saj je pogosto vprašanje v biologiji prisotnost gena (vzorcev $P$) v DNK sekvenci (vhodna beseda $T$), ne pa natančen položaj tega gena ali števila ponovitev gena v DNK sekvenci. Poizvedba je bila izdelana za vzorce velikosti 5, 50, 500 in $\log{|T|}$ (na psevdokodi $\log{i}$). Rezultati testiranja so shranjeni v CSV datoteki in vsaka vrstica datoteke, shrani sledeče podatke: podatkovna struktura, velikost vhodne besede, čas izgradnje, čas iskanja vzorca dolžine 5, čas iskanja vzorca dolžine 50, čas iskanja vzorca dolžine 500, čas iskanja vzorca dolžine $\log{|T|}$ ter velikost podatkovne strukture. Velikost bo dodana ročno iz podatkov pridobljenih s pomnilniškim profilerjem (angl. \textit{memory profiler}). 
+Strukturna primerjava je prikazana s psevdokodo na Algoritmu \ref{alg:metodaTest}. Vsak test v primerjavi se je izvedel petkrat, da se je zmanjšal vpliv drugih procesov na rezultate testiranja. Iz psevdokode opazimo, da je bila primerjava poizvedb storjena za poizvedbo $\Prisotnost{T}{P}$, saj je pogosto vprašanje v biologiji prisotnost gena (vzorcev $P$) v DNK sekvenci (vhodna beseda $T$), ne pa natančen položaj tega gena ali števila ponovitev gena v DNK sekvenci. Poizvedba je bila izdelana za vzorce velikosti 5, 50, 500 in $\log{|T|}$ (na psevdokodi $\log{i}$ v vrstici \ref{alg_line:log}). Rezultati testiranja so bili shranjeni v seznamu in vsaka rezultat hrani sledeče podatke: tip podatkovne strukture, velikost vhodne besede, čas gradnje, čas iskanja vzorca dolžine 5, čas iskanja vzorca dolžine 50, čas iskanja vzorca dolžine 500, čas iskanja vzorca dolžine $\log{|T|}$ ter velikost podatkovne strukture. Velikost bo dodana iz podatkov pridobljenih s pomnilniškim profilerjem (angl. \textit{memory profiler}), zato je ni navedene v vrstici \ref{alg_line:shrani}. 
 
 \begin{algorithm}[htb]
 
 \Vhod{Vhodna beseda $T$, število znakov v najdaljšem testiranem nizu $i_{max}$}
-\Izhod{CSV datoteka z izračunanimi časi}
+\Izhod{Tabela z izračunanimi časi}
 \caption{Psevdokoda primerjave indeksov vhodne besede $T$}\label{alg:metodaTest}
 {
     {$i \leftarrow 500$}
@@ -66,45 +66,43 @@ Strukturna primerjava je prikazana s psevdokodo na Algoritmu \ref{alg:metodaTest
 
         \Za{$S\in\{ST, SA, SA+LCP, CST\}$}{
             \Za{$k=1,\dots,5$}{
-                {$\textit{start}\leftarrow \textit{čas}()$}
+                {$\textit{start}\leftarrow \textit{čas}()$}  \Comment*[r]{\v{}\v{}\v{} testiranje}
 
                 {$\textit{Izgradi}(S,T[1:i-1]\cdot\$)$}
 
-                {$\textit{konec}\leftarrow \textit{čas}()$}
+                {$\textit{konec}\leftarrow \textit{čas}()$} \Comment*[r]{\^{}\^{}\^{} testiranje}
 
                 {$t_{Izg}\leftarrow \textit{konec} - \textit{start}$}
 
-                \Dokler{$j \le 500$}{
-                    {$\textit{start}\leftarrow \textit{čas}()$}
+                \Za{$j\in\{5, 50, 500 \}$}{
+                    {$\textit{start}\leftarrow \textit{čas}()$} \Comment*[r]{vvv testiranje}
 
                     {$\Prisotnost{S}{T[i:i+j]}$}
 
-                    {$\textit{konec}\leftarrow \textit{čas}()$}
-
-                    {$j\leftarrow j*10$}
+                    {$\textit{konec}\leftarrow \textit{čas}()$} \Comment*[r]{\^{}\^{}\^{} testiranje}
 
                     {$t_{j} \leftarrow \textit{konec} - \textit{start}$}
                 }
 
-                {$j\leftarrow \log{i}$}
+                {$j\leftarrow \log{i}$\label{alg_line:log}}
 
-                {$\textit{start}\leftarrow \textit{čas}()$}
+                {$\textit{start}\leftarrow \textit{čas}()$} \Comment*[r]{\v{}\v{}\v{} testiranje}
 
                 {$\Prisotnost{S}{T[i:i+j]}$}
 
-                {$\textit{konec}\leftarrow \textit{čas}()$}
+                {$\textit{konec}\leftarrow \textit{čas}()$} \Comment*[r]{\^{}\^{}\^{} testiranje}
 
                 
 
                 {$t_{log} \leftarrow \textit{konec} - \textit{start}$}
 
-                {$\textit{Shrani}(S,i,t_{Izg},t_{5},t_{50},t_{500},t_{log}$)}
+                {$\textit{Shrani}(S,i,t_{Izg},t_{5},t_{50},t_{500},t_{log}$)\label{alg_line:shrani}}
 
                 {$\textit{Izbriši}(S)$}
             }
         }        
         
-        {$i \leftarrow i+500$}
+        {$i \leftarrow 2\cdot i$}
         
     } 
     
