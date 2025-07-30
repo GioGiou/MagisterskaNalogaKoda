@@ -1,14 +1,14 @@
-Priponska drevesa so posebna implementacija številskega drevesa, pri čemer vsak list predstavlja posamezno pripono besede. Na ta način priponsko drevo ne predstavlja zgolj vhodne besede $T$ dolžine $n$, ki je sestavljeno iz znakov abecede $\Sigma$ in je shranjena v pomnilniku kot polje črk \texttt{T[1:n]}, ampak zakodira tudi strukturo besede. Zato se pogosto uporabi za indeksiranje besede in posledično iskanja vzorcev v njej. Vzorec $P[1:m]$ se nahaja v besedi $T$, če obstaja podniz $T[i:j]$, za katerega velja $P[1:m]=T[i:j]$. Z uporabo indeksa je iskanje prisotnosti vzorca $P$ dolžine $m$ v besedi primerljivo s KMP algoritmom. KMP algoritmom potrebuje $O(n+m)$ časa za preveriti, ali se vzorec nahaja v besedi. Za razliko od KMP algoritma je prednost uporabe priponskega drevesa, da lahko iščemo različne vzorcev v isti besedi $T$. Za najti več vzorcev v priponskem drevesu je potrebno: $O(n)$ časa za izgradnjo priponskega drevesa ter $O(m)$ časa za vsak iskani vzorec. Pri iskanju več vzorcev v besedi $T$ algoritem KMP potrebuje $O(n+m)$ časa za vsak iskan vzorec \cite{Gusfield1997,KMP}.
+Priponska drevesa so posebna implementacija številskega drevesa, pri čemer vsak list predstavlja posamezno pripono besede. Na ta način priponsko drevo ne predstavlja zgolj vhodne besede $T$ dolžine $n$, ki je sestavljeno iz znakov abecede $\Sigma$ in je shranjena v pomnilniku kot polje črk \texttt{T[1:n]}, ampak zakodira tudi strukturo besede. Zato se pogosto uporabljajo za indeksiranje besede in posledično iskanja vzorcev v njej. Vzorec $P[1:m]$ se nahaja v besedi $T$, če obstaja podniz $T[i:j]$, za katerega velja $P[1:m]=T[i:j]$. Z uporabo indeksa je iskanje prisotnosti vzorca $P$ dolžine $m$ v besedi primerljivo s KMP algoritmom. KMP algoritem potrebuje $O(n+m)$ časa za preverjanje, ali se vzorec nahaja v besedi. Za razliko od KMP algoritma je prednost uporabe priponskega drevesa, da lahko iščemo različne vzorce v isti besedi $T$. Za iskanje več vzorcev priponskem drevesu je potrebno: $O(n)$ časa za izgradnjo priponskega drevesa ter $O(m)$ časa za vsak iskani vzorec. Pri iskanju več vzorcev v besedi $T$ algoritem KMP potrebuje $O(n+m)$ časa za vsak iskan vzorec \cite{Gusfield1997,KMP}.
 
 
 %
 Nad priponskim drevesom lahko definiramo funkcijo $\Niz{v}$. Funkcija vrne niz, ki je pridobljen s stikom podnizov na povezavah na poti od korena do vozlišča $v$.
-Torej priponsko drevo nad besedo $T$, ki je niz nad abecedo $\Sigma$, definiramo na sledeči način \cite{Gusfield1997}:
+Torej priponsko drevo nad besedo $T$, ki je niz nad abecedo $\Sigma$, definiramo na naslednji način \cite{Gusfield1997}:
 
 \begin{defi}\label{def:priposkoDrevo}
-    Priponsko drevo nad nizom $T$ dolžine $n$ je številsko drevo, ki zadošča sledečim zahtevam:
+    Priponsko drevo nad nizom $T$ dolžine $n$ je številsko drevo, ki zadošča naslednjim zahtevam:
     \begin{enumerate}
-        \item drevo ima natanko $n$ listov oštevilčenih s števili med $1$ in $n$, ki se shranjenijo v polju $indeks$,
+        \item drevo ima natanko $n$ listov oštevilčenih s števili med $1$ in $n$, ki so shranjeni v polju $indeks$,
         \item vsako notranje vozlišče, razen korena, ima vsaj dva otroka,
         \item vsaka povezava predstavlja neprazni podniz besede $T$,
         \item ne obstajata %dve
@@ -23,7 +23,7 @@ Torej priponsko drevo nad besedo $T$, ki je niz nad abecedo $\Sigma$, definiramo
 
 %POsledično so pripone shranjene v listih
 
-Primer priponskega drevesa besede »KOKOŠ« je prikazan na Sliki \ref{fig:PriponskoDrevo}. Znak »\$«, ki predstavlja konec besedila, omogoča bistveno poenostavitev podatkovne strukture, saj tako ni nobena pripona predpona druge pripone. Posledično je vsaka pripona shranjena v listu priponskega drevesa. V primeru, predstavljenem na Sliki \ref{fig:PriponskoDrevo}, znak »\$« ne bi bil potreben, ker že znak »Š« jasno določi vse pripone besede »KOKOŠ«. Da zagotovimo, da vse so vse pripone shranjene v listih, se besedi na konec pripne znak »\$«. Torej bo v nadaljevanju magistrske naloge znak $T[n]=\$$.
+Primer priponskega drevesa besede »KOKOŠ« je prikazan na Sliki \ref{fig:PriponskoDrevo}. Znak »\$«, ki predstavlja konec besedila, omogoča bistveno poenostavitev podatkovne strukture, saj tako ni nobena pripona predpona druge pripone. Posledično je vsaka pripona shranjena v listu priponskega drevesa. V primeru, predstavljenem na Sliki \ref{fig:PriponskoDrevo}, znak »\$« ne bi bil potreben, ker že znak »Š« jasno določi vse pripone besede »KOKOŠ«. Da zagotovimo, da so vse pripone shranjene v listih, se besedi na konec pripne znak »\$«. Torej bo v nadaljevanju magistrske naloge znak $T[n]=\$$.
 
 \begin{figure}[tb]
     \begin{center}
@@ -42,7 +42,7 @@ Primer priponskega drevesa besede »KOKOŠ« je prikazan na Sliki \ref{fig:Pripo
 %\end{defi}
 %
 %Iz Definicije \ref{def:Globina} je vidno, da sta v globino všteta tudi vozlišče $v$ ter koren drevesa. 
-Ker povezave v priponskih drevesih predstavljajo podnize v besedi $T$, se lahko nad priponskimi drevesi definira tudi črkovna globina vozliča.
+Ker povezave v priponskih drevesih predstavljajo podnize v besedi $T$, se lahko nad priponskimi drevesi definira tudi črkovna globina vozlič.
 
 
 %%Globina vozlišča $D(v)$ je uporabna zgolj, če vsaka povezava predstavlja en sam znak, kar vodi v kršitev druge zahteve Definicije  \ref{def:priposkoDrevo}. V primeru, da povezava predstavlja niz z dvema znakoma, bi se le ta spremenila v dve povezavi, kjer vsaka povezava predstavlja en znak, in vozlišče med njima z enim otrokom, kar krši drugo zahtevo Definicije \ref{def:priposkoDrevo}. Bolj smiselna definicija je besedna globina vozlišča:

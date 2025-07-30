@@ -1,4 +1,4 @@
-Pogosti problem pri obdelavi daljših besed je iskanje vzorcev v njih. V procesiranju naravnih jezikov vlogo vzorca pogosto prevzame iskana beseda naravnega jezika in vlogo vhodne besede pa prevzame besedilo, v katerem želimo iskati besedo. Medtem ko v bioinformatiki vlogo vzorca prevzame specifični gen ali druga DNK sekvenca, pri tem pa je vhodna beseda genomu. 
+Pogosti problem pri obdelavi daljših besed je iskanje vzorcev v njih. V procesiranju naravnih jezikov vlogo vzorca pogosto prevzame iskana beseda naravnega jezika, vlogo vhodne besede pa  prevzame besedilo, v katerem želimo iskati besedo. Medtem ko v bioinformatiki vlogo vzorca prevzame specifični gen ali druga zaporedja DNK, pri tem pa je vhodna beseda genom. 
 
 Ko v besedi $T$ dolžine $n$ iščemo zgolj en vzorec $P$ dolžine $m$, se za iskanje lahko uporabi Knuth–Morris–Pratt (KMP) algoritem s časovno zahtevnostjo $O(n+m)$. V primeru, da se v besedi išče več vzorcev, je smiselno nad besedo zgraditi indeks, recimo priponsko drevo, ki je lahko zgrajeno v času $O(n)$, in nato iskati vzorce. Časovna zahtevnost iskanja vzorca v priponskem drevesu je sorazmerna dolžini vzorca, $O(m)$. Ko je vzorec prisoten v besedi, se vsaj ena pripona besede začne z iskanim vzorcem. 
 Torej se vzorec zagotovo nahaja na začetku sprehoda iz korena proti listom priponskega drevesa, zgrajenega nad besedo. 
@@ -8,7 +8,7 @@ Namen magistrske naloge je preučevanje vpliva kompaktne predstavitve na izgradn
 
 \section{STRUKTURA}\label{sec:struktura}
 
-Magistrska naloga je razdeljena na pet delov. V drugem poglavju bodo predstavljene notacije uporabljene v magistrski nalogi. Predstavljen bodo tudi osnovne podatkovne strukture in operacije nad njimi, ki bodo uporabljene za implementacijo kompaktne predstavitve priponskega drevesa.
+Magistrska naloga je razdeljena na pet delov. V drugem poglavju bodo predstavljene notacije, ki so uporabljene v magistrski nalogi. Predstavljene bodo tudi osnovne podatkovne strukture in operacije nad njimi, ki bodo uporabljene za implementacijo kompaktne predstavitve priponskega drevesa.
 
 V tretjem poglavju naloge bo podrobno predstavljena podatkovna struktura priponsko drevo (angl. \textit{Suffix Tree} oziroma ST). Poleg predstavitve strukture bo v poglavju prikazana tudi metoda, ki sprotno (angl. \textit{on-line}) gradi priponsko drevo v času $O(n)$ ter implementacija poizvedb nad vhodno besedo s pomočjo priponskega drevesa. Zatem sledi v četrtem poglavju predstavitev alternativnega indeksa besedila, priponsko polje (angl. \textit{Suffix Array} oziroma SA). Predstavljena bo tudi metoda izgradnje priponskega polja v $O(n)$ času ter implementacija poizvedb s priponskim poljem.
 
