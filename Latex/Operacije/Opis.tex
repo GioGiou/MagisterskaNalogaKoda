@@ -1,27 +1,29 @@
-Preden se lahko izdela primerjavo podatkovnih struktur je potrebno predstaviti okolje, v katerem bo izdelana primerjava, metoda uporabljena za izdelavo testnih primerov ter sami testni primeri, ki bodo uporabljeni za izdelavo primerjave. V tem podpoglavju bodo prvo predstavljeni testni primeri, za tem bo predstavljena uporabljena testna metoda ter na koncu bo predstavljen stroj in operacijski sistem, ki je uporabljen za izdelavo testiranja. 
+Preden se lahko izdela primerjavo podatkovnih struktur je potrebno predstaviti okolje, v katerem bo izdelana primerjava, metodo, ki bo uporabljena za izdelavo primerjave, ter same testne primere, ki bodo uporabljeni za primerjavo. V tem podpoglavju bodo najprej predstavljeni testni primeri, nato bo predstavljena uporabljena testna metoda ter na koncu bo predstavljen stroj in operacijski sistem, ki sta bila uporabljena za testiranje. 
 
 \subsection{Testni primeri}
 
-Empirična primerjava je bila izdelana nad dvema vhodnima besedama, ki sta prikazani v Tabeli \ref{tab:besedila}. Prva testirana beseda je daljša DNK sekvenca \cite{podatki}, ki je zlepek različnih DNK sekvenc in je označena kot \DNK. Izbrana je bila kot primer vhodne besede, uporabljene v bioinformatiki. Ta vhodna beseda je bila predhodno uporabljena za testiranje implementacije kompaktnega priponskega drevesa od Välimäki idr. \cite{Valimaki2007}. Abeceda $\Sigma$ besede \DNK\ sestoji iz nukleotidov, ki jih označimo z črkami A, C, T in G. Zato smo se odloči, da nukleotide predstavimo kot 7 bitne ASCII znake.
+Empirična primerjava je narejena nad dvema vhodnima besedama, ki sta prikazani v Tabeli \ref{tab:besedila}. Prva testirana beseda je daljše zaporedje DNK \cite{podatki}, ki je zlepek različnih zaporedij DNK in je označena kot \DNK. Izbrana je bila kot primer vhodne besede, ki se uporablja v bioinformatiki. Ta vhodna beseda je bila predhodno uporabljena za testiranje implementacije kompaktnega priponskega drevesa od Välimäki idr. \cite{Valimaki2007}. Abeceda $\Sigma$ besede \DNK\ je sestavljena iz nukleotidov, ki jih označimo s črkami A, C, T in G. Zaradi lažje implementacije smo se odločili, da nukleotide predstavimo kot 7-bitne ASCII znake, namesto 3-bitnega kodiranja (dodatni bit je potreben za predstavitev konca besede).
 
 \begin{table}[htb]
     \caption{Primerjava besedil, ki smo jih uporabili za primerjavo različnih indeksov besed}
     \label{tab:besedila}
     \centering
     \begin{tabular}{rccc}
-        Ime testne besede& Število znakov & Velikost abecede & Velikost na disku \\
-        &  &   & [MB]\\
+        Ime testne besede, & Število znakov & Velikost abecede & Velikost na disku \\
+        Oznaka besede&  &   & [MB]\\
          \hline
-        Ivan Cankar, Na klancu \cite{podatkiNaKlancu}& 317803 & 53 & $25,851$ \\
-        DNK sekvenca \cite{podatki}&  52428800& 5 & $26,767$ \\
+        Ivan Cankar, Na klancu \cite{podatkiNaKlancu}, & 317803 & 53 & $25,851$ \\
+        \NK\ &  &   & \\
+        zaporedje DNK \cite{podatki}, &  52428800& 5 & $26,767$ \\
+        \DNK\ &  &   & \\
     \end{tabular}    
 \end{table}
 
-Druga testirana beseda je Cankarjev kratki roman Na klancu \cite{podatkiNaKlancu}, ki je označen kot \NK. Roman je bil izbran, saj predstavlja tipično vhodno besedo v naravnem jeziku, ki je v tem primeru slovenščina. Abeceda $\Sigma$ besed \NK\ sestoji iz črk slovenske abecede (velikih in malih), presledkov in ločil. Ker smo se odločili, da predstavimo \DNK\ z ASCII znaki, je bilo potrebno \NK\ pretvoriti v 7 bitne ASCII znake. Zato so bili vsi ne ASCII znaki odstranjeni oziroma zamenjani z ASCII alternativami. Na primer znak, ki predstavlja '...', je bil zamenjan s tremi pikami, vse črke z naglasi (kot so strešice, ostrivci ter drugi) so bile zamenjani z osnovnim znakom, zato š postane s in é postane e. Odstranjene so bile tudi vse prazne vrstice ter ločila poglavij, ki so bila označena z '***', saj le-te ne vplivajo na vsebino besedila. Odstranjeni so bili tudi vsi simboli, ki niso vidni bralcu, prisotni v besedilu. Na ta način se je začetno besedilo znižalo iz dolžine 319843 znakov na 317803.
+Druga testirana beseda je Cankarjev kratki roman Na klancu \cite{podatkiNaKlancu}, ki je označen kot \NK. Roman je bil izbran, saj predstavlja tipično vhodno besedo v naravnem jeziku, ki je v tem primeru slovenščina. Abeceda $\Sigma$ besede \NK\ sestoji iz črk slovenske abecede (velikih in malih), presledkov in ločil. Ker smo se odločili, da predstavimo \DNK\ z ASCII znaki, je bilo potrebno \NK\ pretvoriti v 7-bitne ASCII znake. Zato so bili vsi ne-ASCII znaki odstranjeni oziroma zamenjani z njihovimi ASCII alternativami. Na primer znak, ki predstavlja \enquote{...}, je bil zamenjan s tremi pikami, vse črke z naglasi (kot so strešice, ostrivci ter drugi) so bile zamenjane z osnovnim znakom, zato š postane s in é postane e. Odstranjene so bile tudi vse prazne vrstice ter ločila poglavij, ki so bila označena z \enquote{***}, saj le-ta ne vplivajo na vsebino besedila. Odstranjeni so bili tudi vsi simboli, ki niso vidni bralcu, prisotni v besedilu. Na ta način se je začetna dolžina besedila znižala iz 319843 znakov na 317803.
 
 \paragraph{Podaljševanje besedila.}
 
-V drugem stolpcu Tabele \ref{tab:besedila} so prikazane dolžine besed, ki sta bili uporabljeni za testiranje. Pri tem se opazi, da je beseda \NK\ krajša od besede \DNK. Zato jo je bilo potrebno podaljšati. Ker je malo verjetno, da se vhodna beseda ponovi $k$-krat, dokler ne doseže primerne velikosti, predvsem v naravnem jeziku, je bila uporabljena bolj napredna metoda podaljševanja besedila. Metoda vzame manjše podnize besedila ter naredi stik med začetno besedo in podnizom. Tako dobljena beseda je bolj verjetna, saj je večja verjetnost, da se manjši deli besede ponovijo za razliko od celotne besede. Predlagana metoda podaljševanja besede je prikazana v Algoritmu \ref{alg:Konkatenacija}. Pri tem metoda predpostavi, da je beseda dolga vsaj $3000$ znakov. Ta metoda je primerna za podaljševanje daljših besed, sicer pa je možno metodi spremeniti parameter $i$ in tako prilagoditi metodo drugim besedam.
+V drugem stolpcu Tabele \ref{tab:besedila} so prikazane dolžine besed, ki se uporabljajo za testiranje. Pri tem opazimo, da je beseda \NK\ krajša od besede \DNK. Zato jo je potrebno podaljšati. Ker je malo verjetno, da se vhodna beseda ponovi $k$-krat, dokler ne doseže primerne velikosti, predvsem v naravnem jeziku, smo uporabili naprednejša metoda podaljševanja besedila. Metoda vzame manjše podnize besedila ter naredi stik med začetno besedo in podnizom. Tako dobljena beseda je bolj verjetna, saj je večja verjetnost, da se manjši deli besede ponovijo, za razliko od celotne besede. Predlagana metoda podaljševanja besede je prikazana v Algoritmu \ref{alg:Konkatenacija}. Pri tem metoda predpostavi, da je beseda dolga vsaj $3000$ znakov. Ta metoda je primerna za podaljševanje daljših besed, sicer pa je mogoče v metodi spremeniti parameter $i$ in tako prilagoditi metodo drugim besedam.
 
 
 \begin{algorithm}[htb]
@@ -52,84 +54,65 @@ V drugem stolpcu Tabele \ref{tab:besedila} so prikazane dolžine besed, ki sta b
 Predlagana metoda podaljša besedo na velikost $s_{max}$. Ta velikost je lahko dolžina najdaljše besede ali pa je poljubna vrednost, bodisi manjša od dolžine največje besede bodisi večja. Če je beseda daljša od velikosti $s_{max}<|T|$, bo predlagana metoda skrajšala besedo na $|T_0|=s_{max}$. Za potrebe testiranja smo se odločili, da je $s_{max}=25000000$, kar je več kot zadostna dolžina.
 
 \subsection{Metoda testiranja}
-Metoda testiranja je prikazana s psevdokodo na Algoritmu \ref{alg:metodaTest}. Vsak test v primerjavi se je izvedel petkrat, da se je zmanjšal vpliv drugih procesov na rezultate testiranja. Iz psevdokode opazimo, da je bila primerjava poizvedb storjena za poizvedbo $\Prisotnost{T}{P}$, saj je pogosto vprašanje v biologiji prisotnost gena (vzorcev $P$) v DNK sekvenci (vhodna beseda $T$), ne pa natančen položaj tega gena ali števila ponovitev gena v DNK sekvenci. Poizvedba je bila izdelana za vzorce velikosti 5, 50, 500 in $\log{|T|}$ (na psevdokodi $\log{i}$ v vrstici \ref{alg_line:log}). Rezultati testiranja so bili shranjeni v seznamu in vsaka rezultat hrani sledeče podatke: tip podatkovne strukture, velikost vhodne besede, čas gradnje, čas iskanja vzorca dolžine 5, čas iskanja vzorca dolžine 50, čas iskanja vzorca dolžine 500, čas iskanja vzorca dolžine $\log{|T|}$ ter velikost podatkovne strukture, ko bo dodana iz podatkov pridobljenih s pomnilniškim profilerjem (angl. \textit{memory profiler}), zato je ni navedene v vrstici \ref{alg_line:shrani}. 
+Metoda testiranja je prikazana s psevdokodo na Algoritmu \ref{alg:metodaTest}. Najprej se izgradi podatkovna struktura $PS$ ter se izmeri čas gradnje. To je v psevdokodi prikazano v vrstici \ref{alg_line:izg}. Nato pa se izmeri še čas, ki je potreben za poizvedbo $\Prisotnost{T}{P}$ s pomočjo podatkovne strukture $PS$, prikazano v vrstici \ref{alg_line:log} Algoritma \ref{alg:metodaTest}. Poizvedba $\Prisotnost{T}{P}$ je izbrana, saj je v biologiji pogosto vprašanje prisotnost gena (vzorcev $P$) v zaporedju DNK (vhodna beseda $T$), ne pa natančen položaj tega gena ali število ponovitev gena v zaporedju DNK. Čas poizvedbe se meri za vzorce velikosti 5, 50, 500 in $\log{n}$ znakov. Preden se podatkovna struktura $PS$ izbriše iz pomnilnika, se rezultati testiranja shranijo v seznam, kot je prikazano v vrstici \ref{alg_line:shrani} Algoritma \ref{alg:metodaTest}. Da se zmanjša vpliv drugih procesov na rezultate testiranja, se vsak test zažene petkrat.
+
 
 \begin{algorithm}[htb]
 
-\Vhod{Vhodna beseda $T$, število znakov v najdaljšem testiranem nizu $i_{max}$}
+\Vhod{Vhodna beseda $T$, število znakov v najdaljšem testiranem nizu $n_{max}$}
 \Izhod{Seznam rezultatov testiranja}
 \caption{Psevdokoda primerjave indeksov vhodne besede $T$}\label{alg:metodaTest}
 {
-    {$i \leftarrow 500$}
+    {$n \leftarrow 500$}
     
-    \Dokler{$i \le i_{max}$}{
+    \Dokler{$n \le n_{max}$}{
 
-        \Za{$S\in\{ST, SA, SA+LCP, CST\}$}{
-            \Za{$k=1,\dots,5$}{
-                {$\textit{start}\leftarrow \textit{čas}()$}  \Comment*[r]{\v{}\v{}\v{} testiranje}
+        \Za{$PS\in\{ST, SA, SA+LCP, CST\}$}{
+            \Za{$i=1,\dots,5$}{
+                {$s\leftarrow \text{čas}()$; $\text{Izgradi}(PS,T[1:n-1]\cdot\$)$; $k\leftarrow \text{čas}()$\label{alg_line:izg}}
 
-                {$\textit{Izgradi}(S,T[1:i-1]\cdot\$)$}
+                {$t_{Izg}\leftarrow k - s$}
 
-                {$\textit{konec}\leftarrow \textit{čas}()$} \Comment*[r]{\^{}\^{}\^{} testiranje}
+                \Za{$m\in\{5, 50, 500, \log{n}\}$\label{alg_line:log}}{
+                    {$s\leftarrow \text{čas}()$; $\Prisotnost{PS}{T[n:n+m]}$; $k\leftarrow \text{čas}()$}
 
-                {$t_{Izg}\leftarrow \textit{konec} - \textit{start}$}
-
-                \Za{$j\in\{5, 50, 500 \}$}{
-                    {$\textit{start}\leftarrow \textit{čas}()$} \Comment*[r]{\v{}\v{}\v{} testiranje}
-
-                    {$\Prisotnost{S}{T[i:i+j]}$}
-
-                    {$\textit{konec}\leftarrow \textit{čas}()$} \Comment*[r]{\^{}\^{}\^{} testiranje}
-
-                    {$t_{j} \leftarrow \textit{konec} - \textit{start}$}
+                    {$t_{m} \leftarrow k - s$}
                 }
 
-                {$j\leftarrow \log{i}$\label{alg_line:log}}
+                {$\text{Shrani}(PS,n,t_{Izg},t_{5},t_{50},t_{500},t_{log}$)\label{alg_line:shrani}}
 
-                {$\textit{start}\leftarrow \textit{čas}()$} \Comment*[r]{\v{}\v{}\v{} testiranje}
-
-                {$\Prisotnost{S}{T[i:i+j]}$}
-
-                {$\textit{konec}\leftarrow \textit{čas}()$} \Comment*[r]{\^{}\^{}\^{} testiranje}
-
-                
-
-                {$t_{log} \leftarrow \textit{konec} - \textit{start}$}
-
-                {$\textit{Shrani}(S,i,t_{Izg},t_{5},t_{50},t_{500},t_{log}$)\label{alg_line:shrani}}
-
-                {$\textit{Izbriši}(S)$}
+                {$\text{Izbriši}(PS)$}
             }
         }        
         
-        {$i \leftarrow 2\cdot i$}
+        {$n \leftarrow 2\cdot n$}
         
     } 
     
 }
 \end{algorithm}
 
-\subsection{Stroj in operacijski sistem}
-Za izdelavo primerjav podatkovnih struktur smo uporabili računalnik s procesorjem Intel Core i3 5005U z dvema jedroma in štirimi nitmi ter s taktom $1,9$ GHz. Računalnik ima na razpolago 4 GB delovnega pomnilnika, od katerega je ob zagonu zasedenega $1,35$ GB z operacijskim sistemom ter emulatorjem terminala (angl. \textit{terminal emulator}). Poleg delovnega pomnilnika ima računalnik še $8$ GB Swap prostora na trdem disku, ki je namenjen shranjevanju neuporabljenih pomnilniških strani v primeru prezasedenega delovnega pomnilnika in posledično sproščanju le-tega. Operacijski sistem računalnika je Fedora 42 in uporabljen Linux kernel je 6.14.11-300.
+Poleg testiranja čas gradnje podatkovnih struktur in poizvedb v njih želimo izmeriti tudi njihovo velikost. Velikost podatkovne strukture se ne da izmeriti brez uporabe pomnilniškim profilerjem (angl. \textit{memory profiler}). Le-ta bo naknadno dodana k rezultatom ostalih meritev. Pri tem bomo merili največji zasedeni prostor v času testiranja podatkovne strukture $PS$ za besedo dolžine $n$.
 
-Primerjava je bila izdelana v programskem jeziku C++\footnote{Koda je dostopna na povezavi \url{https://github.com/GioGiou/MagisterskaNalogaKoda}.}. Zato so časi, potrebni za izgradnjo struktur ter poizvedb v njih, bili izmerjeni z beleženjem trenutnega časa pred začetkom, ki smo ga shranimo v spremenljivko \verb|start|, in po koncu operacije, ki smo ga shranimo v spremenljivko \verb|konec|. Meritve so bile implementirane s funkcijo \verb|high_resolution_clock::now()|, ki je del standardne knjižnice programskega jezika C++ in vrne natančen čas trenutka, v katerem se je funkcija izvedela. Čas izvajanja je bil naračuna kot razlika med časom ob koncu izvajanja in časom ob začetku izvajanja operacije, kar se v C++ stori s funkcijo \verb|duration_cast<nanoseconds>(konec - start)| \verb|.count()|. Za izgradnjo podatkovnih struktur so bile uporabljene sledeče knjižnice: za priponsko drevo je bila uporabljena implementacija iz knjižnice \cite{ganeshk13}, za kompaktna priponska drevesa je bila uporabjena implementacija iz knjižnice SDSL \cite{gbmp2014sea}, za priponska polja pa je bila uporabljena implementacija iz knjižnice \cite{Grebnov2025}. Le-ta zgradi priponsko polje v $O(n)$ časa z algoritmom, ki sta ga predstavila Timoshevskaya in Feng \cite{Timoshevskaya2014}. Algoritem je izboljšava predhodno predstavljenega algoritma Ko in Aluru \cite{Ko2005}. Pri tem pa je bila uporabljena različica LCP polja imenovana $Q-LCP$ polje, ki je bila predstavljena v podpoglavju \ref{sec:SAPoizvedbe}.
+\subsection{Stroj in operacijski sistem}
+Za izdelavo primerjav podatkovnih struktur uporabljamo računalnik s procesorjem Intel Core i3 5005U z dvema jedroma in štirimi nitmi ter s taktom $1,9$ GHz. Računalnik ima 4 GB delovnega pomnilnika, od katerega je ob zagonu zasedenih $1,35$ GB z operacijskim sistemom in emulatorjem terminala (angl. \textit{terminal emulator}). Poleg delovnega pomnilnika ima računalnik še $8$ GB Swap prostora na trdem disku, ki je namenjen shranjevanju neuporabljenih pomnilniških strani v primeru prezasedenega delovnega pomnilnika in posledično sproščanja le-tega. Operacijski sistem računalnika je Fedora 42 in uporabljen je Linux kernel 6.14.11-300.
+
+Primerjava smo izdelali v programskem jeziku C++\footnote{Koda je dostopna na povezavi \url{https://github.com/GioGiou/MagisterskaNalogaKoda}.}. Zato čase, potrebne za izgradnjo struktur in poizvedb v njih, merimo z beleženjem trenutnega časa pred začetkom, ki se shrani v spremenljivko \verb|start|, in po koncu operacije, ki se shrani v spremenljivko \verb|konec|. Meritve so implementirane s funkcijo \verb|high_resolution_clock::now()|, ki je del standardne knjižnice programskega jezika C++ in vrne natančen čas trenutka, v katerem se je funkcija izvedla. Čas izvajanja izračunamo kot razlika med časom ob koncu izvajanja in časom ob začetku izvajanja operacije, kar se v C++ izvede s funkcijo \verb|duration_cast<nanoseconds>(konec - start)| \verb|.count()|. Za izgradnjo podatkovnih struktur uporabljamo naslednje knjižnice: za priponsko drevo je uporabljena implementacija iz knjižnice \cite{ganeshk13}, za  kompaktno priponsko drevo je uporabjena implementacija iz knjižnice SDSL \cite{gbmp2014sea}, za priponska polja pa je uporabljena implementacija iz knjižnice \cite{Grebnov2025}. Slednja zgradi priponsko polje v $O(n)$ času z algoritmom, ki sta ga predstavila Timoshevskaya in Feng \cite{Timoshevskaya2014}. Algoritem je izboljšava predhodno predstavljenega algoritma Ko in Aluru \cite{Ko2005}. Uporabljamo pa različica $LCP$, $Q-LCP$ polje, ki je bila predstavljena v podpoglavju \ref{sec:SAPoizvedbe}.
 %Knjižnica \cite{Grebnov2025} sicer podpira izgradnjo LCP strukture, ki je bila predstavljena v podpoglavju \ref{sec:STsimulacija}, ampak nima dodatne podatkovne strukture Fischer-Heun za operacijo $rmq$ v konstantnem času \cite{Fischer2007}.
 
-Poleg časovne zahtevnosti gradnje in poizvedb v podatkovnih strukturah nas zanima, koliko prostora zasede posamična podatkovna struktura na delovnem pomnilniku. In sicer nas zanima največji zaseden prostor v času izgradnje posamične podatkovne strukture. Le-ta je bila izmerjena z uporabo pomnilniškega profilerja. Uporabljen je bil pomnilniški profiler Bytehound \cite{Bytehound2024}, saj omogoča grafični prikaz porabe pomnilnika v času izvajanja programa.
+Poleg časovne zahtevnosti gradnje in poizvedb v podatkovnih strukturah nas zanima, koliko prostora zasede posamezna podatkovna struktura v delovnem pomnilniku. Zanima nas največji zaseden prostor v času testiranja posamezne podatkovne strukture. Tega merimo z uporabo pomnilniškega profilerja. Uporabljamo pomnilniški profiler Bytehound \cite{Bytehound2024}, saj omogoča grafični prikaz porabe pomnilnika v času izvajanja programa.
 
-Ker je primerjava izdelana v C++, je potrebno kodo prevesti v izvršljivo datoteko, kar je bilo strojeno s prevajalnikom GCC 15.1.1 s sledečim ukazom:
-\begin{lstlisting}[language=bash]
-    g++ -std=c++11 -O3 -DNDEBUG -I ./include -L ./lib // 
-    main.cpp -o main -lsdsl -ldivsufsort //
-    -ldivsufsort64 -lsuffix -lsais
+Ker je primerjava izdelana v C++, je potrebno kodo prevesti v izvršljivo datoteko, kar storimo s prevajalnikom GCC 15.1.1 s sledečim ukazom:
+\begin{lstlisting}
+    g++ -std=c++11 -O3 -DNDEBUG -I ./include -L ./lib main.cpp -o //
+    main -lsdsl -ldivsufsort -ldivsufsort64 -lsuffix -lsais
 \end{lstlisting}
-Pri prevajanju programa je uporabljenih nekaj zastavic, ki določajo vrednosti parametrov prevajalnika. Večina zastavic je vezana na uvažanje knjižnic v prevajanje, in sicer \verb|-I ./include| nastavi pot do zaglavnih datotek (angl. \textit{header files}), \verb|-L ./lib| nastavi pot do strojne kode knjižnice ter zastavice \verb|-lsdsl|, \verb|-ldivsufsort|, \verb|-ldivsufsort64|,  \verb|-lsais| in \verb|-lsuffix| uvozijo potrebne knjižnice za izgradnjo izvršljive datoteke.
-Zastavica \verb|-O3| določa nivo optimizacije izvršljive datoteke. Ker se uporablja profiler, je potrebo pred začetkom testiranja indeksov besed zagnati tudi profiler, kar je storjeno z ukazom:
-\begin{lstlisting}[language=bash]
-    LD_PRELOAD=~/bytehound/libbytehound.so ./main // 
-    ./test/Test.file 
+Pri prevajanju programa se uporablja nekaj zastavic, ki določajo vrednosti parametrov prevajalnika. Večina zastavic se nanaša na uvoz knjižnic v prevajalni proces, in sicer \verb|-I ./include| nastavi pot do zaglavnih datotek (angl. \textit{header files}), \verb|-L ./lib| nastavi pot do strojne kode knjižnice in zastavice \verb|-lsdsl|, \verb|-ldivsufsort|, \verb|-ldivsufsort64|,  \verb|-lsais| in \verb|-lsuffix| uvozijo potrebne knjižnice za izgradnjo izvršljive datoteke.
+Zastavica \verb|-O3| določa raven optimizacije izvršljive datoteke. Ker uporabljamo profiler, je potrebo pred začetkom testiranja indeksov besed zagnati tudi profiler. Test izvedemo z ukazom:
+\begin{lstlisting}
+    LD_PRELOAD=~/bytehound/libbytehound.so ./main ./test/Test.file 
 \end{lstlisting}
-Program se požene ter se mu poda kot prvi parameter ime datoteke s testnimi podatki. Ker se uporablja probilier za izmeriti zaseden prostor, se v spremenljivko okolja \verb|LD_PRELOAD| shrani profiler kot deljeni objekt (angl. \textit{shared object}), ki je zagnan pred začetkom programa. Stopnja profiliranja pa je shranjena v spremenljivki okolja \verb|MEMORY_PROFILER_LOG| in je bila nastavljena na vrednost \verb|info|.
+Program poženemo ter se mu kot prvi parameter podamo ime datoteke s testnimi podatki. Ker se uporablja profiler za merjenje zasedenega prostora, se v spremenljivko okolja \verb|LD_PRELOAD| shrani profiler kot deljeni objekt (angl. \textit{shared object}), ki se zažene pred začetkom programa. Stopnja profiliranja pa shranimo v spremenljivki okolja \verb|MEMORY_PROFILER_LOG| in jo nastavimo na vrednost \verb|info|.
 
 
 
