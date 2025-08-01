@@ -27,9 +27,12 @@ dataTidy %>%ggplot() +
   stat_summary(fun=mean,geom = 'line')+
   scale_x_continuous(trans = log10_trans(), breaks = trans_breaks("log10", function(x) 10^x),labels = function(x) x/1000) +
   theme_minimal() +
-  labs(y="Čas iskanja v indeksih besede [ns]",x="Dolžina besede (x1000)")+
+  labs(y="Čas iskanja z indeksom besede [ns]",x="Dolžina besede [x1000 znakov]")+
   scale_y_continuous(trans = log10_trans(), breaks = trans_breaks("log10", function(x) 10^x),labels = trans_format("log10", math_format(10^.x)))+
-  scale_color_discrete(name = "Vrsta indeksa besede:", labels= c(CST="Kompaktno priponsko drevo", St="Priponsko drevo",SA="Priponsko polje","SA+LCP"="Priponsko polje z QLCP"))+
+  scale_color_discrete(name = "Vrsta indeksa besede:",
+                       labels= c(CST="Kompaktno priponsko drevo", St="Priponsko drevo",
+                                 SA="Priponsko polje","SA+LCP"="Priponsko polje z QLCP"),
+                       breaks=c("SA","SA+LCP","St","CST"))+
   facet_grid(scales = "free_y",vars(PatternLength),labeller = as_labeller(c(tFind5="Vzorec velikosti 5", tFind50="Vzorec velikosti 50", tFind500="Vzorec velikosti 500",tFindLog="Vzorec velikosti log(n)")))+
   theme(legend.position = "bottom", panel.border = element_rect(colour = "gray60", fill = NA),
         strip.text = element_text(size = 9,face="bold"))
@@ -41,9 +44,12 @@ dataTidySLO %>%ggplot() +
   stat_summary(fun=mean,geom = 'line')+
   scale_x_continuous(trans = log10_trans(), breaks = trans_breaks("log10", function(x) 10^x),labels = function(x) x/1000) +
   theme_minimal() +
-  labs(y="Čas iskanja v indeksih besede [ns]",x="Dolžina besede (x1000)")+
+  labs(y="Čas iskanja z indeksom besede [ns]",x="Dolžina besede [x1000 znakov]")+
   scale_y_continuous(trans = log10_trans(), breaks = trans_breaks("log10", function(x) 10^x),labels = trans_format("log10", math_format(10^.x)))+
-  scale_color_discrete(name = "Vrsta indeksa besede:", labels= c(CST="Kompaktno priponsko drevo", St="Priponsko drevo",SA="Priponsko polje","SA+LCP"="Priponsko polje z QLCP"))+
+  scale_color_discrete(name = "Vrsta indeksa besede:",
+                       labels= c(CST="Kompaktno priponsko drevo", St="Priponsko drevo",
+                                 SA="Priponsko polje","SA+LCP"="Priponsko polje z QLCP"),
+                       breaks=c("SA","SA+LCP","St","CST"))+
   facet_grid(scales = "free_y",vars(PatternLength),labeller = as_labeller(c(tFind5="Vzorec velikosti 5", tFind50="Vzorec velikosti 50", tFind500="Vzorec velikosti 500",tFindLog="Vzorec velikosti log(n)")))+
   theme(legend.position = "bottom", panel.border = element_rect(colour = "gray60", fill = NA),
         strip.text = element_text(size = 9,face="bold"))
@@ -58,9 +64,11 @@ dataTidy%>% ggplot()+
   stat_summary(fun=mean,geom = 'line')+
   scale_x_continuous(trans = log10_trans(), breaks = trans_breaks("log10", function(x) 10^x),labels = function(x) x/1000) +
   theme_minimal() +
-  labs(y="Čas iskanja v indeksih besede [ns]",x="Dolžina besede (x1000)")+
-  scale_color_discrete(name = "Vrsta indeksa\nbesede:", labels= c(CST="Kompaktno\npriponsko drevo", St="Priponsko drevo",SA="Priponsko polje","SA+LCP"="Priponsko polje\nz QLCP"))+
-  #scale_color_manual(values=c("#00BFC4"))+
+  labs(y="Čas izgradnje indeksa besede [ms]",x="Dolžina besede [x1000 znakov]")+
+  scale_color_discrete(name = "Vrsta indeksa besede:",
+                       labels= c(CST="Kompaktno priponsko drevo", St="Priponsko drevo",
+                                 SA="Priponsko polje","SA+LCP"="Priponsko polje z QLCP"),
+                       breaks=c("SA","SA+LCP","St","CST"))+#scale_color_manual(values=c("#00BFC4"))+
   scale_y_continuous(trans = log10_trans(), breaks = trans_breaks("log10", function(x) 10^x),labels = trans_format("log10", math_format(10^.x)))
 ggsave("./Img/izgradnjaDrecvesaNovPC.svg",bg = "white", height = 10, width = 20, units = "cm")
 
@@ -71,8 +79,11 @@ dataTidySLO %>% ggplot()+
   stat_summary(fun=mean,geom = 'line')+
   scale_x_continuous(trans = log10_trans(), breaks = trans_breaks("log10", function(x) 10^x),labels = function(x) x/1000) +
   theme_minimal() +
-  labs(y="Čas iskanja v indeksih besede [ns]",x="Dolžina besede (x1000)")+
-  scale_color_discrete(name = "Vrsta indeksa\nbesede:", labels= c(CST="Kompaktno\npriponsko drevo", St="Priponsko drevo",SA="Priponsko polje","SA+LCP"="Priponsko polje\nz QLCP"))+
+  labs(y="Čas izgradnje indeksa besede [ms]",x="Dolžina besede [x1000 znakov]")+
+  scale_color_discrete(name = "Vrsta indeksa besede:",
+                       labels= c(CST="Kompaktno priponsko drevo", St="Priponsko drevo",
+                                 SA="Priponsko polje","SA+LCP"="Priponsko polje z QLCP"),
+                       breaks=c("SA","SA+LCP","St","CST"))+
   scale_y_continuous(trans = log10_trans(), breaks = trans_breaks("log10", function(x) 10^x),labels = trans_format("log10", math_format(10^.x)))
 ggsave("./Img/izgradnjaDrecvesaNovPCSLO.svg",bg = "white", height = 10, width = 20, units = "cm")
 
@@ -85,8 +96,11 @@ dataTidy %>% ggplot()+
   stat_summary(fun=mean,geom = 'line')+
   scale_x_continuous(trans = log10_trans(), breaks = trans_breaks("log10", function(x) 10^x),labels = function(x) x/1000) +
   theme_minimal() +
-  labs(y="Čas iskanja v indeksih besede [ns]",x="Dolžina besede (x1000)")+
-  scale_color_discrete(name = "Vrsta indeksa\nbesede:", labels= c(CST="Kompaktno\npriponsko drevo", St="Priponsko drevo",SA="Priponsko polje","SA+LCP"="Priponsko polje\nz QLCP"))+
+  labs(y="Velikost indeksa besede [MB]",x="Dolžina besede [x1000 znakov]")+
+  scale_color_discrete(name = "Vrsta indeksa besede:",
+                       labels= c(CST="Kompaktno priponsko drevo", St="Priponsko drevo",
+                                 SA="Priponsko polje","SA+LCP"="Priponsko polje z QLCP"),
+                       breaks=c("SA","SA+LCP","St","CST"))+
   scale_y_continuous(trans = log10_trans(), breaks = trans_breaks("log10", function(x) 10^x),labels = trans_format("log10", math_format(10^.x)))
 ggsave("./Img/velikostDrecvesaNovPC.svg",bg = "white", height = 10, width = 20, units = "cm")
 
@@ -96,8 +110,11 @@ dataTidySLO %>% ggplot()+
   stat_summary(fun=mean,geom = 'line')+
   scale_x_continuous(trans = log10_trans(), breaks = trans_breaks("log10", function(x) 10^x),labels = function(x) x/1000) +
   theme_minimal() +
-  labs(y="Čas iskanja v indeksih besede [ns]",x="Dolžina besede (x1000)")+
-  scale_color_discrete(name = "Vrsta indeksa\nbesede:", labels= c(CST="Kompaktno\npriponsko drevo", St="Priponsko drevo",SA="Priponsko polje","SA+LCP"="Priponsko polje\nz QLCP"))+
+  labs(y="Velikost indeksa besede [MB]",x="Dolžina besede [x1000 znakov]")+
+  scale_color_discrete(name = "Vrsta indeksa besede:",
+                       labels= c(CST="Kompaktno priponsko drevo", St="Priponsko drevo",
+                                 SA="Priponsko polje","SA+LCP"="Priponsko polje z QLCP"),
+                       breaks=c("SA","SA+LCP","St","CST"))+
   scale_y_continuous(trans = log10_trans(), breaks = trans_breaks("log10", function(x) 10^x),labels = trans_format("log10", math_format(10^.x)))
 ggsave("./Img/velikostDrecvesaNovPCSLO.svg",bg = "white", height = 10, width = 20, units = "cm")
 

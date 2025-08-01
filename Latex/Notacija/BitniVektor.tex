@@ -19,11 +19,11 @@ Prva operacija, ki jo definiramo nad bitnim poljem $B$ velikosti $b$, je $\Rang{
     \Rang{1}{B}{i}=i-\Rang{0}{B}{i}.
 \end{equation}
 
-Operacijo je možno naivno implementira s štetjem bitov z vrednostjo $1$ v bitnem polju, za kar je potrebno $O(b)$ časa. Štetje bitov z vrednostjo $1$ se v angl. imenuje \textit{population count} (v nadaljevanju označeno \texttt{popcount}), ki se izračuna v konstantnem času za eno pomnilniško besedo \cite{Brodnik1995,Knuth2011}. Zaradi uporabnosti te funkcije je ta že implementirana v različnih modernih arhitekturah procesorjev in je zato možno uporabiti strojno operacijo. Operacijo rang se lahko pospeši na konstantni čas, pri tem pa se potrebujejo dodatne podatkovne strukture, ki zasedejo $o(b)$ bitov. Pri tem ni potrebno zgraditi dodatnih podatkovnih struktur za obe različici ranga, saj relacija iz enakosti (\ref{eq:rang}) omogoča izgradnjo podatkovne strukture zgolj za operacijo $rang_1$.
+Operacijo je možno naivno implementirati s štetjem bitov z vrednostjo $1$ v bitnem polju, za kar je potrebno $O(b)$ časa. Štetje bitov z vrednostjo $1$ se v angl. imenuje \textit{population count} (v nadaljevanju označeno \texttt{popcount}), ki se izračuna v konstantnem času za eno pomnilniško besedo \cite{Brodnik1995,Knuth2011}. Zaradi uporabnosti te funkcije je ta že implementirana v različnih modernih arhitekturah procesorjev in je zato možno uporabiti strojno operacijo. Operacijo rang se lahko pospeši na konstantni čas, pri tem pa se potrebujejo dodatne podatkovne strukture, ki zasedejo $o(b)$ bitov. Pri tem ni potrebno zgraditi dodatnih podatkovnih struktur za obe različici ranga, saj relacija iz enakosti (\ref{eq:rang}) omogoča izgradnjo podatkovne strukture zgolj za operacijo $rang_1$.
 
 Pomožna struktura shranjuje range različnih elementov bitnega polja $B$ v polju $R$. Naivni pristop bi shranil v polju $R$ range vseh elementov $B$-ja. Problem tega pristopa je prevelika prostorska zahtevnost, saj je zaželjeno, da je $R$ čim manjši in po možnosti ni večji od $o(b)$ bitov. Predlagana rešitev potrebuje $b\log{r_1}=O(bw)$ dodatnih bitov, pri čemer je $r_1$ število bitov z vrednostjo 1 v bitnem polju $B$.
 
-Rešitev tega problema je vzorčenje rangov, tako da so v polju $R$ shranjeni zgolj rangi nekaterih elementov $B$-ja. Polje $R$ razdeli $B$ na $s=kw$ delov, pri čemer je $k$ poljubno število. Element $R[i]=rang_1(B,is)$, pri čemer je $0\le i \le \left\lfloor\frac{b}{s} \right\rfloor$. Na ta način je operacija rang implementiran kot 
+Rešitev tega problema je vzorčenje rangov, tako da so v polju $R$ shranjeni zgolj rangi nekaterih elementov $B$-ja. Polje $R$ razdeli $B$ na $s=kw$ delov, pri čemer je $k$ poljubno število. Element $R[i]=rang_1(B,is)$, pri čemer je $0\le i \le \left\lfloor\frac{b}{s} \right\rfloor$. Na ta način je operacija rang implementirana kot 
 \begin{equation*}
     \Rang{1}{B}{i}=R\left[\left\lfloor\frac{i}{s} \right\rfloor\right] + \Popcount{B\left[\left\lfloor\frac{i}{s} \right\rfloor s,i\right]}.
 \end{equation*}
@@ -32,7 +32,7 @@ Polje $R$ ima velikost $\lfloor\frac{b}{k}\rfloor$ bitov, saj shranjuje $\lfloor
 \begin{figure}[htb]
     \begin{center}
         \includesvg[scale=0.6]{Slike/Rang.svg}
-        \caption{Primer dodatne podatkovne strukture za operacijo $rank_1$ v konstantnem času. Pri tem je bitno polje razdeljeno na posamične pomnilniške besede dolžine $w=4$. Pri tem se je izbralo, da je število $k=4$.} 
+        \caption{Primer dodatne podatkovne strukture za operacijo $rang_1$ v konstantnem času. Pri tem je bitno polje razdeljeno na posamične pomnilniške besede dolžine $w=4$. Pri tem se je izbralo, da je število $k=4$.} 
         \label{fig:rank}
     \end{center}
 \end{figure}
@@ -48,7 +48,7 @@ Druga osnovna operacija nad bitnim poljem $B$ je $\Izbira{v}{B}{i}$, ki vrne pol
 
 Operacijo izbira si lahko predstavimo kot inverzno operacijo operacije rang, saj velja zveza $j=\Rang{v}{B}{\Izbira{v}{B}{i}}$. Pri tem pa ne obstaja povezava med operacijo $\Izbira{1}{B}{i}$ in $\Izbira{0}{B}{i}$. To pomeni, da rešitev s pomožno podatkovno strukturo za $\Izbira{1}{B}{i}$ ne more biti uporabljena za iskanje rešitve za $\Izbira{0}{B}{i}$. V nadaljevanju bo opisan časovno učinkovit postopek iskanja $\Izbira{1}{B}{i}$, saj se lahko $\Izbira{0}{B}{i}$ implementira na podoben način \cite{Navarro2016}.
 
-Ko operacija izbira ni ključna pri reševanju problemov, se lahko uporabi binarno iskanje v poljih $R$ in $R'$, ki sta del podatkovne strukture za rank, za kar je potrebno $O(\log{b})$ časa. Z binarnim iskanjem se najde območje dolžine $k$, pri čemer je potrebno še dodatnih $k$ preiskav, da se najde natančno vrednost.
+Ko operacija izbira ni ključna pri reševanju problemov, se lahko uporabi binarno iskanje v poljih $R$ in $R'$, ki sta del podatkovne strukture za rang, za kar je potrebno $O(\log{b})$ časa. Z binarnim iskanjem se najde območje dolžine $k$, pri čemer je potrebno še dodatnih $k$ preiskav, da se najde natančno vrednost.
 Čas operacije se lahko zniža na $O(\log\log b)$ z uporabo pomožnih podatkovnih struktur. Podobno kot pri operacij rang se bitno polje razdeli na $\lceil \frac{r_1}{s} \rceil$ veder, pri čemer pa je $r_1$ število bitov z vrednostjo 1 v bitnem polju in $s$ je število takih bitov v vsakem vedru. Polje $S[0:\lceil \frac{r_1}{s} \rceil]$ hrani vrednosti $S[i]=\Izbira{1}{B}{i\cdot s+1}$, pri čemer $S[\lceil \frac{r_1}{s} \rceil]=b+1$. Polje $S$ potrebuje $w(\lceil \frac{r_1}{s} \rceil +1)$ bitov. Ko je $s=w^2$, potem podatkovna struktura potrebuje $w(\lceil\frac{r_1}{w^2}\rceil+1)=o(r_1)=o(b)$ bitov \cite{Navarro2016}.
 
 Vedra niso enako velika, zato se lahko razdelijo na velika vedra in mala vedra, pri čemer je vedro veliko natanko tedaj, ko je večje od $s\log^2 b$ bitov, sicer je malo vedro. Pri tem je potrebno shraniti velikost vedra v bitno polje $V$, kjer $V[i]=1$, če $i$-to vedro je veliko, sicer je $V[i]=0$. Za velika vedra se izračunajo vseh $s$ vrednosti izbire, pri čemer so shranjeni v polju $I$ položaji bitov z vrednostjo ena znotraj vedra. Za mala vedra pa se sproti izračuna izbira znotraj vedra. Operacija izbira se izračuna kot
@@ -60,7 +60,7 @@ Vedra niso enako velika, zato se lahko razdelijo na velika vedra in mala vedra, 
        b+1, & r_1 < j
     \end{array}\right.,
 \end{equation*}
-kjer je $x = ((j-1) \mod{s})+1$ in $k$ je relativni položaj $x$-tega bita z vrednostjo 1 na intervalu $B\left[ S\left[\left\lceil \frac{j}{s} -1 \right\rceil\right], S\left[\left\lceil \frac{j}{s} \right\rceil-1\right]\right]$. Vrednost $k$ je izračunana s pomočjo razpolavljanja na podatkovni strukturi za rank in štetja bitov na zadnjem intervalu \cite{Navarro2016}. Podatkovna struktura za izbiro je prikazana na Sliki \ref{fig:select}.
+kjer je $x = ((j-1) \mod{s})+1$ in $k$ je relativni položaj $x$-tega bita z vrednostjo 1 na intervalu $B\left[ S\left[\left\lceil \frac{j}{s} -1 \right\rceil\right], S\left[\left\lceil \frac{j}{s} \right\rceil-1\right]\right]$. Vrednost $k$ je izračunana s pomočjo razpolavljanja na podatkovni strukturi za rang in štetja bitov na zadnjem intervalu \cite{Navarro2016}. Podatkovna struktura za izbiro je prikazana na Sliki \ref{fig:select}.
 
 \begin{figure}[htb]
     \begin{center}
@@ -111,4 +111,4 @@ Ko desni brat ni v intervalu, torej ne velja prejšnji pogoj, potem nadaljujemo 
 
 Zadnji korak pa je iskanje točnega indeksa bita z relativnim viškom $m$. To je storjeno z operacijo $\IskanjeNaprej{B}{i}{m}$, ki najde prvi $j> i$, za katerega velja $\Visek{B}{j}=\Visek{B}{i}+m$. Operacija je implementirana na isti način, samo tokrat se ne preverja vrednost polja $rmM[v].m$, ampak se išče prvo pojavitev viška, ki je enaka $m$. Ta isti postopek se lahko uporabi tudi za preostale tri operacije, pri čemer pa operacija $\rMq{B}{i}{j}$ uporablja namesto polja $rmM[v].m$ polje $rmM[v].M$ in relacija manjše postane večje in obratno. Operaciji $\MinIzbira{B}{i}{j}{t}$ in $\MinStetje{B}{i}{j}$ pa uporabljata polje $rmM[v].n$\cite{Navarro2016}.
 
-Tako implementirane operacije potrebujejo $O(\log{b})$ časa, da se izvršijo. Začetno in končno štetje bitov potrebuje $O(a)=O(1)$ čas. Ker je $rmM$-drevo dvojiško in polno (vsak globina drevesa, razen zadnje, ima maksimalno število otrok) drevo, je njegova višina enaka $O(\log{\lceil b/a\rceil})=O(\log{b})$, torej tudi sprehodi, ki gredo od lista proti korenu ali od korena proti listu, potrebujejo $O(\log{b})$ časa. Z izdelavo manjših $rmM$-dreves, ki zavzamejo $\beta=\log^3{b}$ elementov, in dodatne podatkovne strukture imenovane pospeševalnik (angl. \textit{accelerator}), je možno implementirati te operacije v času $O(\log\log{b})$ \cite{Navarro2016}.
+Tako implementirane operacije potrebujejo $O(\log{b})$ časa, da se izvršijo. Začetno in končno štetje bitov potrebuje $O(a)=O(1)$ čas. Ker je $rmM$-drevo dvojiško in polno (vsaka globina drevesa, razen zadnje, ima maksimalno število otrok) drevo, je njegova višina enaka $O(\log{\lceil b/a\rceil})=O(\log{b})$, torej tudi sprehodi, ki gredo od lista proti korenu ali od korena proti listu, potrebujejo $O(\log{b})$ časa. Z izdelavo manjših $rmM$-dreves, ki zavzamejo $\beta=\log^3{b}$ elementov, in dodatne podatkovne strukture imenovane pospeševalnik (angl. \textit{accelerator}), je možno implementirati te operacije v času $O(\log\log{b})$ \cite{Navarro2016}.
